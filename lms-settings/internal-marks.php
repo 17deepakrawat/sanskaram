@@ -1,0 +1,271 @@
+<?php include($_SERVER['DOCUMENT_ROOT'] . '/includes/header-top.php'); ?>
+<?php include($_SERVER['DOCUMENT_ROOT'] . '/includes/header-bottom.php'); ?>
+<?php include($_SERVER['DOCUMENT_ROOT'] . '/includes/menu.php');
+include($_SERVER['DOCUMENT_ROOT'] . '/includes/helpers.php');
+include($_SERVER['DOCUMENT_ROOT'] . '/includes/ClassHelper.php');
+unset($_SESSION['current_session']);
+unset($_SESSION['filterBySubCourses']);
+unset($_SESSION['filterByExamStatus']);
+unset($_SESSION['durationFilter']);
+unset($_SESSION['subCourseFilter']);
+unset($_SESSION['usersFilter']);
+unset($_SESSION['filterByDuration']);
+unset($_SESSION['filterByVerticalType']);
+
+$sub_course_arr = new ClassHelper();
+$sub_courses = $sub_course_arr->getUserSubCourse($conn, $_SESSION['ID'], $_SESSION['Role'],$_SESSION['university_id']);
+function verticalTypeFunc()
+{
+    $verticalType = '<option value="">Select Vertical Type</option>';
+    $verticalType .= '<option value="1">Edtech Innovate</option>';
+    $verticalType .= '<option value="0">IITS LLP Paramedical</option>';
+    return $verticalType;
+}
+
+?>
+<!-- START PAGE-CONTAINER -->
+<div class="page-container ">
+  <?php include($_SERVER['DOCUMENT_ROOT'] . '/includes/topbar.php'); ?>
+  <!-- START PAGE CONTENT WRAPPER -->
+  <div class="page-content-wrapper ">
+    <!-- START PAGE CONTENT -->
+    <div class="content ">
+      <!-- START JUMBOTRON -->
+      <div class="jumbotron" data-pages="parallax">
+        <div class=" container-fluid   sm-p-l-0 sm-p-r-0">
+          <div class="inner">
+            <!-- START BREADCRUMB -->
+            <ol class="breadcrumb d-flex flex-wrap justify-content-between align-self-start">
+              <?php $breadcrumbs = array_filter(explode("/", $_SERVER['REQUEST_URI']));
+              for ($i = 1; $i <= count($breadcrumbs); $i++) {
+                if (count($breadcrumbs) == $i):
+                  $active = "active";
+                  $crumb = explode("?", $breadcrumbs[$i]);
+                  $marks_type = ($_SESSION['university_id'] == 48) ? "External Marks List" : "Internal Marks List";
+                  echo '<li class="breadcrumb-item ' . $active . '">' . $marks_type . '</li>';
+                endif;
+              }
+              ?>
+            </ol>
+            <!-- END BREADCRUMB -->
+
+          </div>
+        </div>
+      </div>
+      <!-- END JUMBOTRON -->
+      <!-- START CONTAINER FLUID -->
+      <div class=" container-fluid">
+        <!-- BEGIN PlACE PAGE CONTENT HERE -->
+        <div class="card card-transparent">
+          <div class="card-header">
+
+          <?php if($_SESSION['university_id']==48) { 
+            $class = "col-md-3";
+            $class1 = "col-md-3";
+            $search_class = "col-md-3";
+
+           }else{
+            $class = "col-md-2";
+            $class1 = "col-md-3";
+            $search_class = "col-md-2";
+
+           } ?>
+   
+            <div class="row">
+              <div class="col-md-3 m-b-10">
+                <div class="form-group">
+                  <select class="full-width" style="width:40px" data-init-plugin="select2" id="sub_courses"
+                    onchange="addFilter(this.value, 'sub_courses')" data-placeholder="Choose Program">
+                    <option value="">Choose Program</option>
+                    <?php echo $sub_courses; 
+                    ?>
+                  </select>
+                </div>
+              </div>
+             <?php if($_SESSION['university_id']==47) { ?>
+              <div class="<?=  $class ?> m-b-10">
+                <div class="form-group">
+                  <select class="full-width" style="width:40px" data-init-plugin="select2" id="duration"
+                    onchange="addFilter(this.value, 'duration')" data-placeholder="Choose Duration">
+                    <option value="">Choose Duration</option>
+                  </select>
+                </div>
+              </div>
+              <?php } ?>
+          
+                <?php if ($_SESSION['Role'] !== "Center" || $_SESSION['Role'] !== "Sub-Center") { ?>
+                  <div class="<?=  $class ?> ">
+                    <select class="form-control" name="vartical_type" id="vartical_type"
+                      onchange="addFilter(this.value, 'vartical_type')">
+                      <?= verticalTypeFunc() ?>
+                    </select>
+                  </div>
+                <?php } ?>
+
+                <div class="<?=  $class1 ?> ">
+                <button class="btn btn-info" aria-label="" title="" data-toggle="tooltip"
+                  data-original-title="Export Internal Marks" onclick="exportData()"><i class="uil uil-down-arrow"></i>
+                  Export</button>
+              </div>
+            
+              <div class="<?=  $search_class ?>">
+                <input type="text" id="users-search-table" class="form-control pull-right" placeholder="Search">
+              </div>
+            </div>
+            <div class="clearfix"></div>
+          </div>
+
+          <div class="card-body">
+            <div class="table-responsive">
+              <table class="table table-hover nowrap" id="users-table">
+                <thead>
+                  <tr>
+                    <th>Student Name</th>
+                    <th>Unique ID</th>
+                    <th>Enrollment No.</th>
+                    <th>Sub-Course Name</th>
+                    <th>Duration</th>
+                    <th>Centre Name</th>
+                    <th>Action</th>
+                  </tr>
+                </thead>
+              </table>
+            </div>
+          </div>
+
+        </div>
+
+        <!-- END PLACE PAGE CONTENT HERE -->
+      </div>
+      <!-- END CONTAINER FLUID -->
+    </div>
+    <!-- END PAGE CONTENT -->
+    <?php include($_SERVER['DOCUMENT_ROOT'] . '/includes/footer-top.php'); ?>
+    <script type="text/javascript">
+      $(function () {
+        $("#vartical_type").select2({
+          placeholder: "Choose Vertical Type",
+        });
+
+        var table = $('#users-table');
+        var role = '<?= $_SESSION['Role'] ?>';
+        var uni_id = '<?= $_SESSION['university_id'] ?>';
+        let marks_type = (uni_id == 47) ? "Internal" : "External";
+
+        var settings = {
+          'processing': true,
+          'serverSide': true,
+          'serverMethod': 'post',
+          'ajax': {
+            'url': '/app/results/internl-marks-server'
+          },
+          'columns': [{
+            data: "full_name",
+          },
+
+          {
+            data: "Unique_ID",
+          },
+          {
+            data: "Enrollment_No",
+          },
+          {
+            data: "sub_course_name",
+          },
+
+          {
+            data: "Duration",
+            visible: (uni_id == 48) ? true : false,
+          },
+          {
+            data: "user_name",
+          },
+
+          {
+            data: "ID",
+            "render": function (data, type, row) {
+              var intMarkButton = '<button class="btn btn-success cursor-pointer" title="Obtain ' + marks_type + ' Marks" onclick="obtExtMarks(\'' + row.Enrollment_No + '\',\'' + row.Duration + '\',\'' + row.user_code + '\')" ><b>Obtain ' + marks_type + ' Marks</b></button>';
+              return '<div class="button-list text-end">\
+              ' + intMarkButton + '\
+            </div>'
+            }
+          },
+
+          ],
+          "sDom": "<t><'row'<p i>>",
+          "destroy": true,
+          "scrollCollapse": true,
+          "oLanguage": {
+            "sLengthMenu": "_MENU_ ",
+            "sInfo": "Showing <b>_START_ to _END_</b> of _TOTAL_ entries"
+          },
+          "aaSorting": [],
+          "iDisplayLength": 25,
+          "drawCallback": function (settings) {
+            $('[data-toggle="tooltip"]').tooltip();
+          },
+        };
+
+        table.dataTable(settings);
+
+        // search box for table
+        $('#users-search-table').keyup(function () {
+          table.fnFilter($(this).val());
+        });
+
+      })
+
+      function obtExtMarks(enroll, duration, user_code) {
+        $.ajax({
+          url: '/app/results/create-internal-marks',
+          type: 'POST',
+          data: { enroll: enroll, current_duration: duration, user_code: user_code },
+          success: function (data) {
+            $('#lg-modal-content').html(data);
+            $('#lgmodal').modal('show');
+            // }
+          }
+        })
+      }
+      function addFilter(id, by) {
+        $.ajax({
+          url: '/app/applications/filter',
+          type: 'POST',
+          data: {
+            id,
+            by
+          },
+          dataType: 'json',
+          success: function (data) {
+            if (by == "sub_courses") {
+              getDuration(id);
+            }
+
+            if (data.status) {
+              $('.table').DataTable().ajax.reload(null, false);
+            }
+          }
+        })
+      }
+
+      function getDuration(id) {
+        $.ajax({
+          url: '/app/subjects/get-duration',
+          data: { id: id },
+          type: 'POST',
+          success: function (data) {
+            $("#duration").html(data);
+            // addFilter(id, 'duration');
+          }
+        })
+      }
+
+      function exportData() {
+        var url = '';
+        var sub_courses = $("#sub_courses").val();
+        var search = $('#users-search-table').val();
+        var url = search.length > 0 ? "?search=" + search : "";
+        window.open('/app/results/export-internal-marks' + url);
+      }
+    </script>
+    <?php include($_SERVER['DOCUMENT_ROOT'] . '/includes/footer-bottom.php'); ?>
