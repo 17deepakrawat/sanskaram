@@ -1,4 +1,10 @@
 <?php include($_SERVER['DOCUMENT_ROOT'] . '/includes/header-top.php'); ?>
+<style>
+   .input-sm{
+    border-radius: 10px !important;
+    height: 48px !important;
+  }
+</style>
 <?php include($_SERVER['DOCUMENT_ROOT'] . '/includes/header-bottom.php'); ?>
 <?php include($_SERVER['DOCUMENT_ROOT'] . '/includes/menu.php'); ?>
 <!-- START PAGE-CONTAINER -->
@@ -41,9 +47,9 @@
         <div class="card card-transparent">
           <div class="card-header">
             <div class="pull-right">
-              <div class="col-xs-12">
+              <!-- <div class="col-xs-12">
                 <input type="text" id="sub-courses-search-table" class="form-control pull-right custom_search_section" placeholder="Search">
-              </div>
+              </div> -->
             </div>
             <div class="clearfix"></div>
           </div>
@@ -131,15 +137,16 @@
               visible: ['Administrator', 'University Head'].includes(role) ? true : false
             },
           ],
-          "sDom": "<t><'row'<p i>>",
+          "sDom": "<'row mt-3 w-100 p-0 m-0'<'col-sm-6 pr-0 pl-0 custon_text_start'l><'col-sm-6 pr-0 pl-0'f>><t><'row'<p i>>",
           "destroy": true,
           "scrollCollapse": true,
           "oLanguage": {
-            "sLengthMenu": "_MENU_ ",
             "sInfo": "Showing <b>_START_ to _END_</b> of _TOTAL_ entries"
           },
-          "aaSorting": [],
-          "iDisplayLength": 25
+          drawCallback: function(settings, json) {
+            $('[data-toggle="tooltip"]').tooltip();
+          },
+          "aaSorting": []
         };
 
         table.dataTable(settings);

@@ -111,8 +111,8 @@ unset($_SESSION['filterByExamStatus']); //kp
           </div>
 
           <div class="card-body">
-            <div class="table-responsive">
-              <table class="table table-hover nowrap" id="users-table">
+            <div class="">
+              <table class="table table-hover nowrap table-responsive" id="users-table">
                 <thead>
                   <tr>
                     <th>Student Name</th>

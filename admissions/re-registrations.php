@@ -26,7 +26,7 @@ unset($_SESSION['filterByVerticalType']);//kp
                 if (count($breadcrumbs) == $i):
                   $active = "active";
                   $crumb = explode("?", $breadcrumbs[$i]);
-                  echo '<li class="breadcrumb-item ' . $active . '">' . $crumb[0] . '</li>';
+                  echo '<li class="breadcrumb-item ' . $active . '">' . ucwords($crumb[0]) . '</li>';
                 endif;
               }
               ?>
@@ -52,11 +52,11 @@ unset($_SESSION['filterByVerticalType']);//kp
             <?php
             $examSessions = $conn->query("SELECT ID, Name FROM Exam_Sessions WHERE University_ID = " . $_SESSION['university_id'] . " AND (RR_Status = 1 OR RR_Last_Date IS NOT NULL) AND Admission_Session LIKE '%Re-Registrations%'");
             while ($examSession = $examSessions->fetch_assoc()) { ?>
-              <div class="col-md-3">
-                <div class="card cursor-pointer"  onclick="setRRSession(<?= $examSession['ID'] ?>, '<?= htmlspecialchars($examSession['Name'], ENT_QUOTES) ?>')">
-                  <div class="card-body">
-                    <p class="hint-text overline">EXAM SESSION</p>
-                    <h3>
+              <div class="col-md-2">
+                <div class="card cursor-pointer re_reg_radius"  onclick="setRRSession(<?= $examSession['ID'] ?>, '<?= htmlspecialchars($examSession['Name'], ENT_QUOTES) ?>')">
+                  <div class="card-body" style="border: none;">
+                    <p class="hint-text overline font-weight-bold text-black">EXAM SESSION</p>
+                    <h3 class="fownt-weight-bold text-black">
                       <?= $examSession['Name'] ?>
                     </h3>
                   </div>
