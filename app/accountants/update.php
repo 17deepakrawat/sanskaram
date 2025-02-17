@@ -13,7 +13,7 @@
       echo json_encode(['status'=>400, "message"=>"Invalid email!"]);
       exit();
     }
-
+ 
     if(empty($name) || empty($code) || empty($email) || empty($contact) || empty($id)){
       echo json_encode(['status'=>403, 'message'=>'All fields are mandatory!']);
       exit();

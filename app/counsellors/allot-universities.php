@@ -21,9 +21,9 @@
     <div class="modal-body">
       <?php 
         if($_SESSION['Role']=='Administrator'){
-          $universities = $conn->query("SELECT ID, CONCAT(Universities.Short_Name, ' (', Universities.Vertical, ')') as Name FROM Universities");
+          $universities = $conn->query("SELECT ID, CONCAT(Universities.Short_Name, ' (', Universities.Vertical, ')') as Name FROM Universities WHERE Status =1 ");
         }else{
-          $universities = $conn->query("SELECT ID, CONCAT(Universities.Short_Name, ' (', Universities.Vertical, ')') as Name FROM Universities LEFT JOIN University_User ON Universities.ID = University_User.University_ID WHERE `User_ID` = ".$_SESSION['ID']."");
+          $universities = $conn->query("SELECT ID, CONCAT(Universities.Short_Name, ' (', Universities.Vertical, ')') as Name FROM Universities LEFT JOIN University_User ON Universities.ID = University_User.University_ID WHERE Universities.Status =1 AND `User_ID` = ".$_SESSION['ID']."");
         }
           while($university = $universities->fetch_assoc()){ ?>
             <div class="row">

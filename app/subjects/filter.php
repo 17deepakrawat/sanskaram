@@ -23,5 +23,3 @@ if (!empty($_POST)) {
 } else {
     echo json_encode(['status' => false]);
 }
-// echo "<pre>"; 
-// print_r($_SESSION);die;

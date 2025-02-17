@@ -141,17 +141,17 @@ if (isset($_GET['id'])) {
                                 </select>
                             </div>
                         </div>
-                        <?php if($_SESSION['university_id']==48){ ?>
-                        <div class="col-md-6">
-                            <div class="form-group">
-                                <label for="exam_type">Select Exam Type</label>
-                                <select class="form-control" name="exam_type" id="exam_type">
-                                    <option value="">Select Exam Type</option>
-                                    <option value="1" <?php echo (isset($data['Exam_Type']) && $data['Exam_Type'] == 1) ? 'selected' : ''; ?>>Center</option>
-                                    <option value="0" <?php echo (isset($data['Exam_Type']) && $data['Exam_Type'] == 0) ? 'selected' : ''; ?>>Online</option>
-                                </select>
+                        <?php if ($_SESSION['university_id'] == 48) { ?>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="exam_type">Select Exam Type</label>
+                                    <select class="form-control" name="exam_type" id="exam_type">
+                                        <option value="">Select Exam Type</option>
+                                        <option value="1" <?php echo (isset($data['Exam_Type']) && $data['Exam_Type'] == 1) ? 'selected' : ''; ?>>Center</option>
+                                        <option value="0" <?php echo (isset($data['Exam_Type']) && $data['Exam_Type'] == 0) ? 'selected' : ''; ?>>Online</option>
+                                    </select>
+                                </div>
                             </div>
-                        </div>
                         <?php } ?>
 
                         <div class="col-md-6">
@@ -161,7 +161,7 @@ if (isset($_GET['id'])) {
                                     value="<?php echo $data['Credit']; ?>">
                             </div>
                         </div>
-                    
+
                         <div class="col-md-6">
                             <label for="minMarks">Minimum Marks</label>
                             <input type="text" class="form-control" name="minMarks" id="minMarks"
@@ -191,33 +191,33 @@ if (isset($_GET['id'])) {
 ?>
 <script>
 
-$("#resultForm").on("submit", function(e) {
-    // if ($('#form-edit-sub-counsellors').valid()) {
-      $(':input[type="submit"]').prop('disabled', true);
-      var formData = new FormData(this);
-      formData.append('id', '<?= $id ?>');
-      $.ajax({
-        url: this.action,
-        type: 'post',
-        data: formData,
-        cache: false,
-        contentType: false,
-        processData: false,
-        dataType: "json",
-        success: function(data) {
-          if (data.status == 200) {
-            $('.modal').modal('hide');
-            notification('success', data.message);
-            $('#users-table').DataTable().ajax.reload(null, false);
-          } else {
-            $(':input[type="submit"]').prop('disabled', false);
-            notification('danger', data.message);
-          }
-        }
-      });
-      e.preventDefault();
-    // }
-  });
+    $("#resultForm").on("submit", function (e) {
+        // if ($('#form-edit-sub-counsellors').valid()) {
+        $(':input[type="submit"]').prop('disabled', true);
+        var formData = new FormData(this);
+        formData.append('id', '<?= $id ?>');
+        $.ajax({
+            url: this.action,
+            type: 'post',
+            data: formData,
+            cache: false,
+            contentType: false,
+            processData: false,
+            dataType: "json",
+            success: function (data) {
+                if (data.status == 200) {
+                    $('.modal').modal('hide');
+                    notification('success', data.message);
+                    $('#users-table').DataTable().ajax.reload(null, false);
+                } else {
+                    $(':input[type="submit"]').prop('disabled', false);
+                    notification('danger', data.message);
+                }
+            }
+        });
+        e.preventDefault();
+        // }
+    });
 
 
     function getSpecialization(courseId) {
@@ -238,6 +238,7 @@ $("#resultForm").on("submit", function(e) {
 </script>
 <script>
     function getsemester(subCourseId) {
+       
         var id = $('#ID').val();
         var University_id = $('#universities').val();
         $.ajax({
@@ -245,7 +246,6 @@ $("#resultForm").on("submit", function(e) {
             url: '/app/subjects/get-duration',
             data: {
                 id: subCourseId,
-                ID: ID,
                 University_id: University_id
             },
             success: function (response) {

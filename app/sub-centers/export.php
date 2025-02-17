@@ -24,10 +24,7 @@ if ($_SESSION['Role'] == 'University Head') {
   $university_query = " AND Center_SubCenter.Center = " . $_SESSION['ID'];
 }
 
-$filterByVerticalType = "";
-if (isset($_SESSION['filterByVerticalType'])) {
-  $filterByVerticalType = $_SESSION['filterByVerticalType'];
-}
+
 
 ## Search 
 $searchQuery = " " . $filterByVerticalType;

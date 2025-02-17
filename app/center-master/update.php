@@ -15,7 +15,6 @@
     $city = mysqli_real_escape_string($conn, $_POST['city']);
     $district = mysqli_real_escape_string($conn, $_POST['district']);
     $state = mysqli_real_escape_string($conn, $_POST['state']);
-    $vertical_type = mysqli_real_escape_string($conn, $_POST['vertical_type']);
 
     if(!filter_var($email, FILTER_VALIDATE_EMAIL)){
       echo json_encode(['status'=>400, "message"=>"Invalid email!"]);
@@ -42,7 +41,7 @@
       $photo = " , Photo = '$filename'";
     }
 
-    $add = $conn->query("UPDATE `Users` SET `Name` = '$name', `Short_Name` = '$short_name', `Contact_Name` = '$contact_person_name', `Email` = '$email', `Mobile` = '$contact', `Alternate_Mobile` = '$alternate_contact', `Address` = '$address', `Pincode` = '$pincode', `City` = '$city', `District` = '$district', `State` = '$state',`vertical_type`='$vertical_type' $photo WHERE ID = $id");
+    $add = $conn->query("UPDATE `Users` SET `Name` = '$name', `Short_Name` = '$short_name', `Contact_Name` = '$contact_person_name', `Email` = '$email', `Mobile` = '$contact', `Alternate_Mobile` = '$alternate_contact', `Address` = '$address', `Pincode` = '$pincode', `City` = '$city', `District` = '$district', `State` = '$state' $photo WHERE ID = $id");
     if($add){
       echo json_encode(['status'=>200, 'message'=>'Center updated successlly!']);
     }else{

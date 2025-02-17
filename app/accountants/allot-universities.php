@@ -17,7 +17,7 @@
   <form role="form" id="form-allot-universities" action="/app/operations/allot" method="POST" enctype="multipart/form-data">
     <div class="modal-body">
       <?php 
-          $universities = $conn->query("SELECT ID, CONCAT(Universities.Short_Name, ' (', Universities.Vertical, ')') as Name FROM Universities WHERE ID IN (SELECT University_User.University_ID FROM University_User)");
+          $universities = $conn->query("SELECT ID, CONCAT(Universities.Short_Name, ' (', Universities.Vertical, ')') as Name FROM Universities WHERE Universities.Status = 1 AND ID IN (SELECT University_User.University_ID FROM University_User)");
           while($university = $universities->fetch_assoc()){ ?>
             <div class="row">
               <div class="form-check complete">

@@ -6,12 +6,12 @@ if (isset($_FILES['file'])) {
   require('../../extras/vendor/shuchkin/simplexlsxgen/src/SimpleXLSXGen.php');
   require('../../extras/vendor/nuovo/spreadsheet-reader/SpreadsheetReader.php');
   session_start();
-  
-//   ini_set('display_errors', 1);
+
+  //   ini_set('display_errors', 1);
 // ini_set('display_startup_errors', 1);
 // error_reporting(E_ALL);
 
-   ini_set('max_execution_time', 1400);
+  ini_set('max_execution_time', 1400);
   $export_data = array();
   $header = array('Course', 'Sub-Course', 'Enrollment Number', 'Subject Code', 'Obtained External Marks', 'Obtained Internal Marks', 'Semester', 'Exam Month', 'Exam Year', 'Paper Code', 'Remark');
   $export_data[] = $header;
@@ -40,11 +40,6 @@ if (isset($_FILES['file'])) {
         $paper_code = mysqli_real_escape_string($conn, $row[9]);
         $created_at = date("Y-m-d:H:i:s");
 
-
-        if ($_SESSION['university_id'] == 48) {
-          $semester = strtolower($semester);
-        }
-
         $course = $conn->query("SELECT ID,University_ID FROM Courses WHERE University_ID = " . $_SESSION['university_id'] . " AND (Name = '$course' OR Short_Name = '$course')");
 
         if ($course->num_rows == 0) {
@@ -67,21 +62,13 @@ if (isset($_FILES['file'])) {
         $course_id = $sub_course['Course_ID'];
         $sub_course_id = $sub_course['ID'];
         $sub_course_name = $sub_course['Name'];
-       
-        if((empty($obt_int_marks) || $obt_int_marks=='' || $obt_int_marks==0) && $_SESSION['university_id']==47){
-          $checkres = $conn->query("SELECT marksheets.obt_marks_int FROM marksheets LEFT JOIN Syllabi on subject_id = Syllabi.ID  WHERE enrollment_no ='$enrollment' AND University_ID = " . $_SESSION['university_id'] . " AND Code = '$subject_code' AND Syllabi.Semester =  '".$semester."'  AND Course_ID = $course_id AND Sub_Course_ID = $sub_course_id");
-          if($checkres->num_rows > 0){
-           $obt_int_marks = $checkres->fetch_assoc()['obt_marks_int'];
-          }
-         }
 
-         if((empty($obt_ext_marks) || $obt_ext_marks=='' || $obt_ext_marks==0) && $_SESSION['university_id']==48){
-          $checkres = $conn->query("SELECT marksheets.obt_marks_ext FROM marksheets LEFT JOIN Syllabi on subject_id = Syllabi.ID  WHERE enrollment_no ='$enrollment' AND University_ID = " . $_SESSION['university_id'] . " AND Code = '$subject_code' AND Syllabi.Semester = '".$semester."'  AND Course_ID = $course_id AND Sub_Course_ID = $sub_course_id");
-          if($checkres->num_rows > 0){
-           $obt_ext_marks = $checkres->fetch_assoc()['obt_marks_ext'];
+        if ((empty($obt_int_marks) || $obt_int_marks == '' || $obt_int_marks == 0) && $_SESSION['university_id'] == UNIVERSITY_ID) {
+          $checkres = $conn->query("SELECT marksheets.obt_marks_int FROM marksheets LEFT JOIN Syllabi on subject_id = Syllabi.ID  WHERE enrollment_no ='$enrollment' AND University_ID = " . $_SESSION['university_id'] . " AND Code = '$subject_code' AND Syllabi.Semester =  '" . $semester . "'  AND Course_ID = $course_id AND Sub_Course_ID = $sub_course_id");
+          if ($checkres->num_rows > 0) {
+            $obt_int_marks = $checkres->fetch_assoc()['obt_marks_int'];
           }
-         }
-
+        }
 
         $check_student_sub_course = $conn->query("SELECT Users.Code,Users.ID, Role FROM Students LEFT JOIN Users on Added_For= Users.ID WHERE Enrollment_No = '$enrollment' AND Sub_Course_ID = '$sub_course_id' AND Course_ID = '$course_id'");
         if ($check_student_sub_course->num_rows == 0) {
@@ -89,26 +76,10 @@ if (isset($_FILES['file'])) {
           continue;
         }
 
-        $check_student_sub_course = $check_student_sub_course->fetch_assoc();
-        if($check_student_sub_course['Role']=="Sub-Center"){
-          $center_id = getCenterIdFunc($conn, $check_student_sub_course['ID']);
-          $getCode = $conn->query("SELECT Code FROM Users WHERE ID = $center_id and Role = 'Center'");
-          if($getCode->num_rows == 0){
-            $export_data[] = array_merge($row, ['This Center is not assigned to this Student.']);
-            continue;
-          }
-          $check_student_sub_course['Code'] = $getCode->fetch_assoc()['Code'];
-        }
 
-        $user_code = json_encode(trim($check_student_sub_course['Code']), JSON_UNESCAPED_SLASHES);
-        $centerQuery = ($_SESSION['university_id'] == 48) ? " AND JSON_CONTAINS(User_ID, '$user_code') " : "";
-// echo "<pre>";
-// echo  "SELECT ID,User_ID, Min_Marks,Max_Marks,University_ID FROM Syllabi WHERE University_ID = " . $_SESSION['university_id'] . " AND Code = '$subject_code' AND Semester = '" . $semester . "'  AND Course_ID = $course_id AND Sub_Course_ID = $sub_course_id $centerQuery";
-        $subjects = $conn->query("SELECT ID,User_ID, Min_Marks,Max_Marks,University_ID FROM Syllabi WHERE University_ID = " . $_SESSION['university_id'] . " AND Code = '$subject_code' AND Semester = '" . $semester . "'  AND Course_ID = $course_id AND Sub_Course_ID = $sub_course_id $centerQuery");
+        $subjects = $conn->query("SELECT ID,User_ID, Min_Marks,Max_Marks,University_ID FROM Syllabi WHERE University_ID = " . $_SESSION['university_id'] . " AND Code = '$subject_code' AND Semester = '" . $semester . "'  AND Course_ID = $course_id AND Sub_Course_ID = $sub_course_id ");
         if ($subjects->num_rows == 0) {
-          $error_message = ($_SESSION['university_id'] == 48)
-            ? "Subject not found or not assigned to the specified User (Center/Sub-Center)."
-            : "Subject not found!";
+          $error_message = "Subject not found!";
 
           $export_data[] = array_merge($row, [$error_message]);
           continue;
@@ -129,32 +100,21 @@ if (isset($_FILES['file'])) {
           $total = 0;
         }
 
-        if ($subject_arr['University_ID'] == 47) {
-          $min_marks = ($subject_arr['Min_Marks'] + $subject_arr['Max_Marks']) * 40 / 100;
-          if ($total < $min_marks) {
-            $remarks = "Fail";
-          } else {
-            $remarks = "Pass";
-          }
-        } else {
-          $min_marks = isset($subject_arr['Min_Marks']) ? $subject_arr['Min_Marks'] : 0;
 
-          if (($obt_ext_marks >= $min_marks || $obt_int_marks >= $min_marks) && ($obt_ext_marks != 'AB' || $obt_int_marks != 'AB')) {
-            $remarks = "Pass";
-          } else {
-            $remarks = "Fail";
-          }
+        $min_marks = ($subject_arr['Min_Marks'] + $subject_arr['Max_Marks']) * 40 / 100;
+        if ($total < $min_marks) {
+          $remarks = "Fail";
+        } else {
+          $remarks = "Pass";
         }
 
-        
+
+
 
         $check = $conn->query("SELECT * FROM marksheets WHERE enrollment_no ='$enrollment' AND subject_id='$subject_ids' ");
 
         if ($check->num_rows > 0) {
-            // ECHO "<PRE>";
-            // echo "UPDATE `marksheets` SET `obt_marks_ext` = '" . $obt_ext_marks . "',  `obt_marks_int` = '" . $obt_int_marks . "',   `obt_marks` = '" . $total . "',  `remarks` = '" . $remarks . "',  `exam_month` = '" . $exam_month . "', `exam_year` = " . $exam_year . ", `updated_at` = '" . $created_at . "'
-            //   WHERE enrollment_no = '" . $enrollment . "' AND subject_id = '" . $subject_ids . "' "; 
-            
+
           $update = $conn->query("UPDATE `marksheets` SET `obt_marks_ext` = '" . $obt_ext_marks . "',  `obt_marks_int` = '" . $obt_int_marks . "',   `obt_marks` = '" . $total . "',  `remarks` = '" . $remarks . "',  `exam_month` = '" . $exam_month . "', `exam_year` = " . $exam_year . ", `updated_at` = '" . $created_at . "'
               WHERE enrollment_no = '" . $enrollment . "' AND subject_id = '" . $subject_ids . "' ");
           if ($update) {
@@ -172,7 +132,7 @@ if (isset($_FILES['file'])) {
         }
       }
     }
-// die;
+    // die;
     unlink($uploadFilePath);
     $xlsx = SimpleXLSXGen::fromArray($export_data)->downloadAs('Result Status ' . date('h m s') . '.xlsx');
   }

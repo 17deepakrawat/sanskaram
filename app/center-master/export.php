@@ -22,10 +22,7 @@ if ($_SESSION['Role'] != "Administrator") {
     $center_query = " AND Is_Unique = 0";
   }
 }
-$filterByVerticalType = "";
-if (isset($_SESSION['filterByVerticalType'])) {
-  $filterByVerticalType = $_SESSION['filterByVerticalType'];
-}
+
 
 $filterByUniversity = "";
 if (isset($_SESSION['filterByUniversity'])) {
@@ -34,7 +31,7 @@ if (isset($_SESSION['filterByUniversity'])) {
 
 
 ## Search 
-$searchQuery = " ".$filterByVerticalType. $filterByUniversity;
+$searchQuery = " ".$filterByVerticalType. $filterByUniversity ;
 if (isset($_GET['search'])) {
   $searchValue = mysqli_real_escape_string($conn, $_GET['search']); // Search value
   if (!empty($searchValue)) {

@@ -170,12 +170,7 @@ $video = mysqli_fetch_assoc($videos);
         subject_id: {
           required: true
         },
-        // thumbnail: {
-        // required: true
-        // },
-        // video: {
-        // required: true
-        // },
+     
         unit: {
           required: true
         },

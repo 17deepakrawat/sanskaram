@@ -32,17 +32,7 @@ if (isset($_POST['id']) && isset($_POST['by'])) {
             }
         }
     } elseif ($by == 'vertical_type') {
-
-        // $vartical_type_sql = $conn->query("SELECT ID FROM Users WHERE  Vertical_type='$id' AND Status=1");
-        // while ($row = $vartical_type_sql->fetch_array()) {
-        //     $center_id_arr[] = $row['ID'];
-        // }
-        // $center_ids = implode(',', $center_id_arr);
-
-        // $_SESSION['filterByVerticalType'] = " AND ID IN ($center_ids)";
         $_SESSION['filterByVerticalType'] = " AND Vertical_type = $id";
-
-
     }
     echo json_encode(['status' => true]);
 }

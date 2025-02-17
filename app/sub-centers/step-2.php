@@ -124,7 +124,6 @@ if (isset($_POST['id']) && isset($_POST['university_id'])) {
       const university_id = '<?= $university_id ?>';
       const id = '<?= $id ?>';
       $.ajax({
-        // url: '/app/sub-centers/<?php //print $university_is_vocational == 1 ? 'vocational-course-type' : 'fee-structures' ?>?university_id=' + university_id + '&id=' + id,
 
         url: '/app/sub-centers/<?php print $university_is_vocational == 1 ? 'vocational-course-type-sub-center' : 'fee-structures' ?>?university_id=' + university_id + '&id=' + id,
         type: 'GET',

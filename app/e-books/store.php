@@ -32,7 +32,6 @@ if(isset($_FILES["file"]["name"]) && $_FILES["file"]["name"]!=''){
 }
 
  $add = $conn->query("INSERT INTO `e_books`(`course_id`, `subject_id`, `file_path`, `file_type`,`title`, `created_by`, `created_at`) VALUES ('".$course_id."', '".$subject_id."', '".$file_path."', '".$file_type."','".$title."', '".$created_by."', '".$created_at."' ) ");
-  //$add = $conn->query("INSERT INTO `e_books`(`course_id`, `subject_id`, `file_path`, `file_type`, `created_by`, `created_at`) VALUES ('".$course_id."', '".$subject_id."', '".$file_path."', '".$file_type."', '".$created_by."', '".$created_at."' ) ");
 
   if($add){
     echo json_encode(['status'=>200, 'message'=> "E-book uploaded succefully!!"]);

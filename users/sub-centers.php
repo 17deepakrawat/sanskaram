@@ -27,7 +27,7 @@ unset($_SESSION['filterByUniversity']);
                 if (count($breadcrumbs) == $i):
                   $active = "active";
                   $crumb = explode("?", $breadcrumbs[$i]);
-                  echo '<li class="breadcrumb-item ' . $active . '">' . $crumb[0] . '</li>';
+                  echo '<li class="breadcrumb-item ' . $active . '">' . ucwords($crumb[0]) . '</li>';
                 endif;
               }
               ?>
@@ -55,24 +55,14 @@ unset($_SESSION['filterByUniversity']);
                   <select class="full-width" style="width:40px" data-init-plugin="select2" id="university"
                     onchange="addFilter(this.value, 'university')" data-placeholder="Choose University">
                     <option value="">Select University</option>
-                    <option value="47">Bvoc Glocal University</option>
-                    <option value="48">Skill Program University</option>
+                    <option value="<?= UNIVERSITY_ID ?>">Bvoc Glocal University</option>
                     <option value="1">University Not Alloted</option>
 
                   </select>
                 </div>
               </div>
-              <div class="col-md-3 m-b-10"> 
-                <div class="form-group">
-                  <select class="full-width" style="width:40px" data-init-plugin="select2" id="vertical_type"
-                    onchange="addFilter(this.value, 'vertical_type')" data-placeholder="Choose Vertical Type">
-                    <option value="">Select Vertical Type</option>
-                    <option value="1">Edtech</option>
-                    <option value="0">IITS LLP Paramedical</option>
-                  </select>
-                </div>
-              </div>
-              <div class="col-md-3 m-b-10"></div>
+            
+              <div class="col-md-6 m-b-10"></div>
               <div class="col-md-3">
                 <input type="text" id="users-search-table" class="form-control pull-right" placeholder="Search">
               </div>
@@ -91,7 +81,7 @@ unset($_SESSION['filterByUniversity']);
                     <th data-orderable="false">Admissions</th>
                     <th>Wallet Amount</th>
                     <th data-orderable="false" width="100%">Password</th>
-                    <th>Vertical Type</th>
+                
                     <th data-orderable="false"></th>
                     <th data-orderable="false"></th>
                   </tr>
@@ -161,9 +151,7 @@ unset($_SESSION['filterByUniversity']);
               </div>';
             }
           },
-          {
-            data: "vertical_type",
-          },
+
           {
             data: "Status",
             "render": function (data, type, row) {

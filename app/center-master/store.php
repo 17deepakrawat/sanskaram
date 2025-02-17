@@ -18,7 +18,6 @@
     $city = mysqli_real_escape_string($conn, $_POST['city']);
     $district = mysqli_real_escape_string($conn, $_POST['district']);
     $state = mysqli_real_escape_string($conn, $_POST['state']);
-    $vertical_type = mysqli_real_escape_string($conn, $_POST['vertical_type']);
     
     if(!filter_var($email, FILTER_VALIDATE_EMAIL)){
       echo json_encode(['status'=>400, "message"=>"Invalid email!"]);
@@ -30,7 +29,7 @@
       exit();
     }
 
-    $is_vocational = $conn->query("SELECT ID FROM Universities WHERE ID = ".$_SESSION['university_id']." AND Is_Vocational = 1");
+    $is_vocational = $conn->query("SELECT ID FROM Universities WHERE Status = 1 AND ID = ".$_SESSION['university_id']." AND Is_Vocational = 1");
     if($is_vocational->num_rows==0 && $_SESSION['Role']!='Administrator'){
       $check = $conn->query("SELECT ID FROM Users WHERE Email like '$email'");
       if($check->num_rows>0){
@@ -55,17 +54,7 @@
 
     if($user_type == 1){
       if($_SESSION['Role']=='Administrator'){
-        //$last_inserted_center_code = $conn->query("SELECT Code FROM Users WHERE Role = 'Center' AND Is_Unique = 0 AND B2B_Partner = 1 ORDER BY Code DESC LIMIT 1");
-        //if($last_inserted_center_code->num_rows==0){
-        //  $code = $default_center_code_suffix.sprintf("%'.04d\n", 1);
-        //}else{
-          //$last_inserted_center_code = mysqli_fetch_assoc($last_inserted_center_code);
-          //$last_inserted_center_code = intval(str_replace($default_center_code_suffix, '', $last_inserted_center_code['Code']));
-          //$last_inserted_center_code = $last_inserted_center_code+1;
-         // $code = $default_center_code_suffix.sprintf("%'.04d\n", $last_inserted_center_code);
-       // }
-       // $is_unique = 0;
-      //}else{
+       
         $check_has_unique_center_code = $conn->query("SELECT Center_Suffix FROM Universities WHERE ID = ".$_SESSION['university_id']." AND Has_Unique_Center = 1");
         if($check_has_unique_center_code->num_rows>0){
           $center_suffix = mysqli_fetch_assoc($check_has_unique_center_code);
@@ -122,7 +111,7 @@
       $filename = "/assets/img/default-user.png";
     }
 
-    $add = $conn->query("INSERT INTO `Users`(`Name`, `Short_Name`, `Contact_Name`, `Code`, `Email`, `Mobile`, `Alternate_Mobile`, `Address`, `Pincode`, `City`, `District`, `State`, `Password`, `Photo`, `Role`, `Designation`, `Is_Unique`, `Created_By`, `B2B_Partner`, `Vertical_type`) VALUES ('$name', '$short_name', '$contact_person_name', '$code', '$email', '$contact', '$alternate_contact', '$address', '$pincode', '$city', '$district', '$state', AES_ENCRYPT('12345','60ZpqkOnqn0UQQ2MYTlJ'), '$filename', 'Center', 'Center', $is_unique, ".$_SESSION['ID'].", '$user_type','$vertical_type')");
+    $add = $conn->query("INSERT INTO `Users`(`Name`, `Short_Name`, `Contact_Name`, `Code`, `Email`, `Mobile`, `Alternate_Mobile`, `Address`, `Pincode`, `City`, `District`, `State`, `Password`, `Photo`, `Role`, `Designation`, `Is_Unique`, `Created_By`, `B2B_Partner`) VALUES ('$name', '$short_name', '$contact_person_name', '$code', '$email', '$contact', '$alternate_contact', '$address', '$pincode', '$city', '$district', '$state', AES_ENCRYPT('12345','60ZpqkOnqn0UQQ2MYTlJ'), '$filename', 'Center', 'Center', $is_unique, ".$_SESSION['ID'].", '$user_type')");
     if($add){
       echo json_encode(['status'=>200, 'message'=>'Center added successlly!']);
     }else{

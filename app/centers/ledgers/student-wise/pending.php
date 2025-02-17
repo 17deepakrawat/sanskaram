@@ -95,11 +95,9 @@
                     <?php
                     if ($_SESSION['Role'] == "Center" ||  $_SESSION['Role'] == "Administrator") {
                       $centerArr = array();
-                      if ($_SESSION['university_id'] == 48) {
-                        $center_fee_Query = $conn->query("SELECT Fee FROM `Center_Sub_Courses` WHERE `User_ID` = $centerID  AND Duration = '" . $student['Duration'] . "' AND `Course_ID` = " . $student['Course_ID'] . " AND `Sub_Course_ID` = " . $student['Sub_Course_ID'] . " AND University_ID=" . $_SESSION['university_id'] . "");
-                      } else {
+                    
                         $center_fee_Query = $conn->query("SELECT Fee FROM `Center_Sub_Courses` WHERE `User_ID` = $centerID  AND `Course_ID` = " . $student['Course_ID'] . "  AND `Sub_Course_ID` = " . $student['Sub_Course_ID'] . " AND University_ID=" . $_SESSION['university_id'] . "");
-                      }
+                      
                       $centerArr = $center_fee_Query->fetch_assoc();
                       echo number_format($centerArr['Fee'] * (-1), 2) . " &#8377; ";
                     } else {
