@@ -94,16 +94,7 @@ $data = array();
 
 while ($row = mysqli_fetch_assoc($empRecords)) {
   $enroll = $row['Enrollment_No'];
-
-    if(strtolower($row['Course_Category'])=='certified' && ($row['Duration']==6  || $row['Duration']==11)){
-        $duration = $row['Duration'].'/'.$row['Course_Category'];
-    }else if(strtolower($row['Course_Category'])=='certification'){
-        $duration = $row['Duration'].'/certification';
-    }else if(strtolower($row['Course_Category'])=='advance_diploma' || $row['Duration']=='11/advance-diploma'){
-        $duration = '11/advanced';
-    }else{
-        $duration = $row['Duration'];
-    }
+    $duration = $row['Duration'];
     $data[] = array( 
       "ID"=> $row['ID'],
       "Unique_ID"=> $row['Unique_ID'],

@@ -4,8 +4,7 @@ session_start();
 
 $enroll = isset($_POST['enroll']) ? $_POST['enroll'] : "";
 $current_duration = isset($_POST['current_duration']) ? $_POST['current_duration'] : "";
-$user_code = isset($_POST['user_code']) ? $_POST['user_code'] : "";
-$marks_type = ($_SESSION['university_id'] ==48) ? "External":"Internal";
+$marks_type ="Internal";
 
 ?>
 <style>.modal-dialog.modal-lg { width: 50%;}</style>
@@ -60,12 +59,11 @@ $marks_type = ($_SESSION['university_id'] ==48) ? "External":"Internal";
     })
     function getSubjects(duration) {
         var enroll = '<?= $enroll ?>';
-        var user_code = '<?= $user_code ?>';
 
         $.ajax({
           url: '/app/results/internal-subjects-list',
           type: 'POST',
-          data: { enroll: enroll, duration: duration,user_code:user_code},
+          data: { enroll: enroll, duration: duration},
           success: function (data) {
               $('.subject-box').html(data);
           }

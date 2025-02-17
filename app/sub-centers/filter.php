@@ -6,19 +6,7 @@ if (isset($_POST['id']) && isset($_POST['by'])) {
     $by = $_POST['by'];
     $id = intval($_POST['id']);
     $sub_center_name = "";
-    if ($by == 'vertical_type') { 
-
-        // $vartical_type_sql = $conn->query("SELECT ID FROM Users WHERE  Vertical_type='$id' AND Status=1");
-        // while ($row = $vartical_type_sql->fetch_array()) {
-        //     $center_id_arr[] = $row['ID'];
-        // }
-        // $center_ids = implode(',', $center_id_arr);
-
-        // $_SESSION['filterByVerticalType'] = " AND ID IN ($center_ids)";
-        $_SESSION['filterByVerticalType'] = " AND Users.Vertical_type = $id";
-
-
-    }else  if ($by == 'university') {
+    if ($by == 'university') {
         $userIds = [];
         if ($id == 1) {
             $userQuery = $conn->query("SELECT Code FROM Alloted_Center_To_Counsellor ");

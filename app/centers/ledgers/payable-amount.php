@@ -24,10 +24,9 @@ if (isset($_POST['ids']) && isset($_POST['center'])) {
     }
 
 
-    // echo "SELECT Fee, Center_Fee FROM Student_Ledgers LEFT JOIN Students ON Student_Ledgers.Student_ID = Students.ID WHERE Student_Ledgers.Student_ID = $id AND Student_Ledgers.Duration = Students.Duration AND Student_Ledgers.Type = 1";die;
-    $fees = $conn->query("SELECT Fee, Center_Fee FROM Student_Ledgers LEFT JOIN Students ON Student_Ledgers.Student_ID = Students.ID WHERE Student_Ledgers.Student_ID = $id  AND Student_Ledgers.Type = 1 $durationQuery "); // kp -9-9-2024
+   $fees = $conn->query("SELECT Fee, Center_Fee FROM Student_Ledgers LEFT JOIN Students ON Student_Ledgers.Student_ID = Students.ID WHERE Student_Ledgers.Student_ID = $id  AND Student_Ledgers.Type = 1 $durationQuery "); // kp -9-9-2024
     while ($fee = $fees->fetch_assoc()) {
-// echo "<pre>"; print_r($fee);
+
       $balance[$id][] = $_SESSION['Role'] == 'Sub-Center' ? $fee['Fee'] : (!empty($fee['Center_Fee']) ? $fee['Center_Fee'] : $fee['Fee']);
 
       if ($counter == 1) {

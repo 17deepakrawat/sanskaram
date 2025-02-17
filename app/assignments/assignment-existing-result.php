@@ -78,23 +78,3 @@ if (isset($_POST['assignment_id']) && !empty($_POST['assignment_id'] && !empty($
     exit;
 }
 ?>
-<!-- <script type="text/javascript">
-    $(document).ready(function() {
-        $('#update').click(function(event) {
-            event.preventDefault();
-            $.ajax({
-                data: $('form').serialize(),
-                url: '/app/assignments/update_assignment_result',
-                type: 'POST',
-                success: function(strMessage) {
-                    $('#message')
-                        .text(strMessage)
-                        .css('color', 'green')
-                        .addClass('highlight')
-                        .attr('data-custom', 'value');
-                    window.location.href = "student_assignments_review";
-                }
-            })
-        });
-    });
-</script> -->

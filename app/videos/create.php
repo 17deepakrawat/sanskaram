@@ -64,21 +64,7 @@ session_start();
           <textarea name="description" class="form-control" rows="6"></textarea>
         </div>
       </div>
-      <!-- </div> -->
-      <!-- 
-      <div class="row mb-2">
-        <div class="col-md-12">
-        <label>Thumbnail *</label>
-        <input type="file" name="thumbnail" class="dropify" accept="image/png, image/jpg, image/jpeg, image/svg" > </div>
-    </div>
-
-    <div class="row mb-2">
-        <div class="col-md-12">
-        <label>Video *</label>
-        <input type="file" name="video" class="dropify" accept="video" > </div>
-    </div> -->
-
-      <!-- <div class="row mb-2"> -->
+   
       <div class="col-md-6">
         <div class="form-group form-group-default ">
           <label>Thumbnail *</label>

@@ -53,23 +53,13 @@ unset($_SESSION['filterByVerticalType'])
                   <select class="full-width" style="width:40px" data-init-plugin="select2" id="university"
                     onchange="addFilter(this.value, 'university')" data-placeholder="Choose University">
                     <option value="">Select University</option>
-                    <option value="47">Bvoc Glocal University</option>
-                    <option value="48">Skill Program University</option>
+                    <option value="<?= UNIVERSITY_ID ?>">Bvoc Glocal University</option>
                     <option value="1">University Not Alloted</option>
 
                   </select>
                 </div>
               </div>
-              <div class="col-md-4 m-b-10">
-                <div class="form-group">
-                  <select class="full-width" style="width:40px" data-init-plugin="select2" id="vertical_type"
-                    onchange="addFilter(this.value, 'vertical_type')" data-placeholder="Choose Vertical Type">
-                    <option value="">Select Vertical Type</option>
-                    <option value="1">Edtech</option>
-                    <option value="0">IITS LLP Paramedical</option>
-                  </select>
-                </div>
-              </div>
+             
               <div class="col-md-4">
                 <input type="text" id="users-search-table" class="form-control pull-right" placeholder="Search">
               </div>
@@ -87,7 +77,6 @@ unset($_SESSION['filterByVerticalType'])
                     <th>Code</th>
                     <th data-orderable="false">Password</th>
                     <th>Email</th>
-                    <th>Vertical Type</th>
                     <th>Joining Date</th>
                     <th>No Of Sub-Center</th>
                     <th>No Of Addmission</th>
@@ -159,9 +148,7 @@ unset($_SESSION['filterByVerticalType'])
            {
             data: "Email"
           },
-          {
-            data: "vertical_type "
-          },
+         
           {
             data: "Created_At"
           },

@@ -58,18 +58,6 @@ function verticalTypeFunc()
         <!-- BEGIN PlACE PAGE CONTENT HERE -->
         <div class="card card-transparent">
           <div class="card-header">
-
-          <?php if($_SESSION['university_id']==48) { 
-            $class = "col-md-3";
-            $class1 = "col-md-3";
-            $search_class = "col-md-3";
-
-           }else{
-            $class = "col-md-2";
-            $class1 = "col-md-3";
-            $search_class = "col-md-2";
-
-           } ?>
    
             <div class="row">
               <div class="col-md-3 m-b-10">
@@ -82,8 +70,8 @@ function verticalTypeFunc()
                   </select>
                 </div>
               </div>
-             <?php if($_SESSION['university_id']==47) { ?>
-              <div class="<?=  $class ?> m-b-10">
+            
+              <div class="col-md-3 m-b-10">
                 <div class="form-group">
                   <select class="full-width" style="width:40px" data-init-plugin="select2" id="duration"
                     onchange="addFilter(this.value, 'duration')" data-placeholder="Choose Duration">
@@ -91,24 +79,15 @@ function verticalTypeFunc()
                   </select>
                 </div>
               </div>
-              <?php } ?>
-          
-                <?php if ($_SESSION['Role'] !== "Center" || $_SESSION['Role'] !== "Sub-Center") { ?>
-                  <div class="<?=  $class ?> ">
-                    <select class="form-control" name="vartical_type" id="vartical_type"
-                      onchange="addFilter(this.value, 'vartical_type')">
-                      <?= verticalTypeFunc() ?>
-                    </select>
-                  </div>
-                <?php } ?>
 
-                <div class="<?=  $class1 ?> ">
+
+                <div class="col-md-3">
                 <button class="btn btn-info" aria-label="" title="" data-toggle="tooltip"
                   data-original-title="Export Internal Marks" onclick="exportData()"><i class="uil uil-down-arrow"></i>
                   Export</button>
               </div>
             
-              <div class="<?=  $search_class ?>">
+              <div class="col-md-3">
                 <input type="text" id="users-search-table" class="form-control pull-right" placeholder="Search">
               </div>
             </div>

@@ -21,11 +21,6 @@ if(isset($columnSortOrder)){
 
 
 
-$filterByUsers = "";
-if (isset($_SESSION['usersFilter'])) {
-  $filterByUsers = $_SESSION['usersFilter'];
-}
-
 $filterBysubCourse = "";
 if (isset($_SESSION['subCourseFilter'])) {
   $filterBysubCourse = $_SESSION['subCourseFilter'];
@@ -43,7 +38,7 @@ if($searchValue != ''){
 }
 
 $filterByUniversity = " AND Syllabi.University_ID =".$_SESSION['university_id'];
-$searchQuery .= $filterByUniversity. $filterBysubCourse.$filterByDuration .$filterByUsers;
+$searchQuery .= $filterByUniversity. $filterBysubCourse.$filterByDuration;
 
 
 ## Total number of records without filtering
@@ -65,27 +60,18 @@ $data = array();
 
 while ($row = mysqli_fetch_assoc($empRecords)) {
 
-  $user_ids = isset($row['User_ID']) ? $row['User_ID'] : '';
-  $center_ids = json_decode($user_ids, true);
-  
-  if (is_array($center_ids)) {
-      $alloted_center = count($center_ids) > 0 ? count($center_ids) : 'Not assigned';
-  } else {
-      $alloted_center = 'Not assigned'; 
-  }
     $data[] = array( 
       "ID"=> $row['ID'],
       "subject_name" => $row['subject_name'],
       "sub_course_name" => ucwords(strtolower($row['sub_course_name'])),
       "Code" => $row['Code'],
-      "Exam_Type" => $row['Exam_Type'],
       "Marks" => $row['Min_Marks'].'/'.$row['Max_Marks'],
       "Paper_Type"  => $row["Paper_Type"],
       "Credit"      => $row["Credit"],
       "Semester"      => $row["Semester"],
       "course_name" => ucwords(strtolower($row['course_name'])),
       "files"      => $row["files"],
-      "alloted_center"=>$alloted_center
+
 
     );
 }

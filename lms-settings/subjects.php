@@ -4,7 +4,6 @@
 unset($_SESSION['filterByUniversity']);
 unset($_SESSION['subCourseFilter']);
 unset($_SESSION['durationFilter']);
-unset($_SESSION['usersFilter']);
 
 ?>
 <style>
@@ -35,11 +34,15 @@ unset($_SESSION['usersFilter']);
               }
               ?>
               <div>
-                <button class="btn btn-link" aria-label="" title="" data-toggle="tooltip" data-original-title="Upload" onclick="add('subjects', 'lg')"> <i class="uil uil-export"></i></button>
+                 <button class="custom_add_button" aria-label="" title="" data-toggle="tooltip" data-original-title="Add Subject" onclick="add('subjects','lg')">Add <i class="uil uil-plus-circle ml-2"></i></button>
+
+                <button class="btn btn-link" aria-label="" title="" data-toggle="tooltip" data-original-title="Upload"
+                  onclick="upload('subjects', 'lg')"> <i class="uil uil-export"></i></button>
+
               </div>
             </ol>
             <!-- END BREADCRUMB -->
-        
+
           </div>
 
         </div>
@@ -51,8 +54,6 @@ unset($_SESSION['usersFilter']);
         <div class="card card-transparent">
           <div class="card-header">
             <div class="row">
-           
-
               <div class="col-md-3 m-b-10">
                 <div class="form-group">
                   <?php $get_course = $conn->query("SELECT ID, Name FROM Sub_Courses WHERE Status = 1 AND University_ID = " . $_SESSION['university_id'] . " ORDER BY Name ASC"); ?>
@@ -65,53 +66,20 @@ unset($_SESSION['usersFilter']);
                   </select>
                 </div>
               </div>
-<?php $col_clsss =  ($_SESSION['university_id'] == '48') ? '2' :'3';  ?>
-              <div class="col-md-<?= $col_clsss ?> m-b-10">
+              <div class="col-md-3 m-b-10">
                 <div class="form-group">
                   <select class="full-width" style="width:40px" data-init-plugin="select2" id="duration"
                     onchange="addFilter(this.value, 'duration')" data-placeholder="Choose Duration">
-
                   </select>
                 </div>
               </div>
-              <?php if ($_SESSION['university_id'] == '48') { ?>
-              <div class="col-md-2">
-                  <div class="form-group ">
-                    <?php $center = $conn->query("SELECT Users.ID, Users.Name, Users.Code FROM Alloted_Center_To_Counsellor as ac LEFT JOIN Users on ac.Code = Users.ID  WHERE Users.Role='Center' AND University_ID = '".$_SESSION['university_id']."' "); ?>
-                        <select class="full-width" style="width:40px" id="center" onchange="addFilter(this.value,'users'); removeTable()">
-                        <option value="">Choose Center</option> 
-                        <?php while($row = $center->fetch_assoc()){?>
-                            <option value="<?=$row['ID'] ?>"><?= ucwords(strtolower($row['Name'])).'('.$row['Code'].')' ?></option>
-                          <?php } ?>
-
-                        </select>
-                  </div>
-              </div>
-            <?php } ?>
-
-              <?php if ($_SESSION['university_id'] == '47') { ?>
               <div class="col-md-3"></div>
-              <?php } ?>
-
-              <?php if ($_SESSION['university_id'] == '48' && $_SESSION['Role'] =="Administrator") { ?>
-                <div class="col-md-2">
-                            <div class="form-group">
-                                <select class="form-control" name="exam_type" id="exam_type" onchange="addFilter(this.value,'subjects');">
-                                    <option value="">Select Exam Type</option>
-                                    <option value="1" >Center</option>
-                                    <option value="0" >Online</option>
-                                </select>
-                            </div>
-                        </div>
-              <?php } ?>
-
               <div class="col-md-3">
                 <input type="text" id="users-search-table" class="form-control pull-right" placeholder="Search">
               </div>
             </div>
             <div class="clearfix"></div>
           </div>
-
           <div class="card-body">
             <div class="table-responsive">
               <table class="table table-hover nowrap" id="users-table">
@@ -124,17 +92,13 @@ unset($_SESSION['usersFilter']);
                     <th>Min/Max Marks</th>
                     <th>Paper Type</th>
                     <th>Credit</th>
-                    <th>Exam Type</th>
-                    <th>Center Count</th>
                     <th>Action</th>
                   </tr>
                 </thead>
               </table>
             </div>
           </div>
-
         </div>
-
         <!-- END PLACE PAGE CONTENT HERE -->
       </div>
       <!-- END CONTAINER FLUID -->
@@ -176,19 +140,7 @@ unset($_SESSION['usersFilter']);
             {
               data: "Credit"
             },
-            {
-                data: "Exam_Type",
-                render: function (data, type, row) {
-                    var exam_type = (row.Exam_Type == 0) ? 'Online' : (row.Exam_Type == 1) ? 'Center' : 'Not Selected';
-                    return exam_type;
-                },
-                visible: '<?= $_SESSION['university_id'] ?>' == 47 ? false : true
-            },
-
-            {
-              data: "alloted_center",
-              visible: '<?= $_SESSION['university_id'] ?>' == 47 ? false : true
-            },
+       
             {
               data: "ID",
               "render": function (data, type, row) {
@@ -197,14 +149,13 @@ unset($_SESSION['usersFilter']);
                 if (row.files != null) {
                   downloasdSylBtn = '<a href="..' + row.files + '"><i class="uil uil-down-arrow icon-xs cursor-pointer" title="Download" ></i></a>';
                 }
-                var allotButton = [48].includes(parseInt(uni_id)) ? '<i class="uil uil-plus-circle icon-xs cursor-pointer" title="Allot Center" onclick="allotCenter(\'' + data + '\', \'lg\')"></i>' : '';
+               
                 var deleteBtn = ['Administrator', 'University Head'].includes(role) ? '<i class="uil uil-trash icon-xs cursor-pointer" title="Delete" onclick="destroy(&#39;subjects&#39;, &#39;' + data + '&#39)"></i>' : '';
                 var uploadSylBtn = ['Administrator', 'University Head'].includes(role) ? '<i class="uil uil-upload icon-xs cursor-pointer" title="Upload" onclick="upload(&#39;subjects&#39;, &#39;' + data + '&#39, &#39;' + row.Code + '&#39, &#39;' + row.subject_name + '&#39)"></i>' : '';
 
                 return '<div class="button-list text-end">\
                 '+ downloasdSylBtn + '\
                 '+ uploadSylBtn + '\
-                ' + allotButton + '\
                 <i class="uil uil-edit icon-xs cursor-pointer" title="Edit" onclick="edit(&#39;subjects&#39;, &#39;' + data + '&#39, &#39;lg&#39;)"></i>\
                 ' + deleteBtn + '\
               </div>'
@@ -245,36 +196,20 @@ unset($_SESSION['usersFilter']);
           },
           dataType: 'json',
           success: function (data) {
-            const universityId = <?php echo json_encode($_SESSION['university_id']); ?>;
-             if(by =="sub_course" && universityId==47){
-                getDuration(id);
-              }
+            if (by == "sub_course") {
+              getDuration(id);
+            }
             if (data.status) {
               $('.table').DataTable().ajax.reload(null, false);
             }
           }
         })
       }
-      function allotCenter(id, modal) {
-        $.ajax({
-          url: '/app/subjects/allot-center?id=' + id,
-          type: 'GET',
-          success: function (data) {
-            $('#' + modal + '-modal-content').html(data);
-            $('#' + modal + 'modal').modal('show');
-          }
-        });
-      }
+ 
       $(document).ready(function () {
         getDuration();
-        $("#center").select2({
-          placeholder: 'Choose Center',
-        })
         $("#sub_course").select2({
           placeholder: 'Choose Sub Course',
-        })
-        $("#exam_type").select2({
-          placeholder: 'Choose Exam Type',
         })
       })
       function getDuration(id) {
@@ -288,8 +223,8 @@ unset($_SESSION['usersFilter']);
           }
         })
       }
-      
-      
+
+
       function upload(url, id, code, subject_name) {
         var modal = 'md';
         $.ajax({

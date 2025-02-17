@@ -21,8 +21,8 @@
       print !empty($alloted) ? '<dt class="text-success mb-2">Alloted Universities</dt>' : '' ?>
       <div class="row">
         <?php
-          $alloted_query = !empty($alloted) ? " WHERE ID IN (".implode(',', $alloted).")" : "";
-          $universities = $conn->query("SELECT ID, CONCAT(Universities.Short_Name, ' (', Universities.Vertical, ')') as Name, Logo FROM Universities $alloted_query");
+          $alloted_query = !empty($alloted) ? " AND ID IN (".implode(',', $alloted).")" : "";
+          $universities = $conn->query("SELECT ID, CONCAT(Universities.Short_Name, ' (', Universities.Vertical, ')') as Name, Logo FROM Universities WHERE Status = 1 $alloted_query");
           while($university = $universities->fetch_assoc()){ ?>
             <div class="col-md-6 cursor-pointer" onclick="step2('<?=$id?>', '<?=$university['ID']?>', '<?=$university['Name']?>');">
               <center>
@@ -36,8 +36,8 @@
     <?php } ?>
 
 
-    <?php $not_alloted_query = !empty($alloted) ? " WHERE ID NOT IN (".implode(',', $alloted).")" : "";
-      $universities = $conn->query("SELECT ID, CONCAT(Universities.Short_Name, ' (', Universities.Vertical, ')') as Name, Logo FROM Universities $not_alloted_query");
+    <?php $not_alloted_query = !empty($alloted) ? " AND ID NOT IN (".implode(',', $alloted).")" : "";
+      $universities = $conn->query("SELECT ID, CONCAT(Universities.Short_Name, ' (', Universities.Vertical, ')') as Name, Logo FROM Universities  WHERE Status = 1 $not_alloted_query");
       if($universities->num_rows>0){ ?>
         <dt class="text-primary <?php print !empty($alloted) ? 'mt-4' : '' ?> mb-2">Not Alloted Universities</dt>
         <div class="row">

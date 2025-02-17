@@ -56,13 +56,13 @@ if ($search_value != '') {
 }
 
 // echo "<pre>"; print_r($searchQuery);die;
-$examTypeSql = ($_SESSION['university_id'] == "48") ? " AND Exam_Type= 1" : "";
+
 
 $filterByUniversity = " AND Students.University_ID =" . $_SESSION['university_id'] . " AND Students.Enrollment_No IS NOT NULL";
 $role_query = str_replace('{{ table }}', 'Students', isset($_SESSION['RoleQuery']) ? $_SESSION['RoleQuery'] : '');
 $role_query = str_replace('{{ column }}', 'Added_For', $role_query);
 
-$conditionsQr = $userQuery . $role_query . $filterByUniversity . $examTypeSql . $filterBySubCourse . $searchQuery.$filterByDuration.$filterByVerticalType;
+$conditionsQr = $userQuery . $role_query . $filterByUniversity  . $filterBySubCourse . $searchQuery.$filterByDuration.$filterByVerticalType;
 
  $result_record = "SELECT Max_Marks,Min_Marks, marksheets.obt_marks_ext,marksheets.obt_marks_int,Syllabi.Code as subject_code, Syllabi.Name as subject_name,Students.University_ID, Students.Course_Category, Students.Duration, Students.Enrollment_No, CONCAT(TRIM(CONCAT(Students.First_Name, ' ', Students.Middle_Name, ' ', Students.Last_Name))) AS full_name, Sub_Courses.Name AS sub_course_name,Courses.Short_Name as course_short_name, Users.Code, Users.Name as user_name, Users.Code as user_code FROM marksheets  LEFT JOIN Students on marksheets.enrollment_no = Students.Enrollment_No LEFT JOIN Users on Students.Added_For= Users.ID  LEFT JOIN Syllabi on marksheets.subject_id = Syllabi.ID  LEFT JOIN Courses on Syllabi.Course_ID = Courses.ID LEFT JOIN Sub_Courses on Syllabi.Sub_Course_ID = Sub_Courses.ID WHERE 1=1  $conditionsQr ORDER BY Students.ID DESC";
 
@@ -99,13 +99,10 @@ if ($sqldata->num_rows > 0) {
     $duration = new ClassHelper();
     while ($row = $sqldata->fetch_assoc()) {
 
-        if ($row['University_ID'] == 48) {
-            $max_marks = $row['Max_Marks'];
-            $min_marks = ($row['Max_Marks']) * 40 / 100;
-        } else {
+        
             $max_marks = $row['Min_Marks'];
             $min_marks = ($row['Min_Marks']) * 40 / 100;
-        }
+        
 
         $data = [];
         // $data[] = $nums;

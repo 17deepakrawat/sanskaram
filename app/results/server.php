@@ -63,16 +63,7 @@ $results = mysqli_query($conn, $result_record);
 $data = array();
 
 while ($row = mysqli_fetch_assoc($results)) {
-    if ($row['uni_id'] == 47) {
       $duration = $row['Duration'];
-    } else {
-      $duration = (is_int($row['Duration'])) ? $row['Duration'] . '/' . $row['Course_Category']
-                : (($row['Duration'] == '11/advance-diploma') ? '11/advanced'
-                : (($row['Course_Category'] == 'certified') ? $row['Duration'] : ''));
-    }
-
- 
-
     $data[] = array( 
       "student_name" => ucwords(strtolower($row["student_name"])),
       "Unique_ID" => $row["Unique_ID"],

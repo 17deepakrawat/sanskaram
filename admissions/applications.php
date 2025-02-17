@@ -704,8 +704,8 @@ unset($_SESSION['filterByExamStatus']); //kp
                 data: "ID",
                 "render": function(data, type, row) {
                   // console.log(row.Processed_To_University);
-                  //   var edit_show_hide = row.Processed_To_University == 1? '':'display:none';
-                  var edit_show_hide = "";
+                    var edit_show_hide = row.Processed_To_University == 1? '':'display:none';
+                  
                   var edit = '<a  style="' + edit_show_hide + '" href="/admissions/application-form?id=' + data + '"><i class="uil uil-edit mr-1 custom_icon_btn_app" title="Edit Application Form"></i></a>';
                   //   var edit = showInhouse || row.Step < 4 ? '<a  style="'+edit_show_hide+'" href="/admissions/application-form?id=' + data + '"><i class="uil uil-edit mr-1" title="Edit Application Form"></i></a>' : '';
                   var deleted = showInhouse && row.Process_By_Center == 1 ? '<i class="uil uil-trash mr-1 cursor-pointer custom_icon_btn_app" title="Delete Application Form" style="' + edit_show_hide + '" onclick="destroy(&#39;application-form&#39;, &#39;' + data + '&#39;)"></i>' : '';

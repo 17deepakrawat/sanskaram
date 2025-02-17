@@ -15,26 +15,7 @@
 </div>
 <form role="form" id="form-edit-center-master" action="/app/center-master/update" method="POST" enctype="multipart/form-data">
   <div class="modal-body">
-     <div class="row">
-      <div class="col-md-12">
-        <div class="form-group form-group-default required">
-          <label>Vertical Type</label>
-          <select class="full-width" style="border: transparent;" name="vertical_type" id="vertical_type">
-            <option value="1" <?php if ($user['Vertical_type'] == 1) {
-              echo "selected";
-            } else {
-              echo "";
-            } ?>>Edtech</option>
-            <option value="0" <?php if ($user['Vertical_type'] == 0) {
-              echo "selected";
-            } else {
-              echo "";
-            } ?>>IITS LLP
-              Paramedical</option>
-          </select>
-        </div>
-      </div>
-    </div>
+     
   <div class="row">
       <div class="col-md-6">
         <div class="form-group form-group-default required">

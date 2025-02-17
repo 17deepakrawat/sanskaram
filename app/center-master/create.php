@@ -6,17 +6,7 @@
 </div>
 <form role="form" id="form-add-center-master" action="/app/center-master/store" method="POST" enctype="multipart/form-data">
   <div class="modal-body">
-    <div class="row">
-      <div class="col-md-12">
-        <div class="form-group form-group-default required">
-          <label>Vertical Type</label>
-          <select class="full-width" style="border: transparent;" name="vertical_type" id="vertical_type">
-            <option value="1">Edtech</option>
-            <option value="0">IITS LLP Paramedical</option>
-          </select>
-        </div>
-      </div>
-    </div>
+  
     <div class="row">
       <div id="user-type-div" class="col-md-12">
         <div class="form-group form-group-default required">
