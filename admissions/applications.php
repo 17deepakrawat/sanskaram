@@ -1,5 +1,13 @@
 <?php include($_SERVER['DOCUMENT_ROOT'] . '/includes/header-top.php'); ?>
 <style>
+  .custom_input_st_en{
+  border-top-right-radius: 0px !important;
+  border-bottom-right-radius: 0px !important
+}
+.custom_input_st_en1{
+  border-top-left-radius: 0px !important;
+  border-bottom-left-radius: 0px !important
+}
   .tooltip-inner {
     white-space: pre-wrap;
     max-width: 100% !important;
@@ -32,9 +40,33 @@
   .dropdown-toggle::after {
     content: none !important;
   }
-  .dropdown-menu > li > a, .dropdown-menu > .dropdown-item > a {
+
+  .dropdown-menu>li>a,
+  .dropdown-menu>.dropdown-item>a {
     line-height: normal !important;
     padding: 0px !important;
+  }
+
+  .dropdown-menu>li,
+  .dropdown-menu>.dropdown-item {
+    text-align: start !important;
+    padding-left: 5px !important;
+  }
+
+  .input-sm,
+  .form-horizontal .form-group-sm .form-control {
+    font-size: 13px;
+    min-height: 32px;
+    padding: 6px 19px;
+    border-radius: 10px;
+  }
+
+  .div.dataTables_wrapper div.dataTables_length select {
+    width: 57px !important;
+  }
+  .input-sm{
+    border-radius: 10px !important;
+    height: 48px !important;
   }
 </style>
 <link href="/assets/plugins/bootstrap-datepicker/css/datepicker3.css" rel="stylesheet" type="text/css" media="screen">
@@ -163,10 +195,10 @@ unset($_SESSION['filterByExamStatus']); //kp
                 </div>
                 <div class="col-md-2 m-b-10">
                   <div class="input-daterange input-group" id="datepicker-range">
-                    <input type="text" class="input-sm form-control custom_input_st_en" placeholder="Select Date" id="startDateFilter"
+                    <input type="text" class=" form-control custom_input_st_en" placeholder="Select Date" id="startDateFilter"
                       name="start" />
                     <div class="input-group-addon custom_input_st_en_to">to</div>
-                    <input type="text" class="input-sm form-control custom_input_st_en1" placeholder="Select Date" id="endDateFilter"
+                    <input type="text" class="form-control custom_input_st_en1" placeholder="Select Date" id="endDateFilter"
                       onchange="addDateFilter()" name="end" />
                   </div>
                 </div>
@@ -277,14 +309,14 @@ unset($_SESSION['filterByExamStatus']); //kp
                 <!-- Tab panes -->
                 <div class="tab-content">
                   <div class="tab-pane active" id="applications">
-                    <div class="row d-flex justify-content-end">
+                    <!-- <div class="row d-flex justify-content-end">
                       <div class="col-md-2 d-flex justify-content-start">
-                        <input type="text" id="application-search-table" class="form-control pull-right"
+                        <input type="text" id="application-search-table" class="form-control pull-right custom_search_section"
                           placeholder="Search">
                       </div>
-                    </div>
-                    <div class="table-responsive">
-                      <table class="table table-hover nowrap" id="application-table">
+                    </div> -->
+                    <div class="">
+                      <table class="table table-hover nowrap table-responsive" id="application-table">
                         <thead>
                           <tr>
                             <th data-orderable="false"></th>
@@ -344,14 +376,14 @@ unset($_SESSION['filterByExamStatus']); //kp
                     </div>
                   </div>
                   <div class="tab-pane" id="not_processed">
-                    <div class="row d-flex justify-content-end">
+                    <!-- <div class="row d-flex justify-content-end">
                       <div class="col-md-2">
                         <input type="text" id="not-processed-search-table" class="form-control pull-right"
                           placeholder="Search">
                       </div>
-                    </div>
-                    <div class="table-responsive">
-                      <table class="table table-hover nowrap" id="not-processed-table">
+                    </div> -->
+                    <div class="">
+                      <table class="table table-hover nowrap table-responsive" id="not-processed-table">
                         <thead>
                           <tr>
                             <th data-orderable="false"></th>
@@ -396,14 +428,14 @@ unset($_SESSION['filterByExamStatus']); //kp
                     </div>
                   </div>
                   <div class="tab-pane" id="ready_for_verification">
-                    <div class="row d-flex justify-content-end">
+                    <!-- <div class="row d-flex justify-content-end">
                       <div class="col-md-2">
                         <input type="text" id="ready-for-verification-search-table" class="form-control pull-right"
                           placeholder="Search">
                       </div>
-                    </div>
-                    <div class="table-responsive">
-                      <table class="table table-hover nowrap" id="ready-for-verification-table">
+                    </div> -->
+                    <div class="">
+                      <table class="table table-hover nowrap table-responsive" id="ready-for-verification-table">
                         <thead>
                           <tr>
                             <th data-orderable="false"></th>
@@ -455,14 +487,14 @@ unset($_SESSION['filterByExamStatus']); //kp
                     </div>
                   </div>
                   <div class="tab-pane" id="verified">
-                    <div class="row d-flex justify-content-end">
+                    <!-- <div class="row d-flex justify-content-end">
                       <div class="col-md-2">
                         <input type="text" id="verified-search-table" class="form-control pull-right"
                           placeholder="Search">
                       </div>
-                    </div>
-                    <div class="table-responsive">
-                      <table class="table table-hover nowrap" id="verified-table">
+                    </div> -->
+                    <div class="">
+                      <table class="table table-hover nowrap table-responsive" id="verified-table">
                         <thead>
                           <tr>
                             <th data-orderable="false"></th>
@@ -515,14 +547,14 @@ unset($_SESSION['filterByExamStatus']); //kp
                     </div>
                   </div>
                   <div class="tab-pane" id="proccessed_to_university">
-                    <div class="row d-flex justify-content-end">
+                    <!-- <div class="row d-flex justify-content-end">
                       <div class="col-md-2">
                         <input type="text" id="proccessed-to-university-search-table" class="form-control pull-right"
                           placeholder="Search">
                       </div>
-                    </div>
-                    <div class="table-responsive">
-                      <table class="table table-hover nowrap" id="proccessed-to-university-table">
+                    </div> -->
+                    <div class="">
+                      <table class="table table-hover nowrap table-responsive" id="proccessed-to-university-table">
                         <thead>
                           <tr>
                             <th data-orderable="false"></th>
@@ -575,14 +607,14 @@ unset($_SESSION['filterByExamStatus']); //kp
                     </div>
                   </div>
                   <div class="tab-pane" id="enrolled">
-                    <div class="row d-flex justify-content-end">
+                    <!-- <div class="row d-flex justify-content-end">
                       <div class="col-md-2">
                         <input type="text" id="enrolled-search-table" class="form-control pull-right"
                           placeholder="Search">
                       </div>
-                    </div>
-                    <div class="table-responsive">
-                      <table class="table table-hover nowrap" id="enrolled-table">
+                    </div> -->
+                    <div class="">
+                      <table class="table table-hover nowrap table-responsive" id="enrolled-table">
                         <thead>
                           <tr>
                             <th data-orderable="false"></th>
@@ -674,3277 +706,1867 @@ unset($_SESSION['filterByExamStatus']); //kp
     <?php } ?>
 
     <script type="text/javascript">
-      <?php if ($_SESSION['university_id'] == 48) { ?>
-        $(function() {
-          var role = '<?php echo $_SESSION['Role']; ?>';
-          var showInhouse = role != 'Center' && role != 'Sub-Center' ? true : false;
-          var is_accountant = ['Accountant', 'Administrator'].includes(role) ? true : false;
-          var is_university_head = ['University Head', 'Administrator'].includes(role) ? true : false;
-          var is_operations = role == 'Operations' ? true : false;
-          var hasStudentLogin = '<?php echo $_SESSION['has_lms'] == 1 ? true : false; ?>';
-          var applicationTable = $('#application-table');
-          var notProcessedTable = $('#not-processed-table');
-          var readyForVerificationTable = $('#ready-for-verification-table');
-          var verifiedTable = $('#verified-table');
-          var processedToUniversityTable = $('#proccessed-to-university-table');
-          var enrolledTable = $('#enrolled-table');
+      $(function() {
+        var role = '<?php echo $_SESSION['Role']; ?>';
+        let uni_id = '<?php echo $_SESSION['university_id']; ?>';
+        var showInhouse = role != 'Center' && role != 'Sub-Center' ? true : false;
+        var is_accountant = ['Accountant', 'Administrator'].includes(role) ? true : false;
+        var is_university_head = ['University Head', 'Administrator'].includes(role) ? true : false;
+        var is_operations = role == 'Operations' ? true : false;
+        var hasStudentLogin = '<?php echo $_SESSION['has_lms'] == 1 ? true : false; ?>';
+        var applicationTable = $('#application-table');
+        var notProcessedTable = $('#not-processed-table');
+        var readyForVerificationTable = $('#ready-for-verification-table');
+        var verifiedTable = $('#verified-table');
+        var processedToUniversityTable = $('#proccessed-to-university-table');
+        var enrolledTable = $('#enrolled-table');
 
-          var applicationSettings = {
-            'processing': true,
-            'serverSide': true,
-            'serverMethod': 'post',
-            'ajax': {
-              'url': '/app/applications/application-server',
-              'type': 'POST',
-              complete: function(xhr, responseText) {
-                $('#application_count').html(xhr.responseJSON.iTotalDisplayRecords);
+        var applicationSettings = {
+          'processing': true,
+          'serverSide': true,
+          'serverMethod': 'post',
+          'ajax': {
+            'url': '/app/applications/application-server',
+            'type': 'POST',
+            complete: function(xhr, responseText) {
+              $('#application_count').html(xhr.responseJSON.iTotalDisplayRecords);
+            }
+          },
+          'columns': [{
+              data: "ID",
+              "render": function(data, type, row) {
+                var edit_show_hide = row.Processed_To_University == 1 ? '' : 'display:none';
+                var edit = showInhouse || row.Step < 4 ? '<a class="px-0" style="' + edit_show_hide + '" href="/admissions/application-form?id=' + data + '"><div class="app_custom_edit_btn cursor-pointer "> <i class="uil uil-edit mr-1 " title="Edit Application Form"></i><span>Edit</span></div></a>' : '';
+                var deleted = showInhouse && row.Process_By_Center == 1 ? '<div class="app_custom_edit_btn cursor-pointer " onclick="destroy(&#39;application-form&#39;, &#39;' + data + '&#39;)"><i class="uil uil-trash mr-1 " title="Delete Application Form" style="' + edit_show_hide + '" ></i><span>Delete</span></div>' : '';
+                // var print = row.Step == 4 ? '<div class="app_custom_edit_btn cursor-pointer"  onclick="printForm(&#39;' + data + '&#39;)"><i class="uil uil-print mr-1  " title="Print Application Form"></i><span>Print</span></div>' : '';
+                var print = '';
+                var proccessedByCenter = row.Process_By_Center == 1 ? "Not Proccessed" : row.Process_By_Center
+                var documentVerified = row.Document_Verified == 1 ? "Not Verified" : row.Document_Verified
+                var proccessedToUniversity = row.Processed_To_University == 1 ? "Not Proccessed" : row.Processed_To_University
+                var paymentVerified = row.Payment_Received == 1 ? "Not Verified" : row.Payment_Received
+                var info = row.Step == 4 ? '<div class="app_custom_edit_btn cursor-pointer"  data-html="true" data-toggle="tooltip" data-placement="top" title="Proccessed By Center: <strong>' + proccessedByCenter + '</strong>&#013;&#010;Document Verified: <strong>' + documentVerified + '</strong>&#013;&#010;Payment Verified: <strong>' + paymentVerified + '</strong>&#013;&#010;Proccessed to University: <strong>' + proccessedToUniversity + '</strong>"><i class="uil uil-info-circle cursor-pointer "></i><span class="custom_info_txt">Info</span></div>' : '';
+                var dropdownItems = '';
+                if (print) {
+                  dropdownItems += '<div class="dropdown-item custom_drpdown_btn">' + print + '</div>';
+                }
+                if (edit) {
+                  var edit_show_hide = row.Processed_To_University == 1 ? '' : 'display:none';
+                  dropdownItems += '<div class="dropdown-item custom_drpdown_btn" style="' + edit_show_hide + '">' + edit + '</div>';
+                }
+                if (deleted) {
+                  dropdownItems += '<div class="dropdown-item custom_drpdown_btn">' + deleted + '</div>';
+                }
+                if (info) {
+                  dropdownItems += '<div class="dropdown-item custom_drpdown_btn">' + info + '</div>';
+                }
+
+                // Check if dropdownItems is not empty before rendering the dropdown
+                var dropdown = '';
+                if (dropdownItems) {
+                  dropdown = `<div class="mt-2">
+                        <div class="dropdown ">
+                            <button class="btn btn-link dropdown-toggle" type="button" id="dropdownMenuButton_${data}" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                <i class="uil uil-ellipsis-v"></i>
+                            </button>
+                            <div class="dropdown-menu custom_drop_div" aria-labelledby="dropdownMenuButton_${data}">
+                                ${dropdownItems}
+                            </div>
+                        </div>
+                    </div>`;
+                }
+
+                return dropdown;
               }
             },
-            'columns': [{
-                data: "ID",
-                "render": function(data, type, row) {
-                  // console.log(row.Processed_To_University);
-                    var edit_show_hide = row.Processed_To_University == 1? '':'display:none';
-                  
-                  var edit = '<a  style="' + edit_show_hide + '" href="/admissions/application-form?id=' + data + '"><i class="uil uil-edit mr-1 custom_icon_btn_app" title="Edit Application Form"></i></a>';
-                  //   var edit = showInhouse || row.Step < 4 ? '<a  style="'+edit_show_hide+'" href="/admissions/application-form?id=' + data + '"><i class="uil uil-edit mr-1" title="Edit Application Form"></i></a>' : '';
-                  var deleted = showInhouse && row.Process_By_Center == 1 ? '<i class="uil uil-trash mr-1 cursor-pointer custom_icon_btn_app" title="Delete Application Form" style="' + edit_show_hide + '" onclick="destroy(&#39;application-form&#39;, &#39;' + data + '&#39;)"></i>' : '';
-                  var print = row.Step == 4 ? '<i class="uil uil-print mr-1 cursor-pointer custom_icon_btn_app" title="Print Application Form" onclick="printForm(&#39;' + data + '&#39;)"></i>' : '';
-                  var proccessedByCenter = row.Process_By_Center == 1 ? "Not Proccessed" : row.Process_By_Center
-                  var documentVerified = row.Document_Verified == 1 ? "Not Verified" : row.Document_Verified
-                  var proccessedToUniversity = row.Processed_To_University == 1 ? "Not Proccessed" : row.Processed_To_University
-                  var paymentVerified = row.Payment_Received == 1 ? "Not Verified" : row.Payment_Received
-                  var info = row.Step == 4 ? '<i class="uil uil-info-circle cursor-pointer custom_icon_btn_app" data-html="true" data-toggle="tooltip" data-placement="top" title="Proccessed By Center: <strong>' + proccessedByCenter + '</strong>&#013;&#010;Document Verified: <strong>' + documentVerified + '</strong>&#013;&#010;Payment Verified: <strong>' + paymentVerified + '</strong>&#013;&#010;Proccessed to University: <strong>' + proccessedToUniversity + '</strong>"></i>' : '';
-                  return print + edit + deleted + info;
-                }
-              },
-              {
-                data: "Photo",
-                "render": function(data, type, row) {
-                  return '<span class="thumbnail-wrapper d48 circular inline">\
+
+            {
+              data: "Photo",
+              "render": function(data, type, row) {
+                return '<span class="thumbnail-wrapper d48 circular inline">\
                 <img src="' + data + '" alt="" data-src="' + data + '"\
                   data-src-retina="' + data + '" width="32" height="32">\
               </span>';
-                }
-              },
-              {
-                data: "Unique_ID",
-                "render": function(data, type, row) {
-                  return '<span class="cursor-pointer" title="Click to export documents" onclick="exportDocuments(&#39;' + row.ID + '&#39;)"><strong>' + data + '</strong></span>';
-                }
-              },
-              {
-                data: "Step",
-                "render": function(data, type, row) {
-                  var label_class = data < 4 ? 'label-important' : 'label-success';
-                  var status = data < 4 ? 'In Draft @ Step ' + data : 'Completed';
-                  return '<sapn class="label ' + label_class + '">' + status + '</sapn>';
-                }
-              },
-              {
-                data: "form_completion_date"
-              },
-              {
-                data: "Process_By_Center",
-                "render": function(data, type, row) {
-                  if (data == 1 && row.Step == 4) {
-                    return '<span class="label label-primary">Not Processed</span>';
-                    var show = !showInhouse ? '<div class="form-check complete mt-2">\
+              }
+            },
+            {
+              data: "Unique_ID",
+              "render": function(data, type, row) {
+                return '<span class="cursor-pointer" title="Click to export documents" onclick="exportDocuments(&#39;' + row.ID + '&#39;)"><strong>' + data + '</strong></span>';
+              }
+            },
+            {
+              data: "Step",
+              "render": function(data, type, row) {
+                var label_class = data < 4 ? 'label-important' : 'label-success';
+                var status = data < 4 ? 'In Draft @ Step ' + data : 'Completed';
+                return '<sapn class="label ' + label_class + '">' + status + '</sapn>';
+              }
+            },
+            {
+              data: "form_completion_date"
+            },
+            {
+              data: "Process_By_Center",
+              "render": function(data, type, row) {
+                if (data == 1 && row.Step == 4) {
+                  return '<span class="label label-primary">Not Processed</span>';
+                  var show = !showInhouse ? '<div class="form-check complete mt-2">\
                   <input type="checkbox" id="process-by-center-' + row.ID + '" onclick="processByCenter(&#39;' + row.ID + '&#39;)">\
                   <label for="process-by-center-' + row.ID + '">Mark as Processed</label>\
                 </div>' : '<span class="label label-primary">Not Processed</span>';
-                    return show;
-                  } else {
-                    var show = row.Step == 4 ? '<div class="text-center"><span class="label label-primary">Processed on ' + data + '</span></div>' : '';
-                    return show;
-                  }
-                },
-                visible: role == 'Sub-Center' ? false : true
-              },
-              {
-                data: "Document_Verified",
-                "render": function(data, type, row) {
-                  if (row.Pendency_Status == 2) {
-                    if (!showInhouse) {
-                      return '<div class="text-center text-danger"><span class="cursor-pointer"><strong>In Review</strong></span></div>'
-                    } else {
-                      return is_operations || is_university_head ? '<div class="text-center text-danger"><span class="cursor-pointer" onclick="verifyDocument(&#39;' + row.ID + '&#39;)"><strong>Re-Review</strong></span></div>' : '<div class="text-center text-danger"><span><strong>Re-Review</strong></span></div>'
-                    }
-                  } else if (row.Pendency != 0) {
-                    if (!showInhouse) {
-                      return '<div class="text-center text-danger"><span class="cursor-pointer" onclick="uploadPendency(&#39;' + row.ID + '&#39;)"><strong>Pendency</strong></span></div>'
-                    } else {
-                      return is_operations || is_university_head ? '<div class="text-center text-danger"><span class="cursor-pointer" onclick="reportPendency(&#39;' + row.ID + '&#39;)"><strong>Pendency</strong></span></div>' : '<div class="text-center text-danger"><span><strong>Pendency</strong></span></div>'
-                    }
-                  } else {
-                    if (data == 1) {
-                      var show = (is_operations || is_university_head) && row.Process_By_Center != 1 ? '<div class="text-center"><span class="cursor-pointer" onclick="verifyDocument(&#39;' + row.ID + '&#39;)"><strong>Review</strong></span></div>' : row.Step == 4 && row.Process_By_Center != 1 ? '<div class="text-center text-danger"><strong>Pending</strong></div>' : '';
-                      return show;
-                    } else {
-                      var show = row.Step == 4 && row.Process_By_Center != 1 ? '<div class="text-center"><span class="label label-success">Verified at ' + data + '</span></div>' : '';
-                      return show;
-                    }
-                  }
+                  return show;
+                } else {
+                  var show = row.Step == 4 ? '<div class="text-center"><span class="label label-primary">Processed on ' + data + '</span></div>' : '';
+                  return show;
                 }
               },
-              {
-                data: "Payment_Received",
-                "render": function(data, type, row) {
-                  if (data == 1 && row.Step == 4 && row.Process_By_Center != 1) {
-                    var show = is_accountant ? '<div class="text-center"><span class="cursor-pointer" onclick="verifyPayment(&#39;' + row.ID + '&#39;)"><strong>Review</strong></span></div>' : '<center><span class="label label-primary">Pending</span></center>';
-                    return show;
-                  } else if (row.Process_By_Center != 1) {
-                    var show = row.Step == 4 ? '<div class="text-center"><span class="label label-primary">Verified on ' + data + '</span></div>' : '';
+              visible: role == 'Sub-Center' ? false : true
+            },
+            {
+              data: "Document_Verified",
+              "render": function(data, type, row) {
+                if (row.Pendency_Status == 2) {
+                  if (!showInhouse) {
+                    return '<div class="text-center text-danger"><span class="cursor-pointer"><strong>In Review</strong></span></div>'
+                  } else {
+                    return is_operations || is_university_head ? '<div class="text-center text-danger"><span class="cursor-pointer" onclick="verifyDocument(&#39;' + row.ID + '&#39;)"><strong>Re-Review</strong></span></div>' : '<div class="text-center text-danger"><span><strong>Re-Review</strong></span></div>'
+                  }
+                } else if (row.Pendency != 0) {
+                  if (!showInhouse) {
+                    return '<div class="text-center text-danger"><span class="cursor-pointer" onclick="uploadPendency(&#39;' + row.ID + '&#39;)"><strong>Pendency</strong></span></div>'
+                  } else {
+                    return is_operations || is_university_head ? '<div class="text-center text-danger"><span class="cursor-pointer" onclick="reportPendency(&#39;' + row.ID + '&#39;)"><strong>Pendency</strong></span></div>' : '<div class="text-center text-danger"><span><strong>Pendency</strong></span></div>'
+                  }
+                } else {
+                  if (data == 1) {
+                    var show = (is_operations || is_university_head) && row.Process_By_Center != 1 ? '<div class="text-center"><span class="cursor-pointer" onclick="verifyDocument(&#39;' + row.ID + '&#39;)"><strong>Review</strong></span></div>' : row.Step == 4 && row.Process_By_Center != 1 ? '<div class="text-center text-danger"><strong>Pending</strong></div>' : '';
                     return show;
                   } else {
-                    return '';
+                    var show = row.Step == 4 && row.Process_By_Center != 1 ? '<div class="text-center"><span class="label label-success">Verified at ' + data + '</span></div>' : '';
+                    return show;
                   }
-                },
-                visible: false
+                }
+              }
+            },
+            {
+              data: "Payment_Received",
+              "render": function(data, type, row) {
+                if (data == 1 && row.Step == 4 && row.Process_By_Center != 1) {
+                  var show = is_accountant ? '<div class="text-center"><span class="cursor-pointer" onclick="verifyPayment(&#39;' + row.ID + '&#39;)"><strong>Review</strong></span></div>' : '<center><span class="label label-primary">Pending</span></center>';
+                  return show;
+                } else if (row.Process_By_Center != 1) {
+                  var show = row.Step == 4 ? '<div class="text-center"><span class="label label-primary">Verified on ' + data + '</span></div>' : '';
+                  return show;
+                } else {
+                  return '';
+                }
               },
-              {
-                data: "Processed_To_University",
-                "render": function(data, type, row) {
-                  if (data == 1) {
-                    var show = showInhouse && row.Document_Verified != 1 && row.Payment_Received != 1 ? '<div class="form-check complete mt-2">\
+              visible: false
+            },
+            {
+              data: "Processed_To_University",
+              "render": function(data, type, row) {
+                if (data == 1) {
+                  var show = showInhouse && row.Document_Verified != 1 && row.Payment_Received != 1 ? '<div class="form-check complete mt-2">\
                   <input type="checkbox" id="processed-to-university-' + row.ID + '" onclick="checkABCid(&#39;' + row.ID + '&#39;)">\
                   <label for="processed-to-university-' + row.ID + '">Mark as Processed</label>\
                 </div>' : "";
-                    return show;
-                  } else {
-                    var show = row.Step == 4 ? '<div class="text-center"><span class="label label-success">Processed on ' + data + '</span></div>' : '';
-                    return show;
-                  }
+                  return show;
+                } else {
+                  var show = row.Step == 4 ? '<div class="text-center"><span class="label label-success">Processed on ' + data + '</span></div>' : '';
+                  return show;
                 }
-              },
-              {
-                data: "Enrollment_No",
-                "render": function(data, type, row) {
-                  var edit = showInhouse && row.Processed_To_University != 1 ? '<i class="uil uil-edit ml-2 cursor-pointer custom_edit_button " title="Add Enrollment No." onclick="addEnrollment(&#39;' + row.ID + '&#39;)">' : '';
-                  return data + edit;
-                }
-              },
-              {
-                data: "ABC_ID",
-                "render": function(data, type, row) {
-                  if (data.length > 0) {
-                    var edit = showInhouse ? '<i class="uil uil-edit ml-2 cursor-pointer" title="Add ABC_ID" onclick="addABCid(&#39;' + row.ID + '&#39;)">' : '';
-                  } else {
-                    var edit = '<i class="uil uil-edit ml-2 cursor-pointer" title="Add ABC_ID" onclick="addABCid(&#39;' + row.ID + '&#39;)">';
-                  }
-
-                  return data + edit;
-                }
-              },
-              {
-                data: "OA_Number",
-                "render": function(data, type, row) {
-                  var edit = showInhouse ? '<i class="uil uil-edit ml-2 cursor-pointer" title="Add OA Number" onclick="addOANumber(&#39;' + row.ID + '&#39;)">' : '';
-                  return data + edit;
-                }
-              },
-              {
-                data: "Adm_Session"
-              },
-              {
-                data: "updated_date"
-              },
-              {
-                data: "Adm_Type"
-              },
-              {
-                data: "Adm_Type",
-                "render": function(data, type, row) {
-                  return '<span onclick="reportPendnency(' + row.ID + ')"><strong>Report</strong><span>';
-                },
-                visible: false,
-              },
-              {
-                data: "First_Name",
-                "render": function(data, type, row) {
-                  return '<strong>' + data + '</strong>';
-                },
-                visible: false,
-              },
-              {
-                data: "Father_Name"
-              },
-              {
-                data: "Short_Name"
-              },
-              {
-                data: "Course_Category",
-              },
-              {
-                data: "Duration"
-              },
-              {
-                data: "Status",
-                "render": function(data, type, row) {
-                  var active = data == 1 ? 'Active' : 'Inactive';
-                  if (row.Step == 4 && showInhouse) {
-                    var checked = data == 1 ? 'checked' : '';
-                    return '<div class="form-check form-check-inline switch switch-lg success">\
-                  <input onclick="changeStatus(\'Students\', &#39;' + row.ID + '&#39;);" type="checkbox" ' + checked + ' id="student-status-switch-' + row.ID + '">\
-                  <label for="student-status-switch-' + row.ID + '">' + active + '</label>\
-                </div>';
-                  } else {
-                    return active;
-                  }
-                },
-                visible: hasStudentLogin
-              },
-              {
-                data: "ID_Card",
-                "render": function(data, type, row) {
-                  var active = data == 1 ? 'Active' : 'Inactive';
-                  if (row.Step == 4 && showInhouse && row.Enrollment_No.length > 0) {
-                    var checked = data == 1 ? 'checked' : '';
-                    return '<div class="form-check form-check-inline switch switch-lg success">\
-                  <input onclick="changeStatus(\'Students\', &#39;' + row.ID + '&#39;, \'ID_Card\');" type="checkbox" ' + checked + ' id="student-id-card-switch-' + row.ID + '">\
-                  <label for="student-id-card-switch-' + row.ID + '">' + active + '</label>\
-                </div>';
-                  } else {
-                    return active;
-                  }
-                },
-                visible: hasStudentLogin
-              },
-              {
-                data: "Admit_Card",
-                "render": function(data, type, row) {
-                  var active = data == 1 ? 'Active' : 'Inactive';
-                  if (row.Step == 4 && showInhouse && row.Enrollment_No.length > 0) {
-                    var checked = data == 1 ? 'checked' : '';
-                    return '<div class="form-check form-check-inline switch switch-lg success">\
-                  <input onclick="changeStatus(\'Students\', &#39;' + row.ID + '&#39;, \'Admit_Card\');" type="checkbox" ' + checked + ' id="student-admit-card-switch-' + row.ID + '">\
-                  <label for="student-admit-card-switch-' + row.ID + '">' + active + '</label>\
-                </div>';
-                  } else {
-                    return active;
-                  }
-                },
-                visible: hasStudentLogin
-              },
-              {
-                data: "Exam",
-                "render": function(data, type, row) {
-                  var active = data == 1 ? 'Active' : 'Inactive';
-                  if (row.Step == 4 && showInhouse && row.Enrollment_No.length > 0) {
-                    var checked = data == 1 ? 'checked' : '';
-                    return '<div class="form-check form-check-inline switch switch-lg success">\
-                  <input onclick="changeStatus(\'Students\', &#39;' + row.ID + '&#39;, \'Exam\');" type="checkbox" ' + checked + ' id="student-exam-switch-' + row.ID + '">\
-                  <label for="student-exam-switch-' + row.ID + '">' + active + '</label>\
-                </div>';
-                  } else {
-                    return active;
-                  }
-                },
-                visible: hasStudentLogin
-              },
-              {
-                data: "DOB"
-              },
-              {
-                data: "Center_Code",
-                visible: role == 'Sub-Center' ? false : true
-              },
-              {
-                data: "Center_Name",
-                "render": function(data, type, row) {
-                  var name = row.Center_Name;
-                  var Sub_Center_Name = row.Sub_Center_Name.length > 0 ? '( ' + row.Sub_Center_Name + ' )' : '';
-                  return name + Sub_Center_Name;
-                },
-                visible: role == 'Sub-Center' ? false : true
-              },
-              {
-                data: "RM",
-                visible: role == 'Center' || role == 'Sub-Center' ? false : true
-              }
-            ],
-            "sDom": "l<t><'row'<p i>>",
-            "destroy": true,
-            "scrollCollapse": true,
-            "oLanguage": {
-              "sInfo": "Showing <b>_START_ to _END_</b> of _TOTAL_ entries"
-            },
-            drawCallback: function(settings, json) {
-              $('[data-toggle="tooltip"]').tooltip();
-            },
-            "aaSorting": []
-          };
-
-          var notProcessedSettings = {
-            'processing': true,
-            'serverSide': true,
-            'serverMethod': 'post',
-            'ajax': {
-              'url': '/app/applications/not-processed-server',
-              'type': 'POST',
-              complete: function(xhr, responseText) {
-                $('#not_processed_count').html(xhr.responseJSON.iTotalDisplayRecords);
               }
             },
-            'columns': [{
-                data: "ID",
-                "render": function(data, type, row) {
-                  var edit_show_hide = row.Processed_To_University == 1 ? '' : 'display:none';
-                  var edit = showInhouse || row.Step < 4 ? '<a  style="' + edit_show_hide + '" href="/admissions/application-form?id=' + data + '"><i class="uil uil-edit mr-1 custom_icon_btn_app" title="Edit Application Form"></i></a>' : '';
-                  var deleted = showInhouse && row.Process_By_Center == 1 ? '<i class="uil uil-trash mr-1 cursor-pointer custom_icon_btn_app" title="Delete Application Form" style="' + edit_show_hide + '" onclick="destroy(&#39;application-form&#39;, &#39;' + data + '&#39;)"></i>' : '';
-                  var print = row.Step == 4 ? '<i class="uil uil-print mr-1 cursor-pointer custom_icon_btn_app" title="Print Application Form" onclick="printForm(&#39;' + data + '&#39;)"></i>' : '';
-                  var proccessedByCenter = row.Process_By_Center == 1 ? "Not Proccessed" : row.Process_By_Center
-                  var documentVerified = row.Document_Verified == 1 ? "Not Verified" : row.Document_Verified
-                  var proccessedToUniversity = row.Processed_To_University == 1 ? "Not Proccessed" : row.Processed_To_University
-                  var paymentVerified = row.Payment_Received == 1 ? "Not Verified" : row.Payment_Received
-                  var info = row.Step == 4 ? '<i class="uil uil-info-circle cursor-pointer custom_icon_btn_app" data-html="true" data-toggle="tooltip" data-placement="top" title="Proccessed By Center: <strong>' + proccessedByCenter + '</strong>&#013;&#010;Document Verified: <strong>' + documentVerified + '</strong>&#013;&#010;Payment Verified: <strong>' + paymentVerified + '</strong>&#013;&#010;Proccessed to University: <strong>' + proccessedToUniversity + '</strong>"></i>' : '';
-                  return print + edit + deleted + info;
-                }
-              },
-              {
-                data: "Photo",
-                "render": function(data, type, row) {
-                  return '<span class="thumbnail-wrapper d48 circular inline">\
-                <img src="' + data + '" alt="" data-src="' + data + '"\
-                  data-src-retina="' + data + '" width="32" height="32">\
-              </span>';
-                }
-              },
-              {
-                data: "Unique_ID",
-                "render": function(data, type, row) {
-                  return '<span class="cursor-pointer" title="Click to export documents" onclick="exportDocuments(&#39;' + row.ID + '&#39;)"><strong>' + data + '</strong></span>';
-                }
-              },
-              {
-                data: "Step",
-                "render": function(data, type, row) {
-                  var label_class = data < 4 ? 'label-important' : 'label-success';
-                  var status = data < 4 ? 'In Draft @ Step ' + data : 'Completed';
-                  return '<sapn class="label ' + label_class + '">' + status + '</sapn>';
-                }
-              },
-              {
-                data: "Process_By_Center",
-                "render": function(data, type, row) {
-                  if (data == 1 && row.Step == 4) {
-                    return '<span class="label label-primary">Not Processed</span>';
-                    var show = !showInhouse ? '<div class="form-check complete mt-2">\
-                  <input type="checkbox" id="process-by-center-' + row.ID + '" onclick="processByCenter(&#39;' + row.ID + '&#39;)">\
-                  <label for="process-by-center-' + row.ID + '">Mark as Processed</label>\
-                </div>' : '<span class="label label-primary">Not Processed</span>';
-                    return show;
-                  } else {
-                    var show = row.Step == 4 ? '<div class="text-center"><span class="label label-primary">Processed on ' + data + '</span></div>' : '';
-                    return show;
-                  }
-                },
-                visible: role == 'Sub-Center' ? false : true
-              },
-              {
-                data: "Adm_Session"
-              },
-              {
-                data: "updated_date"
-              },
-              {
-                data: "Adm_Type"
-              },
-              {
-                data: "Adm_Type",
-                "render": function(data, type, row) {
-                  return '<span onclick="reportPendnency(' + row.ID + ')"><strong>Report</strong><span>';
-                },
-                visible: false,
-              },
-              {
-                data: "First_Name",
-                "render": function(data, type, row) {
-                  return '<strong>' + data + '</strong>';
-                },
-                visible: false,
-              },
-              {
-                data: "Father_Name"
-              },
-              {
-                data: "Short_Name"
-              },
-              {
-                data: "Course_Category",
-              },
-              {
-                data: "Duration"
-              },
-              {
-                data: "Status",
-                "render": function(data, type, row) {
-                  var active = data == 1 ? 'Active' : 'Inactive';
-                  if (row.Step == 4 && showInhouse) {
-                    var checked = data == 1 ? 'checked' : '';
-                    return '<div class="form-check form-check-inline switch switch-lg success">\
-                  <input onclick="changeStatus(\'Students\', &#39;' + row.ID + '&#39;);" type="checkbox" ' + checked + ' id="student-status-switch-' + row.ID + '">\
-                  <label for="student-status-switch-' + row.ID + '">' + active + '</label>\
-                </div>';
-                  } else {
-                    return active;
-                  }
-                },
-                visible: hasStudentLogin
-              },
-              {
-                data: "ID_Card",
-                "render": function(data, type, row) {
-                  var active = data == 1 ? 'Active' : 'Inactive';
-                  if (row.Step == 4 && showInhouse && row.Enrollment_No.length > 0) {
-                    var checked = data == 1 ? 'checked' : '';
-                    return '<div class="form-check form-check-inline switch switch-lg success">\
-                  <input onclick="changeStatus(\'Students\', &#39;' + row.ID + '&#39;, \'ID_Card\');" type="checkbox" ' + checked + ' id="student-id-card-switch-' + row.ID + '">\
-                  <label for="student-id-card-switch-' + row.ID + '">' + active + '</label>\
-                </div>';
-                  } else {
-                    return active;
-                  }
-                },
-                visible: hasStudentLogin
-              },
-              {
-                data: "Admit_Card",
-                "render": function(data, type, row) {
-                  var active = data == 1 ? 'Active' : 'Inactive';
-                  if (row.Step == 4 && showInhouse && row.Enrollment_No.length > 0) {
-                    var checked = data == 1 ? 'checked' : '';
-                    return '<div class="form-check form-check-inline switch switch-lg success">\
-                  <input onclick="changeStatus(\'Students\', &#39;' + row.ID + '&#39;, \'Admit_Card\');" type="checkbox" ' + checked + ' id="student-admit-card-switch-' + row.ID + '">\
-                  <label for="student-admit-card-switch-' + row.ID + '">' + active + '</label>\
-                </div>';
-                  } else {
-                    return active;
-                  }
-                },
-                visible: hasStudentLogin
-              },
-              {
-                data: "Exam",
-                "render": function(data, type, row) {
-                  var active = data == 1 ? 'Active' : 'Inactive';
-                  if (row.Step == 4 && showInhouse && row.Enrollment_No.length > 0) {
-                    var checked = data == 1 ? 'checked' : '';
-                    return '<div class="form-check form-check-inline switch switch-lg success">\
-                  <input onclick="changeStatus(\'Students\', &#39;' + row.ID + '&#39;, \'Exam\');" type="checkbox" ' + checked + ' id="student-exam-switch-' + row.ID + '">\
-                  <label for="student-exam-switch-' + row.ID + '">' + active + '</label>\
-                </div>';
-                  } else {
-                    return active;
-                  }
-                },
-                visible: hasStudentLogin
-              },
-              {
-                data: "DOB"
-              },
-              {
-                data: "Center_Code",
-                visible: role == 'Sub-Center' ? false : true
-              },
-              {
-                data: "Center_Name",
-                visible: role == 'Sub-Center' ? false : true
-              },
-              {
-                data: "RM",
-                visible: role == 'Center' || role == 'Sub-Center' ? false : true
-              }
-            ],
-            "sDom": "l<t><'row'<p i>>",
-            "destroy": true,
-            "scrollCollapse": true,
-            "oLanguage": {
-              "sInfo": "Showing <b>_START_ to _END_</b> of _TOTAL_ entries"
-            },
-            drawCallback: function(settings, json) {
-              $('[data-toggle="tooltip"]').tooltip();
-            },
-            "aaSorting": []
-          };
-
-          var readyForVerificationSettings = {
-            'processing': true,
-            'serverSide': true,
-            'serverMethod': 'post',
-            'ajax': {
-              'url': '/app/applications/ready-for-verification-server',
-              'type': 'POST',
-              complete: function(xhr, responseText) {
-                $('#ready_for_verification_count').html(xhr.responseJSON.iTotalDisplayRecords);
+            {
+              data: "Enrollment_No",
+              "render": function(data, type, row) {
+                var edit = showInhouse && row.Processed_To_University != 1 ? '<i class="uil uil-edit ml-2 cursor-pointer custom_icon_btn_app" title="Add Enrollment No." onclick="addEnrollment(&#39;' + row.ID + '&#39;)">' : '';
+                return data + edit;
               }
             },
-            'columns': [{
-                data: "ID",
-                "render": function(data, type, row) {
-                  var edit_show_hide = row.Processed_To_University == 1 ? '' : 'display:none';
-                  var edit = showInhouse || row.Step < 4 ? '<a  style="' + edit_show_hide + '" href="/admissions/application-form?id=' + data + '"><i class="uil uil-edit mr-1 custom_icon_btn_app" title="Edit Application Form"></i></a>' : '';
-                  var deleted = showInhouse && row.Process_By_Center == 1 ? '<i class="uil uil-trash mr-1 cursor-pointer custom_icon_btn_app" title="Delete Application Form" style="' + edit_show_hide + '" onclick="destroy(&#39;application-form&#39;, &#39;' + data + '&#39;)"></i>' : '';
-                  var print = row.Step == 4 ? '<i class="uil uil-print mr-1 cursor-pointer custom_icon_btn_app" title="Print Application Form" onclick="printForm(&#39;' + data + '&#39;)"></i>' : '';
-                  var proccessedByCenter = row.Process_By_Center == 1 ? "Not Proccessed" : row.Process_By_Center
-                  var documentVerified = row.Document_Verified == 1 ? "Not Verified" : row.Document_Verified
-                  var proccessedToUniversity = row.Processed_To_University == 1 ? "Not Proccessed" : row.Processed_To_University
-                  var paymentVerified = row.Payment_Received == 1 ? "Not Verified" : row.Payment_Received
-                  var info = row.Step == 4 ? '<i class="uil uil-info-circle cursor-pointer custom_icon_btn_app" data-html="true" data-toggle="tooltip" data-placement="top" title="Proccessed By Center: <strong>' + proccessedByCenter + '</strong>&#013;&#010;Document Verified: <strong>' + documentVerified + '</strong>&#013;&#010;Payment Verified: <strong>' + paymentVerified + '</strong>&#013;&#010;Proccessed to University: <strong>' + proccessedToUniversity + '</strong>"></i>' : '';
-                  return print + edit + deleted + info;
-                }
-              },
-              {
-                data: "Photo",
-                "render": function(data, type, row) {
-                  return '<span class="thumbnail-wrapper d48 circular inline">\
-                <img src="' + data + '" alt="" data-src="' + data + '"\
-                  data-src-retina="' + data + '" width="32" height="32">\
-              </span>';
-                }
-              },
-              {
-                data: "Unique_ID",
-                "render": function(data, type, row) {
-                  return '<span class="cursor-pointer" title="Click to export documents" onclick="exportDocuments(&#39;' + row.ID + '&#39;)"><strong>' + data + '</strong></span>';
-                }
-              },
-              {
-                data: "Step",
-                "render": function(data, type, row) {
-                  var label_class = data < 4 ? 'label-important' : 'label-success';
-                  var status = data < 4 ? 'In Draft @ Step ' + data : 'Completed';
-                  return '<sapn class="label ' + label_class + '">' + status + '</sapn>';
-                }
-              },
-              {
-                data: "Process_By_Center",
-                "render": function(data, type, row) {
-                  if (data == 1 && row.Step == 4) {
-                    return '<span class="label label-primary">Not Processed</span>';
-                    var show = !showInhouse ? '<div class="form-check complete mt-2">\
-                  <input type="checkbox" id="process-by-center-' + row.ID + '" onclick="processByCenter(&#39;' + row.ID + '&#39;)">\
-                  <label for="process-by-center-' + row.ID + '">Mark as Processed</label>\
-                </div>' : '<span class="label label-primary">Not Processed</span>';
-                    return show;
-                  } else {
-                    var show = row.Step == 4 ? '<div class="text-center"><span class="label label-primary">Processed on ' + data + '</span></div>' : '';
-                    return show;
-                  }
-                },
-                visible: role == 'Sub-Center' ? false : true
-              },
-              {
-                data: "Document_Verified",
-                "render": function(data, type, row) {
-                  if (row.Pendency_Status == 2) {
-                    if (!showInhouse) {
-                      return '<div class="text-center text-danger"><span class="cursor-pointer"><strong>In Review</strong></span></div>'
-                    } else {
-                      return is_operations || is_university_head ? '<div class="text-center text-danger"><span class="cursor-pointer" onclick="verifyDocument(&#39;' + row.ID + '&#39;)"><strong>Re-Review</strong></span></div>' : '<div class="text-center text-danger"><span><strong>Re-Review</strong></span></div>'
-                    }
-                  } else if (row.Pendency != 0) {
-                    if (!showInhouse) {
-                      return '<div class="text-center text-danger"><span class="cursor-pointer" onclick="uploadPendency(&#39;' + row.ID + '&#39;)"><strong>Pendency</strong></span></div>'
-                    } else {
-                      return is_operations || is_university_head ? '<div class="text-center text-danger"><span class="cursor-pointer" onclick="reportPendency(&#39;' + row.ID + '&#39;)"><strong>Pendency</strong></span></div>' : '<div class="text-center text-danger"><span><strong>Pendency</strong></span></div>'
-                    }
-                  } else {
-                    if (data == 1) {
-                      var show = (is_operations || is_university_head) && row.Process_By_Center != 1 ? '<div class="text-center"><span class="cursor-pointer" onclick="verifyDocument(&#39;' + row.ID + '&#39;)"><strong>Review</strong></span></div>' : row.Step == 4 && row.Process_By_Center != 1 ? '<div class="text-center text-danger"><strong>Pending</strong></div>' : '';
-                      return show;
-                    } else {
-                      var show = row.Step == 4 && row.Process_By_Center != 1 ? '<div class="text-center"><span class="label label-success">Verified at ' + data + '</span></div>' : '';
-                      return show;
-                    }
-                  }
-                }
-              },
-              {
-                data: "Payment_Received",
-                "render": function(data, type, row) {
-                  if (data == 1 && row.Step == 4 && row.Process_By_Center != 1) {
-                    var show = is_accountant ? '<div class="text-center"><span class="cursor-pointer" onclick="verifyPayment(&#39;' + row.ID + '&#39;)"><strong>Review</strong></span></div>' : '<center><span class="label label-primary">Pending</span></center>';
-                    return show;
-                  } else {
-                    var show = row.Step == 4 ? '<div class="text-center"><span class="label label-primary">Verified on ' + data + '</span></div>' : '';
-                    return show;
-                  }
-                },
-                visible: false
-              },
-              {
-                data: "Enrollment_No",
-                "render": function(data, type, row) {
-                  var edit = showInhouse && row.Processed_To_University != 1 ? '<i class="uil uil-edit ml-2 cursor-pointer" title="Add Enrollment No." onclick="addEnrollment(&#39;' + row.ID + '&#39;)">' : '';
-                  return data + edit;
-                }
-              },
-              {
-                data: "ABC_ID",
-                "render": function(data, type, row) {
-                  if (data.length > 0) {
-                    var edit = showInhouse ? '<i class="uil uil-edit ml-2 cursor-pointer" title="Add ABC_ID" onclick="addABCid(&#39;' + row.ID + '&#39;)">' : '';
-                  } else {
-                    var edit = '<i class="uil uil-edit ml-2 cursor-pointer" title="Add ABC_ID" onclick="addABCid(&#39;' + row.ID + '&#39;)">';
-                  }
-                  return data + edit;
-                }
-              },
-              {
-                data: "OA_Number",
-                "render": function(data, type, row) {
-                  var edit = showInhouse ? '<i class="uil uil-edit ml-2 cursor-pointer" title="Add OA Number" onclick="addOANumber(&#39;' + row.ID + '&#39;)">' : '';
-                  return data + edit;
-                }
-              },
-              {
-                data: "Adm_Session"
-              },
-              {
-                data: "updated_date"
-              },
-              {
-                data: "Adm_Type"
-              },
-              {
-                data: "Adm_Type",
-                "render": function(data, type, row) {
-                  return '<span onclick="reportPendnency(' + row.ID + ')"><strong>Report</strong><span>';
-                },
-                visible: false,
-              },
-              {
-                data: "First_Name",
-                "render": function(data, type, row) {
-                  return '<strong>' + data + '</strong>';
-                },
-                visible: false,
-              },
-              {
-                data: "Father_Name"
-              },
-              {
-                data: "Short_Name"
-              },
-              {
-                data: "Course_Category",
-              },
-              {
-                data: "Duration"
-              },
-              {
-                data: "Status",
-                "render": function(data, type, row) {
-                  var active = data == 1 ? 'Active' : 'Inactive';
-                  if (row.Step == 4 && showInhouse) {
-                    var checked = data == 1 ? 'checked' : '';
-                    return '<div class="form-check form-check-inline switch switch-lg success">\
-                  <input onclick="changeStatus(\'Students\', &#39;' + row.ID + '&#39;);" type="checkbox" ' + checked + ' id="student-status-switch-' + row.ID + '">\
-                  <label for="student-status-switch-' + row.ID + '">' + active + '</label>\
-                </div>';
-                  } else {
-                    return active;
-                  }
-                },
-                visible: hasStudentLogin
-              },
-              {
-                data: "ID_Card",
-                "render": function(data, type, row) {
-                  var active = data == 1 ? 'Active' : 'Inactive';
-                  if (row.Step == 4 && showInhouse && row.Enrollment_No.length > 0) {
-                    var checked = data == 1 ? 'checked' : '';
-                    return '<div class="form-check form-check-inline switch switch-lg success">\
-                  <input onclick="changeStatus(\'Students\', &#39;' + row.ID + '&#39;, \'ID_Card\');" type="checkbox" ' + checked + ' id="student-id-card-switch-' + row.ID + '">\
-                  <label for="student-id-card-switch-' + row.ID + '">' + active + '</label>\
-                </div>';
-                  } else {
-                    return active;
-                  }
-                },
-                visible: hasStudentLogin
-              },
-              {
-                data: "Admit_Card",
-                "render": function(data, type, row) {
-                  var active = data == 1 ? 'Active' : 'Inactive';
-                  if (row.Step == 4 && showInhouse && row.Enrollment_No.length > 0) {
-                    var checked = data == 1 ? 'checked' : '';
-                    return '<div class="form-check form-check-inline switch switch-lg success">\
-                  <input onclick="changeStatus(\'Students\', &#39;' + row.ID + '&#39;, \'Admit_Card\');" type="checkbox" ' + checked + ' id="student-admit-card-switch-' + row.ID + '">\
-                  <label for="student-admit-card-switch-' + row.ID + '">' + active + '</label>\
-                </div>';
-                  } else {
-                    return active;
-                  }
-                },
-                visible: hasStudentLogin
-              },
-              {
-                data: "Exam",
-                "render": function(data, type, row) {
-                  var active = data == 1 ? 'Active' : 'Inactive';
-                  if (row.Step == 4 && showInhouse && row.Enrollment_No.length > 0) {
-                    var checked = data == 1 ? 'checked' : '';
-                    return '<div class="form-check form-check-inline switch switch-lg success">\
-                  <input onclick="changeStatus(\'Students\', &#39;' + row.ID + '&#39;, \'Exam\');" type="checkbox" ' + checked + ' id="student-exam-switch-' + row.ID + '">\
-                  <label for="student-exam-switch-' + row.ID + '">' + active + '</label>\
-                </div>';
-                  } else {
-                    return active;
-                  }
-                },
-                visible: hasStudentLogin
-              },
-              {
-                data: "DOB"
-              },
-              {
-                data: "Center_Code",
-                visible: role == 'Sub-Center' ? false : true
-              },
-              {
-                data: "Center_Name",
-                visible: role == 'Sub-Center' ? false : true
-              },
-              {
-                data: "RM",
-                visible: role == 'Center' || role == 'Sub-Center' ? false : true
-              }
-            ],
-            "sDom": "l<t><'row'<p i>>",
-            "destroy": true,
-            "scrollCollapse": true,
-            "oLanguage": {
-              "sInfo": "Showing <b>_START_ to _END_</b> of _TOTAL_ entries"
-            },
-            drawCallback: function(settings, json) {
-              $('[data-toggle="tooltip"]').tooltip();
-            },
-            "aaSorting": []
-          };
+            {
+              data: "exam_exit_val",
+              "render": function(data, type, row) {
+                var edit = "";
+                if (data.length > 0 && data == 'Enrolled' && is_operations == false) {
 
-          var verifiedSettings = {
-            'processing': true,
-            'serverSide': true,
-            'serverMethod': 'post',
-            'ajax': {
-              'url': '/app/applications/verified-server',
-              'type': 'POST',
-              complete: function(xhr, responseText) {
-                $('#verified_count').html(xhr.responseJSON.iTotalDisplayRecords);
+                  var edit = showInhouse ? '<i class="uil uil-edit ml-2 cursor-pointer custom_icon_btn_app" title="Update Exit Exam Status" onclick="addExamStatus(&#39;' + row.ID + '&#39;)">' : '';
+                }
+                return data + edit;
+              },
+              visible: uni_id == '48' ? false : true
+
+            },
+            {
+              data: "Dispatch_status",
+              "render": function(data, type, row) {
+                var returnStatus = data;
+
+                if (row['exam_exit_val'] != '' && row['exam_exit_val'] != 'Enrolled' && data == '' && row['exam_exit_val'] != 'Drop Out') {
+                  returnStatus = "Pending";
+                }
+
+                // Only apply badge for Pending
+                if (returnStatus == 'Pending') {
+                  returnStatus = '<span class="badge badge-warning">Pending</span>';
+                }
+
+                return returnStatus;
+              },
+              visible: uni_id == '48' ? false : true
+            },
+            {
+              data: "ABC_ID",
+              "render": function(data, type, row) {
+                if (data.length > 0) {
+                  var edit = showInhouse ? '<i class="uil uil-edit ml-2 cursor-pointer custom_icon_btn_app" title="Add ABC_ID" onclick="addABCid(&#39;' + row.ID + '&#39;)">' : '';
+                } else {
+                  var edit = '<i class="uil uil-edit ml-2 cursor-pointer custom_icon_btn_app" title="Add ABC_ID" onclick="addABCid(&#39;' + row.ID + '&#39;)">';
+                }
+                return data + edit;
               }
             },
-            'columns': [{
-                data: "ID",
-                "render": function(data, type, row) {
-                  var edit_show_hide = row.Processed_To_University == 1 ? '' : 'display:none';
-                  var edit = showInhouse || row.Step < 4 ? '<a  style="' + edit_show_hide + '" href="/admissions/application-form?id=' + data + '"><i class="uil uil-edit mr-1 custom_icon_btn_app" title="Edit Application Form"></i></a>' : '';
-                  var deleted = showInhouse && row.Process_By_Center == 1 ? '<i class="uil uil-trash mr-1 cursor-pointer custom_icon_btn_app" title="Delete Application Form" style="' + edit_show_hide + '" onclick="destroy(&#39;application-form&#39;, &#39;' + data + '&#39;)"></i>' : '';
-                  var print = row.Step == 4 ? '<i class="uil uil-print mr-1 cursor-pointer custom_icon_btn_app" title="Print Application Form" onclick="printForm(&#39;' + data + '&#39;)"></i>' : '';
-                  var proccessedByCenter = row.Process_By_Center == 1 ? "Not Proccessed" : row.Process_By_Center
-                  var documentVerified = row.Document_Verified == 1 ? "Not Verified" : row.Document_Verified
-                  var proccessedToUniversity = row.Processed_To_University == 1 ? "Not Proccessed" : row.Processed_To_University
-                  var paymentVerified = row.Payment_Received == 1 ? "Not Verified" : row.Payment_Received
-                  var info = row.Step == 4 ? '<i class="uil uil-info-circle cursor-pointer custom_icon_btn_app" data-html="true" data-toggle="tooltip" data-placement="top" title="Proccessed By Center: <strong>' + proccessedByCenter + '</strong>&#013;&#010;Document Verified: <strong>' + documentVerified + '</strong>&#013;&#010;Payment Verified: <strong>' + paymentVerified + '</strong>&#013;&#010;Proccessed to University: <strong>' + proccessedToUniversity + '</strong>"></i>' : '';
-                  return print + edit + deleted + info;
-                }
-              },
-              {
-                data: "Photo",
-                "render": function(data, type, row) {
-                  return '<span class="thumbnail-wrapper d48 circular inline">\
-                <img src="' + data + '" alt="" data-src="' + data + '"\
-                  data-src-retina="' + data + '" width="32" height="32">\
-              </span>';
-                }
-              },
-              {
-                data: "Unique_ID",
-                "render": function(data, type, row) {
-                  return '<span class="cursor-pointer" title="Click to export documents" onclick="exportDocuments(&#39;' + row.ID + '&#39;)"><strong>' + data + '</strong></span>';
-                }
-              },
-              {
-                data: "Step",
-                "render": function(data, type, row) {
-                  var label_class = data < 4 ? 'label-important' : 'label-success';
-                  var status = data < 4 ? 'In Draft @ Step ' + data : 'Completed';
-                  return '<sapn class="label ' + label_class + '">' + status + '</sapn>';
-                }
-              },
-              {
-                data: "Process_By_Center",
-                "render": function(data, type, row) {
-                  if (data == 1 && row.Step == 4) {
-                    return '<span class="label label-primary">Not Processed</span>';
-                    var show = !showInhouse ? '<div class="form-check complete mt-2">\
-                  <input type="checkbox" id="process-by-center-' + row.ID + '" onclick="processByCenter(&#39;' + row.ID + '&#39;)">\
-                  <label for="process-by-center-' + row.ID + '">Mark as Processed</label>\
-                </div>' : '<span class="label label-primary">Not Processed</span>';
-                    return show;
-                  } else {
-                    var show = row.Step == 4 ? '<div class="text-center"><span class="label label-primary">Processed on ' + data + '</span></div>' : '';
-                    return show;
-                  }
-                },
-                visible: role == 'Sub-Center' ? false : true
-              },
-              {
-                data: "Document_Verified",
-                "render": function(data, type, row) {
-                  if (row.Pendency_Status == 2) {
-                    if (!showInhouse) {
-                      return '<div class="text-center text-danger"><span class="cursor-pointer"><strong>In Review</strong></span></div>'
-                    } else {
-                      return is_operations || is_university_head ? '<div class="text-center text-danger"><span class="cursor-pointer" onclick="verifyDocument(&#39;' + row.ID + '&#39;)"><strong>Re-Review</strong></span></div>' : '<div class="text-center text-danger"><span><strong>Re-Review</strong></span></div>'
-                    }
-                  } else if (row.Pendency != 0) {
-                    if (!showInhouse) {
-                      return '<div class="text-center text-danger"><span class="cursor-pointer" onclick="uploadPendency(&#39;' + row.ID + '&#39;)"><strong>Pendency</strong></span></div>'
-                    } else {
-                      return is_operations || is_university_head ? '<div class="text-center text-danger"><span class="cursor-pointer" onclick="reportPendency(&#39;' + row.ID + '&#39;)"><strong>Pendency</strong></span></div>' : '<div class="text-center text-danger"><span><strong>Pendency</strong></span></div>'
-                    }
-                  } else {
-                    if (data == 1) {
-                      var show = (is_operations || is_university_head) && row.Process_By_Center != 1 ? '<div class="text-center"><span class="cursor-pointer" onclick="verifyDocument(&#39;' + row.ID + '&#39;)"><strong>Review</strong></span></div>' : row.Step == 4 && row.Process_By_Center != 1 ? '<div class="text-center text-danger"><strong>Pending</strong></div>' : '';
-                      return show;
-                    } else {
-                      var show = row.Step == 4 && row.Process_By_Center != 1 ? '<div class="text-center"><span class="label label-success">Verified at ' + data + '</span></div>' : '';
-                      return show;
-                    }
-                  }
-                }
-              },
-              {
-                data: "Payment_Received",
-                "render": function(data, type, row) {
-                  if (data == 1 && row.Step == 4 && row.Process_By_Center != 1) {
-                    var show = is_accountant ? '<div class="text-center"><span class="cursor-pointer" onclick="verifyPayment(&#39;' + row.ID + '&#39;)"><strong>Review</strong></span></div>' : '<center><span class="label label-primary">Pending</span></center>';
-                    return show;
-                  } else {
-                    var show = row.Step == 4 ? '<div class="text-center"><span class="label label-primary">Verified on ' + data + '</span></div>' : '';
-                    return show;
-                  }
-                },
-                visible: false
-              },
-              {
-                data: "Processed_To_University",
-                "render": function(data, type, row) {
-                  if (data == 1) {
-                    var show = showInhouse && row.Document_Verified != 1 && row.Payment_Received != 1 ? '<div class="form-check complete mt-2">\
-                  <input type="checkbox" id="processed-to-university-' + row.ID + '" onclick="checkABCid(&#39;' + row.ID + '&#39;)">\
-                  <label for="processed-to-university-' + row.ID + '">Mark as Processed</label>\
-                </div>' : "";
-                    return show;
-                  } else {
-                    var show = row.Step == 4 ? '<div class="text-center"><span class="label label-success">Processed on ' + data + '</span></div>' : '';
-                    return show;
-                  }
-                }
-              },
-              {
-                data: "Enrollment_No",
-                "render": function(data, type, row) {
-                  var universityId = '<?= $_SESSION["university_id"] ?>';
-                  var edit = showInhouse && universityId == 48 ? '<i class="uil uil-edit ml-2 cursor-pointer" title="Add Enrollment No." onclick="addEnrollment(&#39;' + row.ID + '&#39;)">' : '';
-                  return data + edit;
-                }
-              },
-              {
-                data: "ABC_ID",
-                "render": function(data, type, row) {
-                  if (data.length > 0) {
-                    var edit = showInhouse ? '<i class="uil uil-edit ml-2 cursor-pointer" title="Add ABC_ID" onclick="addABCid(&#39;' + row.ID + '&#39;)">' : '';
-                  } else {
-                    var edit = '<i class="uil uil-edit ml-2 cursor-pointer" title="Add ABC_ID" onclick="addABCid(&#39;' + row.ID + '&#39;)">';
-                  }
-                  return data + edit;
-                }
-              },
-              {
-                data: "OA_Number",
-                "render": function(data, type, row) {
-                  var edit = showInhouse ? '<i class="uil uil-edit ml-2 cursor-pointer" title="Add OA Number" onclick="addOANumber(&#39;' + row.ID + '&#39;)">' : '';
-                  return data + edit;
-                }
-              },
-              {
-                data: "Adm_Session"
-              },
-              {
-                data: "updated_date"
-              },
-              {
-                data: "Adm_Type"
-              },
-              {
-                data: "Adm_Type",
-                "render": function(data, type, row) {
-                  return '<span onclick="reportPendnency(' + row.ID + ')"><strong>Report</strong><span>';
-                },
-                visible: false,
-              },
-              {
-                data: "First_Name",
-                "render": function(data, type, row) {
-                  return '<strong>' + data + '</strong>';
-                },
-                visible: false,
-              },
-              {
-                data: "Father_Name"
-              },
-              {
-                data: "Short_Name"
-              },
-              {
-                data: "Course_Category",
-              },
-              {
-                data: "Duration"
-              },
-              {
-                data: "Status",
-                "render": function(data, type, row) {
-                  var active = data == 1 ? 'Active' : 'Inactive';
-                  if (row.Step == 4 && showInhouse) {
-                    var checked = data == 1 ? 'checked' : '';
-                    return '<div class="form-check form-check-inline switch switch-lg success">\
-                  <input onclick="changeStatus(\'Students\', &#39;' + row.ID + '&#39;);" type="checkbox" ' + checked + ' id="student-status-switch-' + row.ID + '">\
-                  <label for="student-status-switch-' + row.ID + '">' + active + '</label>\
-                </div>';
-                  } else {
-                    return active;
-                  }
-                },
-                visible: hasStudentLogin
-              },
-              {
-                data: "ID_Card",
-                "render": function(data, type, row) {
-                  var active = data == 1 ? 'Active' : 'Inactive';
-                  if (row.Step == 4 && showInhouse && row.Enrollment_No.length > 0) {
-                    var checked = data == 1 ? 'checked' : '';
-                    return '<div class="form-check form-check-inline switch switch-lg success">\
-                  <input onclick="changeStatus(\'Students\', &#39;' + row.ID + '&#39;, \'ID_Card\');" type="checkbox" ' + checked + ' id="student-id-card-switch-' + row.ID + '">\
-                  <label for="student-id-card-switch-' + row.ID + '">' + active + '</label>\
-                </div>';
-                  } else {
-                    return active;
-                  }
-                },
-                visible: hasStudentLogin
-              },
-              {
-                data: "Admit_Card",
-                "render": function(data, type, row) {
-                  var active = data == 1 ? 'Active' : 'Inactive';
-                  if (row.Step == 4 && showInhouse && row.Enrollment_No.length > 0) {
-                    var checked = data == 1 ? 'checked' : '';
-                    return '<div class="form-check form-check-inline switch switch-lg success">\
-                  <input onclick="changeStatus(\'Students\', &#39;' + row.ID + '&#39;, \'Admit_Card\');" type="checkbox" ' + checked + ' id="student-admit-card-switch-' + row.ID + '">\
-                  <label for="student-admit-card-switch-' + row.ID + '">' + active + '</label>\
-                </div>';
-                  } else {
-                    return active;
-                  }
-                },
-                visible: hasStudentLogin
-              },
-              {
-                data: "Exam",
-                "render": function(data, type, row) {
-                  var active = data == 1 ? 'Active' : 'Inactive';
-                  if (row.Step == 4 && showInhouse && row.Enrollment_No.length > 0) {
-                    var checked = data == 1 ? 'checked' : '';
-                    return '<div class="form-check form-check-inline switch switch-lg success">\
-                  <input onclick="changeStatus(\'Students\', &#39;' + row.ID + '&#39;, \'Exam\');" type="checkbox" ' + checked + ' id="student-exam-switch-' + row.ID + '">\
-                  <label for="student-exam-switch-' + row.ID + '">' + active + '</label>\
-                </div>';
-                  } else {
-                    return active;
-                  }
-                },
-                visible: hasStudentLogin
-              },
-              {
-                data: "DOB"
-              },
-              {
-                data: "Center_Code",
-                visible: role == 'Sub-Center' ? false : true
-              },
-              {
-                data: "Center_Name",
-                visible: role == 'Sub-Center' ? false : true
-              },
-              {
-                data: "RM",
-                visible: role == 'Center' || role == 'Sub-Center' ? false : true
-              }
-            ],
-            "sDom": "l<t><'row'<p i>>",
-            "destroy": true,
-            "scrollCollapse": true,
-            "oLanguage": {
-              "sInfo": "Showing <b>_START_ to _END_</b> of _TOTAL_ entries"
-            },
-            drawCallback: function(settings, json) {
-              $('[data-toggle="tooltip"]').tooltip();
-            },
-            "aaSorting": []
-          };
-
-          var processedToUniversitySettings = {
-            'processing': true,
-            'serverSide': true,
-            'serverMethod': 'post',
-            'ajax': {
-              'url': '/app/applications/processed-to-university-server',
-              'type': 'POST',
-              complete: function(xhr, responseText) {
-                $('#processed_to_university_count').html(xhr.responseJSON.iTotalDisplayRecords);
+            {
+              data: "OA_Number",
+              "render": function(data, type, row) {
+                var edit = showInhouse ? '<i class="uil uil-edit ml-2 cursor-pointer custom_icon_btn_app" title="Add OA Number" onclick="addOANumber(&#39;' + row.ID + '&#39;)">' : '';
+                return data + edit;
               }
             },
-            'columns': [{
-                data: "ID",
-                "render": function(data, type, row) {
-                  var edit_show_hide = row.Processed_To_University == 1 ? '' : 'display:none';
-                  var edit = showInhouse || row.Step < 4 ? '<a  style="' + edit_show_hide + '" href="/admissions/application-form?id=' + data + '"><i class="uil uil-edit mr-1 custom_icon_btn_app" title="Edit Application Form"></i></a>' : '';
-                  var deleted = showInhouse && row.Process_By_Center == 1 ? '<i class="uil uil-trash mr-1 cursor-pointer custom_icon_btn_app" title="Delete Application Form" style="' + edit_show_hide + '" onclick="destroy(&#39;application-form&#39;, &#39;' + data + '&#39;)"></i>' : '';
-                  var print = row.Step == 4 ? '<i class="uil uil-print mr-1 cursor-pointer custom_icon_btn_app" title="Print Application Form" onclick="printForm(&#39;' + data + '&#39;)"></i>' : '';
-                  var proccessedByCenter = row.Process_By_Center == 1 ? "Not Proccessed" : row.Process_By_Center
-                  var documentVerified = row.Document_Verified == 1 ? "Not Verified" : row.Document_Verified
-                  var proccessedToUniversity = row.Processed_To_University == 1 ? "Not Proccessed" : row.Processed_To_University
-                  var paymentVerified = row.Payment_Received == 1 ? "Not Verified" : row.Payment_Received
-                  var info = row.Step == 4 ? '<i class="uil uil-info-circle cursor-pointer custom_icon_btn_app" data-html="true" data-toggle="tooltip" data-placement="top" title="Proccessed By Center: <strong>' + proccessedByCenter + '</strong>&#013;&#010;Document Verified: <strong>' + documentVerified + '</strong>&#013;&#010;Payment Verified: <strong>' + paymentVerified + '</strong>&#013;&#010;Proccessed to University: <strong>' + proccessedToUniversity + '</strong>"></i>' : '';
-                  return print + edit + deleted + info;
-                }
-              },
-              {
-                data: "Photo",
-                "render": function(data, type, row) {
-                  return '<span class="thumbnail-wrapper d48 circular inline">\
-                <img src="' + data + '" alt="" data-src="' + data + '"\
-                  data-src-retina="' + data + '" width="32" height="32">\
-              </span>';
-                }
-              },
-              {
-                data: "Unique_ID",
-                "render": function(data, type, row) {
-                  return '<span class="cursor-pointer" title="Click to export documents" onclick="exportDocuments(&#39;' + row.ID + '&#39;)"><strong>' + data + '</strong></span>';
-                }
-              },
-              {
-                data: "Step",
-                "render": function(data, type, row) {
-                  var label_class = data < 4 ? 'label-important' : 'label-success';
-                  var status = data < 4 ? 'In Draft @ Step ' + data : 'Completed';
-                  return '<sapn class="label ' + label_class + '">' + status + '</sapn>';
-                }
-              },
-              {
-                data: "Process_By_Center",
-                "render": function(data, type, row) {
-                  if (data == 1 && row.Step == 4) {
-                    return '<span class="label label-primary">Not Processed</span>';
-                    var show = !showInhouse ? '<div class="form-check complete mt-2">\
-                  <input type="checkbox" id="process-by-center-' + row.ID + '" onclick="processByCenter(&#39;' + row.ID + '&#39;)">\
-                  <label for="process-by-center-' + row.ID + '">Mark as Processed</label>\
-                </div>' : '<span class="label label-primary">Not Processed</span>';
-                    return show;
-                  } else {
-                    var show = row.Step == 4 ? '<div class="text-center"><span class="label label-primary">Processed on ' + data + '</span></div>' : '';
-                    return show;
-                  }
-                },
-                visible: role == 'Sub-Center' ? false : true
-              },
-              {
-                data: "Document_Verified",
-                "render": function(data, type, row) {
-                  if (row.Pendency_Status == 2) {
-                    if (!showInhouse) {
-                      return '<div class="text-center text-danger"><span class="cursor-pointer"><strong>In Review</strong></span></div>'
-                    } else {
-                      return is_operations || is_university_head ? '<div class="text-center text-danger"><span class="cursor-pointer" onclick="verifyDocument(&#39;' + row.ID + '&#39;)"><strong>Re-Review</strong></span></div>' : '<div class="text-center text-danger"><span><strong>Re-Review</strong></span></div>'
-                    }
-                  } else if (row.Pendency != 0) {
-                    if (!showInhouse) {
-                      return '<div class="text-center text-danger"><span class="cursor-pointer" onclick="uploadPendency(&#39;' + row.ID + '&#39;)"><strong>Pendency</strong></span></div>'
-                    } else {
-                      return is_operations || is_university_head ? '<div class="text-center text-danger"><span class="cursor-pointer" onclick="reportPendency(&#39;' + row.ID + '&#39;)"><strong>Pendency</strong></span></div>' : '<div class="text-center text-danger"><span><strong>Pendency</strong></span></div>'
-                    }
-                  } else {
-                    if (data == 1) {
-                      var show = (is_operations || is_university_head) && row.Process_By_Center != 1 ? '<div class="text-center"><span class="cursor-pointer" onclick="verifyDocument(&#39;' + row.ID + '&#39;)"><strong>Review</strong></span></div>' : row.Step == 4 && row.Process_By_Center != 1 ? '<div class="text-center text-danger"><strong>Pending</strong></div>' : '';
-                      return show;
-                    } else {
-                      var show = row.Step == 4 && row.Process_By_Center != 1 ? '<div class="text-center"><span class="label label-success">Verified at ' + data + '</span></div>' : '';
-                      return show;
-                    }
-                  }
-                }
-              },
-              {
-                data: "Payment_Received",
-                "render": function(data, type, row) {
-                  if (data == 1 && row.Step == 4 && row.Process_By_Center != 1) {
-                    var show = is_accountant ? '<div class="text-center"><span class="cursor-pointer" onclick="verifyPayment(&#39;' + row.ID + '&#39;)"><strong>Review</strong></span></div>' : '<center><span class="label label-primary">Pending</span></center>';
-                    return show;
-                  } else if (row.Process_By_Center != 1) {
-                    var show = row.Step == 4 ? '<div class="text-center"><span class="label label-primary">Verified on ' + data + '</span></div>' : '';
-                    return show;
-                  } else {
-                    return '';
-                  }
-                },
-                visible: false
-              },
-              {
-                data: "Processed_To_University",
-                "render": function(data, type, row) {
-                  if (data == 1) {
-                    var show = showInhouse && row.Document_Verified != 1 && row.Payment_Received != 1 ? '<div class="form-check complete mt-2">\
-                  <input type="checkbox" id="processed-to-university-' + row.ID + '" onclick="checkABCid(&#39;' + row.ID + '&#39;)">\
-                  <label for="processed-to-university-' + row.ID + '">Mark as Processed</label>\
-                </div>' : "";
-                    return show;
-                  } else {
-                    var show = row.Step == 4 ? '<div class="text-center"><span class="label label-success">Processed on ' + data + '</span></div>' : '';
-                    return show;
-                  }
-                }
-              },
-              {
-                data: "Enrollment_No",
-                "render": function(data, type, row) {
-                  var edit = showInhouse && row.Processed_To_University != 1 ? '<i class="uil uil-edit ml-2 cursor-pointer" title="Add Enrollment No." onclick="addEnrollment(&#39;' + row.ID + '&#39;)">' : '';
-                  return data + edit;
-                }
-              },
-              {
-                data: "ABC_ID",
-                "render": function(data, type, row) {
-                  return data;
-                }
-              },
-              {
-                data: "OA_Number",
-                "render": function(data, type, row) {
-                  var edit = showInhouse ? '<i class="uil uil-edit ml-2 cursor-pointer" title="Add OA Number" onclick="addOANumber(&#39;' + row.ID + '&#39;)">' : '';
-                  return data + edit;
-                }
-              },
-              {
-                data: "Adm_Session"
-              },
-              {
-                data: "updated_date"
-              },
-              {
-                data: "Adm_Type"
-              },
-              {
-                data: "Adm_Type",
-                "render": function(data, type, row) {
-                  return '<span onclick="reportPendnency(' + row.ID + ')"><strong>Report</strong><span>';
-                },
-                visible: false,
-              },
-              {
-                data: "First_Name",
-                "render": function(data, type, row) {
-                  return '<strong>' + data + '</strong>';
-                },
-                visible: false,
-              },
-              {
-                data: "Father_Name"
-              },
-              {
-                data: "Short_Name"
-              },
-              {
-                data: "Course_Category",
-              },
-              {
-                data: "Duration"
-              },
-              {
-                data: "Status",
-                "render": function(data, type, row) {
-                  var active = data == 1 ? 'Active' : 'Inactive';
-                  if (row.Step == 4 && showInhouse) {
-                    var checked = data == 1 ? 'checked' : '';
-                    return '<div class="form-check form-check-inline switch switch-lg success">\
-                  <input onclick="changeStatus(\'Students\', &#39;' + row.ID + '&#39;);" type="checkbox" ' + checked + ' id="student-status-switch-' + row.ID + '">\
-                  <label for="student-status-switch-' + row.ID + '">' + active + '</label>\
-                </div>';
-                  } else {
-                    return active;
-                  }
-                },
-                visible: hasStudentLogin
-              },
-              {
-                data: "ID_Card",
-                "render": function(data, type, row) {
-                  var active = data == 1 ? 'Active' : 'Inactive';
-                  if (row.Step == 4 && showInhouse && row.Enrollment_No.length > 0) {
-                    var checked = data == 1 ? 'checked' : '';
-                    return '<div class="form-check form-check-inline switch switch-lg success">\
-                  <input onclick="changeStatus(\'Students\', &#39;' + row.ID + '&#39;, \'ID_Card\');" type="checkbox" ' + checked + ' id="student-id-card-switch-' + row.ID + '">\
-                  <label for="student-id-card-switch-' + row.ID + '">' + active + '</label>\
-                </div>';
-                  } else {
-                    return active;
-                  }
-                },
-                visible: hasStudentLogin
-              },
-              {
-                data: "Admit_Card",
-                "render": function(data, type, row) {
-                  var active = data == 1 ? 'Active' : 'Inactive';
-                  if (row.Step == 4 && showInhouse && row.Enrollment_No.length > 0) {
-                    var checked = data == 1 ? 'checked' : '';
-                    return '<div class="form-check form-check-inline switch switch-lg success">\
-                  <input onclick="changeStatus(\'Students\', &#39;' + row.ID + '&#39;, \'Admit_Card\');" type="checkbox" ' + checked + ' id="student-admit-card-switch-' + row.ID + '">\
-                  <label for="student-admit-card-switch-' + row.ID + '">' + active + '</label>\
-                </div>';
-                  } else {
-                    return active;
-                  }
-                },
-                visible: hasStudentLogin
-              },
-              {
-                data: "Exam",
-                "render": function(data, type, row) {
-                  var active = data == 1 ? 'Active' : 'Inactive';
-                  if (row.Step == 4 && showInhouse && row.Enrollment_No.length > 0) {
-                    var checked = data == 1 ? 'checked' : '';
-                    return '<div class="form-check form-check-inline switch switch-lg success">\
-                  <input onclick="changeStatus(\'Students\', &#39;' + row.ID + '&#39;, \'Exam\');" type="checkbox" ' + checked + ' id="student-exam-switch-' + row.ID + '">\
-                  <label for="student-exam-switch-' + row.ID + '">' + active + '</label>\
-                </div>';
-                  } else {
-                    return active;
-                  }
-                },
-                visible: hasStudentLogin
-              },
-              {
-                data: "DOB"
-              },
-              {
-                data: "Center_Code",
-                visible: role == 'Sub-Center' ? false : true
-              },
-              {
-                data: "Center_Name",
-                visible: role == 'Sub-Center' ? false : true
-              },
-              {
-                data: "RM",
-                visible: role == 'Center' || role == 'Sub-Center' ? false : true
-              }
-            ],
-            "sDom": "l<t><'row'<p i>>",
-            "destroy": true,
-            "scrollCollapse": true,
-            "oLanguage": {
-              "sInfo": "Showing <b>_START_ to _END_</b> of _TOTAL_ entries"
+            {
+              data: "Adm_Session"
             },
-            drawCallback: function(settings, json) {
-              $('[data-toggle="tooltip"]').tooltip();
+            {
+              data: "updated_date"
             },
-            "aaSorting": []
-          };
-
-          var enrolledSettings = {
-            'processing': true,
-            'serverSide': true,
-            'serverMethod': 'post',
-            'ajax': {
-              'url': '/app/applications/enrolled-server',
-              'type': 'POST',
-              complete: function(xhr, responseText) {
-                $('#enrolled_count').html(xhr.responseJSON.iTotalDisplayRecords);
-              }
+            {
+              data: "Adm_Type"
             },
-            'columns': [{
-                data: "ID",
-                "render": function(data, type, row) {
-                  var edit_show_hide = row.Processed_To_University == 1 ? '' : 'display:none';
-                  var edit = showInhouse || row.Step < 4 ? '<a  style="' + edit_show_hide + '" href="/admissions/application-form?id=' + data + '"><i class="uil uil-edit mr-1 custom_icon_btn_app" title="Edit Application Form"></i></a>' : '';
-                  var deleted = showInhouse && row.Process_By_Center == 1 ? '<i class="uil uil-trash mr-1 cursor-pointer custom_icon_btn_app" title="Delete Application Form" style="' + edit_show_hide + '" onclick="destroy(&#39;application-form&#39;, &#39;' + data + '&#39;)"></i>' : '';
-                  var print = row.Step == 4 ? '<i class="uil uil-print mr-1 cursor-pointer custom_icon_btn_app" title="Print Application Form" onclick="printForm(&#39;' + data + '&#39;)"></i>' : '';
-                  var proccessedByCenter = row.Process_By_Center == 1 ? "Not Proccessed" : row.Process_By_Center
-                  var documentVerified = row.Document_Verified == 1 ? "Not Verified" : row.Document_Verified
-                  var proccessedToUniversity = row.Processed_To_University == 1 ? "Not Proccessed" : row.Processed_To_University
-                  var paymentVerified = row.Payment_Received == 1 ? "Not Verified" : row.Payment_Received
-                  var info = row.Step == 4 ? '<i class="uil uil-info-circle cursor-pointer custom_icon_btn_app" data-html="true" data-toggle="tooltip" data-placement="top" title="Proccessed By Center: <strong>' + proccessedByCenter + '</strong>&#013;&#010;Document Verified: <strong>' + documentVerified + '</strong>&#013;&#010;Payment Verified: <strong>' + paymentVerified + '</strong>&#013;&#010;Proccessed to University: <strong>' + proccessedToUniversity + '</strong>"></i>' : '';
-                  return print + edit + deleted + info;
-                }
+            {
+              data: "Adm_Type",
+              "render": function(data, type, row) {
+                return '<span onclick="reportPendnency(' + row.ID + ')"><strong>Report</strong><span>';
               },
-              {
-                data: "Photo",
-                "render": function(data, type, row) {
-                  return '<span class="thumbnail-wrapper d48 circular inline">\
-                <img src="' + data + '" alt="" data-src="' + data + '"\
-                  data-src-retina="' + data + '" width="32" height="32">\
-              </span>';
-                }
-              },
-              {
-                data: "Unique_ID",
-                "render": function(data, type, row) {
-                  return '<span class="cursor-pointer" title="Click to export documents" onclick="exportDocuments(&#39;' + row.ID + '&#39;)"><strong>' + data + '</strong></span>';
-                }
-              },
-              {
-                data: "Step",
-                "render": function(data, type, row) {
-                  var label_class = data < 4 ? 'label-important' : 'label-success';
-                  var status = data < 4 ? 'In Draft @ Step ' + data : 'Completed';
-                  return '<sapn class="label ' + label_class + '">' + status + '</sapn>';
-                }
-              },
-              {
-                data: "Process_By_Center",
-                "render": function(data, type, row) {
-                  if (data == 1 && row.Step == 4) {
-                    return '<span class="label label-primary">Not Processed</span>';
-                    var show = !showInhouse ? '<div class="form-check complete mt-2">\
-                  <input type="checkbox" id="process-by-center-' + row.ID + '" onclick="processByCenter(&#39;' + row.ID + '&#39;)">\
-                  <label for="process-by-center-' + row.ID + '">Mark as Processed</label>\
-                </div>' : '<span class="label label-primary">Not Processed</span>';
-                    return show;
-                  } else {
-                    var show = row.Step == 4 ? '<div class="text-center"><span class="label label-primary">Processed on ' + data + '</span></div>' : '';
-                    return show;
-                  }
-                },
-                visible: role == 'Sub-Center' ? false : true
-              },
-              {
-                data: "Document_Verified",
-                "render": function(data, type, row) {
-                  if (row.Pendency_Status == 2) {
-                    if (!showInhouse) {
-                      return '<div class="text-center text-danger"><span class="cursor-pointer"><strong>In Review</strong></span></div>'
-                    } else {
-                      return is_operations || is_university_head ? '<div class="text-center text-danger"><span class="cursor-pointer" onclick="verifyDocument(&#39;' + row.ID + '&#39;)"><strong>Re-Review</strong></span></div>' : '<div class="text-center text-danger"><span><strong>Re-Review</strong></span></div>'
-                    }
-                  } else if (row.Pendency != 0) {
-                    if (!showInhouse) {
-                      return '<div class="text-center text-danger"><span class="cursor-pointer" onclick="uploadPendency(&#39;' + row.ID + '&#39;)"><strong>Pendency</strong></span></div>'
-                    } else {
-                      return is_operations || is_university_head ? '<div class="text-center text-danger"><span class="cursor-pointer" onclick="reportPendency(&#39;' + row.ID + '&#39;)"><strong>Pendency</strong></span></div>' : '<div class="text-center text-danger"><span><strong>Pendency</strong></span></div>'
-                    }
-                  } else {
-                    if (data == 1) {
-                      var show = (is_operations || is_university_head) && row.Process_By_Center != 1 ? '<div class="text-center"><span class="cursor-pointer" onclick="verifyDocument(&#39;' + row.ID + '&#39;)"><strong>Review</strong></span></div>' : row.Step == 4 && row.Process_By_Center != 1 ? '<div class="text-center text-danger"><strong>Pending</strong></div>' : '';
-                      return show;
-                    } else {
-                      var show = row.Step == 4 && row.Process_By_Center != 1 ? '<div class="text-center"><span class="label label-success">Verified at ' + data + '</span></div>' : '';
-                      return show;
-                    }
-                  }
-                }
-              },
-              {
-                data: "Payment_Received",
-                "render": function(data, type, row) {
-                  if (data == 1 && row.Step == 4 && row.Process_By_Center != 1) {
-                    var show = is_accountant ? '<div class="text-center"><span class="cursor-pointer" onclick="verifyPayment(&#39;' + row.ID + '&#39;)"><strong>Review</strong></span></div>' : '<center><span class="label label-primary">Pending</span></center>';
-                    return show;
-                  } else if (row.Process_By_Center != 1) {
-                    var show = row.Step == 4 ? '<div class="text-center"><span class="label label-primary">Verified on ' + data + '</span></div>' : '';
-                    return show;
-                  } else {
-                    return '';
-                  }
-                },
-                visible: false
-              },
-              {
-                data: "Processed_To_University",
-                "render": function(data, type, row) {
-                  if (data == 1) {
-                    var show = showInhouse && row.Document_Verified != 1 && row.Payment_Received != 1 ? '<div class="form-check complete mt-2">\
-                  <input type="checkbox" id="processed-to-university-' + row.ID + '" onclick="checkABCid(&#39;' + row.ID + '&#39;)">\
-                  <label for="processed-to-university-' + row.ID + '">Mark as Processed</label>\
-                </div>' : "";
-                    return show;
-                  } else {
-                    var show = row.Step == 4 ? '<div class="text-center"><span class="label label-success">Processed on ' + data + '</span></div>' : '';
-                    return show;
-                  }
-                }
-              },
-              {
-                data: "Enrollment_No",
-                "render": function(data, type, row) {
-                  var edit = showInhouse && row.Processed_To_University != 1 ? '<i class="uil uil-edit ml-2 cursor-pointer" title="Add Enrollment No." onclick="addEnrollment(&#39;' + row.ID + '&#39;)">' : '';
-                  return data + edit;
-                }
-              },
-              {
-                data: "ABC_ID",
-                "render": function(data, type, row) {
-                  if (data.length > 0) {
-                    var edit = showInhouse ? '<i class="uil uil-edit ml-2 cursor-pointer" title="Add ABC_ID" onclick="addABCid(&#39;' + row.ID + '&#39;)">' : '';
-                  } else {
-                    var edit = '<i class="uil uil-edit ml-2 cursor-pointer" title="Add ABC_ID" onclick="addABCid(&#39;' + row.ID + '&#39;)">';
-                  }
-                  return data + edit;
-                }
-              },
-              {
-                data: "OA_Number",
-                "render": function(data, type, row) {
-                  var edit = showInhouse ? '<i class="uil uil-edit ml-2 cursor-pointer" title="Add OA Number" onclick="addOANumber(&#39;' + row.ID + '&#39;)">' : '';
-                  return data + edit;
-                }
-              },
-              {
-                data: "Adm_Session"
-              },
-              {
-                data: "updated_date"
-              },
-              {
-                data: "Adm_Type"
-              },
-              {
-                data: "Adm_Type",
-                "render": function(data, type, row) {
-                  return '<span onclick="reportPendnency(' + row.ID + ')"><strong>Report</strong><span>';
-                },
-                visible: false,
-              },
-              {
-                data: "First_Name",
-                "render": function(data, type, row) {
-                  return '<strong>' + data + '</strong>';
-                },
-                visible: false,
-              },
-              {
-                data: "Father_Name"
-              },
-              {
-                data: "Short_Name"
-              },
-              {
-                data: "Course_Category",
-              },
-              {
-                data: "Duration"
-              },
-              {
-                data: "Status",
-                "render": function(data, type, row) {
-                  var active = data == 1 ? 'Active' : 'Inactive';
-                  if (row.Step == 4 && showInhouse) {
-                    var checked = data == 1 ? 'checked' : '';
-                    return '<div class="form-check form-check-inline switch switch-lg success">\
-                  <input onclick="changeStatus(\'Students\', &#39;' + row.ID + '&#39;);" type="checkbox" ' + checked + ' id="student-status-switch-' + row.ID + '">\
-                  <label for="student-status-switch-' + row.ID + '">' + active + '</label>\
-                </div>';
-                  } else {
-                    return active;
-                  }
-                },
-                visible: hasStudentLogin
-              },
-              {
-                data: "ID_Card",
-                "render": function(data, type, row) {
-                  var active = data == 1 ? 'Active' : 'Inactive';
-                  if (row.Step == 4 && showInhouse && row.Enrollment_No.length > 0) {
-                    var checked = data == 1 ? 'checked' : '';
-                    return '<div class="form-check form-check-inline switch switch-lg success">\
-                  <input onclick="changeStatus(\'Students\', &#39;' + row.ID + '&#39;, \'ID_Card\');" type="checkbox" ' + checked + ' id="student-id-card-switch-' + row.ID + '">\
-                  <label for="student-id-card-switch-' + row.ID + '">' + active + '</label>\
-                </div>';
-                  } else {
-                    return active;
-                  }
-                },
-                visible: hasStudentLogin
-              },
-              {
-                data: "Admit_Card",
-                "render": function(data, type, row) {
-                  var active = data == 1 ? 'Active' : 'Inactive';
-                  if (row.Step == 4 && showInhouse && row.Enrollment_No.length > 0) {
-                    var checked = data == 1 ? 'checked' : '';
-                    return '<div class="form-check form-check-inline switch switch-lg success">\
-                  <input onclick="changeStatus(\'Students\', &#39;' + row.ID + '&#39;, \'Admit_Card\');" type="checkbox" ' + checked + ' id="student-admit-card-switch-' + row.ID + '">\
-                  <label for="student-admit-card-switch-' + row.ID + '">' + active + '</label>\
-                </div>';
-                  } else {
-                    return active;
-                  }
-                },
-                visible: hasStudentLogin
-              },
-              {
-                data: "Exam",
-                "render": function(data, type, row) {
-                  var active = data == 1 ? 'Active' : 'Inactive';
-                  if (row.Step == 4 && showInhouse && row.Enrollment_No.length > 0) {
-                    var checked = data == 1 ? 'checked' : '';
-                    return '<div class="form-check form-check-inline switch switch-lg success">\
-                  <input onclick="changeStatus(\'Students\', &#39;' + row.ID + '&#39;, \'Exam\');" type="checkbox" ' + checked + ' id="student-exam-switch-' + row.ID + '">\
-                  <label for="student-exam-switch-' + row.ID + '">' + active + '</label>\
-                </div>';
-                  } else {
-                    return active;
-                  }
-                },
-                visible: hasStudentLogin
-              },
-              {
-                data: "DOB"
-              },
-              {
-                data: "Center_Code",
-                visible: role == 'Sub-Center' ? false : true
-              },
-              {
-                data: "Center_Name",
-                visible: role == 'Sub-Center' ? false : true
-              },
-              {
-                data: "RM",
-                visible: role == 'Center' || role == 'Sub-Center' ? false : true
-              }
-            ],
-            "sDom": "l<t><'row'<p i>>",
-            "destroy": true,
-            "scrollCollapse": true,
-            "oLanguage": {
-              "sInfo": "Showing <b>_START_ to _END_</b> of _TOTAL_ entries"
+              visible: false,
             },
-            drawCallback: function(settings, json) {
-              $('[data-toggle="tooltip"]').tooltip();
+            {
+              data: "First_Name",
+              "render": function(data, type, row) {
+                return '<strong>' + data + '</strong>';
+              },
+              visible: false,
             },
-            "aaSorting": []
-          };
-
-          applicationTable.dataTable(applicationSettings);
-          notProcessedTable.dataTable(notProcessedSettings);
-          readyForVerificationTable.dataTable(readyForVerificationSettings);
-          verifiedTable.dataTable(verifiedSettings);
-          processedToUniversityTable.dataTable(processedToUniversitySettings);
-          enrolledTable.dataTable(enrolledSettings);
-
-          // search box for table
-          $('#application-search-table').keyup(function() {
-            applicationTable.fnFilter($(this).val());
-          });
-
-          $('#not-processed-search-table').keyup(function() {
-            notProcessedTable.fnFilter($(this).val());
-          });
-
-          $('#ready-for-verification-search-table').keyup(function() {
-            readyForVerificationTable.fnFilter($(this).val());
-          });
-
-          $('#document-verified-search-table').keyup(function() {
-            documentVerifiedTable.fnFilter($(this).val());
-          });
-
-          $('#processed-to-university-search-table').keyup(function() {
-            processedToUniversityTable.fnFilter($(this).val());
-          });
-
-          $('#enrolled-search-table').keyup(function() {
-            enrolledTable.fnFilter($(this).val());
-          });
-
-
-        })
-      <?php } else { ?>
-        $(function() {
-          var role = '<?php echo $_SESSION['Role']; ?>';
-          let uni_id = '<?php echo $_SESSION['university_id']; ?>';
-          var showInhouse = role != 'Center' && role != 'Sub-Center' ? true : false;
-          var is_accountant = ['Accountant', 'Administrator'].includes(role) ? true : false;
-          var is_university_head = ['University Head', 'Administrator'].includes(role) ? true : false;
-          var is_operations = role == 'Operations' ? true : false;
-          var hasStudentLogin = '<?php echo $_SESSION['has_lms'] == 1 ? true : false; ?>';
-          var applicationTable = $('#application-table');
-          var notProcessedTable = $('#not-processed-table');
-          var readyForVerificationTable = $('#ready-for-verification-table');
-          var verifiedTable = $('#verified-table');
-          var processedToUniversityTable = $('#proccessed-to-university-table');
-          var enrolledTable = $('#enrolled-table');
-
-          var applicationSettings = {
-            'processing': true,
-            'serverSide': true,
-            'serverMethod': 'post',
-            'ajax': {
-              'url': '/app/applications/application-server',
-              'type': 'POST',
-              complete: function(xhr, responseText) {
-                $('#application_count').html(xhr.responseJSON.iTotalDisplayRecords);
-              }
+            {
+              data: "Father_Name"
             },
-            'columns': [{
-                data: "ID",
-                "render": function(data, type, row) {
-                  var edit_show_hide = row.Processed_To_University == 1 ? '' : 'display:none';
-                  var edit = showInhouse || row.Step < 4 ? '<a class="px-0" style="' + edit_show_hide + '" href="/admissions/application-form?id=' + data + '"><div class="app_custom_edit_btn cursor-pointer "> <i class="uil uil-edit mr-1 " title="Edit Application Form"></i><span>Edit</span></div></a>' : '';
-                  var deleted = showInhouse && row.Process_By_Center == 1 ? '<div class="app_custom_edit_btn cursor-pointer " onclick="destroy(&#39;application-form&#39;, &#39;' + data + '&#39;)"><i class="uil uil-trash mr-1 " title="Delete Application Form" style="' + edit_show_hide + '" ></i><span>Delete</span></div>' : '';
-                  var print = row.Step == 4 ? '<div class="app_custom_edit_btn cursor-pointer"  onclick="printForm(&#39;' + data + '&#39;)"><i class="uil uil-print mr-1  " title="Print Application Form"></i><span>Print</span></div>' : '';
-                  var proccessedByCenter = row.Process_By_Center == 1 ? "Not Proccessed" : row.Process_By_Center
-                  var documentVerified = row.Document_Verified == 1 ? "Not Verified" : row.Document_Verified
-                  var proccessedToUniversity = row.Processed_To_University == 1 ? "Not Proccessed" : row.Processed_To_University
-                  var paymentVerified = row.Payment_Received == 1 ? "Not Verified" : row.Payment_Received
-                  var info = row.Step == 4 ? '<div class="app_custom_edit_btn cursor-pointer"  data-html="true" data-toggle="tooltip" data-placement="top" title="Proccessed By Center: <strong>' + proccessedByCenter + '</strong>&#013;&#010;Document Verified: <strong>' + documentVerified + '</strong>&#013;&#010;Payment Verified: <strong>' + paymentVerified + '</strong>&#013;&#010;Proccessed to University: <strong>' + proccessedToUniversity + '</strong>"><i class="uil uil-info-circle cursor-pointer "></i><span>Info</span></div>' : '';
-                  var dropdown = ` <div class="mt-2">
-                                       <div class="dropdown">
-                                           <button class="btn btn-link dropdown-toggle" type="button" id="dropdownMenuButton_${data}" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                               <i class="uil uil-ellipsis-v"></i>
-                                           </button>
-                                           <div class="dropdown-menu" aria-labelledby="dropdownMenuButton_${data}">
-                                               <div class="dropdown-item " href="#">` + print + ` </div>
-                                               <div class="dropdown-item " href="#">` + edit + ` </div>
-                                               <div class="dropdown-item " href="#">` + deleted + ` </div>
-                                               <div class="dropdown-item " href="#">` + info + ` </div>
-                                           </div>
-                                       </div>
-                                   </div>`;
+            {
+              data: "Short_Name"
+            },
+            {
+              data: "Duration"
+            },
+            {
+              data: "Status",
+              "render": function(data, type, row) {
+                var active = data == 1 ? '<span class="badge bg-success">Active</span>' : '<span class="badge bg-danger">Inactive</span>';
 
-                  // return '<div class="d-flex flex-column">' +
-                  //   '<div>' + print + edit + deleted + info + '</div>' +
-                  //   dropdown +
-                  //   '</div>';
-                   return dropdown;
-                }
-              },
-
-              {
-                data: "Photo",
-                "render": function(data, type, row) {
-                  return '<span class="thumbnail-wrapper d48 circular inline">\
-                <img src="' + data + '" alt="" data-src="' + data + '"\
-                  data-src-retina="' + data + '" width="32" height="32">\
-              </span>';
-                }
-              },
-              {
-                data: "Unique_ID",
-                "render": function(data, type, row) {
-                  return '<span class="cursor-pointer" title="Click to export documents" onclick="exportDocuments(&#39;' + row.ID + '&#39;)"><strong>' + data + '</strong></span>';
-                }
-              },
-              {
-                data: "Step",
-                "render": function(data, type, row) {
-                  var label_class = data < 4 ? 'label-important' : 'label-success';
-                  var status = data < 4 ? 'In Draft @ Step ' + data : 'Completed';
-                  return '<sapn class="label ' + label_class + '">' + status + '</sapn>';
-                }
-              },
-              {
-                data: "form_completion_date"
-              },
-              {
-                data: "Process_By_Center",
-                "render": function(data, type, row) {
-                  if (data == 1 && row.Step == 4) {
-                    return '<span class="label label-primary">Not Processed</span>';
-                    var show = !showInhouse ? '<div class="form-check complete mt-2">\
-                  <input type="checkbox" id="process-by-center-' + row.ID + '" onclick="processByCenter(&#39;' + row.ID + '&#39;)">\
-                  <label for="process-by-center-' + row.ID + '">Mark as Processed</label>\
-                </div>' : '<span class="label label-primary">Not Processed</span>';
-                    return show;
-                  } else {
-                    var show = row.Step == 4 ? '<div class="text-center"><span class="label label-primary">Processed on ' + data + '</span></div>' : '';
-                    return show;
-                  }
-                },
-                visible: role == 'Sub-Center' ? false : true
-              },
-              {
-                data: "Document_Verified",
-                "render": function(data, type, row) {
-                  if (row.Pendency_Status == 2) {
-                    if (!showInhouse) {
-                      return '<div class="text-center text-danger"><span class="cursor-pointer"><strong>In Review</strong></span></div>'
-                    } else {
-                      return is_operations || is_university_head ? '<div class="text-center text-danger"><span class="cursor-pointer" onclick="verifyDocument(&#39;' + row.ID + '&#39;)"><strong>Re-Review</strong></span></div>' : '<div class="text-center text-danger"><span><strong>Re-Review</strong></span></div>'
-                    }
-                  } else if (row.Pendency != 0) {
-                    if (!showInhouse) {
-                      return '<div class="text-center text-danger"><span class="cursor-pointer" onclick="uploadPendency(&#39;' + row.ID + '&#39;)"><strong>Pendency</strong></span></div>'
-                    } else {
-                      return is_operations || is_university_head ? '<div class="text-center text-danger"><span class="cursor-pointer" onclick="reportPendency(&#39;' + row.ID + '&#39;)"><strong>Pendency</strong></span></div>' : '<div class="text-center text-danger"><span><strong>Pendency</strong></span></div>'
-                    }
-                  } else {
-                    if (data == 1) {
-                      var show = (is_operations || is_university_head) && row.Process_By_Center != 1 ? '<div class="text-center"><span class="cursor-pointer" onclick="verifyDocument(&#39;' + row.ID + '&#39;)"><strong>Review</strong></span></div>' : row.Step == 4 && row.Process_By_Center != 1 ? '<div class="text-center text-danger"><strong>Pending</strong></div>' : '';
-                      return show;
-                    } else {
-                      var show = row.Step == 4 && row.Process_By_Center != 1 ? '<div class="text-center"><span class="label label-success">Verified at ' + data + '</span></div>' : '';
-                      return show;
-                    }
-                  }
-                }
-              },
-              {
-                data: "Payment_Received",
-                "render": function(data, type, row) {
-                  if (data == 1 && row.Step == 4 && row.Process_By_Center != 1) {
-                    var show = is_accountant ? '<div class="text-center"><span class="cursor-pointer" onclick="verifyPayment(&#39;' + row.ID + '&#39;)"><strong>Review</strong></span></div>' : '<center><span class="label label-primary">Pending</span></center>';
-                    return show;
-                  } else if (row.Process_By_Center != 1) {
-                    var show = row.Step == 4 ? '<div class="text-center"><span class="label label-primary">Verified on ' + data + '</span></div>' : '';
-                    return show;
-                  } else {
-                    return '';
-                  }
-                },
-                visible: false
-              },
-              {
-                data: "Processed_To_University",
-                "render": function(data, type, row) {
-                  if (data == 1) {
-                    var show = showInhouse && row.Document_Verified != 1 && row.Payment_Received != 1 ? '<div class="form-check complete mt-2">\
-                  <input type="checkbox" id="processed-to-university-' + row.ID + '" onclick="checkABCid(&#39;' + row.ID + '&#39;)">\
-                  <label for="processed-to-university-' + row.ID + '">Mark as Processed</label>\
-                </div>' : "";
-                    return show;
-                  } else {
-                    var show = row.Step == 4 ? '<div class="text-center"><span class="label label-success">Processed on ' + data + '</span></div>' : '';
-                    return show;
-                  }
-                }
-              },
-              {
-                data: "Enrollment_No",
-                "render": function(data, type, row) {
-                  var edit = showInhouse && row.Processed_To_University != 1 ? '<i class="uil uil-edit ml-2 cursor-pointer custom_icon_btn_app" title="Add Enrollment No." onclick="addEnrollment(&#39;' + row.ID + '&#39;)">' : '';
-                  return data + edit;
-                }
-              },
-              {
-                data: "exam_exit_val",
-                "render": function(data, type, row) {
-                  var edit = "";
-                  if (data.length > 0 && data == 'Enrolled' && is_operations == false) {
-
-                    var edit = showInhouse ? '<i class="uil uil-edit ml-2 cursor-pointer custom_icon_btn_app" title="Update Exit Exam Status" onclick="addExamStatus(&#39;' + row.ID + '&#39;)">' : '';
-                  }
-                  return data + edit;
-                },
-                visible: uni_id == '48' ? false : true
-
-              },
-              {
-                data: "Dispatch_status",
-                "render": function(data, type, row) {
-                  var returnStatus = data;
-
-                  if (row['exam_exit_val'] != '' && row['exam_exit_val'] != 'Enrolled' && data == '' && row['exam_exit_val'] != 'Drop Out') {
-                    returnStatus = "Pending";
-                  }
-
-                  // Only apply badge for Pending
-                  if (returnStatus == 'Pending') {
-                    returnStatus = '<span class="badge badge-warning">Pending</span>';
-                  }
-
-                  return returnStatus;
-                },
-                visible: uni_id == '48' ? false : true
-              },
-              {
-                data: "ABC_ID",
-                "render": function(data, type, row) {
-                  if (data.length > 0) {
-                    var edit = showInhouse ? '<i class="uil uil-edit ml-2 cursor-pointer custom_icon_btn_app" title="Add ABC_ID" onclick="addABCid(&#39;' + row.ID + '&#39;)">' : '';
-                  } else {
-                    var edit = '<i class="uil uil-edit ml-2 cursor-pointer custom_icon_btn_app" title="Add ABC_ID" onclick="addABCid(&#39;' + row.ID + '&#39;)">';
-                  }
-                  return data + edit;
-                }
-              },
-              {
-                data: "OA_Number",
-                "render": function(data, type, row) {
-                  var edit = showInhouse ? '<i class="uil uil-edit ml-2 cursor-pointer custom_icon_btn_app" title="Add OA Number" onclick="addOANumber(&#39;' + row.ID + '&#39;)">' : '';
-                  return data + edit;
-                }
-              },
-              {
-                data: "Adm_Session"
-              },
-              {
-                data: "updated_date"
-              },
-              {
-                data: "Adm_Type"
-              },
-              {
-                data: "Adm_Type",
-                "render": function(data, type, row) {
-                  return '<span onclick="reportPendnency(' + row.ID + ')"><strong>Report</strong><span>';
-                },
-                visible: false,
-              },
-              {
-                data: "First_Name",
-                "render": function(data, type, row) {
-                  return '<strong>' + data + '</strong>';
-                },
-                visible: false,
-              },
-              {
-                data: "Father_Name"
-              },
-              {
-                data: "Short_Name"
-              },
-              {
-                data: "Duration"
-              },
-              {
-                data: "Status",
-                "render": function(data, type, row) {
-                  var active = data == 1 ? '<span class="badge bg-success">Active</span>' : '<span class="badge bg-danger">Inactive</span>';
-
-                  if (row.Step == 4 && showInhouse) {
-                    var checked = data == 1 ? 'checked' : '';
-                    return '<div class="form-check form-check-inline switch switch-lg success">\
+                if (row.Step == 4 && showInhouse) {
+                  var checked = data == 1 ? 'checked' : '';
+                  return '<div class="form-check form-check-inline switch switch-lg success">\
                 <input onclick="changeStatus(\'Students\', &#39;' + row.ID + '&#39;);" type="checkbox" ' + checked + ' id="student-status-switch-' + row.ID + '">\
                 <label for="student-status-switch-' + row.ID + '">' + active + '</label>\
               </div>';
-                  } else {
-                    return active;
-                  }
-                },
-                visible: hasStudentLogin
+                } else {
+                  return active;
+                }
               },
-              {
-                data: "ID_Card",
-                "render": function(data, type, row) {
-                  var statusBadge = data == 1 ? '<span class="badge badge-success">Active</span>' : '<span class="badge badge-danger">Inactive</span>';
+              visible: hasStudentLogin
+            },
+            {
+              data: "ID_Card",
+              "render": function(data, type, row) {
+                var statusBadge = data == 1 ? '<span class="badge badge-success">Active</span>' : '<span class="badge badge-danger">Inactive</span>';
 
-                  if (row.Step == 4 && showInhouse && row.Enrollment_No.length > 0) {
-                    var checked = data == 1 ? 'checked' : '';
-                    return '<div class="form-check form-check-inline switch switch-lg success">\
+                if (row.Step == 4 && showInhouse && row.Enrollment_No.length > 0) {
+                  var checked = data == 1 ? 'checked' : '';
+                  return '<div class="form-check form-check-inline switch switch-lg success">\
                 <input onclick="changeStatus(\'Students\', &#39;' + row.ID + '&#39;, \'ID_Card\');" type="checkbox" ' + checked + ' id="student-id-card-switch-' + row.ID + '">\
                 <label for="student-id-card-switch-' + row.ID + '">' + statusBadge + '</label>\
               </div>';
-                  } else {
-                    return statusBadge;
-                  }
-                },
-                visible: hasStudentLogin
+                } else {
+                  return statusBadge;
+                }
               },
-              {
-                data: "Admit_Card",
-                "render": function(data, type, row) {
-                  var statusBadge = data == 1 ?
-                    '<span class="badge badge-success">Active</span>' :
-                    '<span class="badge badge-danger">Inactive</span>';
+              visible: hasStudentLogin
+            },
+            {
+              data: "Admit_Card",
+              "render": function(data, type, row) {
+                var statusBadge = data == 1 ?
+                  '<span class="badge badge-success">Active</span>' :
+                  '<span class="badge badge-danger">Inactive</span>';
 
-                  if (row.Step == 4 && showInhouse && row.Enrollment_No.length > 0) {
-                    var checked = data == 1 ? 'checked' : '';
-                    return '<div class="form-check form-check-inline switch switch-lg success">\
+                if (row.Step == 4 && showInhouse && row.Enrollment_No.length > 0) {
+                  var checked = data == 1 ? 'checked' : '';
+                  return '<div class="form-check form-check-inline switch switch-lg success">\
                 <input onclick="changeStatus(\'Students\', &#39;' + row.ID + '&#39;, \'Admit_Card\');" type="checkbox" ' + checked + ' id="student-admit-card-switch-' + row.ID + '">\
                 <label for="student-admit-card-switch-' + row.ID + '">' + statusBadge + '</label>\
               </div>';
-                  } else {
-                    return statusBadge;
-                  }
-                },
-                visible: hasStudentLogin
+                } else {
+                  return statusBadge;
+                }
               },
-              {
-                data: "Exam",
-                "render": function(data, type, row) {
-                  var statusBadge = data == 1 ?
-                    '<span class="badge badge-success">Active</span>' :
-                    '<span class="badge badge-danger">Inactive</span>';
+              visible: hasStudentLogin
+            },
+            {
+              data: "Exam",
+              "render": function(data, type, row) {
+                var statusBadge = data == 1 ?
+                  '<span class="badge badge-success">Active</span>' :
+                  '<span class="badge badge-danger">Inactive</span>';
 
-                  if (row.Step == 4 && showInhouse && row.Enrollment_No.length > 0) {
-                    var checked = data == 1 ? 'checked' : '';
-                    return '<div class="form-check form-check-inline switch switch-lg success">\
+                if (row.Step == 4 && showInhouse && row.Enrollment_No.length > 0) {
+                  var checked = data == 1 ? 'checked' : '';
+                  return '<div class="form-check form-check-inline switch switch-lg success">\
                 <input onclick="changeStatus(\'Students\', &#39;' + row.ID + '&#39;, \'Exam\');" type="checkbox" ' + checked + ' id="student-exam-switch-' + row.ID + '">\
                 <label for="student-exam-switch-' + row.ID + '">' + statusBadge + '</ label>\
               </div>';
-                  } else {
-                    return statusBadge;
-                  }
-                },
-                visible: hasStudentLogin
-              },
-              {
-                data: "DOB"
-              },
-              {
-                data: "Center_Code",
-                visible: role == 'Sub-Center' ? false : true
-              },
-              {
-                data: "Center_Name",
-                "render": function(data, type, row) {
-                  var name = row.Center_Name;
-                  var Sub_Center_Name = row.Sub_Center_Name.length > 0 ? '( ' + row.Sub_Center_Name + ' )' : '';
-                  return name + Sub_Center_Name;
-                },
-                visible: role == 'Sub-Center' ? false : true
-              },
-              {
-                data: "RM",
-                visible: role == 'Center' || role == 'Sub-Center' ? false : true
-              }
-            ],
-            "sDom": "l<t><'row'<p i>>",
-            "destroy": true,
-            "scrollCollapse": true,
-            "oLanguage": {
-              "sInfo": "Showing <b>_START_ to _END_</b> of _TOTAL_ entries"
-            },
-            drawCallback: function(settings, json) {
-              $('[data-toggle="tooltip"]').tooltip();
-            },
-            "aaSorting": []
-          };
-
-          var notProcessedSettings = {
-            'processing': true,
-            'serverSide': true,
-            'serverMethod': 'post',
-            'ajax': {
-              'url': '/app/applications/not-processed-server',
-              'type': 'POST',
-              complete: function(xhr, responseText) {
-                $('#not_processed_count').html(xhr.responseJSON.iTotalDisplayRecords);
-              }
-            },
-            'columns': [{
-                data: "ID",
-                "render": function(data, type, row) {
-                  var edit_show_hide = row.Processed_To_University == 1 ? '' : 'display:none';
-                  var edit = showInhouse || row.Step < 4 ? '<a  style="' + edit_show_hide + '" href="/admissions/application-form?id=' + data + '"><i class="uil uil-edit mr-1 custom_icon_btn_app" title="Edit Application Form"></i></a>' : '';
-                  var deleted = showInhouse && row.Process_By_Center == 1 ? '<i class="uil uil-trash mr-1 cursor-pointer custom_icon_btn_app" title="Delete Application Form" style="' + edit_show_hide + '" onclick="destroy(&#39;application-form&#39;, &#39;' + data + '&#39;)"></i>' : '';
-                  var print = row.Step == 4 ? '<i class="uil uil-print mr-1 cursor-pointer custom_icon_btn_app" title="Print Application Form" onclick="printForm(&#39;' + data + '&#39;)"></i>' : '';
-                  var proccessedByCenter = row.Process_By_Center == 1 ? "Not Proccessed" : row.Process_By_Center
-                  var documentVerified = row.Document_Verified == 1 ? "Not Verified" : row.Document_Verified
-                  var proccessedToUniversity = row.Processed_To_University == 1 ? "Not Proccessed" : row.Processed_To_University
-                  var paymentVerified = row.Payment_Received == 1 ? "Not Verified" : row.Payment_Received
-                  var info = row.Step == 4 ? '<i class="uil uil-info-circle cursor-pointer custom_icon_btn_app " data-html="true" data-toggle="tooltip" data-placement="top" title="Proccessed By Center: <strong>' + proccessedByCenter + '</strong>&#013;&#010;Document Verified: <strong>' + documentVerified + '</strong>&#013;&#010;Payment Verified: <strong>' + paymentVerified + '</strong>&#013;&#010;Proccessed to University: <strong>' + proccessedToUniversity + '</strong>"></i>' : '';
-                  return print + edit + deleted + info;
+                } else {
+                  return statusBadge;
                 }
               },
-              {
-                data: "Photo",
-                "render": function(data, type, row) {
-                  return '<span class="thumbnail-wrapper d48 circular inline">\
+              visible: hasStudentLogin
+            },
+            {
+              data: "DOB"
+            },
+            {
+              data: "Center_Code",
+              visible: role == 'Sub-Center' ? false : true
+            },
+            {
+              data: "Center_Name",
+              "render": function(data, type, row) {
+                var name = row.Center_Name;
+                var Sub_Center_Name = row.Sub_Center_Name.length > 0 ? '( ' + row.Sub_Center_Name + ' )' : '';
+                return name + Sub_Center_Name;
+              },
+              visible: role == 'Sub-Center' ? false : true
+            },
+            {
+              data: "RM",
+              visible: role == 'Center' || role == 'Sub-Center' ? false : true
+            }
+          ],
+          "sDom": "<'row mt-3 w-100 p-0 m-0'<'col-sm-6 pr-0 pl-0 custon_text_start'l><'col-sm-6 pr-0 pl-0'f>><t><'row'<p i>>",
+          "destroy": true,
+          "scrollCollapse": true,
+          "oLanguage": {
+            "sInfo": "Showing <b>_START_ to _END_</b> of _TOTAL_ entries"
+          },
+          drawCallback: function(settings, json) {
+            $('[data-toggle="tooltip"]').tooltip();
+          },
+          "aaSorting": []
+
+        };
+
+        var notProcessedSettings = {
+          'processing': true,
+          'serverSide': true,
+          'serverMethod': 'post',
+          'ajax': {
+            'url': '/app/applications/not-processed-server',
+            'type': 'POST',
+            complete: function(xhr, responseText) {
+              $('#not_processed_count').html(xhr.responseJSON.iTotalDisplayRecords);
+            }
+          },
+          'columns': [{
+              data: "ID",
+              "render": function(data, type, row) {
+                var edit_show_hide = row.Processed_To_University == 1 ? '' : 'display:none';
+                var edit = showInhouse || row.Step < 4 ? '<a  style="' + edit_show_hide + '" href="/admissions/application-form?id=' + data + '"><div class="app_custom_edit_btn cursor-pointer "> <i class="uil uil-edit mr-1 " title="Edit Application Form"></i><span>Edit</span></div></a>' : '';
+                var deleted = showInhouse && row.Process_By_Center == 1 ? '<div class="app_custom_edit_btn cursor-pointer" onclick="destroy(&#39;application-form&#39;, &#39;' + data + '&#39;)"><i class="uil uil-trash mr-1 cursor-pointer " title="Delete Application Form" style="' + edit_show_hide + '" ></i><span>Delete</span></div>' : '';
+                // var print = row.Step == 4 ? '<div class="app_custom_edit_btn cursor-pointer" onclick="printForm(&#39;' + data + '&#39;)"><i class="uil uil-print mr-1 cursor-pointer" title="Print Application Form" ></i><span>Print</span></div> ' : '';
+                var print = '';
+                var proccessedByCenter = row.Process_By_Center == 1 ? "Not Proccessed" : row.Process_By_Center
+                var documentVerified = row.Document_Verified == 1 ? "Not Verified" : row.Document_Verified
+                var proccessedToUniversity = row.Processed_To_University == 1 ? "Not Proccessed" : row.Processed_To_University
+                var paymentVerified = row.Payment_Received == 1 ? "Not Verified" : row.Payment_Received
+                var info = row.Step == 4 ? '<div class="app_custom_edit_btn cursor-pointer" data-html="true" data-toggle="tooltip" data-placement="top" title="Proccessed By Center: <strong>' + proccessedByCenter + '</strong>&#013;&#010;Document Verified: <strong>' + documentVerified + '</strong>&#013;&#010;Payment Verified: <strong>' + paymentVerified + '</strong>&#013;&#010;Proccessed to University: <strong>' + proccessedToUniversity + '</strong>"><i class="uil uil-info-circle cursor-pointer" ></i><span class="custom_info_txt">Info</span></div>' : '';
+                var dropdownItems = '';
+                if (print) {
+                  dropdownItems += '<div class="dropdown-item custom_drpdown_btn">' + print + '</div>';
+                }
+                if (edit) {
+                  var edit_show_hide = row.Processed_To_University == 1 ? '' : 'display:none';
+                  dropdownItems += '<div class="dropdown-item custom_drpdown_btn" style="' + edit_show_hide + '">' + edit + '</div>';
+                }
+                if (deleted) {
+                  dropdownItems += '<div class="dropdown-item custom_drpdown_btn">' + deleted + '</div>';
+                }
+                if (info) {
+                  dropdownItems += '<div class="dropdown-item custom_drpdown_btn">' + info + '</div>';
+                }
+
+                // Check if dropdownItems is not empty before rendering the dropdown
+                var dropdown = '';
+                if (dropdownItems) {
+                  dropdown = `<div class="mt-2">
+                        <div class="dropdown custom_drop_div">
+                            <button class="btn btn-link dropdown-toggle" type="button" id="dropdownMenuButton_${data}" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                <i class="uil uil-ellipsis-v"></i>
+                            </button>
+                            <div class="dropdown-menu " aria-labelledby="dropdownMenuButton_${data}">
+                                ${dropdownItems}
+                            </div>
+                        </div>
+                    </div>`;
+                }
+
+                return dropdown;
+              }
+            },
+            {
+              data: "Photo",
+              "render": function(data, type, row) {
+                return '<span class="thumbnail-wrapper d48 circular inline">\
                 <img src="' + data + '" alt="" data-src="' + data + '"\
                   data-src-retina="' + data + '" width="32" height="32">\
               </span>';
-                }
-              },
-              {
-                data: "Unique_ID",
-                "render": function(data, type, row) {
-                  return '<span class="cursor-pointer" title="Click to export documents" onclick="exportDocuments(&#39;' + row.ID + '&#39;)"><strong>' + data + '</strong></span>';
-                }
-              },
-              {
-                data: "Step",
-                "render": function(data, type, row) {
-                  var label_class = data < 4 ? 'label-important' : 'label-success';
-                  var status = data < 4 ? 'In Draft @ Step ' + data : 'Completed';
-                  return '<sapn class="label ' + label_class + '">' + status + '</sapn>';
-                }
-              },
-              {
-                data: "Process_By_Center",
-                "render": function(data, type, row) {
-                  if (data == 1 && row.Step == 4) {
-                    return '<span class="label label-primary">Not Processed</span>';
-                    var show = !showInhouse ? '<div class="form-check complete mt-2">\
+              }
+            },
+            {
+              data: "Unique_ID",
+              "render": function(data, type, row) {
+                return '<span class="cursor-pointer" title="Click to export documents" onclick="exportDocuments(&#39;' + row.ID + '&#39;)"><strong>' + data + '</strong></span>';
+              }
+            },
+            {
+              data: "Step",
+              "render": function(data, type, row) {
+                var label_class = data < 4 ? 'label-important' : 'label-success';
+                var status = data < 4 ? 'In Draft @ Step ' + data : 'Completed';
+                return '<sapn class="label ' + label_class + '">' + status + '</sapn>';
+              }
+            },
+            {
+              data: "Process_By_Center",
+              "render": function(data, type, row) {
+                if (data == 1 && row.Step == 4) {
+                  return '<span class="label label-primary">Not Processed</span>';
+                  var show = !showInhouse ? '<div class="form-check complete mt-2">\
                   <input type="checkbox" id="process-by-center-' + row.ID + '" onclick="processByCenter(&#39;' + row.ID + '&#39;)">\
                   <label for="process-by-center-' + row.ID + '">Mark as Processed</label>\
                 </div>' : '<span class="label label-primary">Not Processed</span>';
-                    return show;
-                  } else {
-                    var show = row.Step == 4 ? '<div class="text-center"><span class="label label-primary">Processed on ' + data + '</span></div>' : '';
-                    return show;
-                  }
-                },
-                visible: role == 'Sub-Center' ? false : true
+                  return show;
+                } else {
+                  var show = row.Step == 4 ? '<div class="text-center"><span class="label label-primary">Processed on ' + data + '</span></div>' : '';
+                  return show;
+                }
               },
-              {
-                data: "Adm_Session"
+              visible: role == 'Sub-Center' ? false : true
+            },
+            {
+              data: "Adm_Session"
+            },
+            {
+              data: "updated_date"
+            },
+            {
+              data: "Adm_Type"
+            },
+            {
+              data: "Adm_Type",
+              "render": function(data, type, row) {
+                return '<span onclick="reportPendnency(' + row.ID + ')"><strong>Report</strong><span>';
               },
-              {
-                data: "updated_date"
+              visible: false,
+            },
+            {
+              data: "First_Name",
+              "render": function(data, type, row) {
+                return '<strong>' + data + '</strong>';
               },
-              {
-                data: "Adm_Type"
-              },
-              {
-                data: "Adm_Type",
-                "render": function(data, type, row) {
-                  return '<span onclick="reportPendnency(' + row.ID + ')"><strong>Report</strong><span>';
-                },
-                visible: false,
-              },
-              {
-                data: "First_Name",
-                "render": function(data, type, row) {
-                  return '<strong>' + data + '</strong>';
-                },
-                visible: false,
-              },
-              {
-                data: "Father_Name"
-              },
-              {
-                data: "Short_Name"
-              },
-              {
-                data: "Duration"
-              },
-              {
-                data: "Status",
-                "render": function(data, type, row) {
-                  var statusBadge = data == 1 ?
-                    '<span class="badge badge-success">Active</span>' :
-                    '<span class="badge badge-danger">Inactive</span>';
+              visible: false,
+            },
+            {
+              data: "Father_Name"
+            },
+            {
+              data: "Short_Name"
+            },
+            {
+              data: "Duration"
+            },
+            {
+              data: "Status",
+              "render": function(data, type, row) {
+                var statusBadge = data == 1 ?
+                  '<span class="badge badge-success">Active</span>' :
+                  '<span class="badge badge-danger">Inactive</span>';
 
-                  if (row.Step == 4 && showInhouse) {
-                    var checked = data == 1 ? 'checked' : '';
-                    return '<div class="form-check form-check-inline switch switch-lg success">\
+                if (row.Step == 4 && showInhouse) {
+                  var checked = data == 1 ? 'checked' : '';
+                  return '<div class="form-check form-check-inline switch switch-lg success">\
                 <input onclick="changeStatus(\'Students\', &#39;' + row.ID + '&#39;);" type="checkbox" ' + checked + ' id="student-status-switch-' + row.ID + '">\
                 <label for="student-status-switch-' + row.ID + '">' + statusBadge + '</label>\
               </div>';
-                  } else {
-                    return statusBadge;
-                  }
-                },
-                visible: hasStudentLogin
+                } else {
+                  return statusBadge;
+                }
               },
-              {
-                data: "ID_Card",
-                "render": function(data, type, row) {
-                  var statusBadge = data == 1 ?
-                    '<span class="badge badge-success">Active</span>' :
-                    '<span class="badge badge-danger">Inactive</span>';
+              visible: hasStudentLogin
+            },
+            {
+              data: "ID_Card",
+              "render": function(data, type, row) {
+                var statusBadge = data == 1 ?
+                  '<span class="badge badge-success">Active</span>' :
+                  '<span class="badge badge-danger">Inactive</span>';
 
-                  if (row.Step == 4 && showInhouse && row.Enrollment_No.length > 0) {
-                    var checked = data == 1 ? 'checked' : '';
-                    return '<div class="form-check form-check-inline switch switch-lg success">\
+                if (row.Step == 4 && showInhouse && row.Enrollment_No.length > 0) {
+                  var checked = data == 1 ? 'checked' : '';
+                  return '<div class="form-check form-check-inline switch switch-lg success">\
                 <input onclick="changeStatus(\'Students\', &#39;' + row.ID + '&#39;, \'ID_Card\');" type="checkbox" ' + checked + ' id="student-id-card-switch-' + row.ID + '">\
                 <label for="student-id-card-switch-' + row.ID + '">' + statusBadge + '</label>\
               </div>';
-                  } else {
-                    return statusBadge;
-                  }
-                },
-                visible: hasStudentLogin
+                } else {
+                  return statusBadge;
+                }
               },
-              {
-                data: "Admit_Card",
-                "render": function(data, type, row) {
-                  var statusBadge = data == 1 ?
-                    '<span class="badge badge-success">Active</span>' :
-                    '<span class="badge badge-danger">Inactive</span>';
+              visible: hasStudentLogin
+            },
+            {
+              data: "Admit_Card",
+              "render": function(data, type, row) {
+                var statusBadge = data == 1 ?
+                  '<span class="badge badge-success">Active</span>' :
+                  '<span class="badge badge-danger">Inactive</span>';
 
-                  if (row.Step == 4 && showInhouse && row.Enrollment_No.length > 0) {
-                    var checked = data == 1 ? 'checked' : '';
-                    return '<div class="form-check form-check-inline switch switch-lg success">\
+                if (row.Step == 4 && showInhouse && row.Enrollment_No.length > 0) {
+                  var checked = data == 1 ? 'checked' : '';
+                  return '<div class="form-check form-check-inline switch switch-lg success">\
                 <input onclick="changeStatus(\'Students\', &#39;' + row.ID + '&#39;, \'Admit_Card\');" type="checkbox" ' + checked + ' id="student-admit-card-switch-' + row.ID + '">\
                 <label for="student-admit-card-switch-' + row.ID + '">' + statusBadge + '</label>\
               </div>';
-                  } else {
-                    return statusBadge;
-                  }
-                },
-                visible: hasStudentLogin
+                } else {
+                  return statusBadge;
+                }
               },
-              {
-                data: "Exam",
-                "render": function(data, type, row) {
-                  var statusBadge = data == 1 ?
-                    '<span class="badge badge-success">Active</span>' :
-                    '<span class="badge badge-danger">Inactive</span>';
+              visible: hasStudentLogin
+            },
+            {
+              data: "Exam",
+              "render": function(data, type, row) {
+                var statusBadge = data == 1 ?
+                  '<span class="badge badge-success">Active</span>' :
+                  '<span class="badge badge-danger">Inactive</span>';
 
-                  if (row.Step == 4 && showInhouse && row.Enrollment_No.length > 0) {
-                    var checked = data == 1 ? 'checked' : '';
-                    return '<div class="form-check form-check-inline switch switch-lg success">\
+                if (row.Step == 4 && showInhouse && row.Enrollment_No.length > 0) {
+                  var checked = data == 1 ? 'checked' : '';
+                  return '<div class="form-check form-check-inline switch switch-lg success">\
                 <input onclick="changeStatus(\'Students\', &#39;' + row.ID + '&#39;, \'Exam\');" type="checkbox" ' + checked + ' id="student-exam-switch-' + row.ID + '">\
                 <label for="student-exam-switch-' + row.ID + '">' + statusBadge + '</label>\
               </div>';
-                  } else {
-                    return statusBadge;
-                  }
-                },
-                visible: hasStudentLogin
-              },
-              {
-                data: "DOB"
-              },
-              {
-                data: "Center_Code",
-                visible: role == 'Sub-Center' ? false : true
-              },
-              {
-                data: "Center_Name",
-                visible: role == 'Sub-Center' ? false : true
-              },
-              {
-                data: "RM",
-                visible: role == 'Center' || role == 'Sub-Center' ? false : true
-              }
-            ],
-            "sDom": "l<t><'row'<p i>>",
-            "destroy": true,
-            "scrollCollapse": true,
-            "oLanguage": {
-              "sInfo": "Showing <b>_START_ to _END_</b> of _TOTAL_ entries"
-            },
-            drawCallback: function(settings, json) {
-              $('[data-toggle="tooltip"]').tooltip();
-            },
-            "aaSorting": []
-          };
-
-          var readyForVerificationSettings = {
-            'processing': true,
-            'serverSide': true,
-            'serverMethod': 'post',
-            'ajax': {
-              'url': '/app/applications/ready-for-verification-server',
-              'type': 'POST',
-              complete: function(xhr, responseText) {
-                $('#ready_for_verification_count').html(xhr.responseJSON.iTotalDisplayRecords);
-              }
-            },
-            'columns': [{
-                data: "ID",
-                "render": function(data, type, row) {
-                  var edit_show_hide = row.Processed_To_University == 1 ? '' : 'display:none';
-                  var edit = showInhouse || row.Step < 4 ? '<a  style="' + edit_show_hide + '" href="/admissions/application-form?id=' + data + '"><i class="custom_icon_btn_app uil uil-edit mr-1" title="Edit Application Form"></i></a>' : '';
-                  var deleted = showInhouse && row.Process_By_Center == 1 ? '<i class="uil uil-trash mr-1 cursor-pointer custom_icon_btn_app" title="Delete Application Form" style="' + edit_show_hide + '" onclick="destroy(&#39;application-form&#39;, &#39;' + data + '&#39;)"></i>' : '';
-                  var print = row.Step == 4 ? '<i class="uil uil-print mr-1 cursor-pointer custom_icon_btn_app" title="Print Application Form" onclick="printForm(&#39;' + data + '&#39;)"></i>' : '';
-                  var proccessedByCenter = row.Process_By_Center == 1 ? "Not Proccessed" : row.Process_By_Center
-                  var documentVerified = row.Document_Verified == 1 ? "Not Verified" : row.Document_Verified
-                  var proccessedToUniversity = row.Processed_To_University == 1 ? "Not Proccessed" : row.Processed_To_University
-                  var paymentVerified = row.Payment_Received == 1 ? "Not Verified" : row.Payment_Received
-                  var info = row.Step == 4 ? '<i class="uil uil-info-circle cursor-pointer custom_icon_btn_app" data-html="true" data-toggle="tooltip" data-placement="top" title="Proccessed By Center: <strong>' + proccessedByCenter + '</strong>&#013;&#010;Document Verified: <strong>' + documentVerified + '</strong>&#013;&#010;Payment Verified: <strong>' + paymentVerified + '</strong>&#013;&#010;Proccessed to University: <strong>' + proccessedToUniversity + '</strong>"></i>' : '';
-                  return print + edit + deleted + info;
+                } else {
+                  return statusBadge;
                 }
               },
-              {
-                data: "Photo",
-                "render": function(data, type, row) {
-                  return '<span class="thumbnail-wrapper d48 circular inline">\
+              visible: hasStudentLogin
+            },
+            {
+              data: "DOB"
+            },
+            {
+              data: "Center_Code",
+              visible: role == 'Sub-Center' ? false : true
+            },
+            {
+              data: "Center_Name",
+              visible: role == 'Sub-Center' ? false : true
+            },
+            {
+              data: "RM",
+              visible: role == 'Center' || role == 'Sub-Center' ? false : true
+            }
+          ],
+          "sDom": "<'row mt-3 w-100 p-0 m-0'<'col-sm-6 pr-0 pl-0 custon_text_start'l><'col-sm-6 pr-0 pl-0'f>><t><'row'<p i>>",
+          "destroy": true,
+          "scrollCollapse": true,
+          "oLanguage": {
+            "sInfo": "Showing <b>_START_ to _END_</b> of _TOTAL_ entries"
+          },
+          drawCallback: function(settings, json) {
+            $('[data-toggle="tooltip"]').tooltip();
+          },
+          "aaSorting": []
+        };
+
+        var readyForVerificationSettings = {
+          'processing': true,
+          'serverSide': true,
+          'serverMethod': 'post',
+          'ajax': {
+            'url': '/app/applications/ready-for-verification-server',
+            'type': 'POST',
+            complete: function(xhr, responseText) {
+              $('#ready_for_verification_count').html(xhr.responseJSON.iTotalDisplayRecords);
+            }
+          },
+          'columns': [{
+              data: "ID",
+              "render": function(data, type, row) {
+                var edit_show_hide = row.Processed_To_University == 1 ? '' : 'display:none';
+                var edit = showInhouse || row.Step < 4 ? '<a  style="' + edit_show_hide + '" href="/admissions/application-form?id=' + data + '"><div class="app_custom_edit_btn cursor-pointer "><i class=" uil uil-edit mr-1" title="Edit Application Form"></i><span>Edit</span></div></a>' : '';
+                var deleted = showInhouse && row.Process_By_Center == 1 ? '<div class="app_custom_edit_btn cursor-pointer"style="' + edit_show_hide + '" onclick="destroy(&#39;application-form&#39;, &#39;' + data + '&#39;)" ><i class="uil uil-trash mr-1 cursor-pointer custom_icon_btn_app" title="Delete Application Form" ></i><span>Delete</span></div>' : '';
+                // var print = row.Step == 4 ? '<div class="app_custom_edit_btn cursor-pointer"  onclick="printForm(&#39;' + data + '&#39;)"><i class="uil uil-print mr-1 cursor-pointer" title="Print Application Form"></i><span>Print</span></div>' : '';
+                var print = '';
+                var proccessedByCenter = row.Process_By_Center == 1 ? "Not Proccessed" : row.Process_By_Center
+                var documentVerified = row.Document_Verified == 1 ? "Not Verified" : row.Document_Verified
+                var proccessedToUniversity = row.Processed_To_University == 1 ? "Not Proccessed" : row.Processed_To_University
+                var paymentVerified = row.Payment_Received == 1 ? "Not Verified" : row.Payment_Received
+                var info = row.Step == 4 ? '<div class="app_custom_edit_btn cursor-pointer"  data-html="true" data-toggle="tooltip" data-placement="top" title="Proccessed By Center: <strong>' + proccessedByCenter + '</strong>&#013;&#010;Document Verified: <strong>' + documentVerified + '</strong>&#013;&#010;Payment Verified: <strong>' + paymentVerified + '</strong>&#013;&#010;Proccessed to University: <strong>' + proccessedToUniversity + '</strong>"><i class="uil uil-info-circle cursor-pointer "></i><span class="custom_info_txt">Info</span></div>' : '';
+                var dropdownItems = '';
+                if (print) {
+                  dropdownItems += '<div class="dropdown-item custom_drpdown_btn">' + print + '</div>';
+                }
+                if (edit) {
+                  var edit_show_hide = row.Processed_To_University == 1 ? '' : 'display:none';
+                  dropdownItems += '<div class="dropdown-item custom_drpdown_btn" style="' + edit_show_hide + '">' + edit + '</div>';
+                }
+                if (deleted) {
+                  dropdownItems += '<div class="dropdown-item custom_drpdown_btn">' + deleted + '</div>';
+                }
+                if (info) {
+                  dropdownItems += '<div class="dropdown-item custom_drpdown_btn">' + info + '</div>';
+                }
+
+                // Check if dropdownItems is not empty before rendering the dropdown
+                var dropdown = '';
+                if (dropdownItems) {
+                  dropdown = `<div class="mt-2">
+                        <div class="dropdown ">
+                            <button class="btn btn-link dropdown-toggle" type="button" id="dropdownMenuButton_${data}" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                <i class="uil uil-ellipsis-v"></i>
+                            </button>
+                            <div class="dropdown-menu custom_drop_div" aria-labelledby="dropdownMenuButton_${data}">
+                                ${dropdownItems}
+                            </div>
+                        </div>
+                    </div>`;
+                }
+
+                return dropdown;
+              }
+            },
+
+            {
+              data: "Photo",
+              "render": function(data, type, row) {
+                return '<span class="thumbnail-wrapper d48 circular inline">\
                 <img src="' + data + '" alt="" data-src="' + data + '"\
                   data-src-retina="' + data + '" width="32" height="32">\
               </span>';
-                }
-              },
-              {
-                data: "Unique_ID",
-                "render": function(data, type, row) {
-                  return '<span class="cursor-pointer" title="Click to export documents" onclick="exportDocuments(&#39;' + row.ID + '&#39;)"><strong>' + data + '</strong></span>';
-                }
-              },
-              {
-                data: "Step",
-                "render": function(data, type, row) {
-                  var label_class = data < 4 ? 'label-important' : 'label-success';
-                  var status = data < 4 ? 'In Draft @ Step ' + data : 'Completed';
-                  return '<sapn class="label ' + label_class + '">' + status + '</sapn>';
-                }
-              },
-              {
-                data: "Process_By_Center",
-                "render": function(data, type, row) {
-                  if (data == 1 && row.Step == 4) {
-                    return '<span class="label label-primary">Not Processed</span>';
-                    var show = !showInhouse ? '<div class="form-check complete mt-2">\
+              }
+            },
+            {
+              data: "Unique_ID",
+              "render": function(data, type, row) {
+                return '<span class="cursor-pointer" title="Click to export documents" onclick="exportDocuments(&#39;' + row.ID + '&#39;)"><strong>' + data + '</strong></span>';
+              }
+            },
+            {
+              data: "Step",
+              "render": function(data, type, row) {
+                var label_class = data < 4 ? 'label-important' : 'label-success';
+                var status = data < 4 ? 'In Draft @ Step ' + data : 'Completed';
+                return '<sapn class="label ' + label_class + '">' + status + '</sapn>';
+              }
+            },
+            {
+              data: "Process_By_Center",
+              "render": function(data, type, row) {
+                if (data == 1 && row.Step == 4) {
+                  return '<span class="label label-primary">Not Processed</span>';
+                  var show = !showInhouse ? '<div class="form-check complete mt-2">\
                   <input type="checkbox" id="process-by-center-' + row.ID + '" onclick="processByCenter(&#39;' + row.ID + '&#39;)">\
                   <label for="process-by-center-' + row.ID + '">Mark as Processed</label>\
                 </div>' : '<span class="label label-primary">Not Processed</span>';
-                    return show;
-                  } else {
-                    var show = row.Step == 4 ? '<div class="text-center"><span class="label label-primary">Processed on ' + data + '</span></div>' : '';
-                    return show;
-                  }
-                },
-                visible: role == 'Sub-Center' ? false : true
-              },
-              {
-                data: "Document_Verified",
-                "render": function(data, type, row) {
-                  if (row.Pendency_Status == 2) {
-                    if (!showInhouse) {
-                      return '<div class="text-center text-danger"><span class="cursor-pointer"><strong>In Review</strong></span></div>'
-                    } else {
-                      return is_operations || is_university_head ? '<div class="text-center text-danger"><span class="cursor-pointer" onclick="verifyDocument(&#39;' + row.ID + '&#39;)"><strong>Re-Review</strong></span></div>' : '<div class="text-center text-danger"><span><strong>Re-Review</strong></span></div>'
-                    }
-                  } else if (row.Pendency != 0) {
-                    if (!showInhouse) {
-                      return '<div class="text-center text-danger"><span class="cursor-pointer" onclick="uploadPendency(&#39;' + row.ID + '&#39;)"><strong>Pendency</strong></span></div>'
-                    } else {
-                      return is_operations || is_university_head ? '<div class="text-center text-danger"><span class="cursor-pointer" onclick="reportPendency(&#39;' + row.ID + '&#39;)"><strong>Pendency</strong></span></div>' : '<div class="text-center text-danger"><span><strong>Pendency</strong></span></div>'
-                    }
-                  } else {
-                    if (data == 1) {
-                      var show = (is_operations || is_university_head) && row.Process_By_Center != 1 ? '<div class="text-center"><span class="cursor-pointer" onclick="verifyDocument(&#39;' + row.ID + '&#39;)"><strong>Review</strong></span></div>' : row.Step == 4 && row.Process_By_Center != 1 ? '<div class="text-center text-danger"><strong>Pending</strong></div>' : '';
-                      return show;
-                    } else {
-                      var show = row.Step == 4 && row.Process_By_Center != 1 ? '<div class="text-center"><span class="label label-success">Verified at ' + data + '</span></div>' : '';
-                      return show;
-                    }
-                  }
+                  return show;
+                } else {
+                  var show = row.Step == 4 ? '<div class="text-center"><span class="label label-primary">Processed on ' + data + '</span></div>' : '';
+                  return show;
                 }
               },
-              {
-                data: "Payment_Received",
-                "render": function(data, type, row) {
-                  if (data == 1 && row.Step == 4 && row.Process_By_Center != 1) {
-                    var show = is_accountant ? '<div class="text-center"><span class="cursor-pointer" onclick="verifyPayment(&#39;' + row.ID + '&#39;)"><strong>Review</strong></span></div>' : '<center><span class="label label-primary">Pending</span></center>';
+              visible: role == 'Sub-Center' ? false : true
+            },
+            {
+              data: "Document_Verified",
+              "render": function(data, type, row) {
+                if (row.Pendency_Status == 2) {
+                  if (!showInhouse) {
+                    return '<div class="text-center text-danger"><span class="cursor-pointer"><strong>In Review</strong></span></div>'
+                  } else {
+                    return is_operations || is_university_head ? '<div class="text-center text-danger"><span class="cursor-pointer" onclick="verifyDocument(&#39;' + row.ID + '&#39;)"><strong>Re-Review</strong></span></div>' : '<div class="text-center text-danger"><span><strong>Re-Review</strong></span></div>'
+                  }
+                } else if (row.Pendency != 0) {
+                  if (!showInhouse) {
+                    return '<div class="text-center text-danger"><span class="cursor-pointer" onclick="uploadPendency(&#39;' + row.ID + '&#39;)"><strong>Pendency</strong></span></div>'
+                  } else {
+                    return is_operations || is_university_head ? '<div class="text-center text-danger"><span class="cursor-pointer" onclick="reportPendency(&#39;' + row.ID + '&#39;)"><strong>Pendency</strong></span></div>' : '<div class="text-center text-danger"><span><strong>Pendency</strong></span></div>'
+                  }
+                } else {
+                  if (data == 1) {
+                    var show = (is_operations || is_university_head) && row.Process_By_Center != 1 ? '<div class="text-center"><span class="cursor-pointer" onclick="verifyDocument(&#39;' + row.ID + '&#39;)"><strong>Review</strong></span></div>' : row.Step == 4 && row.Process_By_Center != 1 ? '<div class="text-center text-danger"><strong>Pending</strong></div>' : '';
                     return show;
                   } else {
-                    var show = row.Step == 4 ? '<div class="text-center"><span class="label label-primary">Verified on ' + data + '</span></div>' : '';
+                    var show = row.Step == 4 && row.Process_By_Center != 1 ? '<div class="text-center"><span class="label label-success">Verified at ' + data + '</span></div>' : '';
                     return show;
                   }
-                },
-                visible: false
-              },
-              {
-                data: "Enrollment_No",
-                "render": function(data, type, row) {
-                  var edit = showInhouse && row.Processed_To_University != 1 ? '<i class="uil uil-edit ml-2 cursor-pointer custom_icon_btn_app" title="Add Enrollment No." onclick="addEnrollment(&#39;' + row.ID + '&#39;)">' : '';
-                  return data + edit;
+                }
+              }
+            },
+            {
+              data: "Payment_Received",
+              "render": function(data, type, row) {
+                if (data == 1 && row.Step == 4 && row.Process_By_Center != 1) {
+                  var show = is_accountant ? '<div class="text-center"><span class="cursor-pointer" onclick="verifyPayment(&#39;' + row.ID + '&#39;)"><strong>Review</strong></span></div>' : '<center><span class="label label-primary">Pending</span></center>';
+                  return show;
+                } else {
+                  var show = row.Step == 4 ? '<div class="text-center"><span class="label label-primary">Verified on ' + data + '</span></div>' : '';
+                  return show;
                 }
               },
-              {
-                data: "ABC_ID",
-                "render": function(data, type, row) {
-                  if (data.length > 0) {
-                    var edit = showInhouse ? '<i class="uil uil-edit ml-2 cursor-pointer custom_icon_btn_app" title="Add ABC_ID" onclick="addABCid(&#39;' + row.ID + '&#39;)">' : '';
-                  } else {
-                    var edit = '<i class="uil uil-edit ml-2 cursor-pointer custom_icon_btn_app" title="Add ABC_ID" onclick="addABCid(&#39;' + row.ID + '&#39;)">';
-                  }
-                  return data + edit;
+              visible: false
+            },
+            {
+              data: "Enrollment_No",
+              "render": function(data, type, row) {
+                var edit = showInhouse && row.Processed_To_University != 1 ? '<i class="uil uil-edit ml-2 cursor-pointer custom_icon_btn_app" title="Add Enrollment No." onclick="addEnrollment(&#39;' + row.ID + '&#39;)">' : '';
+                return data + edit;
+              }
+            },
+            {
+              data: "ABC_ID",
+              "render": function(data, type, row) {
+                if (data.length > 0) {
+                  var edit = showInhouse ? '<i class="uil uil-edit ml-2 cursor-pointer custom_icon_btn_app" title="Add ABC_ID" onclick="addABCid(&#39;' + row.ID + '&#39;)">' : '';
+                } else {
+                  var edit = '<i class="uil uil-edit ml-2 cursor-pointer custom_icon_btn_app" title="Add ABC_ID" onclick="addABCid(&#39;' + row.ID + '&#39;)">';
                 }
+                return data + edit;
+              }
+            },
+            {
+              data: "OA_Number",
+              "render": function(data, type, row) {
+                var edit = showInhouse ? '<i class="uil uil-edit ml-2 cursor-pointer custom_icon_btn_app" title="Add OA Number" onclick="addOANumber(&#39;' + row.ID + '&#39;)">' : '';
+                return data + edit;
+              }
+            },
+            {
+              data: "Adm_Session"
+            },
+            {
+              data: "updated_date"
+            },
+            {
+              data: "Adm_Type"
+            },
+            {
+              data: "Adm_Type",
+              "render": function(data, type, row) {
+                return '<span onclick="reportPendnency(' + row.ID + ')"><strong>Report</strong><span>';
               },
-              {
-                data: "OA_Number",
-                "render": function(data, type, row) {
-                  var edit = showInhouse ? '<i class="uil uil-edit ml-2 cursor-pointer custom_icon_btn_app" title="Add OA Number" onclick="addOANumber(&#39;' + row.ID + '&#39;)">' : '';
-                  return data + edit;
-                }
+              visible: false,
+            },
+            {
+              data: "First_Name",
+              "render": function(data, type, row) {
+                return '<strong>' + data + '</strong>';
               },
-              {
-                data: "Adm_Session"
-              },
-              {
-                data: "updated_date"
-              },
-              {
-                data: "Adm_Type"
-              },
-              {
-                data: "Adm_Type",
-                "render": function(data, type, row) {
-                  return '<span onclick="reportPendnency(' + row.ID + ')"><strong>Report</strong><span>';
-                },
-                visible: false,
-              },
-              {
-                data: "First_Name",
-                "render": function(data, type, row) {
-                  return '<strong>' + data + '</strong>';
-                },
-                visible: false,
-              },
-              {
-                data: "Father_Name"
-              },
-              {
-                data: "Short_Name"
-              },
-              {
-                data: "Duration"
-              },
-              {
-                data: "Status",
-                "render": function(data, type, row) {
-                  var statusBadge = data == 1 ?
-                    '<span class="badge badge-success">Active</span>' :
-                    '<span class="badge badge-danger">Inactive</span>';
+              visible: false,
+            },
+            {
+              data: "Father_Name"
+            },
+            {
+              data: "Short_Name"
+            },
+            {
+              data: "Duration"
+            },
+            {
+              data: "Status",
+              "render": function(data, type, row) {
+                var statusBadge = data == 1 ?
+                  '<span class="badge badge-success">Active</span>' :
+                  '<span class="badge badge-danger">Inactive</span>';
 
-                  if (row.Step == 4 && showInhouse) {
-                    var checked = data == 1 ? 'checked' : '';
-                    return '<div class="form-check form-check-inline switch switch-lg success">\
+                if (row.Step == 4 && showInhouse) {
+                  var checked = data == 1 ? 'checked' : '';
+                  return '<div class="form-check form-check-inline switch switch-lg success">\
                 <input onclick="changeStatus(\'Students\', &#39;' + row.ID + '&#39;);" type="checkbox" ' + checked + ' id="student-status-switch-' + row.ID + '">\
                 <label for="student-status-switch-' + row.ID + '">' + statusBadge + '</label>\
               </div>';
-                  } else {
-                    return statusBadge;
-                  }
-                },
-                visible: hasStudentLogin
+                } else {
+                  return statusBadge;
+                }
               },
-              {
-                data: "ID_Card",
-                "render": function(data, type, row) {
-                  var statusBadge = data == 1 ?
-                    '<span class="badge badge-success">Active</span>' :
-                    '<span class="badge badge-danger">Inactive</span>';
+              visible: hasStudentLogin
+            },
+            {
+              data: "ID_Card",
+              "render": function(data, type, row) {
+                var statusBadge = data == 1 ?
+                  '<span class="badge badge-success">Active</span>' :
+                  '<span class="badge badge-danger">Inactive</span>';
 
-                  if (row.Step == 4 && showInhouse && row.Enrollment_No.length > 0) {
-                    var checked = data == 1 ? 'checked' : '';
-                    return '<div class="form-check form-check-inline switch switch-lg success">\
+                if (row.Step == 4 && showInhouse && row.Enrollment_No.length > 0) {
+                  var checked = data == 1 ? 'checked' : '';
+                  return '<div class="form-check form-check-inline switch switch-lg success">\
                 <input onclick="changeStatus(\'Students\', &#39;' + row.ID + '&#39;, \'ID_Card\');" type="checkbox" ' + checked + ' id="student-id-card-switch-' + row.ID + '">\
                 <label for="student-id-card-switch-' + row.ID + '">' + statusBadge + '</label>\
               </div>';
-                  } else {
-                    return statusBadge;
-                  }
-                },
-                visible: hasStudentLogin
-              },
-              {
-                data: "Admit_Card",
-                "render": function(data, type, row) {
-                  var statusBadge = data == 1 ?
-                    '<span class="badge badge-success">Active</span>' :
-                    '<span class="badge badge-danger">Inactive</span>';
-
-                  if (row.Step == 4 && showInhouse && row.Enrollment_No.length > 0) {
-                    var checked = data == 1 ? 'checked' : '';
-                    return '<div class="form-check form-check-inline switch switch-lg success">\
-                <input onclick="changeStatus(\'Students\', &#39;' + row.ID + '&#39;, \'Admit_Card\');" type="checkbox" ' + checked + ' id="student-admit-card-switch-' + row.ID + '">\
-                <label for="student-admit-card-switch-' + row.ID + '">' + statusBadge + '</label>\
-              </div>';
-                  } else {
-                    return statusBadge;
-                  }
-                },
-                visible: hasStudentLogin
-              },
-              {
-                data: "Admit_Card",
-                "render": function(data, type, row) {
-                  var statusBadge = data == 1 ?
-                    '<span class="badge badge-success">Active</span>' :
-                    '<span class="badge badge-danger">Inactive</span>';
-
-                  if (row.Step == 4 && showInhouse && row.Enrollment_No.length > 0) {
-                    var checked = data == 1 ? 'checked' : '';
-                    return '<div class="form-check form-check-inline switch switch-lg success">\
-                <input onclick="changeStatus(\'Students\', &#39;' + row.ID + '&#39;, \'Admit_Card\');" type="checkbox" ' + checked + ' id="student-admit-card-switch-' + row.ID + '">\
-                <label for="student-admit-card-switch-' + row.ID + '">' + statusBadge + '</label>\
-              </div>';
-                  } else {
-                    return statusBadge;
-                  }
-                },
-                visible: hasStudentLogin
-              },
-              {
-                data: "DOB"
-              },
-              {
-                data: "Center_Code",
-                visible: role == 'Sub-Center' ? false : true
-              },
-              {
-                data: "Center_Name",
-                visible: role == 'Sub-Center' ? false : true
-              },
-              {
-                data: "RM",
-                visible: role == 'Center' || role == 'Sub-Center' ? false : true
-              }
-            ],
-            "sDom": "l<t><'row'<p i>>",
-            "destroy": true,
-            "scrollCollapse": true,
-            "oLanguage": {
-              "sInfo": "Showing <b>_START_ to _END_</b> of _TOTAL_ entries"
-            },
-            drawCallback: function(settings, json) {
-              $('[data-toggle="tooltip"]').tooltip();
-            },
-            "aaSorting": []
-          };
-
-          var verifiedSettings = {
-            'processing': true,
-            'serverSide': true,
-            'serverMethod': 'post',
-            'ajax': {
-              'url': '/app/applications/verified-server',
-              'type': 'POST',
-              complete: function(xhr, responseText) {
-                $('#verified_count').html(xhr.responseJSON.iTotalDisplayRecords);
-              }
-            },
-            'columns': [{
-                data: "ID",
-                "render": function(data, type, row) {
-                  var edit_show_hide = row.Processed_To_University == 1 ? '' : 'display:none';
-                  var edit = showInhouse || row.Step < 4 ? '<a  style="' + edit_show_hide + '" href="/admissions/application-form?id=' + data + '"><i class="uil uil-edit mr-1 custom_icon_btn_app" title="Edit Application Form"></i></a>' : '';
-                  var deleted = showInhouse && row.Process_By_Center == 1 ? '<i class="uil uil-trash mr-1 cursor-pointer custom_icon_btn_app" title="Delete Application Form" style="' + edit_show_hide + '" onclick="destroy(&#39;application-form&#39;, &#39;' + data + '&#39;)"></i>' : '';
-                  var print = row.Step == 4 ? '<i class="uil uil-print mr-1 cursor-pointer custom_icon_btn_app" title="Print Application Form" onclick="printForm(&#39;' + data + '&#39;)"></i>' : '';
-                  var proccessedByCenter = row.Process_By_Center == 1 ? "Not Proccessed" : row.Process_By_Center
-                  var documentVerified = row.Document_Verified == 1 ? "Not Verified" : row.Document_Verified
-                  var proccessedToUniversity = row.Processed_To_University == 1 ? "Not Proccessed" : row.Processed_To_University
-                  var paymentVerified = row.Payment_Received == 1 ? "Not Verified" : row.Payment_Received
-                  var info = row.Step == 4 ? '<i class="uil uil-info-circle cursor-pointer custom_icon_btn_app" data-html="true" data-toggle="tooltip" data-placement="top" title="Proccessed By Center: <strong>' + proccessedByCenter + '</strong>&#013;&#010;Document Verified: <strong>' + documentVerified + '</strong>&#013;&#010;Payment Verified: <strong>' + paymentVerified + '</strong>&#013;&#010;Proccessed to University: <strong>' + proccessedToUniversity + '</strong>"></i>' : '';
-                  return print + edit + deleted + info;
+                } else {
+                  return statusBadge;
                 }
               },
-              {
-                data: "Photo",
-                "render": function(data, type, row) {
-                  return '<span class="thumbnail-wrapper d48 circular inline">\
+              visible: hasStudentLogin
+            },
+            {
+              data: "Admit_Card",
+              "render": function(data, type, row) {
+                var statusBadge = data == 1 ?
+                  '<span class="badge badge-success">Active</span>' :
+                  '<span class="badge badge-danger">Inactive</span>';
+
+                if (row.Step == 4 && showInhouse && row.Enrollment_No.length > 0) {
+                  var checked = data == 1 ? 'checked' : '';
+                  return '<div class="form-check form-check-inline switch switch-lg success">\
+                <input onclick="changeStatus(\'Students\', &#39;' + row.ID + '&#39;, \'Admit_Card\');" type="checkbox" ' + checked + ' id="student-admit-card-switch-' + row.ID + '">\
+                <label for="student-admit-card-switch-' + row.ID + '">' + statusBadge + '</label>\
+              </div>';
+                } else {
+                  return statusBadge;
+                }
+              },
+              visible: hasStudentLogin
+            },
+            {
+              data: "Admit_Card",
+              "render": function(data, type, row) {
+                var statusBadge = data == 1 ?
+                  '<span class="badge badge-success">Active</span>' :
+                  '<span class="badge badge-danger">Inactive</span>';
+
+                if (row.Step == 4 && showInhouse && row.Enrollment_No.length > 0) {
+                  var checked = data == 1 ? 'checked' : '';
+                  return '<div class="form-check form-check-inline switch switch-lg success">\
+                <input onclick="changeStatus(\'Students\', &#39;' + row.ID + '&#39;, \'Admit_Card\');" type="checkbox" ' + checked + ' id="student-admit-card-switch-' + row.ID + '">\
+                <label for="student-admit-card-switch-' + row.ID + '">' + statusBadge + '</label>\
+              </div>';
+                } else {
+                  return statusBadge;
+                }
+              },
+              visible: hasStudentLogin
+            },
+            {
+              data: "DOB"
+            },
+            {
+              data: "Center_Code",
+              visible: role == 'Sub-Center' ? false : true
+            },
+            {
+              data: "Center_Name",
+              visible: role == 'Sub-Center' ? false : true
+            },
+            {
+              data: "RM",
+              visible: role == 'Center' || role == 'Sub-Center' ? false : true
+            }
+          ],
+          "sDom": "<'row mt-3 w-100 p-0 m-0'<'col-sm-6 pr-0 pl-0 custon_text_start'l><'col-sm-6 pr-0 pl-0'f>><t><'row'<p i>>",
+          "destroy": true,
+          "scrollCollapse": true,
+          "oLanguage": {
+            "sInfo": "Showing <b>_START_ to _END_</b> of _TOTAL_ entries"
+          },
+          drawCallback: function(settings, json) {
+            $('[data-toggle="tooltip"]').tooltip();
+          },
+          "aaSorting": []
+        };
+
+        var verifiedSettings = {
+          'processing': true,
+          'serverSide': true,
+          'serverMethod': 'post',
+          'ajax': {
+            'url': '/app/applications/verified-server',
+            'type': 'POST',
+            complete: function(xhr, responseText) {
+              $('#verified_count').html(xhr.responseJSON.iTotalDisplayRecords);
+            }
+          },
+          'columns': [{
+              data: "ID",
+              "render": function(data, type, row) {
+                var edit_show_hide = row.Processed_To_University == 1 ? '' : 'display:none';
+                var edit = showInhouse || row.Step < 4 ? '<a  style="' + edit_show_hide + '" href="/admissions/application-form?id=' + data + '"><div class="app_custom_edit_btn cursor-pointer "><i class="uil uil-edit mr-1 " title="Edit Application Form"></i><span>Edit</span></div></a>' : '';
+                var deleted = showInhouse && row.Process_By_Center == 1 ? '<div class="app_custom_edit_btn cursor-pointer "style="' + edit_show_hide + '" onclick="destroy(&#39;application-form&#39;, &#39;' + data + '&#39;)"> <i class="uil uil-trash mr-1 cursor-pointer " title="Delete Application Form" ></i><span>Delete</span></div>' : '';
+                // var print = row.Step == 4 ? '<div class="app_custom_edit_btn cursor-pointer" onclick="printForm(&#39;' + data + '&#39;)"><i class="uil uil-print mr-1 cursor-pointer custom_icon_btn_app" title="Print Application Form" ></i><span>Print</span></div>' : '';
+                var print = '';
+                var proccessedByCenter = row.Process_By_Center == 1 ? "Not Proccessed" : row.Process_By_Center
+                var documentVerified = row.Document_Verified == 1 ? "Not Verified" : row.Document_Verified
+                var proccessedToUniversity = row.Processed_To_University == 1 ? "Not Proccessed" : row.Processed_To_University
+                var paymentVerified = row.Payment_Received == 1 ? "Not Verified" : row.Payment_Received
+                var info = row.Step == 4 ? '<div class="app_custom_edit_btn cursor-pointer" data-html="true" data-toggle="tooltip" data-placement="top" title="Proccessed By Center: <strong>' + proccessedByCenter + '</strong>&#013;&#010;Document Verified: <strong>' + documentVerified + '</strong>&#013;&#010;Payment Verified: <strong>' + paymentVerified + '</strong>&#013;&#010;Proccessed to University: <strong>' + proccessedToUniversity + '</strong>"><i class="uil uil-info-circle cursor-pointer " ></i><span class="custom_info_txt">Info</span></div>' : '';
+                var dropdownItems = '';
+                if (print) {
+                  dropdownItems += '<div class="dropdown-item custom_drpdown_btn">' + print + '</div>';
+                }
+                if (edit) {
+                  var edit_show_hide = row.Processed_To_University == 1 ? '' : 'display:none';
+                  dropdownItems += '<div class="dropdown-item custom_drpdown_btn" style="' + edit_show_hide + '">' + edit + '</div>';
+                }
+                if (deleted) {
+                  dropdownItems += '<div class="dropdown-item custom_drpdown_btn">' + deleted + '</div>';
+                }
+                if (info) {
+                  dropdownItems += '<div class="dropdown-item custom_drpdown_btn">' + info + '</div>';
+                }
+
+                // Check if dropdownItems is not empty before rendering the dropdown
+                var dropdown = '';
+                if (dropdownItems) {
+                  dropdown = `<div class="mt-2">
+                        <div class="dropdown ">
+                            <button class="btn btn-link dropdown-toggle" type="button" id="dropdownMenuButton_${data}" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                <i class="uil uil-ellipsis-v"></i>
+                            </button>
+                            <div class="dropdown-menu custom_drop_div" aria-labelledby="dropdownMenuButton_${data}">
+                                ${dropdownItems}
+                            </div>
+                        </div>
+                    </div>`;
+                }
+
+                return dropdown;
+              }
+            },
+            {
+              data: "Photo",
+              "render": function(data, type, row) {
+                return '<span class="thumbnail-wrapper d48 circular inline">\
                 <img src="' + data + '" alt="" data-src="' + data + '"\
                   data-src-retina="' + data + '" width="32" height="32">\
               </span>';
-                }
-              },
-              {
-                data: "Unique_ID",
-                "render": function(data, type, row) {
-                  return '<span class="cursor-pointer" title="Click to export documents" onclick="exportDocuments(&#39;' + row.ID + '&#39;)"><strong>' + data + '</strong></span>';
-                }
-              },
-              {
-                data: "Step",
-                "render": function(data, type, row) {
-                  var label_class = data < 4 ? 'label-important' : 'label-success';
-                  var status = data < 4 ? 'In Draft @ Step ' + data : 'Completed';
-                  return '<sapn class="label ' + label_class + '">' + status + '</sapn>';
-                }
-              },
-              {
-                data: "Process_By_Center",
-                "render": function(data, type, row) {
-                  if (data == 1 && row.Step == 4) {
-                    return '<span class="label label-primary">Not Processed</span>';
-                    var show = !showInhouse ? '<div class="form-check complete mt-2">\
+              }
+            },
+            {
+              data: "Unique_ID",
+              "render": function(data, type, row) {
+                return '<span class="cursor-pointer" title="Click to export documents" onclick="exportDocuments(&#39;' + row.ID + '&#39;)"><strong>' + data + '</strong></span>';
+              }
+            },
+            {
+              data: "Step",
+              "render": function(data, type, row) {
+                var label_class = data < 4 ? 'label-important' : 'label-success';
+                var status = data < 4 ? 'In Draft @ Step ' + data : 'Completed';
+                return '<sapn class="label ' + label_class + '">' + status + '</sapn>';
+              }
+            },
+            {
+              data: "Process_By_Center",
+              "render": function(data, type, row) {
+                if (data == 1 && row.Step == 4) {
+                  return '<span class="label label-primary">Not Processed</span>';
+                  var show = !showInhouse ? '<div class="form-check complete mt-2">\
                   <input type="checkbox" id="process-by-center-' + row.ID + '" onclick="processByCenter(&#39;' + row.ID + '&#39;)">\
                   <label for="process-by-center-' + row.ID + '">Mark as Processed</label>\
                 </div>' : '<span class="label label-primary">Not Processed</span>';
-                    return show;
-                  } else {
-                    var show = row.Step == 4 ? '<div class="text-center"><span class="label label-primary">Processed on ' + data + '</span></div>' : '';
-                    return show;
-                  }
-                },
-                visible: role == 'Sub-Center' ? false : true
-              },
-              {
-                data: "Document_Verified",
-                "render": function(data, type, row) {
-                  if (row.Pendency_Status == 2) {
-                    if (!showInhouse) {
-                      return '<div class="text-center text-danger"><span class="cursor-pointer"><strong>In Review</strong></span></div>'
-                    } else {
-                      return is_operations || is_university_head ? '<div class="text-center text-danger"><span class="cursor-pointer" onclick="verifyDocument(&#39;' + row.ID + '&#39;)"><strong>Re-Review</strong></span></div>' : '<div class="text-center text-danger"><span><strong>Re-Review</strong></span></div>'
-                    }
-                  } else if (row.Pendency != 0) {
-                    if (!showInhouse) {
-                      return '<div class="text-center text-danger"><span class="cursor-pointer" onclick="uploadPendency(&#39;' + row.ID + '&#39;)"><strong>Pendency</strong></span></div>'
-                    } else {
-                      return is_operations || is_university_head ? '<div class="text-center text-danger"><span class="cursor-pointer" onclick="reportPendency(&#39;' + row.ID + '&#39;)"><strong>Pendency</strong></span></div>' : '<div class="text-center text-danger"><span><strong>Pendency</strong></span></div>'
-                    }
-                  } else {
-                    if (data == 1) {
-                      var show = (is_operations || is_university_head) && row.Process_By_Center != 1 ? '<div class="text-center"><span class="cursor-pointer" onclick="verifyDocument(&#39;' + row.ID + '&#39;)"><strong>Review</strong></span></div>' : row.Step == 4 && row.Process_By_Center != 1 ? '<div class="text-center text-danger"><strong>Pending</strong></div>' : '';
-                      return show;
-                    } else {
-                      var show = row.Step == 4 && row.Process_By_Center != 1 ? '<div class="text-center"><span class="label label-success">Verified at ' + data + '</span></div>' : '';
-                      return show;
-                    }
-                  }
+                  return show;
+                } else {
+                  var show = row.Step == 4 ? '<div class="text-center"><span class="label label-primary">Processed on ' + data + '</span></div>' : '';
+                  return show;
                 }
               },
-              {
-                data: "Payment_Received",
-                "render": function(data, type, row) {
-                  if (data == 1 && row.Step == 4 && row.Process_By_Center != 1) {
-                    var show = is_accountant ? '<div class="text-center"><span class="cursor-pointer" onclick="verifyPayment(&#39;' + row.ID + '&#39;)"><strong>Review</strong></span></div>' : '<center><span class="label label-primary">Pending</span></center>';
+              visible: role == 'Sub-Center' ? false : true
+            },
+            {
+              data: "Document_Verified",
+              "render": function(data, type, row) {
+                if (row.Pendency_Status == 2) {
+                  if (!showInhouse) {
+                    return '<div class="text-center text-danger"><span class="cursor-pointer"><strong>In Review</strong></span></div>'
+                  } else {
+                    return is_operations || is_university_head ? '<div class="text-center text-danger"><span class="cursor-pointer" onclick="verifyDocument(&#39;' + row.ID + '&#39;)"><strong>Re-Review</strong></span></div>' : '<div class="text-center text-danger"><span><strong>Re-Review</strong></span></div>'
+                  }
+                } else if (row.Pendency != 0) {
+                  if (!showInhouse) {
+                    return '<div class="text-center text-danger"><span class="cursor-pointer" onclick="uploadPendency(&#39;' + row.ID + '&#39;)"><strong>Pendency</strong></span></div>'
+                  } else {
+                    return is_operations || is_university_head ? '<div class="text-center text-danger"><span class="cursor-pointer" onclick="reportPendency(&#39;' + row.ID + '&#39;)"><strong>Pendency</strong></span></div>' : '<div class="text-center text-danger"><span><strong>Pendency</strong></span></div>'
+                  }
+                } else {
+                  if (data == 1) {
+                    var show = (is_operations || is_university_head) && row.Process_By_Center != 1 ? '<div class="text-center"><span class="cursor-pointer" onclick="verifyDocument(&#39;' + row.ID + '&#39;)"><strong>Review</strong></span></div>' : row.Step == 4 && row.Process_By_Center != 1 ? '<div class="text-center text-danger"><strong>Pending</strong></div>' : '';
                     return show;
                   } else {
-                    var show = row.Step == 4 ? '<div class="text-center"><span class="label label-primary">Verified on ' + data + '</span></div>' : '';
+                    var show = row.Step == 4 && row.Process_By_Center != 1 ? '<div class="text-center"><span class="label label-success">Verified at ' + data + '</span></div>' : '';
                     return show;
                   }
-                },
-                visible: false
+                }
+              }
+            },
+            {
+              data: "Payment_Received",
+              "render": function(data, type, row) {
+                if (data == 1 && row.Step == 4 && row.Process_By_Center != 1) {
+                  var show = is_accountant ? '<div class="text-center"><span class="cursor-pointer" onclick="verifyPayment(&#39;' + row.ID + '&#39;)"><strong>Review</strong></span></div>' : '<center><span class="label label-primary">Pending</span></center>';
+                  return show;
+                } else {
+                  var show = row.Step == 4 ? '<div class="text-center"><span class="label label-primary">Verified on ' + data + '</span></div>' : '';
+                  return show;
+                }
               },
-              {
-                data: "Processed_To_University",
-                "render": function(data, type, row) {
-                  if (data == 1) {
-                    var show = showInhouse && row.Document_Verified != 1 && row.Payment_Received != 1 ? '<div class="form-check complete mt-2">\
+              visible: false
+            },
+            {
+              data: "Processed_To_University",
+              "render": function(data, type, row) {
+                if (data == 1) {
+                  var show = showInhouse && row.Document_Verified != 1 && row.Payment_Received != 1 ? '<div class="form-check complete mt-2">\
                   <input type="checkbox" id="processed-to-university-' + row.ID + '" onclick="checkABCid(&#39;' + row.ID + '&#39;)">\
                   <label for="processed-to-university-' + row.ID + '">Mark as Processed</label>\
                 </div>' : "";
-                    return show;
-                  } else {
-                    var show = row.Step == 4 ? '<div class="text-center"><span class="label label-success">Processed on ' + data + '</span></div>' : '';
-                    return show;
-                  }
+                  return show;
+                } else {
+                  var show = row.Step == 4 ? '<div class="text-center"><span class="label label-success">Processed on ' + data + '</span></div>' : '';
+                  return show;
                 }
-              },
-              {
-                data: "Enrollment_No",
-                "render": function(data, type, row) {
-                  var edit = showInhouse && row.enterEnrollmentNumber === true ? '<i class="uil uil-edit ml-2 cursor-pointer custom_icon_btn_app" title="Add Enrollment No." onclick="addEnrollment(&#39;' + row.ID + '&#39;)">' : '';
-                  return data + edit;
+              }
+            },
+            {
+              data: "Enrollment_No",
+              "render": function(data, type, row) {
+                var edit = showInhouse && row.enterEnrollmentNumber === true ? '<i class="uil uil-edit ml-2 cursor-pointer custom_icon_btn_app" title="Add Enrollment No." onclick="addEnrollment(&#39;' + row.ID + '&#39;)">' : '';
+                return data + edit;
+              }
+            },
+            {
+              data: "ABC_ID",
+              "render": function(data, type, row) {
+                if (data.length > 0) {
+                  var edit = showInhouse ? '<i class="uil uil-edit ml-2 cursor-pointer custom_icon_btn_app" title="Add ABC_ID" onclick="addABCid(&#39;' + row.ID + '&#39;)">' : '';
+                } else {
+                  var edit = '<i class="uil uil-edit ml-2 cursor-pointer custom_icon_btn_app" title="Add ABC_ID" onclick="addABCid(&#39;' + row.ID + '&#39;)">';
                 }
+                return data + edit;
+              }
+            },
+            {
+              data: "OA_Number",
+              "render": function(data, type, row) {
+                var edit = showInhouse ? '<i class="uil uil-edit ml-2 cursor-pointer custom_icon_btn_app" title="Add OA Number" onclick="addOANumber(&#39;' + row.ID + '&#39;)">' : '';
+                return data + edit;
+              }
+            },
+            {
+              data: "Adm_Session"
+            },
+            {
+              data: "updated_date"
+            },
+            {
+              data: "Adm_Type"
+            },
+            {
+              data: "Adm_Type",
+              "render": function(data, type, row) {
+                return '<span onclick="reportPendnency(' + row.ID + ')"><strong>Report</strong><span>';
               },
-              {
-                data: "ABC_ID",
-                "render": function(data, type, row) {
-                  if (data.length > 0) {
-                    var edit = showInhouse ? '<i class="uil uil-edit ml-2 cursor-pointer custom_icon_btn_app" title="Add ABC_ID" onclick="addABCid(&#39;' + row.ID + '&#39;)">' : '';
-                  } else {
-                    var edit = '<i class="uil uil-edit ml-2 cursor-pointer custom_icon_btn_app" title="Add ABC_ID" onclick="addABCid(&#39;' + row.ID + '&#39;)">';
-                  }
-                  return data + edit;
-                }
+              visible: false,
+            },
+            {
+              data: "First_Name",
+              "render": function(data, type, row) {
+                return '<strong>' + data + '</strong>';
               },
-              {
-                data: "OA_Number",
-                "render": function(data, type, row) {
-                  var edit = showInhouse ? '<i class="uil uil-edit ml-2 cursor-pointer custom_icon_btn_app" title="Add OA Number" onclick="addOANumber(&#39;' + row.ID + '&#39;)">' : '';
-                  return data + edit;
-                }
-              },
-              {
-                data: "Adm_Session"
-              },
-              {
-                data: "updated_date"
-              },
-              {
-                data: "Adm_Type"
-              },
-              {
-                data: "Adm_Type",
-                "render": function(data, type, row) {
-                  return '<span onclick="reportPendnency(' + row.ID + ')"><strong>Report</strong><span>';
-                },
-                visible: false,
-              },
-              {
-                data: "First_Name",
-                "render": function(data, type, row) {
-                  return '<strong>' + data + '</strong>';
-                },
-                visible: false,
-              },
-              {
-                data: "Father_Name"
-              },
-              {
-                data: "Short_Name"
-              },
-              {
-                data: "Duration"
-              },
-              {
-                data: "Status",
-                "render": function(data, type, row) {
-                  var statusBadge = data == 1 ?
-                    '<span class="badge badge-success">Active</span>' :
-                    '<span class="badge badge-danger">Inactive</span>';
+              visible: false,
+            },
+            {
+              data: "Father_Name"
+            },
+            {
+              data: "Short_Name"
+            },
+            {
+              data: "Duration"
+            },
+            {
+              data: "Status",
+              "render": function(data, type, row) {
+                var statusBadge = data == 1 ?
+                  '<span class="badge badge-success">Active</span>' :
+                  '<span class="badge badge-danger">Inactive</span>';
 
-                  if (row.Step == 4 && showInhouse) {
-                    var checked = data == 1 ? 'checked' : '';
-                    return '<div class="form-check form-check-inline switch switch-lg success">\
+                if (row.Step == 4 && showInhouse) {
+                  var checked = data == 1 ? 'checked' : '';
+                  return '<div class="form-check form-check-inline switch switch-lg success">\
                 <input onclick="changeStatus(\'Students\', &#39;' + row.ID + '&#39;);" type="checkbox" ' + checked + ' id="student-status-switch-' + row.ID + '">\
                 <label for="student-status-switch-' + row.ID + '">' + statusBadge + '</label>\
               </div>';
-                  } else {
-                    return statusBadge;
-                  }
-                },
-                visible: hasStudentLogin
+                } else {
+                  return statusBadge;
+                }
               },
-              {
-                data: "ID_Card",
-                "render": function(data, type, row) {
-                  var statusBadge = data == 1 ?
-                    '<span class="badge badge-success">Active</span>' :
-                    '<span class="badge badge-danger">Inactive</span>';
+              visible: hasStudentLogin
+            },
+            {
+              data: "ID_Card",
+              "render": function(data, type, row) {
+                var statusBadge = data == 1 ?
+                  '<span class="badge badge-success">Active</span>' :
+                  '<span class="badge badge-danger">Inactive</span>';
 
-                  if (row.Step == 4 && showInhouse && row.Enrollment_No.length > 0) {
-                    var checked = data == 1 ? 'checked' : '';
-                    return '<div class="form-check form-check-inline switch switch-lg success">\
+                if (row.Step == 4 && showInhouse && row.Enrollment_No.length > 0) {
+                  var checked = data == 1 ? 'checked' : '';
+                  return '<div class="form-check form-check-inline switch switch-lg success">\
                 <input onclick="changeStatus(\'Students\', &#39;' + row.ID + '&#39;, \'ID_Card\');" type="checkbox" ' + checked + ' id="student-id-card-switch-' + row.ID + '">\
                 <label for="student-id-card-switch-' + row.ID + '">' + statusBadge + '</label>\
               </div>';
-                  } else {
-                    return statusBadge;
-                  }
-                },
-                visible: hasStudentLogin
+                } else {
+                  return statusBadge;
+                }
               },
-              {
-                data: "Admit_Card",
-                "render": function(data, type, row) {
-                  var statusBadge = data == 1 ?
-                    '<span class="badge badge-success">Active</span>' :
-                    '<span class="badge badge-danger">Inactive</span>';
+              visible: hasStudentLogin
+            },
+            {
+              data: "Admit_Card",
+              "render": function(data, type, row) {
+                var statusBadge = data == 1 ?
+                  '<span class="badge badge-success">Active</span>' :
+                  '<span class="badge badge-danger">Inactive</span>';
 
-                  if (row.Step == 4 && showInhouse && row.Enrollment_No.length > 0) {
-                    var checked = data == 1 ? 'checked' : '';
-                    return '<div class="form-check form-check-inline switch switch-lg success">\
+                if (row.Step == 4 && showInhouse && row.Enrollment_No.length > 0) {
+                  var checked = data == 1 ? 'checked' : '';
+                  return '<div class="form-check form-check-inline switch switch-lg success">\
                 <input onclick="changeStatus(\'Students\', &#39;' + row.ID + '&#39;, \'Admit_Card\');" type="checkbox" ' + checked + ' id="student-admit-card-switch-' + row.ID + '">\
                 <label for="student-admit-card-switch-' + row.ID + '">' + statusBadge + '</label>\
               </div>';
-                  } else {
-                    return statusBadge;
-                  }
-                },
-                visible: hasStudentLogin
+                } else {
+                  return statusBadge;
+                }
               },
-              {
-                data: "Exam",
-                "render": function(data, type, row) {
-                  var statusBadge = data == 1 ?
-                    '<span class="badge badge-success">Active</span>' :
-                    '<span class="badge badge-danger">Inactive</span>';
+              visible: hasStudentLogin
+            },
+            {
+              data: "Exam",
+              "render": function(data, type, row) {
+                var statusBadge = data == 1 ?
+                  '<span class="badge badge-success">Active</span>' :
+                  '<span class="badge badge-danger">Inactive</span>';
 
-                  if (row.Step == 4 && showInhouse && row.Enrollment_No.length > 0) {
-                    var checked = data == 1 ? 'checked' : '';
-                    return '<div class="form-check form-check-inline switch switch-lg success">\
+                if (row.Step == 4 && showInhouse && row.Enrollment_No.length > 0) {
+                  var checked = data == 1 ? 'checked' : '';
+                  return '<div class="form-check form-check-inline switch switch-lg success">\
                 <input onclick="changeStatus(\'Students\', &#39;' + row.ID + '&#39;, \'Exam\');" type="checkbox" ' + checked + ' id="student-exam-switch-' + row.ID + '">\
                 <label for="student-exam-switch-' + row.ID + '">' + statusBadge + '<  /label>\
               </div>';
-                  } else {
-                    return statusBadge;
-                  }
-                },
-                visible: hasStudentLogin
-              },
-              {
-                data: "DOB"
-              },
-              {
-                data: "Center_Code",
-                visible: role == 'Sub-Center' ? false : true
-              },
-              {
-                data: "Center_Name",
-                visible: role == 'Sub-Center' ? false : true
-              },
-              {
-                data: "RM",
-                visible: role == 'Center' || role == 'Sub-Center' ? false : true
-              }
-            ],
-            "sDom": "l<t><'row'<p i>>",
-            "destroy": true,
-            "scrollCollapse": true,
-            "oLanguage": {
-              "sInfo": "Showing <b>_START_ to _END_</b> of _TOTAL_ entries"
-            },
-            drawCallback: function(settings, json) {
-              $('[data-toggle="tooltip"]').tooltip();
-            },
-            "aaSorting": []
-          };
-
-          var processedToUniversitySettings = {
-            'processing': true,
-            'serverSide': true,
-            'serverMethod': 'post',
-            'ajax': {
-              'url': '/app/applications/processed-to-university-server',
-              'type': 'POST',
-              complete: function(xhr, responseText) {
-                $('#processed_to_university_count').html(xhr.responseJSON.iTotalDisplayRecords);
-              }
-            },
-            'columns': [{
-                data: "ID",
-                "render": function(data, type, row) {
-                  var edit_show_hide = row.Processed_To_University == 1 ? '' : 'display:none';
-                  var edit = showInhouse || row.Step < 4 ? '<a  style="' + edit_show_hide + '" href="/admissions/application-form?id=' + data + '"><i class="uil uil-edit mr-1 custom_icon_btn_app" title="Edit Application Form"></i></a>' : '';
-                  var deleted = showInhouse && row.Process_By_Center == 1 ? '<i class="uil uil-trash mr-1 cursor-pointer custom_icon_btn_app" title="Delete Application Form" style="' + edit_show_hide + '" onclick="destroy(&#39;application-form&#39;, &#39;' + data + '&#39;)"></i>' : '';
-                  var print = row.Step == 4 ? '<i class="uil uil-print mr-1 cursor-pointer custom_icon_btn_app" title="Print Application Form" onclick="printForm(&#39;' + data + '&#39;)"></i>' : '';
-                  var proccessedByCenter = row.Process_By_Center == 1 ? "Not Proccessed" : row.Process_By_Center
-                  var documentVerified = row.Document_Verified == 1 ? "Not Verified" : row.Document_Verified
-                  var proccessedToUniversity = row.Processed_To_University == 1 ? "Not Proccessed" : row.Processed_To_University
-                  var paymentVerified = row.Payment_Received == 1 ? "Not Verified" : row.Payment_Received
-                  var info = row.Step == 4 ? '<i class="uil uil-info-circle cursor-pointer custom_icon_btn_app" data-html="true" data-toggle="tooltip" data-placement="top" title="Proccessed By Center: <strong>' + proccessedByCenter + '</strong>&#013;&#010;Document Verified: <strong>' + documentVerified + '</strong>&#013;&#010;Payment Verified: <strong>' + paymentVerified + '</strong>&#013;&#010;Proccessed to University: <strong>' + proccessedToUniversity + '</strong>"></i>' : '';
-                  return print + edit + deleted + info;
+                } else {
+                  return statusBadge;
                 }
               },
-              {
-                data: "Photo",
-                "render": function(data, type, row) {
-                  return '<span class="thumbnail-wrapper d48 circular inline">\
+              visible: hasStudentLogin
+            },
+            {
+              data: "DOB"
+            },
+            {
+              data: "Center_Code",
+              visible: role == 'Sub-Center' ? false : true
+            },
+            {
+              data: "Center_Name",
+              visible: role == 'Sub-Center' ? false : true
+            },
+            {
+              data: "RM",
+              visible: role == 'Center' || role == 'Sub-Center' ? false : true
+            }
+          ],
+          "sDom": "<'row mt-3 w-100 p-0 m-0'<'col-sm-6 pr-0 pl-0 custon_text_start'l><'col-sm-6 pr-0 pl-0'f>><t><'row'<p i>>",
+          "destroy": true,
+          "scrollCollapse": true,
+          "oLanguage": {
+            "sInfo": "Showing <b>_START_ to _END_</b> of _TOTAL_ entries"
+          },
+          drawCallback: function(settings, json) {
+            $('[data-toggle="tooltip"]').tooltip();
+          },
+          "aaSorting": []
+        };
+
+        var processedToUniversitySettings = {
+          'processing': true,
+          'serverSide': true,
+          'serverMethod': 'post',
+          'ajax': {
+            'url': '/app/applications/processed-to-university-server',
+            'type': 'POST',
+            complete: function(xhr, responseText) {
+              $('#processed_to_university_count').html(xhr.responseJSON.iTotalDisplayRecords);
+            }
+          },
+          'columns': [{
+              data: "ID",
+              "render": function(data, type, row) {
+                var edit_show_hide = row.Processed_To_University == 1 ? '' : 'display:none';
+                var edit = showInhouse || row.Step < 4 ? '<a  style="' + edit_show_hide + '" href="/admissions/application-form?id=' + data + '"><div class="app_custom_edit_btn cursor-pointer "><i class="uil uil-edit mr-1 " title="Edit Application Form"></i><span>Edit</span></div></a>' : '';
+                var deleted = showInhouse && row.Process_By_Center == 1 ? '<div class="app_custom_edit_btn cursor-pointer style="' + edit_show_hide + '" onclick="destroy(&#39;application-form&#39;, &#39;' + data + '&#39;)" ><i class="uil uil-trash mr-1 cursor-pointer " title="Delete Application Form" ></i><span>Delete</span></div>' : '';
+                // var print = row.Step == 4 ? '<div class="app_custom_edit_btn cursor-pointer" onclick="printForm(&#39;' + data + '&#39;)"><i class="uil uil-print mr-1 cursor-pointer " title="Print Application Form"></i><span>Print</span></div>' : '';
+                var print = '';
+                var proccessedByCenter = row.Process_By_Center == 1 ? "Not Proccessed" : row.Process_By_Center
+                var documentVerified = row.Document_Verified == 1 ? "Not Verified" : row.Document_Verified
+                var proccessedToUniversity = row.Processed_To_University == 1 ? "Not Proccessed" : row.Processed_To_University
+                var paymentVerified = row.Payment_Received == 1 ? "Not Verified" : row.Payment_Received
+                var info = row.Step == 4 ? '<div class="app_custom_edit_btn cursor-pointer"data-html="true" data-toggle="tooltip" data-placement="top" title="Proccessed By Center: <strong>' + proccessedByCenter + '</strong>&#013;&#010;Document Verified: <strong>' + documentVerified + '</strong>&#013;&#010;Payment Verified: <strong>' + paymentVerified + '</strong>&#013;&#010;Proccessed to University: <strong>' + proccessedToUniversity + '</strong>" ><i class="uil uil-info-circle cursor-pointer " ></i><span class="custom_info_txt">Info</span></div>' : '';
+                var dropdownItems = '';
+                if (print) {
+                  dropdownItems += '<div class="dropdown-item custom_drpdown_btn">' + print + '</div>';
+                }
+                if (edit) {
+                  var edit_show_hide = row.Processed_To_University == 1 ? '' : 'display:none';
+                  dropdownItems += '<div class="dropdown-item custom_drpdown_btn" style="' + edit_show_hide + '">' + edit + '</div>';
+                }
+                if (deleted) {
+                  dropdownItems += '<div class="dropdown-item custom_drpdown_btn">' + deleted + '</div>';
+                }
+                if (info) {
+                  dropdownItems += '<div class="dropdown-item custom_drpdown_btn">' + info + '</div>';
+                }
+
+                // Check if dropdownItems is not empty before rendering the dropdown
+                var dropdown = '';
+                if (dropdownItems) {
+                  dropdown = `<div class="mt-2">
+                        <div class="dropdown ">
+                            <button class="btn btn-link dropdown-toggle" type="button" id="dropdownMenuButton_${data}" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                <i class="uil uil-ellipsis-v"></i>
+                            </button>
+                            <div class="dropdown-menu custom_drop_div" aria-labelledby="dropdownMenuButton_${data}">
+                                ${dropdownItems}
+                            </div>
+                        </div>
+                    </div>`;
+                }
+
+                return dropdown;
+              }
+            },
+            {
+              data: "Photo",
+              "render": function(data, type, row) {
+                return '<span class="thumbnail-wrapper d48 circular inline">\
                 <img src="' + data + '" alt="" data-src="' + data + '"\
                   data-src-retina="' + data + '" width="32" height="32">\
               </span>';
-                }
-              },
-              {
-                data: "Unique_ID",
-                "render": function(data, type, row) {
-                  return '<span class="cursor-pointer" title="Click to export documents" onclick="exportDocuments(&#39;' + row.ID + '&#39;)"><strong>' + data + '</strong></span>';
-                }
-              },
-              {
-                data: "Step",
-                "render": function(data, type, row) {
-                  var label_class = data < 4 ? 'label-important' : 'label-success';
-                  var status = data < 4 ? 'In Draft @ Step ' + data : 'Completed';
-                  return '<sapn class="label ' + label_class + '">' + status + '</sapn>';
-                }
-              },
-              {
-                data: "Process_By_Center",
-                "render": function(data, type, row) {
-                  if (data == 1 && row.Step == 4) {
-                    return '<span class="label label-primary">Not Processed</span>';
-                    var show = !showInhouse ? '<div class="form-check complete mt-2">\
+              }
+            },
+            {
+              data: "Unique_ID",
+              "render": function(data, type, row) {
+                return '<span class="cursor-pointer" title="Click to export documents" onclick="exportDocuments(&#39;' + row.ID + '&#39;)"><strong>' + data + '</strong></span>';
+              }
+            },
+            {
+              data: "Step",
+              "render": function(data, type, row) {
+                var label_class = data < 4 ? 'label-important' : 'label-success';
+                var status = data < 4 ? 'In Draft @ Step ' + data : 'Completed';
+                return '<sapn class="label ' + label_class + '">' + status + '</sapn>';
+              }
+            },
+            {
+              data: "Process_By_Center",
+              "render": function(data, type, row) {
+                if (data == 1 && row.Step == 4) {
+                  return '<span class="label label-primary">Not Processed</span>';
+                  var show = !showInhouse ? '<div class="form-check complete mt-2">\
                   <input type="checkbox" id="process-by-center-' + row.ID + '" onclick="processByCenter(&#39;' + row.ID + '&#39;)">\
                   <label for="process-by-center-' + row.ID + '">Mark as Processed</label>\
                 </div>' : '<span class="label label-primary">Not Processed</span>';
-                    return show;
-                  } else {
-                    var show = row.Step == 4 ? '<div class="text-center"><span class="label label-primary">Processed on ' + data + '</span></div>' : '';
-                    return show;
-                  }
-                },
-                visible: role == 'Sub-Center' ? false : true
-              },
-              {
-                data: "Document_Verified",
-                "render": function(data, type, row) {
-                  if (row.Pendency_Status == 2) {
-                    if (!showInhouse) {
-                      return '<div class="text-center text-danger"><span class="cursor-pointer"><strong>In Review</strong></span></div>'
-                    } else {
-                      return is_operations || is_university_head ? '<div class="text-center text-danger"><span class="cursor-pointer" onclick="verifyDocument(&#39;' + row.ID + '&#39;)"><strong>Re-Review</strong></span></div>' : '<div class="text-center text-danger"><span><strong>Re-Review</strong></span></div>'
-                    }
-                  } else if (row.Pendency != 0) {
-                    if (!showInhouse) {
-                      return '<div class="text-center text-danger"><span class="cursor-pointer" onclick="uploadPendency(&#39;' + row.ID + '&#39;)"><strong>Pendency</strong></span></div>'
-                    } else {
-                      return is_operations || is_university_head ? '<div class="text-center text-danger"><span class="cursor-pointer" onclick="reportPendency(&#39;' + row.ID + '&#39;)"><strong>Pendency</strong></span></div>' : '<div class="text-center text-danger"><span><strong>Pendency</strong></span></div>'
-                    }
-                  } else {
-                    if (data == 1) {
-                      var show = (is_operations || is_university_head) && row.Process_By_Center != 1 ? '<div class="text-center"><span class="cursor-pointer" onclick="verifyDocument(&#39;' + row.ID + '&#39;)"><strong>Review</strong></span></div>' : row.Step == 4 && row.Process_By_Center != 1 ? '<div class="text-center text-danger"><strong>Pending</strong></div>' : '';
-                      return show;
-                    } else {
-                      var show = row.Step == 4 && row.Process_By_Center != 1 ? '<div class="text-center"><span class="label label-success">Verified at ' + data + '</span></div>' : '';
-                      return show;
-                    }
-                  }
+                  return show;
+                } else {
+                  var show = row.Step == 4 ? '<div class="text-center"><span class="label label-primary">Processed on ' + data + '</span></div>' : '';
+                  return show;
                 }
               },
-              {
-                data: "Payment_Received",
-                "render": function(data, type, row) {
-                  if (data == 1 && row.Step == 4 && row.Process_By_Center != 1) {
-                    var show = is_accountant ? '<div class="text-center"><span class="cursor-pointer" onclick="verifyPayment(&#39;' + row.ID + '&#39;)"><strong>Review</strong></span></div>' : '<center><span class="label label-primary">Pending</span></center>';
-                    return show;
-                  } else if (row.Process_By_Center != 1) {
-                    var show = row.Step == 4 ? '<div class="text-center"><span class="label label-primary">Verified on ' + data + '</span></div>' : '';
+              visible: role == 'Sub-Center' ? false : true
+            },
+            {
+              data: "Document_Verified",
+              "render": function(data, type, row) {
+                if (row.Pendency_Status == 2) {
+                  if (!showInhouse) {
+                    return '<div class="text-center text-danger"><span class="cursor-pointer"><strong>In Review</strong></span></div>'
+                  } else {
+                    return is_operations || is_university_head ? '<div class="text-center text-danger"><span class="cursor-pointer" onclick="verifyDocument(&#39;' + row.ID + '&#39;)"><strong>Re-Review</strong></span></div>' : '<div class="text-center text-danger"><span><strong>Re-Review</strong></span></div>'
+                  }
+                } else if (row.Pendency != 0) {
+                  if (!showInhouse) {
+                    return '<div class="text-center text-danger"><span class="cursor-pointer" onclick="uploadPendency(&#39;' + row.ID + '&#39;)"><strong>Pendency</strong></span></div>'
+                  } else {
+                    return is_operations || is_university_head ? '<div class="text-center text-danger"><span class="cursor-pointer" onclick="reportPendency(&#39;' + row.ID + '&#39;)"><strong>Pendency</strong></span></div>' : '<div class="text-center text-danger"><span><strong>Pendency</strong></span></div>'
+                  }
+                } else {
+                  if (data == 1) {
+                    var show = (is_operations || is_university_head) && row.Process_By_Center != 1 ? '<div class="text-center"><span class="cursor-pointer" onclick="verifyDocument(&#39;' + row.ID + '&#39;)"><strong>Review</strong></span></div>' : row.Step == 4 && row.Process_By_Center != 1 ? '<div class="text-center text-danger"><strong>Pending</strong></div>' : '';
                     return show;
                   } else {
-                    return '';
+                    var show = row.Step == 4 && row.Process_By_Center != 1 ? '<div class="text-center"><span class="label label-success">Verified at ' + data + '</span></div>' : '';
+                    return show;
                   }
-                },
-                visible: false
+                }
+              }
+            },
+            {
+              data: "Payment_Received",
+              "render": function(data, type, row) {
+                if (data == 1 && row.Step == 4 && row.Process_By_Center != 1) {
+                  var show = is_accountant ? '<div class="text-center"><span class="cursor-pointer" onclick="verifyPayment(&#39;' + row.ID + '&#39;)"><strong>Review</strong></span></div>' : '<center><span class="label label-primary">Pending</span></center>';
+                  return show;
+                } else if (row.Process_By_Center != 1) {
+                  var show = row.Step == 4 ? '<div class="text-center"><span class="label label-primary">Verified on ' + data + '</span></div>' : '';
+                  return show;
+                } else {
+                  return '';
+                }
               },
-              {
-                data: "Processed_To_University",
-                "render": function(data, type, row) {
-                  if (data == 1) {
-                    var show = showInhouse && row.Document_Verified != 1 && row.Payment_Received != 1 ? '<div class="form-check complete mt-2">\
+              visible: false
+            },
+            {
+              data: "Processed_To_University",
+              "render": function(data, type, row) {
+                if (data == 1) {
+                  var show = showInhouse && row.Document_Verified != 1 && row.Payment_Received != 1 ? '<div class="form-check complete mt-2">\
                   <input type="checkbox" id="processed-to-university-' + row.ID + '" onclick="checkABCid(&#39;' + row.ID + '&#39;)">\
                   <label for="processed-to-university-' + row.ID + '">Mark as Processed</label>\
                 </div>' : "";
-                    return show;
-                  } else {
-                    var show = row.Step == 4 ? '<div class="text-center"><span class="label label-success">Processed on ' + data + '</span></div>' : '';
-                    return show;
-                  }
+                  return show;
+                } else {
+                  var show = row.Step == 4 ? '<div class="text-center"><span class="label label-success">Processed on ' + data + '</span></div>' : '';
+                  return show;
                 }
-              },
-              {
-                data: "Enrollment_No",
-                "render": function(data, type, row) {
-                  var edit = showInhouse && row.Processed_To_University != 1 ? '<i class="uil uil-edit ml-2 cursor-pointer custom_edit_button" title="Add Enrollment No." onclick="addEnrollment(&#39;' + row.ID + '&#39;)">' : '';
-                  return data + edit;
-                }
-              },
-              {
-                data: "ABC_ID",
-                "render": function(data, type, row) {
-                  return data;
-                }
-              },
-              {
-                data: "OA_Number",
-                "render": function(data, type, row) {
-                  var edit = showInhouse ? '<i class="uil uil-edit ml-2 cursor-pointer custom_edit_button" title="Add OA Number" onclick="addOANumber(&#39;' + row.ID + '&#39;)">' : '';
-                  return data + edit;
-                }
-              },
-              {
-                data: "Adm_Session"
-              },
-              {
-                data: "updated_date"
-              },
-              {
-                data: "Adm_Type"
-              },
-              {
-                data: "Adm_Type",
-                "render": function(data, type, row) {
-                  return '<span onclick="reportPendnency(' + row.ID + ')"><strong>Report</strong><span>';
-                },
-                visible: false,
-              },
-              {
-                data: "First_Name",
-                "render": function(data, type, row) {
-                  return '<strong>' + data + '</strong>';
-                },
-                visible: false,
-              },
-              {
-                data: "Father_Name"
-              },
-              {
-                data: "Short_Name"
-              },
-              {
-                data: "Duration"
-              },
-              {
-                data: "Status",
-                "render": function(data, type, row) {
-                  var active = data == 1 ? 'Active' : 'Inactive';
-                  if (row.Step == 4 && showInhouse) {
-                    var checked = data == 1 ? 'checked' : '';
-                    return '<div class="form-check form-check-inline switch switch-lg success">\
-                  <input onclick="changeStatus(\'Students\', &#39;' + row.ID + '&#39;);" type="checkbox" ' + checked + ' id="student-status-switch-' + row.ID + '">\
-                  <label for="student-status-switch-' + row.ID + '">' + active + '</label>\
-                </div>';
-                  } else {
-                    return active;
-                  }
-                },
-                visible: hasStudentLogin
-              },
-              {
-                data: "ID_Card",
-                "render": function(data, type, row) {
-                  var active = data == 1 ? 'Active' : 'Inactive';
-                  if (row.Step == 4 && showInhouse && row.Enrollment_No.length > 0) {
-                    var checked = data == 1 ? 'checked' : '';
-                    return '<div class="form-check form-check-inline switch switch-lg success">\
-                  <input onclick="changeStatus(\'Students\', &#39;' + row.ID + '&#39;, \'ID_Card\');" type="checkbox" ' + checked + ' id="student-id-card-switch-' + row.ID + '">\
-                  <label for="student-id-card-switch-' + row.ID + '">' + active + '</label>\
-                </div>';
-                  } else {
-                    return active;
-                  }
-                },
-                visible: hasStudentLogin
-              },
-              {
-                data: "Admit_Card",
-                "render": function(data, type, row) {
-                  var active = data == 1 ? 'Active' : 'Inactive';
-                  if (row.Step == 4 && showInhouse && row.Enrollment_No.length > 0) {
-                    var checked = data == 1 ? 'checked' : '';
-                    return '<div class="form-check form-check-inline switch switch-lg success">\
-                  <input onclick="changeStatus(\'Students\', &#39;' + row.ID + '&#39;, \'Admit_Card\');" type="checkbox" ' + checked + ' id="student-admit-card-switch-' + row.ID + '">\
-                  <label for="student-admit-card-switch-' + row.ID + '">' + active + '</label>\
-                </div>';
-                  } else {
-                    return active;
-                  }
-                },
-                visible: hasStudentLogin
-              },
-              {
-                data: "Exam",
-                "render": function(data, type, row) {
-                  var active = data == 1 ? 'Active' : 'Inactive';
-                  if (row.Step == 4 && showInhouse && row.Enrollment_No.length > 0) {
-                    var checked = data == 1 ? 'checked' : '';
-                    return '<div class="form-check form-check-inline switch switch-lg success">\
-                  <input onclick="changeStatus(\'Students\', &#39;' + row.ID + '&#39;, \'Exam\');" type="checkbox" ' + checked + ' id="student-exam-switch-' + row.ID + '">\
-                  <label for="student-exam-switch-' + row.ID + '">' + active + '</label>\
-                </div>';
-                  } else {
-                    return active;
-                  }
-                },
-                visible: hasStudentLogin
-              },
-              {
-                data: "DOB"
-              },
-              {
-                data: "Center_Code",
-                visible: role == 'Sub-Center' ? false : true
-              },
-              {
-                data: "Center_Name",
-                visible: role == 'Sub-Center' ? false : true
-              },
-              {
-                data: "RM",
-                visible: role == 'Center' || role == 'Sub-Center' ? false : true
               }
-            ],
-            "sDom": "l<t><'row'<p i>>",
-            "destroy": true,
-            "scrollCollapse": true,
-            "oLanguage": {
-              "sInfo": "Showing <b>_START_ to _END_</b> of _TOTAL_ entries"
             },
-            drawCallback: function(settings, json) {
-              $('[data-toggle="tooltip"]').tooltip();
+            {
+              data: "Enrollment_No",
+              "render": function(data, type, row) {
+                var edit = showInhouse && row.Processed_To_University != 1 ? '<i class="uil uil-edit ml-2 cursor-pointer custom_icon_btn_app" title="Add Enrollment No." onclick="addEnrollment(&#39;' + row.ID + '&#39;)">' : '';
+                return data + edit;
+              }
             },
-            "aaSorting": []
-          };
+            {
+              data: "ABC_ID",
+              "render": function(data, type, row) {
+                return data;
+              }
+            },
+            {
+              data: "OA_Number",
+              "render": function(data, type, row) {
+                var edit = showInhouse ? '<i class="uil uil-edit ml-2 cursor-pointer custom_icon_btn_app" title="Add OA Number" onclick="addOANumber(&#39;' + row.ID + '&#39;)">' : '';
+                return data + edit;
+              }
+            },
+            {
+              data: "Adm_Session"
+            },
+            {
+              data: "updated_date"
+            },
+            {
+              data: "Adm_Type"
+            },
+            {
+              data: "Adm_Type",
+              "render": function(data, type, row) {
+                return '<span onclick="reportPendnency(' + row.ID + ')"><strong>Report</strong><span>';
+              },
+              visible: false,
+            },
+            {
+              data: "First_Name",
+              "render": function(data, type, row) {
+                return '<strong>' + data + '</strong>';
+              },
+              visible: false,
+            },
+            {
+              data: "Father_Name"
+            },
+            {
+              data: "Short_Name"
+            },
+            {
+              data: "Duration"
+            },
+            {
+              data: "Status",
+              "render": function(data, type, row) {
+                var active = data == 1 ? 'Active' : 'Inactive';
+                var badgeClass = data == 1 ? 'badge-success' : 'badge-danger'; // Badge class based on status
 
-          var enrolledSettings = {
-            'processing': true,
-            'serverSide': true,
-            'serverMethod': 'post',
-            'ajax': {
-              'url': '/app/applications/enrolled-server',
-              'type': 'POST',
-              complete: function(xhr, responseText) {
-                $('#enrolled_count').html(xhr.responseJSON.iTotalDisplayRecords);
-              }
-            },
-            'columns': [{
-                data: "ID",
-                "render": function(data, type, row) {
-                  var edit_show_hide = row.Processed_To_University == 1 ? '' : 'display:none';
-                  var edit = showInhouse || row.Step < 4 ? '<a  style="' + edit_show_hide + '" href="/admissions/application-form?id=' + data + '"><i class="uil uil-edit mr-1 custom_icon_btn_app" title="Edit Application Form"></i></a>' : '';
-                  var deleted = showInhouse && row.Process_By_Center == 1 ? '<i class="uil uil-trash mr-1 cursor-pointer custom_icon_btn_app" title="Delete Application Form" style="' + edit_show_hide + '" onclick="destroy(&#39;application-form&#39;, &#39;' + data + '&#39;)"></i>' : '';
-                  var print = row.Step == 4 ? '<i class="uil uil-print mr-1 cursor-pointer custom_icon_btn_app" title="Print Application Form" onclick="printForm(&#39;' + data + '&#39;)"></i>' : '';
-                  var proccessedByCenter = row.Process_By_Center == 1 ? "Not Proccessed" : row.Process_By_Center
-                  var documentVerified = row.Document_Verified == 1 ? "Not Verified" : row.Document_Verified
-                  var proccessedToUniversity = row.Processed_To_University == 1 ? "Not Proccessed" : row.Processed_To_University
-                  var paymentVerified = row.Payment_Received == 1 ? "Not Verified" : row.Payment_Received
-                  var info = row.Step == 4 ? '<i class="uil uil-info-circle cursor-pointer custom_icon_btn_app" data-html="true" data-toggle="tooltip" data-placement="top" title="Proccessed By Center: <strong>' + proccessedByCenter + '</strong>&#013;&#010;Document Verified: <strong>' + documentVerified + '</strong>&#013;&#010;Payment Verified: <strong>' + paymentVerified + '</strong>&#013;&#010;Proccessed to University: <strong>' + proccessedToUniversity + '</strong>"></i>' : '';
-                  return print + edit + deleted + info;
+                if (row.Step == 4 && showInhouse) {
+                  var checked = data == 1 ? 'checked' : '';
+                  return '<div class="form-check form-check-inline switch switch-lg success">\
+                <input onclick="changeStatus(\'Students\', &#39;' + row.ID + '&#39;);" type="checkbox" ' + checked + ' id="student-status-switch-' + row.ID + '">\
+                <label for="student-status-switch-' + row.ID + '"> <span class="badge ' + badgeClass + '">' + active + '</span></label>\
+              </div>';
+                } else {
+                  return '<span class=" span_active badge ' + badgeClass + '">' + active + '</span>';
                 }
               },
-              {
-                data: "Photo",
-                "render": function(data, type, row) {
-                  return '<span class="thumbnail-wrapper d48 circular inline">\
+              visible: hasStudentLogin
+            },
+            {
+              data: "ID_Card",
+              "render": function(data, type, row) {
+                var active = data == 1 ? 'Active' : 'Inactive';
+                var badgeClass = data == 1 ? 'badge-success' : 'badge-danger'; // Assign badge class based on status
+
+                if (row.Step == 4 && showInhouse && row.Enrollment_No.length > 0) {
+                  var checked = data == 1 ? 'checked' : '';
+                  return '<div class="form-check form-check-inline switch switch-lg success">\
+                <input onclick="changeStatus(\'Students\', &#39;' + row.ID + '&#39;, \'ID_Card\');" type="checkbox" ' + checked + ' id="student-id-card-switch-' + row.ID + '">\
+                <label for="student-id-card-switch-' + row.ID + '"> <span class="badge ' + badgeClass + '">' + active + '</span></label>\
+              </div>';
+                } else {
+                  return '<span class=" span_active badge ' + badgeClass + '">' + active + '</span>'; // Display badge outside checkbox
+                }
+              },
+              visible: hasStudentLogin
+            },
+            {
+              data: "Admit_Card",
+              "render": function(data, type, row) {
+                var active = data == 1 ? 'Active' : 'Inactive';
+                var badgeClass = data == 1 ? 'badge-success' : 'badge-danger'; // Assign badge class based on status
+
+                if (row.Step == 4 && showInhouse && row.Enrollment_No.length > 0) {
+                  var checked = data == 1 ? 'checked' : '';
+                  return '<div class="form-check form-check-inline switch switch-lg success">\
+                <input onclick="changeStatus(\'Students\', &#39;' + row.ID + '&#39;, \'Admit_Card\');" type="checkbox" ' + checked + ' id="student-admit-card-switch-' + row.ID + '">\
+                <label for="student-admit-card-switch-' + row.ID + '"> <span class="badge ' + badgeClass + '">' + active + '</span></label>\
+              </div>';
+                } else {
+                  return '<span class="span_active badge ' + badgeClass + '">' + active + '</span>'; // Display badge outside checkbox
+                }
+              },
+              visible: hasStudentLogin
+            }, {
+              data: "Exam",
+              "render": function(data, type, row) {
+                var active = data == 1 ? 'Active' : 'Inactive';
+                var badgeClass = data == 1 ? 'badge-success' : 'badge-danger'; // Assign badge class based on status
+
+                if (row.Step == 4 && showInhouse && row.Enrollment_No.length > 0) {
+                  var checked = data == 1 ? 'checked' : '';
+                  return '<div class="form-check form-check-inline switch switch-lg success">\
+                <input onclick="changeStatus(\'Students\', &#39;' + row.ID + '&#39;, \'Exam\');" type="checkbox" ' + checked + ' id="student-exam-switch-' + row.ID + '">\
+                <label for="student-exam-switch-' + row.ID + '"><span class="badge ' + badgeClass + '">' + active + '</span></label>\
+              </div>';
+                } else {
+                  return '<span class=" span_active badge ' + badgeClass + '">' + active + '</span>'; // Display badge outside checkbox
+                }
+              },
+              visible: hasStudentLogin
+            },
+            {
+              data: "DOB"
+            },
+            {
+              data: "Center_Code",
+              visible: role == 'Sub-Center' ? false : true
+            },
+            {
+              data: "Center_Name",
+              visible: role == 'Sub-Center' ? false : true
+            },
+            {
+              data: "RM",
+              visible: role == 'Center' || role == 'Sub-Center' ? false : true
+            }
+          ],
+          "sDom": "<'row mt-3 w-100 p-0 m-0'<'col-sm-6 pr-0 pl-0 custon_text_start'l><'col-sm-6 pr-0 pl-0'f>><t><'row'<p i>>",
+          "destroy": true,
+          "scrollCollapse": true,
+          "oLanguage": {
+            "sInfo": "Showing <b>_START_ to _END_</b> of _TOTAL_ entries"
+          },
+          drawCallback: function(settings, json) {
+            $('[data-toggle="tooltip"]').tooltip();
+          },
+          "aaSorting": []
+        };
+
+        var enrolledSettings = {
+          'processing': true,
+          'serverSide': true,
+          'serverMethod': 'post',
+          'ajax': {
+            'url': '/app/applications/enrolled-server',
+            'type': 'POST',
+            complete: function(xhr, responseText) {
+              $('#enrolled_count').html(xhr.responseJSON.iTotalDisplayRecords);
+            }
+          },
+          'columns': [{
+              data: "ID",
+              "render": function(data, type, row) {
+                var edit_show_hide = row.Processed_To_University == 1 ? '' : 'display:none';
+                var edit = showInhouse || row.Step < 4 ? '<a  style="' + edit_show_hide + '" href="/admissions/application-form?id=' + data + '"><div class="app_custom_edit_btn cursor-pointer "> <i class="uil uil-edit mr-1 " title="Edit Application Form"></i><span>Edit</span></div></a>' : '';
+                var deleted = showInhouse && row.Process_By_Center == 1 ? '<div class="app_custom_edit_btn cursor-pointer " style="' + edit_show_hide + '" onclick="destroy(&#39;application-form&#39;, &#39;' + data + '&#39;)"><i class="uil uil-trash mr-1 cursor-pointer " title="Delete Application Form"></i><span>Delete</span></div>' : '';
+                // var print = row.Step == 4 ? '<div class="app_custom_edit_btn cursor-pointer" onclick="printForm(&#39;' + data + '&#39;)><i class="uil uil-print mr-1 cursor-pointer " title="Print Application Form" "></i><span>Print</span></div>' : '';
+                var print = '';
+                var proccessedByCenter = row.Process_By_Center == 1 ? "Not Proccessed" : row.Process_By_Center
+                var documentVerified = row.Document_Verified == 1 ? "Not Verified" : row.Document_Verified
+                var proccessedToUniversity = row.Processed_To_University == 1 ? "Not Proccessed" : row.Processed_To_University
+                var paymentVerified = row.Payment_Received == 1 ? "Not Verified" : row.Payment_Received
+                var info = row.Step == 4 ? '<div class="app_custom_edit_btn cursor-pointer"  data-html="true" data-toggle="tooltip" data-placement="top" title="Proccessed By Center: <strong>' + proccessedByCenter + '</strong>&#013;&#010;Document Verified: <strong>' + documentVerified + '</strong>&#013;&#010;Payment Verified: <strong>' + paymentVerified + '</strong>&#013;&#010;Proccessed to University: <strong>' + proccessedToUniversity + '</strong>"><i class="uil uil-info-circle cursor-pointer "></i><span class="custom_info_txt">Info</span></div>' : '';
+                var dropdownItems = '';
+                if (print) {
+                  dropdownItems += '<div class="dropdown-item custom_drpdown_btn">' + print + '</div>';
+                }
+                if (edit) {
+                  var edit_show_hide = row.Processed_To_University == 1 ? '' : 'display:none';
+                  dropdownItems += '<div class="dropdown-item custom_drpdown_btn" style="' + edit_show_hide + '">' + edit + '</div>';
+                }
+                if (deleted) {
+                  dropdownItems += '<div class="dropdown-item custom_drpdown_btn">' + deleted + '</div>';
+                }
+                if (info) {
+                  dropdownItems += '<div class="dropdown-item custom_drpdown_btn">' + info + '</div>';
+                }
+
+                // Check if dropdownItems is not empty before rendering the dropdown
+                var dropdown = '';
+                if (dropdownItems) {
+                  dropdown = `<div class="mt-2">
+                        <div class="dropdown ">
+                            <button class="btn btn-link dropdown-toggle" type="button" id="dropdownMenuButton_${data}" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                <i class="uil uil-ellipsis-v"></i>
+                            </button>
+                            <div class="dropdown-menu custom_drop_div" aria-labelledby="dropdownMenuButton_${data}">
+                                ${dropdownItems}
+                            </div>
+                        </div>
+                    </div>`;
+                }
+
+                return dropdown;
+              }
+            },
+            {
+              data: "Photo",
+              "render": function(data, type, row) {
+                return '<span class="thumbnail-wrapper d48 circular inline">\
                 <img src="' + data + '" alt="" data-src="' + data + '"\
                   data-src-retina="' + data + '" width="32" height="32">\
               </span>';
-                }
-              },
-              {
-                data: "Unique_ID",
-                "render": function(data, type, row) {
-                  return '<span class="cursor-pointer" title="Click to export documents" onclick="exportDocuments(&#39;' + row.ID + '&#39;)"><strong>' + data + '</strong></span>';
-                }
-              },
-              {
-                data: "Step",
-                "render": function(data, type, row) {
-                  var label_class = data < 4 ? 'label-important' : 'label-success';
-                  var status = data < 4 ? 'In Draft @ Step ' + data : 'Completed';
-                  return '<sapn class="label ' + label_class + '">' + status + '</sapn>';
-                }
-              },
-              {
-                data: "Process_By_Center",
-                "render": function(data, type, row) {
-                  if (data == 1 && row.Step == 4) {
-                    return '<span class="label label-primary">Not Processed</span>';
-                    var show = !showInhouse ? '<div class="form-check complete mt-2">\
+              }
+            },
+            {
+              data: "Unique_ID",
+              "render": function(data, type, row) {
+                return '<span class="cursor-pointer" title="Click to export documents" onclick="exportDocuments(&#39;' + row.ID + '&#39;)"><strong>' + data + '</strong></span>';
+              }
+            },
+            {
+              data: "Step",
+              "render": function(data, type, row) {
+                var label_class = data < 4 ? 'label-important' : 'label-success';
+                var status = data < 4 ? 'In Draft @ Step ' + data : 'Completed';
+                return '<sapn class="label ' + label_class + '">' + status + '</sapn>';
+              }
+            },
+            {
+              data: "Process_By_Center",
+              "render": function(data, type, row) {
+                if (data == 1 && row.Step == 4) {
+                  return '<span class="label label-primary">Not Processed</span>';
+                  var show = !showInhouse ? '<div class="form-check complete mt-2">\
                   <input type="checkbox" id="process-by-center-' + row.ID + '" onclick="processByCenter(&#39;' + row.ID + '&#39;)">\
                   <label for="process-by-center-' + row.ID + '">Mark as Processed</label>\
                 </div>' : '<span class="label label-primary">Not Processed</span>';
-                    return show;
-                  } else {
-                    var show = row.Step == 4 ? '<div class="text-center"><span class="label label-primary">Processed on ' + data + '</span></div>' : '';
-                    return show;
-                  }
-                },
-                visible: role == 'Sub-Center' ? false : true
-              },
-              {
-                data: "Document_Verified",
-                "render": function(data, type, row) {
-                  if (row.Pendency_Status == 2) {
-                    if (!showInhouse) {
-                      return '<div class="text-center text-danger"><span class="cursor-pointer"><strong>In Review</strong></span></div>'
-                    } else {
-                      return is_operations || is_university_head ? '<div class="text-center text-danger"><span class="cursor-pointer" onclick="verifyDocument(&#39;' + row.ID + '&#39;)"><strong>Re-Review</strong></span></div>' : '<div class="text-center text-danger"><span><strong>Re-Review</strong></span></div>'
-                    }
-                  } else if (row.Pendency != 0) {
-                    if (!showInhouse) {
-                      return '<div class="text-center text-danger"><span class="cursor-pointer" onclick="uploadPendency(&#39;' + row.ID + '&#39;)"><strong>Pendency</strong></span></div>'
-                    } else {
-                      return is_operations || is_university_head ? '<div class="text-center text-danger"><span class="cursor-pointer" onclick="reportPendency(&#39;' + row.ID + '&#39;)"><strong>Pendency</strong></span></div>' : '<div class="text-center text-danger"><span><strong>Pendency</strong></span></div>'
-                    }
-                  } else {
-                    if (data == 1) {
-                      var show = (is_operations || is_university_head) && row.Process_By_Center != 1 ? '<div class="text-center"><span class="cursor-pointer" onclick="verifyDocument(&#39;' + row.ID + '&#39;)"><strong>Review</strong></span></div>' : row.Step == 4 && row.Process_By_Center != 1 ? '<div class="text-center text-danger"><strong>Pending</strong></div>' : '';
-                      return show;
-                    } else {
-                      var show = row.Step == 4 && row.Process_By_Center != 1 ? '<div class="text-center"><span class="label label-success">Verified at ' + data + '</span></div>' : '';
-                      return show;
-                    }
-                  }
+                  return show;
+                } else {
+                  var show = row.Step == 4 ? '<div class="text-center"><span class="label label-primary">Processed on ' + data + '</span></div>' : '';
+                  return show;
                 }
               },
-              {
-                data: "Payment_Received",
-                "render": function(data, type, row) {
-                  if (data == 1 && row.Step == 4 && row.Process_By_Center != 1) {
-                    var show = is_accountant ? '<div class="text-center"><span class="cursor-pointer" onclick="verifyPayment(&#39;' + row.ID + '&#39;)"><strong>Review</strong></span></div>' : '<center><span class="label label-primary">Pending</span></center>';
-                    return show;
-                  } else if (row.Process_By_Center != 1) {
-                    var show = row.Step == 4 ? '<div class="text-center"><span class="label label-primary">Verified on ' + data + '</span></div>' : '';
+              visible: role == 'Sub-Center' ? false : true
+            },
+            {
+              data: "Document_Verified",
+              "render": function(data, type, row) {
+                if (row.Pendency_Status == 2) {
+                  if (!showInhouse) {
+                    return '<div class="text-center text-danger"><span class="cursor-pointer"><strong>In Review</strong></span></div>'
+                  } else {
+                    return is_operations || is_university_head ? '<div class="text-center text-danger"><span class="cursor-pointer" onclick="verifyDocument(&#39;' + row.ID + '&#39;)"><strong>Re-Review</strong></span></div>' : '<div class="text-center text-danger"><span><strong>Re-Review</strong></span></div>'
+                  }
+                } else if (row.Pendency != 0) {
+                  if (!showInhouse) {
+                    return '<div class="text-center text-danger"><span class="cursor-pointer" onclick="uploadPendency(&#39;' + row.ID + '&#39;)"><strong>Pendency</strong></span></div>'
+                  } else {
+                    return is_operations || is_university_head ? '<div class="text-center text-danger"><span class="cursor-pointer" onclick="reportPendency(&#39;' + row.ID + '&#39;)"><strong>Pendency</strong></span></div>' : '<div class="text-center text-danger"><span><strong>Pendency</strong></span></div>'
+                  }
+                } else {
+                  if (data == 1) {
+                    var show = (is_operations || is_university_head) && row.Process_By_Center != 1 ? '<div class="text-center"><span class="cursor-pointer" onclick="verifyDocument(&#39;' + row.ID + '&#39;)"><strong>Review</strong></span></div>' : row.Step == 4 && row.Process_By_Center != 1 ? '<div class="text-center text-danger"><strong>Pending</strong></div>' : '';
                     return show;
                   } else {
-                    return '';
+                    var show = row.Step == 4 && row.Process_By_Center != 1 ? '<div class="text-center"><span class="label label-success">Verified at ' + data + '</span></div>' : '';
+                    return show;
                   }
-                },
-                visible: false
+                }
+              }
+            },
+            {
+              data: "Payment_Received",
+              "render": function(data, type, row) {
+                if (data == 1 && row.Step == 4 && row.Process_By_Center != 1) {
+                  var show = is_accountant ? '<div class="text-center"><span class="cursor-pointer" onclick="verifyPayment(&#39;' + row.ID + '&#39;)"><strong>Review</strong></span></div>' : '<center><span class="label label-primary">Pending</span></center>';
+                  return show;
+                } else if (row.Process_By_Center != 1) {
+                  var show = row.Step == 4 ? '<div class="text-center"><span class="label label-primary">Verified on ' + data + '</span></div>' : '';
+                  return show;
+                } else {
+                  return '';
+                }
               },
-              {
-                data: "Processed_To_University",
-                "render": function(data, type, row) {
-                  if (data == 1) {
-                    var show = showInhouse && row.Document_Verified != 1 && row.Payment_Received != 1 ? '<div class="form-check complete mt-2">\
+              visible: false
+            },
+            {
+              data: "Processed_To_University",
+              "render": function(data, type, row) {
+                if (data == 1) {
+                  var show = showInhouse && row.Document_Verified != 1 && row.Payment_Received != 1 ? '<div class="form-check complete mt-2">\
                   <input type="checkbox" id="processed-to-university-' + row.ID + '" onclick="checkABCid(&#39;' + row.ID + '&#39;)">\
                   <label for="processed-to-university-' + row.ID + '">Mark as Processed</label>\
                 </div>' : "";
-                    return show;
-                  } else {
-                    var show = row.Step == 4 ? '<div class="text-center"><span class="label label-success">Processed on ' + data + '</span></div>' : '';
-                    return show;
-                  }
+                  return show;
+                } else {
+                  var show = row.Step == 4 ? '<div class="text-center"><span class="label label-success">Processed on ' + data + '</span></div>' : '';
+                  return show;
                 }
-              },
-              {
-                data: "Enrollment_No",
-                "render": function(data, type, row) {
-                  var edit = showInhouse && row.Processed_To_University != 1 ? '<i class="uil uil-edit ml-2 cursor-pointer" title="Add Enrollment No." onclick="addEnrollment(&#39;' + row.ID + '&#39;)">' : '';
-                  return data + edit;
-                }
-              },
-              {
-                data: "ABC_ID",
-                "render": function(data, type, row) {
-                  var edit = showInhouse ? '<i class="uil uil-edit ml-2 cursor-pointer" title="Add ABC_ID" onclick="addABCid(&#39;' + row.ID + '&#39;)">' : '';
-                  return data + edit;
-                }
-              },
-              {
-                data: "OA_Number",
-                "render": function(data, type, row) {
-                  var edit = showInhouse ? '<i class="uil uil-edit ml-2 cursor-pointer" title="Add OA Number" onclick="addOANumber(&#39;' + row.ID + '&#39;)">' : '';
-                  return data + edit;
-                }
-              },
-              {
-                data: "Adm_Session"
-              },
-              {
-                data: "updated_date"
-              },
-              {
-                data: "Adm_Type"
-              },
-              {
-                data: "Adm_Type",
-                "render": function(data, type, row) {
-                  return '<span onclick="reportPendnency(' + row.ID + ')"><strong>Report</strong><span>';
-                },
-                visible: false,
-              },
-              {
-                data: "First_Name",
-                "render": function(data, type, row) {
-                  return '<strong>' + data + '</strong>';
-                },
-                visible: false,
-              },
-              {
-                data: "Father_Name"
-              },
-              {
-                data: "Short_Name"
-              },
-              {
-                data: "Duration"
-              },
-              {
-                data: "Status",
-                "render": function(data, type, row) {
-                  var active = data == 1 ? 'Active' : 'Inactive';
-                  if (row.Step == 4 && showInhouse) {
-                    var checked = data == 1 ? 'checked' : '';
-                    return '<div class="form-check form-check-inline switch switch-lg success">\
-                  <input onclick="changeStatus(\'Students\', &#39;' + row.ID + '&#39;);" type="checkbox" ' + checked + ' id="student-status-switch-' + row.ID + '">\
-                  <label for="student-status-switch-' + row.ID + '">' + active + '</label>\
-                </div>';
-                  } else {
-                    return active;
-                  }
-                },
-                visible: hasStudentLogin
-              },
-              {
-                data: "ID_Card",
-                "render": function(data, type, row) {
-                  var active = data == 1 ? 'Active' : 'Inactive';
-                  if (row.Step == 4 && showInhouse && row.Enrollment_No.length > 0) {
-                    var checked = data == 1 ? 'checked' : '';
-                    return '<div class="form-check form-check-inline switch switch-lg success">\
-                  <input onclick="changeStatus(\'Students\', &#39;' + row.ID + '&#39;, \'ID_Card\');" type="checkbox" ' + checked + ' id="student-id-card-switch-' + row.ID + '">\
-                  <label for="student-id-card-switch-' + row.ID + '">' + active + '</label>\
-                </div>';
-                  } else {
-                    return active;
-                  }
-                },
-                visible: hasStudentLogin
-              },
-              {
-                data: "Admit_Card",
-                "render": function(data, type, row) {
-                  var active = data == 1 ? 'Active' : 'Inactive';
-                  if (row.Step == 4 && showInhouse && row.Enrollment_No.length > 0) {
-                    var checked = data == 1 ? 'checked' : '';
-                    return '<div class="form-check form-check-inline switch switch-lg success">\
-                  <input onclick="changeStatus(\'Students\', &#39;' + row.ID + '&#39;, \'Admit_Card\');" type="checkbox" ' + checked + ' id="student-admit-card-switch-' + row.ID + '">\
-                  <label for="student-admit-card-switch-' + row.ID + '">' + active + '</label>\
-                </div>';
-                  } else {
-                    return active;
-                  }
-                },
-                visible: hasStudentLogin
-              },
-              {
-                data: "Exam",
-                "render": function(data, type, row) {
-                  var active = data == 1 ? 'Active' : 'Inactive';
-                  if (row.Step == 4 && showInhouse && row.Enrollment_No.length > 0) {
-                    var checked = data == 1 ? 'checked' : '';
-                    return '<div class="form-check form-check-inline switch switch-lg success">\
-                  <input onclick="changeStatus(\'Students\', &#39;' + row.ID + '&#39;, \'Exam\');" type="checkbox" ' + checked + ' id="student-exam-switch-' + row.ID + '">\
-                  <label for="student-exam-switch-' + row.ID + '">' + active + '</label>\
-                </div>';
-                  } else {
-                    return active;
-                  }
-                },
-                visible: hasStudentLogin
-              },
-              {
-                data: "DOB"
-              },
-              {
-                data: "Center_Code",
-                visible: role == 'Sub-Center' ? false : true
-              },
-              {
-                data: "Center_Name",
-                visible: role == 'Sub-Center' ? false : true
-              },
-              {
-                data: "RM",
-                visible: role == 'Center' || role == 'Sub-Center' ? false : true
               }
-            ],
-            "sDom": "l<t><'row'<p i>>",
-            "destroy": true,
-            "scrollCollapse": true,
-            "oLanguage": {
-              "sInfo": "Showing <b>_START_ to _END_</b> of _TOTAL_ entries"
             },
-            drawCallback: function(settings, json) {
-              $('[data-toggle="tooltip"]').tooltip();
+            {
+              data: "Enrollment_No",
+              "render": function(data, type, row) {
+                var edit = showInhouse && row.Processed_To_University != 1 ? '<i class="uil uil-edit ml-2 cursor-pointer custom_icon_btn_app" title="Add Enrollment No." onclick="addEnrollment(&#39;' + row.ID + '&#39;)">' : '';
+                return data + edit;
+              }
             },
-            "aaSorting": []
-          };
+            {
+              data: "ABC_ID",
+              "render": function(data, type, row) {
+                var edit = showInhouse ? '<i class="uil uil-edit ml-2 cursor-pointer custom_icon_btn_app" title="Add ABC_ID" onclick="addABCid(&#39;' + row.ID + '&#39;)">' : '';
+                return data + edit;
+              }
+            },
+            {
+              data: "OA_Number",
+              "render": function(data, type, row) {
+                var edit = showInhouse ? '<i class="uil uil-edit ml-2 cursor-pointer custom_icon_btn_app" title="Add OA Number" onclick="addOANumber(&#39;' + row.ID + '&#39;)">' : '';
+                return data + edit;
+              }
+            },
+            {
+              data: "Adm_Session"
+            },
+            {
+              data: "updated_date"
+            },
+            {
+              data: "Adm_Type"
+            },
+            {
+              data: "Adm_Type",
+              "render": function(data, type, row) {
+                return '<span onclick="reportPendnency(' + row.ID + ')"><strong>Report</strong><span>';
+              },
+              visible: false,
+            },
+            {
+              data: "First_Name",
+              "render": function(data, type, row) {
+                return '<strong>' + data + '</strong>';
+              },
+              visible: false,
+            },
+            {
+              data: "Father_Name"
+            },
+            {
+              data: "Short_Name"
+            },
+            {
+              data: "Duration"
+            },
+            {
+              data: "Status",
+              "render": function(data, type, row) {
+                var active = data == 1 ? 'Active' : 'Inactive';
+                var badgeClass = data == 1 ? 'badge-success' : 'badge-danger'; // Set badge class based on status
 
-          applicationTable.dataTable(applicationSettings);
-          notProcessedTable.dataTable(notProcessedSettings);
-          readyForVerificationTable.dataTable(readyForVerificationSettings);
-          verifiedTable.dataTable(verifiedSettings);
-          processedToUniversityTable.dataTable(processedToUniversitySettings);
-          enrolledTable.dataTable(enrolledSettings);
+                if (row.Step == 4 && showInhouse) {
+                  var checked = data == 1 ? 'checked' : '';
+                  return '<div class="form-check form-check-inline switch switch-lg success">\
+                <input onclick="changeStatus(\'Students\', &#39;' + row.ID + '&#39;);" type="checkbox" ' + checked + ' id="student-status-switch-' + row.ID + '">\
+                <label for="student-status-switch-' + row.ID + '">\
+                  <span class="badge ' + badgeClass + '">' + active + '</span>\
+                </label>\
+              </div>';
+                } else {
+                  return '<span class=" span_active badge ' + badgeClass + '">' + active + '</span>'; // Display badge without checkbox
+                }
+              },
+              visible: hasStudentLogin
+            },
+            {
+              data: "ID_Card",
+              "render": function(data, type, row) {
+                var active = data == 1 ? 'Active' : 'Inactive';
+                var badgeClass = data == 1 ? 'badge-success' : 'badge-danger'; // Badge class based on status
 
-          // search box for table
-          $('#application-search-table').keyup(function() {
-            applicationTable.fnFilter($(this).val());
-          });
+                if (row.Step == 4 && showInhouse && row.Enrollment_No.length > 0) {
+                  var checked = data == 1 ? 'checked' : '';
+                  return '<div class="form-check form-check-inline switch switch-lg success">\
+                <input onclick="changeStatus(\'Students\', &#39;' + row.ID + '&#39;, \'ID_Card\');" type="checkbox" ' + checked + ' id="student-id-card-switch-' + row.ID + '">\
+                <label for="student-id-card-switch-' + row.ID + '">\
+                  <span class="badge ' + badgeClass + '">' + active + '</span>\
+                </label>\
+              </div>';
+                } else {
+                  return '<span class="span_active badge ' + badgeClass + '">' + active + '</span>'; // Badge without checkbox
+                }
+              },
+              visible: hasStudentLogin
+            },
+            {
+              data: "Admit_Card",
+              "render": function(data, type, row) {
+                var active = data == 1 ? 'Active' : 'Inactive';
+                var badgeClass = data == 1 ? 'badge-success' : 'badge-danger'; // Dynamic badge class
 
-          $('#not-processed-search-table').keyup(function() {
-            notProcessedTable.fnFilter($(this).val());
-          });
+                if (row.Step == 4 && showInhouse && row.Enrollment_No.length > 0) {
+                  var checked = data == 1 ? 'checked' : '';
+                  return '<div class="form-check form-check-inline switch switch-lg success">\
+                <input onclick="changeStatus(\'Students\', &#39;' + row.ID + '&#39;, \'Admit_Card\');" type="checkbox" ' + checked + ' id="student-admit-card-switch-' + row.ID + '">\
+                <label for="student-admit-card-switch-' + row.ID + '">\
+                  <span class="badge ' + badgeClass + '">' + active + '</span>\
+                </label>\
+              </div>';
+                } else {
+                  return '<span class="span_active badge ' + badgeClass + '">' + active + '</span>'; // Badge without toggle
+                }
+              },
+              visible: hasStudentLogin
+            },
+            {
+              data: "Exam",
+              "render": function(data, type, row) {
+                var active = data == 1 ? 'Active' : 'Inactive';
+                var badgeClass = data == 1 ? 'badge-success' : 'badge-danger'; // Dynamic badge class
 
-          $('#ready-for-verification-search-table').keyup(function() {
-            readyForVerificationTable.fnFilter($(this).val());
-          });
+                if (row.Step == 4 && showInhouse && row.Enrollment_No.length > 0) {
+                  var checked = data == 1 ? 'checked' : '';
+                  return '<div class="form-check form-check-inline switch switch-lg success">\
+                <input onclick="changeStatus(\'Students\', &#39;' + row.ID + '&#39;, \'Exam\');" type="checkbox" ' + checked + ' id="student-exam-switch-' + row.ID + '">\
+                <label for="student-exam-switch-' + row.ID + '">\
+                  <span class="badge ' + badgeClass + '">' + active + '</span>\
+                </label>\
+              </div>';
+                } else {
+                  return '<span class="span_active badge ' + badgeClass + '">' + active + '</span>'; // Badge without toggle
+                }
+              },
+              visible: hasStudentLogin
+            },
+            {
+              data: "DOB"
+            },
+            {
+              data: "Center_Code",
+              visible: role == 'Sub-Center' ? false : true
+            },
+            {
+              data: "Center_Name",
+              visible: role == 'Sub-Center' ? false : true
+            },
+            {
+              data: "RM",
+              visible: role == 'Center' || role == 'Sub-Center' ? false : true
+            }
+          ],
+          "sDom": "<'row mt-3 w-100 p-0 m-0'<'col-sm-6 pr-0 pl-0 custon_text_start'l><'col-sm-6 pr-0 pl-0'f>><t><'row'<p i>>",
+          "destroy": true,
+          "scrollCollapse": true,
+          "oLanguage": {
+            "sInfo": "Showing <b>_START_ to _END_</b> of _TOTAL_ entries"
+          },
+          drawCallback: function(settings, json) {
+            $('[data-toggle="tooltip"]').tooltip();
+          },
+          "aaSorting": []
+        };
 
-          $('#document-verified-search-table').keyup(function() {
-            documentVerifiedTable.fnFilter($(this).val());
-          });
+        applicationTable.dataTable(applicationSettings);
+        notProcessedTable.dataTable(notProcessedSettings);
+        readyForVerificationTable.dataTable(readyForVerificationSettings);
+        verifiedTable.dataTable(verifiedSettings);
+        processedToUniversityTable.dataTable(processedToUniversitySettings);
+        enrolledTable.dataTable(enrolledSettings);
 
-          $('#processed-to-university-search-table').keyup(function() {
-            processedToUniversityTable.fnFilter($(this).val());
-          });
+        // search box for table
+        $('#application-search-table').keyup(function() {
+          applicationTable.fnFilter($(this).val());
+        });
 
-          $('#enrolled-search-table').keyup(function() {
-            enrolledTable.fnFilter($(this).val());
-          });
+        $('#not-processed-search-table').keyup(function() {
+          notProcessedTable.fnFilter($(this).val());
+        });
+
+        $('#ready-for-verification-search-table').keyup(function() {
+          readyForVerificationTable.fnFilter($(this).val());
+        });
+
+        $('#document-verified-search-table').keyup(function() {
+          documentVerifiedTable.fnFilter($(this).val());
+        });
+
+        $('#processed-to-university-search-table').keyup(function() {
+          processedToUniversityTable.fnFilter($(this).val());
+        });
+
+        $('#enrolled-search-table').keyup(function() {
+          enrolledTable.fnFilter($(this).val());
+        });
 
 
-        })
-      <?php } ?>
+      })
     </script>
 
     <script type="text/javascript">
@@ -4079,8 +2701,8 @@ unset($_SESSION['filterByExamStatus']); //kp
 
     <script type="text/javascript">
       function printForm(id) {
-        window.open('/forms/47/index.php?student_id=' + id, '_blank');
-        // window.location.href = '/forms/47/index.php?student_id=' + id;
+        // window.open('/forms/47/index.php?student_id=' + id, '_blank');
+
       }
     </script>
 

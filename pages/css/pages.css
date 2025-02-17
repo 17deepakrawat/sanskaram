@@ -21258,7 +21258,7 @@ input:checked+.toggle-slider::after {
   align-items: center;
 }
 .custom_search_section{
-  border-radius:8px !important;
+  border-radius:10px !important;
   padding-left: 16px !important;
 }
 div.dataTables_wrapper div.dataTables_info {
@@ -21473,4 +21473,42 @@ font-size: 17px;
   display: flex;
   height: 20px;
 }
+.custom_info_txt{
+  margin-left: 4px;
+}
+/* Hover effect for all dropdown items */
+.dropdown-item.custom_drpdown_btn:hover {
+  background-color: #4b4b4b !important; /* Changes background color on hover */
+  color: white !important; /* Changes text color on hover */
+}
 
+/* Make sure the icon color changes to white on hover */
+.dropdown-item.custom_drpdown_btn:hover i, .dropdown-item.custom_drpdown_btn:hover span {
+  color: white !important; /* Changes icon color to white */
+}
+
+
+.custom_drop_div{
+  padding: 5px !important;
+}
+.span_active{
+  margin-bottom: 11px;
+}
+.custon_text_start{
+  display: flex !important;
+  justify-content: start !important;
+}
+.custom_input_st_en{
+  border-top-right-radius: 0px !important;
+  border-bottom-right-radius: 0px !important
+}
+.custom_input_st_en1{
+  border-top-left-radius: 0px !important;
+  border-bottom-left-radius: 0px !important
+}
+.re_reg_radius {
+  border-radius: 10px !important;
+  border-bottom: none !important;
+  background: #a8b5d0;
+  box-shadow: 0 1px 9px 0 #aeb7cb, 0 0 4px 0 #a8b5d0 !important;
+}
