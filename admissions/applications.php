@@ -28,6 +28,14 @@
     border-radius: 3px;
     color: #ffffff !important;
   }
+
+  .dropdown-toggle::after {
+    content: none !important;
+  }
+  .dropdown-menu > li > a, .dropdown-menu > .dropdown-item > a {
+    line-height: normal !important;
+    padding: 0px !important;
+  }
 </style>
 <link href="/assets/plugins/bootstrap-datepicker/css/datepicker3.css" rel="stylesheet" type="text/css" media="screen">
 <link href="/assets/plugins/bootstrap-daterangepicker/daterangepicker-bs3.css" rel="stylesheet" type="text/css"
@@ -812,7 +820,7 @@ unset($_SESSION['filterByExamStatus']); //kp
               {
                 data: "Enrollment_No",
                 "render": function(data, type, row) {
-                  var edit = showInhouse && row.Processed_To_University != 1 ? '<i class="uil uil-edit ml-2 cursor-pointer" title="Add Enrollment No." onclick="addEnrollment(&#39;' + row.ID + '&#39;)">' : '';
+                  var edit = showInhouse && row.Processed_To_University != 1 ? '<i class="uil uil-edit ml-2 cursor-pointer custom_edit_button " title="Add Enrollment No." onclick="addEnrollment(&#39;' + row.ID + '&#39;)">' : '';
                   return data + edit;
                 }
               },
@@ -2298,17 +2306,36 @@ unset($_SESSION['filterByExamStatus']); //kp
                 data: "ID",
                 "render": function(data, type, row) {
                   var edit_show_hide = row.Processed_To_University == 1 ? '' : 'display:none';
-                  var edit = showInhouse || row.Step < 4 ? '<a  style="' + edit_show_hide + '" href="/admissions/application-form?id=' + data + '"><i class="uil uil-edit mr-1 custom_icon_btn_app" title="Edit Application Form"></i></a>' : '';
-                  var deleted = showInhouse && row.Process_By_Center == 1 ? '<i class="uil uil-trash mr-1 cursor-pointer custom_icon_btn_app" title="Delete Application Form" style="' + edit_show_hide + '" onclick="destroy(&#39;application-form&#39;, &#39;' + data + '&#39;)"></i>' : '';
-                  var print = row.Step == 4 ? '<i class="uil uil-print mr-1 cursor-pointer custom_icon_btn_app" title="Print Application Form" onclick="printForm(&#39;' + data + '&#39;)"></i>' : '';
+                  var edit = showInhouse || row.Step < 4 ? '<a class="px-0" style="' + edit_show_hide + '" href="/admissions/application-form?id=' + data + '"><div class="app_custom_edit_btn cursor-pointer "> <i class="uil uil-edit mr-1 " title="Edit Application Form"></i><span>Edit</span></div></a>' : '';
+                  var deleted = showInhouse && row.Process_By_Center == 1 ? '<div class="app_custom_edit_btn cursor-pointer " onclick="destroy(&#39;application-form&#39;, &#39;' + data + '&#39;)"><i class="uil uil-trash mr-1 " title="Delete Application Form" style="' + edit_show_hide + '" ></i><span>Delete</span></div>' : '';
+                  var print = row.Step == 4 ? '<div class="app_custom_edit_btn cursor-pointer"  onclick="printForm(&#39;' + data + '&#39;)"><i class="uil uil-print mr-1  " title="Print Application Form"></i><span>Print</span></div>' : '';
                   var proccessedByCenter = row.Process_By_Center == 1 ? "Not Proccessed" : row.Process_By_Center
                   var documentVerified = row.Document_Verified == 1 ? "Not Verified" : row.Document_Verified
                   var proccessedToUniversity = row.Processed_To_University == 1 ? "Not Proccessed" : row.Processed_To_University
                   var paymentVerified = row.Payment_Received == 1 ? "Not Verified" : row.Payment_Received
-                  var info = row.Step == 4 ? '<i class="uil uil-info-circle cursor-pointer custom_icon_btn_app" data-html="true" data-toggle="tooltip" data-placement="top" title="Proccessed By Center: <strong>' + proccessedByCenter + '</strong>&#013;&#010;Document Verified: <strong>' + documentVerified + '</strong>&#013;&#010;Payment Verified: <strong>' + paymentVerified + '</strong>&#013;&#010;Proccessed to University: <strong>' + proccessedToUniversity + '</strong>"></i>' : '';
-                  return print + edit + deleted + info;
+                  var info = row.Step == 4 ? '<div class="app_custom_edit_btn cursor-pointer"  data-html="true" data-toggle="tooltip" data-placement="top" title="Proccessed By Center: <strong>' + proccessedByCenter + '</strong>&#013;&#010;Document Verified: <strong>' + documentVerified + '</strong>&#013;&#010;Payment Verified: <strong>' + paymentVerified + '</strong>&#013;&#010;Proccessed to University: <strong>' + proccessedToUniversity + '</strong>"><i class="uil uil-info-circle cursor-pointer "></i><span>Info</span></div>' : '';
+                  var dropdown = ` <div class="mt-2">
+                                       <div class="dropdown">
+                                           <button class="btn btn-link dropdown-toggle" type="button" id="dropdownMenuButton_${data}" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                               <i class="uil uil-ellipsis-v"></i>
+                                           </button>
+                                           <div class="dropdown-menu" aria-labelledby="dropdownMenuButton_${data}">
+                                               <div class="dropdown-item " href="#">` + print + ` </div>
+                                               <div class="dropdown-item " href="#">` + edit + ` </div>
+                                               <div class="dropdown-item " href="#">` + deleted + ` </div>
+                                               <div class="dropdown-item " href="#">` + info + ` </div>
+                                           </div>
+                                       </div>
+                                   </div>`;
+
+                  // return '<div class="d-flex flex-column">' +
+                  //   '<div>' + print + edit + deleted + info + '</div>' +
+                  //   dropdown +
+                  //   '</div>';
+                   return dropdown;
                 }
               },
+
               {
                 data: "Photo",
                 "render": function(data, type, row) {
@@ -3475,7 +3502,7 @@ unset($_SESSION['filterByExamStatus']); //kp
               {
                 data: "Enrollment_No",
                 "render": function(data, type, row) {
-                  var edit = showInhouse && row.Processed_To_University != 1 ? '<i class="uil uil-edit ml-2 cursor-pointer" title="Add Enrollment No." onclick="addEnrollment(&#39;' + row.ID + '&#39;)">' : '';
+                  var edit = showInhouse && row.Processed_To_University != 1 ? '<i class="uil uil-edit ml-2 cursor-pointer custom_edit_button" title="Add Enrollment No." onclick="addEnrollment(&#39;' + row.ID + '&#39;)">' : '';
                   return data + edit;
                 }
               },
@@ -3488,7 +3515,7 @@ unset($_SESSION['filterByExamStatus']); //kp
               {
                 data: "OA_Number",
                 "render": function(data, type, row) {
-                  var edit = showInhouse ? '<i class="uil uil-edit ml-2 cursor-pointer" title="Add OA Number" onclick="addOANumber(&#39;' + row.ID + '&#39;)">' : '';
+                  var edit = showInhouse ? '<i class="uil uil-edit ml-2 cursor-pointer custom_edit_button" title="Add OA Number" onclick="addOANumber(&#39;' + row.ID + '&#39;)">' : '';
                   return data + edit;
                 }
               },
@@ -4314,5 +4341,8 @@ unset($_SESSION['filterByExamStatus']); //kp
           }
         })
       }
+      $(function() {
+        $('[data-toggle="tooltip"]').tooltip();
+      });
     </script>
     <?php include($_SERVER['DOCUMENT_ROOT'] . '/includes/footer-bottom.php'); ?>

@@ -42,8 +42,8 @@
   </div>
   <div class="d-flex align-items-center">
     <?php if (($_SESSION['Role'] == 'Administrator' && $page == 'admissions') || ($_SESSION['Role'] == 'Administrator' && $_SERVER['REQUEST_URI'] == '/users/centers')  || ($_SESSION['Role'] == 'Administrator' && $_SERVER['REQUEST_URI'] == '/lms-settings/internal-marks') || ($_SESSION['Role'] == 'Administrator' && $_SERVER['REQUEST_URI'] == '/lms-settings/results') || ($_SESSION['Role'] == 'Administrator' && $_SERVER['REQUEST_URI'] == '/lms-settings/subjects') || (isset($_SESSION['Alloted_Universities']) && count($_SESSION['Alloted_Universities']) > 1)) { ?>
-      <button class="btn btn-outline-primary btn-lg d-none d-sm-none d-md-block mr-4" onclick="changeUniversity()">Change
-        University</button>
+      <button class="btn btn-outline-primary btn-lg d-none d-sm-none d-md-block mr-4 custom_add_button" onclick="changeUniversity()">Change
+        University<i class="uil uil-exchange ml-2"></i></button>
     <?php } ?>
     <div class="m-2">
       <?php if ($_SESSION['Role'] == 'Center' || $_SESSION['Role'] == 'Sub-Center') {

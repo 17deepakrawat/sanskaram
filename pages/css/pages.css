@@ -21464,3 +21464,13 @@ font-size: 17px;
 .breadcrumb > .breadcrumb-item.active {
   color: black !important;
 }
+.app_custom_edit_btn {
+  /* background: #709ceb; */
+ 
+  border-radius: 6px;
+  color: black;
+  gap: 4px;
+  display: flex;
+  height: 20px;
+}
+
