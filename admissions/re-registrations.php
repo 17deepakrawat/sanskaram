@@ -55,8 +55,8 @@ unset($_SESSION['filterByVerticalType']);//kp
               <div class="col-md-2">
                 <div class="card cursor-pointer re_reg_radius"  onclick="setRRSession(<?= $examSession['ID'] ?>, '<?= htmlspecialchars($examSession['Name'], ENT_QUOTES) ?>')">
                   <div class="card-body" style="border: none;">
-                    <p class="hint-text overline font-weight-bold text-black">EXAM SESSION</p>
-                    <h3 class="fownt-weight-bold text-black">
+                    <p class="hint-text overline font-weight-bold text-black custom_re_reg_txt">EXAM SESSION</p>
+                    <h3 class="fownt-weight-bold text-black custom_re_reg_txt">
                       <?= $examSession['Name'] ?>
                     </h3>
                   </div>
@@ -69,7 +69,7 @@ unset($_SESSION['filterByVerticalType']);//kp
         <?php } else { ?>
           <div class="row clearfix">
             <div class="col-md-12 d-flex justify-content-between">
-              <h5>
+              <h5 class="font-weight-bold text-black">
                 <?= $_SESSION['active_rr_session_name'] ?>
               </h5>
               <div>

@@ -21512,3 +21512,9 @@ font-size: 17px;
   background: #a8b5d0;
   box-shadow: 0 1px 9px 0 #aeb7cb, 0 0 4px 0 #a8b5d0 !important;
 }
+.re_reg_radius:hover{
+  background-color: #21252dc2 !important;
+}
+.re_reg_radius:hover .custom_re_reg_txt{
+  color: white !important;
+}
