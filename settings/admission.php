@@ -34,29 +34,10 @@
             <!-- BEGIN PlACE PAGE CONTENT HERE -->
             <div class="row">
             <?php if($_SESSION['Role']=='Administrator'){ 
-              $universities = $conn->query("SELECT ID, Short_Name, Vertical, Logo FROM Universities");
+              $universities = $conn->query("SELECT ID, Short_Name, Vertical, Logo FROM Universities WHERE Status = 1");
               if($universities->num_rows>0){
                 while($university = $universities->fetch_assoc()){ ?>
-                  <div class="col-lg-3 sm-no-padding">
-                    <div class="card card-transparent">
-                      <div class="card-body no-padding">
-                        <div onclick="getComponents('<?php echo base64_encode($university['ID']) ?>')" class="card card-default">
-                          <div class="card-header">
-                            <div class="card-title bold">
-                              <?php echo $university['Short_Name']." (".$university['Vertical'].")" ?>
-                            </div>
-                          </div>
-                          <div class="card-body" style="min-height: 150px !important">
-                            <div class="row m-t-20">
-                              <div class="d-flex justify-content-center col-md-12 cursor-pointer">
-                                <img src="<?php echo $university['Logo'] ?>" style="max-width:100% !important" height="100px">
-                              </div>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
+           
               <?php }
               }else{ ?>
                 <div class="container mt-3">
@@ -80,6 +61,9 @@
 <?php include($_SERVER['DOCUMENT_ROOT'].'/includes/footer-top.php'); ?>
 
 <script type="text/javascript">
+  $(document).ready(function(){
+    getComponents(<?= UNIVERSITY_ID?>);
+  })
 
   function getComponents(id){
     $.ajax({
@@ -92,7 +76,7 @@
   }
   
   <?php if($_SESSION['Role']=='University Head'){ ?>
-    getComponents('<?php echo base64_encode($_SESSION['university_id']) ?>');
+    getComponents('<?php echo base64_encode(string: $_SESSION['university_id']) ?>');
   <?php } ?>
 
 function addComponents(url, modal, university_id){

@@ -5,7 +5,7 @@
   ?>
   <option value="">Choose</option>
   <?php
-    $types = $conn->query("SELECT ID, Name FROM Course_Types WHERE University_ID = $id ORDER BY Name");
+    $types = $conn->query("SELECT ID, Name FROM Course_Types WHERE University_ID = $id  ORDER BY Name");
     while($type = $types->fetch_assoc()){ 
   ?>
       <option value="<?php echo $type['ID'] ?>"><?php echo $type['Name'] ?></option>

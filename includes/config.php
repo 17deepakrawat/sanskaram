@@ -10,3 +10,6 @@
     $light_logo = "";
     $light_logo_retina = "";
     $login_cover = "";
+    define("UNIVERSITY_ID", 47);
+
+    

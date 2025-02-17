@@ -22,7 +22,7 @@ if (isset($_GET['id'])) {
           <select class="full-width" style="border: transparent;" name="university_id" onchange="getCourseType(this.value); getDepartments(this.value);">
             <option value="">Choose</option>
             <?php
-            $universities = $conn->query("SELECT ID, CONCAT(Universities.Short_Name, ' (', Universities.Vertical, ')') as Name FROM Universities WHERE ID IS NOT NULL " . $_SESSION['UniversityQuery']);
+            $universities = $conn->query("SELECT ID, CONCAT(Universities.Short_Name, ' (', Universities.Vertical, ')') as Name FROM Universities WHERE Status = 1 AND ID IS NOT NULL " . $_SESSION['UniversityQuery']);
             while ($university = $universities->fetch_assoc()) { ?>
               <option value="<?= $university['ID'] ?>" <?php print $university['ID'] == $course['University_ID'] ? 'selected' : '' ?>><?= $university['Name'] ?></option>
             <?php } ?>

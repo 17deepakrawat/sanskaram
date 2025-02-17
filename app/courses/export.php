@@ -11,9 +11,7 @@
   }
 
   // Admin Query
-  $query = $_SESSION['Role']!="Administrator" ? " AND Courses.University_ID = ".$_SESSION['university_id'] : "";
-
-  
+  $query = " AND Courses.University_ID = ".$_SESSION['university_id'];
   $header = array('Course Type', 'Name', 'Short Name', 'University', 'Status');
   
   ## Search 

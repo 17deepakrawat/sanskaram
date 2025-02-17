@@ -16,7 +16,7 @@ $searchValue = mysqli_real_escape_string($conn,$_POST['search']['value']); // Se
 if(isset($columnSortOrder)){
   $orderby = "ORDER BY $columnName $columnSortOrder";
 }else{
-  $orderby = "ORDER BY Sub_Courses.ID ASC";
+  $orderby = "ORDER BY Sub_Courses.ID DESC";
 }
 
 // Admin Query

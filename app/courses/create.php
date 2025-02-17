@@ -15,7 +15,7 @@
             <option value="">Choose</option>
             <?php
             require '../../includes/db-config.php';
-            $universities = $conn->query("SELECT ID, CONCAT(Universities.Short_Name, ' (', Universities.Vertical, ')') as Name FROM Universities WHERE ID IS NOT NULL " . $_SESSION['UniversityQuery']);
+            $universities = $conn->query("SELECT ID, CONCAT(Universities.Short_Name, ' (', Universities.Vertical, ')') as Name FROM Universities WHERE Status = 1 AND  ID IS NOT NULL " . $_SESSION['UniversityQuery']);
             while ($university = $universities->fetch_assoc()) { ?>
               <option value="<?= $university['ID'] ?>"><?= $university['Name'] ?></option>
             <?php } ?>

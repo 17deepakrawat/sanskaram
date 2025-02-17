@@ -18,7 +18,8 @@
                         <div class="row d-flex justify-content-start">
                             <div class="col-md-2">
                                 <div class="form-group">
-                                    <select class="full-width" style="width:40px" data-init-plugin="select2" id="sessions" onchange="changeSession(this.value)">
+                                    <select class="full-width" style="width:40px" data-init-plugin="select2"
+                                        id="sessions" onchange="changeSession(this.value)">
                                         <option value="All">All</option>
                                         <?php
                                         $role_query = "";
@@ -28,7 +29,8 @@
                                         }
                                         $sessions = $conn->query("SELECT Admission_Sessions.ID,Admission_Sessions.Name,Admission_Sessions.Current_Status FROM Admission_Sessions LEFT JOIN Students ON Admission_Sessions.ID = Students.Admission_Session_ID WHERE Admission_Sessions.University_ID = '" . $_SESSION['university_id'] . "' $role_query GROUP BY Name ORDER BY Admission_Sessions.ID ASC");
                                         while ($session = mysqli_fetch_assoc($sessions)) { ?>
-                                            <option value="<?= $session['Name'] ?>" <?php print $session['Current_Status'] == 1 ? 'selected' : '' ?>><?= $session['Name'] ?></option>
+                                            <option value="<?= $session['Name'] ?>" <?php print $session['Current_Status'] == 1 ? 'selected' : '' ?>><?= $session['Name'] ?>
+                                            </option>
                                         <?php } ?>
                                     </select>
                                 </div>
@@ -47,7 +49,8 @@
 
                                 <div class="col-xs-7" style="margin-right: 10px;">
 
-                                    <input type="text" id="e-book-search-table" class="form-control pull-right p-2 fw-bold" placeholder="Search">
+                                    <input type="text" id="e-book-search-table"
+                                        class="form-control pull-right p-2 fw-bold" placeholder="Search">
                                 </div>
                             </div>
                         </div>
@@ -78,7 +81,7 @@
         <!-- END PAGE CONTENT -->
         <?php include($_SERVER['DOCUMENT_ROOT'] . '/includes/footer-top.php'); ?>
         <script type="text/javascript">
-            $(function() {
+            $(function () {
                 var role = '<?= $_SESSION['Role'] ?>';
                 var show = role == 'Administrator' ? true : false;
                 var table = $('#students-table');
@@ -90,32 +93,32 @@
                         'url': '/app/examform/server'
                     },
                     'columns': [{
-                            data: "adm"
-                        },
-                        {
-                            data: "student_name"
-                        },
-                        {
-                            data: "enrollment_no"
-                        },
-                        {
-                            data: "uniqueid"
-                        },
-                        {
-                            data: "coursename"
-                        },
-                        {
-                            data: "sub_course_name"
-                        },
-                        {
-                            data: "Center_SubCeter"
-                        },
-                        {
-                            data: "semester"
-                        },
-                        {
-                            data: "universityname"
-                        },
+                        data: "adm"
+                    },
+                    {
+                        data: "student_name"
+                    },
+                    {
+                        data: "enrollment_no"
+                    },
+                    {
+                        data: "uniqueid"
+                    },
+                    {
+                        data: "coursename"
+                    },
+                    {
+                        data: "sub_course_name"
+                    },
+                    {
+                        data: "Center_SubCeter"
+                    },
+                    {
+                        data: "semester"
+                    },
+                    {
+                        data: "universityname"
+                    },
                     ],
                     "sDom": "<t><'row'<p i>>",
                     "destroy": true,
@@ -128,13 +131,13 @@
                     "iDisplayLength": 25,
                 };
                 table.dataTable(settings);
-                $('#e-book-search-table').keyup(function() {
+                $('#e-book-search-table').keyup(function () {
                     table.fnFilter($(this).val());
                 });
             });
         </script>
         <script type="text/javascript">
-            $(document).ready(function() {
+            $(document).ready(function () {
                 updateSession('All');
             })
 
@@ -151,7 +154,7 @@
                         session_id: session_id
                     },
                     type: 'POST',
-                    success: function(data) {
+                    success: function (data) {
                         $('.table').DataTable().ajax.reload(null, false);
                     }
                 })
@@ -159,8 +162,8 @@
         </script>
 
         <script>
-            $(document).ready(function() {
-                $('#exportCSV').on('click', function() {
+            $(document).ready(function () {
+                $('#exportCSV').on('click', function () {
                     var exportUrl = '/app/examform/excelexport?format=csv';
                     window.location.href = exportUrl;
                 });

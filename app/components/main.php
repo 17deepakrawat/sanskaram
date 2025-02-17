@@ -1,6 +1,6 @@
 <?php if(isset($_GET['id'])){
   require '../../includes/db-config.php';
-  $university_id = base64_decode($_GET['id']);
+  $university_id = $_GET['id'];
   $check = $conn->query("SELECT ID FROM Universities WHERE ID = $university_id");
   if($check->num_rows>0){
 ?>

@@ -51,9 +51,8 @@
         <div class="p-l-50 p-r-50 p-t-50 m-t-30 sm-p-l-15 sm-p-r-15 sm-p-t-40">
           <div class="new_custom_h d-flex  align-items-start">
             <div class="university_new_logo">
-              <img src="assets/img/university/glocallog_login.png" class="img-fluid" alt="">
-              <p class="universityname_t text-center">Glocal University</p>
-
+              <img src="assets/img/university/sanskaram.png" class="img-fluid" alt="">
+              <p class="universityname_t text-center">Sanskaram University</p>
             </div>
           </div>
 
