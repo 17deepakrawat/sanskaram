@@ -68,21 +68,14 @@ if ($students_sql->num_rows > 0) {
 
             // Calculate total duration
             $total_duration = 0;
-            if ($students_temps['University_ID'] == 47) {
+        
                 if (str_contains($students_temps['total_duration'], '"')) {
                     $a = str_replace('"', '', $students_temps['total_duration']);
                     $total_duration = (int)$a;
                 } else {
                     $total_duration = (int)$students_temps['total_duration'];
                 }
-            } else {
-                if (str_contains($students_temps['Duration'], '/')) {
-                    $a = explode("/", $students_temps['Duration']);
-                    $total_duration = (int)$a[0];
-                } else {
-                    $total_duration = (int)$students_temps['Duration'];
-                }
-            }
+            
 
             // Determine course category
             $courseCategory = "";
