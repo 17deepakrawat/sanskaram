@@ -81,27 +81,12 @@ unset($_SESSION['filterByVerticalType']);//kp
             </div>
           </div>
           <div class="row clearfix">
-            <div class="col-md-4">
-              <div class="form-group">
-                <div class="card card-transparent">
-                  <select class="full-width select2-hidden-accessible" data-init-plugin="select2" id="vartical_type"
-                    onchange="addFilterVerticalType(this.value,'users', 'vartical_type')" data-placeholder="Choose Vertical Type"
-                    tabindex="-1" aria-hidden="true">
-                    <option value="">Vertical Type</option>
-                    <option value="1">Edtech</option>
-                    <option value="0">IITS LLP Paramedical</option>
-                  </select>
-                </div>
-              </div>
-
-            </div>
+    
             <div class="col-md-4 m-b-10">
               <div class="form-group">
                 
                 <select class="full-width" data-init-plugin="select2" id="users"
                   onchange="addFilter(this.value, 'users','')" data-placeholder="Choose User">
-            
-
                 </select>
               </div>
             </div>
