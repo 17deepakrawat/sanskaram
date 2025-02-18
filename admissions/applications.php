@@ -2642,7 +2642,7 @@ unset($_SESSION['filterByExamStatus']); //kp
 
     <script type="text/javascript">
       function exportData() {
-        var search = $('#application-search-table').val();
+        var search = $('#applications').val();
         //console.log(search, "sandip");
         var steps_found = $('.nav-tabs').find('li a.active').attr('data-target');
         
@@ -2674,7 +2674,7 @@ unset($_SESSION['filterByExamStatus']); //kp
       }
 
       function exportSelectedDocument() {
-        var search = $('#application-search-table').val();
+        var search = $('#applications').val();
         var searchQuery = search.length > 0 ? "?search=" + search : "";
         $.ajax({
           url: '/app/applications/documents/create' + searchQuery,
