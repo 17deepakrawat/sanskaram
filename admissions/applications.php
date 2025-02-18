@@ -895,7 +895,7 @@ unset($_SESSION['filterByExamStatus']); //kp
                 }
                 return data + edit;
               },
-              visible: uni_id == '48' ? false : true
+           
 
             },
             {
@@ -2645,6 +2645,7 @@ unset($_SESSION['filterByExamStatus']); //kp
         var search = $('#application-search-table').val();
         //console.log(search, "sandip");
         var steps_found = $('.nav-tabs').find('li a.active').attr('data-target');
+        
         var steps_found = steps_found.substring(1, steps_found.length);
         var url = search.length > 0 ? "?steps_found=" + steps_found + "&search=" + search : "?steps_found=" + steps_found;
         //var url = search.length > 0 ? "?search=" + search : "";

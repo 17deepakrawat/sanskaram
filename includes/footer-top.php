@@ -31,7 +31,7 @@
 <div class=" container-fluid  container-fixed-lg footer">
   <div class="copyright sm-text-center">
     <p class="small-text no-margin pull-left sm-pull-reset">
-      2021-22 All Rights Reserved. <?= $organization_name ?>
+      2021-22 All Rights Reserved <?= $_SESSION['university_name'] ?> .
     </p>
     <div class="clearfix"></div>
   </div>

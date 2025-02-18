@@ -91,7 +91,7 @@
         }
         $lead = $lead->fetch_assoc();
       }
-      $centerIds = [2071, 2072, 2078, 2079, 2080, 2081, 2082, 2083, 2084, 2085, 2086, 2087, 2088, 2089, 2090, 2091, 2092, 2093, 2094, 2095, 2096, 2097, 2098, 2099, 2100, 2101, 2102, 2103, 2104, 2105, 2106, 2107, 2108, 2109, 2110, 2111, 2112, 2113, 2114, 2115, 2121, 2122, 2123, 2124, 2125, 2126, 2127, 2146, 2147, 2148, 2149];
+      $centerIds = [];
       $loggedInId = $_SESSION['ID'];
       $staticSemester = false;
       if (in_array($loggedInId, $centerIds)) {
@@ -108,7 +108,8 @@
             data-init-reponsive-tabs="dropdownfx">
             <li class="nav-item custom_nav_btn">
               <a class="active d-flex align-items-center " data-toggle="tab" href="#tab1" data-target="#tab1"
-                role="tab"><i class="uil uil-user-circle fs-14 tab-icon custom_nav_btn_txt"></i> <span class="custom_nav_btn_txt">Basic Details</span></a>
+                role="tab"><i class="uil uil-user-circle fs-14 tab-icon custom_nav_btn_txt"></i> <span
+                  class="custom_nav_btn_txt">Basic Details</span></a>
             </li>
             <li class="nav-item">
               <a class="d-flex align-items-center" data-toggle="tab" href="#tab2" data-target="#tab2" role="tab"><i
@@ -199,45 +200,18 @@
                           </div>
                         </div>
 
-                        <?php if ($_SESSION['university_id'] == 47) { ?>
-                          <!-- Admission Session -->
-                          <div class="col-md-4">
-                            <div class="form-group form-group-default required">
-                              <label>Sub Course</label>
-                              <select class="full-width" style="border: transparent;" data-init-plugin="select2"
-                                name="sub_course" id="sub_course" onchange="getDuration(), getEligibility();">
-                                <option value="">Select</option>
-                              </select>
-                            </div>
+
+                        <!-- Admission Session -->
+                        <div class="col-md-4">
+                          <div class="form-group form-group-default required">
+                            <label>Sub Course</label>
+                            <select class="full-width" style="border: transparent;" data-init-plugin="select2"
+                              name="sub_course" id="sub_course" onchange="getDuration(), getEligibility();">
+                              <option value="">Select</option>
+                            </select>
                           </div>
-                        <?php } else { ?>
-                          <!-- Admission Session -->
-                          <div class="col-md-4">
-                            <div class="form-group form-group-default required">
-                              <label>Sub Course</label>
-                              <select class="full-width" style="border: transparent;" data-init-plugin="select2"
-                                name="sub_course" id="sub_course" onchange="getCourseCategory()">
-                                <option value="">Select</option>
-                              </select>
-                            </div>
-                          </div>
-                          <!-- Course Category -->
-                          <div class="col-md-4">
-                            <div class="form-group form-group-default required">
-                              <label>Course Category</label>
-                              <select class="full-width" style="border: transparent;" data-init-plugin="select2"
-                                id="course_category" name="course_category" onchange="getDuration(), getEligibility();">
-                                <option value="certification" <?php print !empty($id) ? ($student['Course_Category'] == 'certification' ? 'selected' : '') : '' ?>>Certification
-                                </option>
-                                <option value="advance_diploma" <?php print !empty($id) ? ($student['Course_Category'] == 'advance_diploma' ? 'selected' : '') : '' ?>>
-                                  advance_diploma</option>
-                                <option value="pg_diploma" <?php print !empty($id) ? ($student['Course_Category'] == 'pg_diploma' ? 'selected' : '') : '' ?>>PG Diploma
-                                </option>
-                                <option value="certified" <?php print !empty($id) ? ($student['Course_Category'] == 'certified' ? 'selected' : '') : '' ?>>Certified</option>
-                              </select>
-                            </div>
-                          </div>
-                        <?php } ?>
+                        </div>
+
 
                         <!-- Admission Type -->
                         <div class="col-md-4">
@@ -614,8 +588,9 @@
                         <div class="col-md-12">
                           <div class="form-group form-group-default pg-program ">
                             <label>Marksheet Reference No.</label>
-                            <input type="text"
-                              name="high_marksheet_reference_no" id="high_marksheet_reference_no" value="<?php print !empty($high_school) ? $high_school['marksheet_reference_no'] : '' ?>" class="form-control mt-1">
+                            <input type="text" name="high_marksheet_reference_no" id="high_marksheet_reference_no"
+                              value="<?php print !empty($high_school) ? $high_school['marksheet_reference_no'] : '' ?>"
+                              class="form-control mt-1">
                           </div>
                         </div>
                         <div class="col-md-12">
@@ -631,7 +606,7 @@
                               foreach ($high_marksheet as $hm) { ?>
                                 <img src="<?= $hm ?>" class="cursor-pointer mr-2" onclick="window.open('<?= $hm ?>')"
                                   width="40" height="40" />
-                            <?php }
+                              <?php }
                             } ?>
                           </div>
                         </div>
@@ -739,8 +714,9 @@
                         <div class="col-md-12">
                           <div class="form-group form-group-default pg-program ">
                             <label>Marksheet Reference No.</label>
-                            <input type="text"
-                              name="inter_marksheet_reference_no" id="inter_marksheet_reference_no" value="<?php print !empty($intermediate) ? $intermediate['marksheet_reference_no'] : '' ?>" class="form-control mt-1">
+                            <input type="text" name="inter_marksheet_reference_no" id="inter_marksheet_reference_no"
+                              value="<?php print !empty($intermediate) ? $intermediate['marksheet_reference_no'] : '' ?>"
+                              class="form-control mt-1">
                           </div>
                         </div>
                         <div class="col-md-12">
@@ -756,7 +732,7 @@
                               foreach ($inter_marksheet as $im) { ?>
                                 <img src="<?= $im ?>" class="cursor-pointer mr-2" onclick="window.open('<?= $im ?>')"
                                   width="40" height="40" />
-                            <?php }
+                              <?php }
                             } ?>
                           </div>
                         </div>
@@ -864,8 +840,9 @@
                         <div class="col-md-12">
                           <div class="form-group form-group-default pg-program ">
                             <label>Marksheet Reference No.</label>
-                            <input type="text"
-                              name="ug_marksheet_reference_no" id="ug_marksheet_reference_no" value="<?php print !empty($ug) ? $ug['marksheet_reference_no'] : '' ?>" class="form-control mt-1">
+                            <input type="text" name="ug_marksheet_reference_no" id="ug_marksheet_reference_no"
+                              value="<?php print !empty($ug) ? $ug['marksheet_reference_no'] : '' ?>"
+                              class="form-control mt-1">
                           </div>
                         </div>
                         <div class="col-md-12">
@@ -880,7 +857,7 @@
                               foreach ($ug_marksheet as $um) { ?>
                                 <img src="<?= $um ?>" class="cursor-pointer mr-2" onclick="window.open('<?= $um ?>')"
                                   width="40" height="40" />
-                            <?php }
+                              <?php }
                             } ?>
                           </div>
                         </div>
@@ -987,8 +964,9 @@
                         <div class="col-md-12">
                           <div class="form-group form-group-default pg-program ">
                             <label>Marksheet Reference No.</label>
-                            <input type="text"
-                              name="pg_marksheet_reference_no" id="pg_marksheet_reference_no" value="<?php print !empty($pg) ? $pg['marksheet_reference_no'] : '' ?>" class="form-control mt-1">
+                            <input type="text" name="pg_marksheet_reference_no" id="pg_marksheet_reference_no"
+                              value="<?php print !empty($pg) ? $pg['marksheet_reference_no'] : '' ?>"
+                              class="form-control mt-1">
                           </div>
                         </div>
                         <div class="col-md-12">
@@ -1003,7 +981,7 @@
                               foreach ($pg_marksheet as $pm) { ?>
                                 <img src="<?= $pm ?>" class="cursor-pointer mr-2" onclick="window.open('<?= $pm ?>')"
                                   width="40" height="40" />
-                            <?php }
+                              <?php }
                             } ?>
                           </div>
                         </div>
@@ -1110,8 +1088,9 @@
                         <div class="col-md-12">
                           <div class="form-group form-group-default pg-program ">
                             <label>Marksheet Reference No.</label>
-                            <input type="text"
-                              name="other_marksheet_reference_no" id="other_marksheet_reference_no" value="<?php print !empty($other) ? $other['marksheet_reference_no'] : '' ?>" class="form-control mt-1">
+                            <input type="text" name="other_marksheet_reference_no" id="other_marksheet_reference_no"
+                              value="<?php print !empty($other) ? $other['marksheet_reference_no'] : '' ?>"
+                              class="form-control mt-1">
                           </div>
                         </div>
                         <div class="col-md-12">
@@ -1127,7 +1106,7 @@
                               foreach ($other_marksheet as $om) { ?>
                                 <img src="<?= $om ?>" class="cursor-pointer mr-2" onclick="window.open('<?= $om ?>')"
                                   width="40" height="40" />
-                            <?php }
+                              <?php }
                             } ?>
                           </div>
                         </div>
@@ -1190,7 +1169,7 @@
                             <?php if (!empty($id) && !empty($aadhaars)) {
                               foreach ($aadhaars as $aadhar) { ?>
                                 <img src="<?php print !empty($id) ? $aadhar : '' ?>" height="80" />
-                            <?php }
+                              <?php }
                             } ?>
 
 
@@ -1287,7 +1266,7 @@
                             <?php if (!empty($id) && !empty($migrations)) {
                               foreach ($migrations as $migration) { ?>
                                 <img src="<?php print !empty($id) ? $migration : '' ?>" height="80" />
-                            <?php }
+                              <?php }
                             } ?>
                           </div>
                         </div>
@@ -1317,7 +1296,7 @@
                             <?php if (!empty($id) && !empty($affidavits)) {
                               foreach ($affidavits as $affidavit) { ?>
                                 <img src="<?php print !empty($id) ? $affidavit : '' ?>" height="80" />
-                            <?php }
+                              <?php }
                             } ?>
                           </div>
                         </div>
@@ -1347,7 +1326,7 @@
                             <?php if (!empty($id) && !empty($other_certificates)) {
                               foreach ($other_certificates as $other_certificate) { ?>
                                 <img src="<?php print !empty($id) ? $other_certificate : '' ?>" height="80" />
-                            <?php }
+                              <?php }
                             } ?>
                           </div>
                         </div>
@@ -1362,7 +1341,8 @@
                 <img src="/assets/img/success.gif" alt="" class="step_image_final" style="border-radius: 10px;">
                 <h1>Thank you for providing the requested information.<h1>
                     <h3>Please use the link below to print the pre-filled application form.
-                      <button class="btn btn-success btn-lg m-b-10 border-0 custom_round_print" onclick="printForm()"><i class="uil uil-print"></i>
+                      <button class="btn btn-success btn-lg m-b-10 border-0 custom_round_print" onclick="printForm()"><i
+                          class="uil uil-print"></i>
                         &nbsp;Print </button>
                     </h3>
               </div>
@@ -1370,16 +1350,19 @@
             <div class="padding-20 sm-padding-5 sm-m-b-20 sm-m-t-20 bg-white clearfix">
               <ul class="pager wizard no-style">
                 <li class="next">
-                  <button aria-label="" class="btn btn-primary btn-cons btn-animated from-left pull-right custom_next_application"
+                  <button aria-label=""
+                    class="btn btn-primary btn-cons btn-animated from-left pull-right custom_next_application"
                     type="button">
-                    <span class="span_next_p"><span class="application_txt_nex">Next</span> <i class="uil uil-arrow-circle-right"></i></span>
+                    <span class="span_next_p"><span class="application_txt_nex">Next</span> <i
+                        class="uil uil-arrow-circle-right"></i></span>
                     <span class="hidden-block">
                       <i class="uil uil-arrow-circle-right font-size-3"></i>
                     </span>
                   </button>
                 </li>
                 <li class="next finish hidden">
-                  <button aria-label="" class="btn btn-primary btn-cons btn-animated from-left pull-right custom_next_application"
+                  <button aria-label=""
+                    class="btn btn-primary btn-cons btn-animated from-left pull-right custom_next_application"
                     type="button">
                     <span class="span_next_p"> <span>Submitted</span> <i class="uil uil-check"></i></span>
                     <span class="hidden-block">
@@ -1397,7 +1380,8 @@
                   </button>
                 </li>
                 <li class="previous" id="previous-button">
-                  <button aria-label="" class="btn btn-default btn-cons btn-animated from-left pull-right custom_prev_application"
+                  <button aria-label=""
+                    class="btn btn-default btn-cons btn-animated from-left pull-right custom_prev_application"
                     type="button">
                     <span class="">
                       <span class="application_txt_nex">Previous </span><i class="uil uil-arrow-circle-left"></i>
@@ -1456,7 +1440,7 @@
 
     <?php if (empty($id)) { ?>
       <script>
-        $(function() {
+        $(function () {
           if (localStorage.getItem('inserted_id') !== null) {
             localStorage.removeItem('inserted_id');
             Swal.fire(
@@ -1470,7 +1454,7 @@
     <?php } ?>
 
     <script>
-      $(function() {
+      $(function () {
         localStorage.removeItem('print_id');
         $("#dob").mask("99-99-9999")
         $("#aadhar").mask("9999-9999-9999")
@@ -1516,7 +1500,7 @@
       <?php // if (!empty($id)) { 
       ?>
       // $('#inter_year').val('<?php // print !empty($intermediate) ? (array_key_exists('Year', $intermediate) ? $intermediate['Year'] : '') : '' 
-                                ?>');
+      ?>');
       <?php // } 
       ?>
       //   }
@@ -1562,7 +1546,7 @@
       <?php // if (!empty($id)) { 
       ?>
       // $('#ug_year').val('<?php // print !empty($ug) ? (array_key_exists('Year', $ug) ? $ug['Year'] : '') : '' 
-                            ?>');
+      ?>');
       <?php // } 
       ?>
       //   }
@@ -1608,7 +1592,7 @@
       <?php // if (!empty($id)) { 
       ?>
       // $('#pg_year').val('<?php // print !empty($pg) ? (array_key_exists('Year', $pg) ? $pg['Year'] : '') : '' 
-                            ?>');
+      ?>');
       <?php // } 
       ?>
       //   }
@@ -1626,7 +1610,7 @@
           $.ajax({
             url: '/app/regions/cities?pincode=' + pincode,
             type: 'GET',
-            success: function(data) {
+            success: function (data) {
               $('#city').html(data);
               <?php if (!empty($id) && !empty($address)) { ?>
                 $('#city').val('<?php echo !empty($id) && !empty($address) ? (array_key_exists('present_city', $address) ? $address['present_city'] : '') : '' ?>');
@@ -1637,7 +1621,7 @@
           $.ajax({
             url: '/app/regions/districts?pincode=' + pincode,
             type: 'GET',
-            success: function(data) {
+            success: function (data) {
               $('#district').html(data);
               <?php if (!empty($id) && !empty($address)) { ?>
                 $('#district').val('<?php echo !empty($id) && !empty($address) ? (array_key_exists('present_district', $address) ? $address['present_district'] : '') : '' ?>');
@@ -1648,7 +1632,7 @@
           $.ajax({
             url: '/app/regions/state?pincode=' + pincode,
             type: 'GET',
-            success: function(data) {
+            success: function (data) {
               $('#state').val(data);
             }
           })
@@ -1666,7 +1650,7 @@
         $.ajax({
           url: '/app/application-form/center?university_id=' + university_id,
           type: 'GET',
-          success: function(data) {
+          success: function (data) {
             $('#center').html(data);
             <?php if ($id): ?>
               <?php if (isset($student['Added_For']) && isset($subcenter['Center']) && $student['Added_For'] !== $subcenter['Center']): ?>
@@ -1691,7 +1675,7 @@
         $.ajax({
           url: '/app/application-form/admission-session?university_id=' + universityId + '&userId=' + userId + '&form=<?php print !empty($id) ? 1 : "" ?>',
           type: 'GET',
-          success: function(data) {
+          success: function (data) {
             $('#admission_session').html(data);
             $('#admission_session').val(<?php print !empty($id) ? $student['Admission_Session_ID'] : '' ?>);
             getAdmissionType($('#admission_session').val());
@@ -1705,7 +1689,7 @@
         $.ajax({
           url: '/app/application-form/admission-type?university_id=' + university_id + '&session_id=' + session_id,
           type: 'GET',
-          success: function(data) {
+          success: function (data) {
             $('#admission_type').html(data);
             $('#admission_type').val(<?php print !empty($id) ? $student['Admission_Type_ID'] : '' ?>);
             getCourse();
@@ -1721,7 +1705,7 @@
         $.ajax({
           url: '/app/application-form/course?center=' + center + '&session_id=' + session_id + '&admission_type_id=' + admission_type_id + '&university_id=' + university_id + '&form=<?php print !empty($id) || !empty($lead_id) ? 1 : "" ?>',
           type: 'GET',
-          success: function(data) {
+          success: function (data) {
             $('#course').html(data);
             $('#course').val(<?php print !empty($id) ? $student['Course_ID'] : (isset($_GET['lead_id']) ? $lead['Course_ID'] : '') ?>);
             getSubCourse();
@@ -1975,7 +1959,7 @@
         $.ajax({
           url: '/app/application-form/sub-course?center=' + center + '&session_id=' + session_id + '&admission_type_id=' + admission_type_id + '&university_id=' + university_id + '&course_id=' + course_id,
           type: 'GET',
-          success: function(data) {
+          success: function (data) {
             $('#sub_course').html(data);
             <?php if (!empty($id)): ?>
               $('#sub_course').val("<?php echo $student['Sub_Course_ID']; ?>");
@@ -1994,7 +1978,7 @@
         $.ajax({
           url: '/app/application-form/mode?sub_course_id=' + sub_course_id,
           type: 'GET',
-          success: function(data) {
+          success: function (data) {
             $('#mode').html(data);
             getEligibility();
           }
@@ -2008,7 +1992,7 @@
         $.ajax({
           url: '/app/application-form/course-category?id=' + subid + '&userId=' + user_id,
           type: 'GET',
-          success: function(data) {
+          success: function (data) {
             $('#course_category').html(data);
             <?php
             if (!empty($id)) {
@@ -2022,50 +2006,28 @@
       }
 
       function getDuration() {
-        <?php if ($_SESSION['university_id'] == 47) { ?>
-          const admission_type_id = $('#admission_type').val();
-          const sub_course_id = $('#sub_course').val();
-          $.ajax({
-            url: '/app/application-form/duration?admission_type_id=' + admission_type_id + '&sub_course_id=' + sub_course_id,
-            type: 'GET',
-            success: function(data) {
-              var isStatic = "<?= $staticSemester ?>";
-              var admission_type = $('#admission_type').val();
-              var session_id = $('#admission_session').val();
-              if (isStatic && admission_type == '65' && session_id == '95') {
-                var data = '<option value="6">6</option>';
-                $('#duration').html(data);
-                $('#duration').val(<?php print !empty($id) ? $student['Duration'] : '' ?>)
-              } else {
-                $('#duration').html(data);
-                $('#duration').val(<?php print !empty($id) ? $student['Duration'] : '' ?>)
-              }
-            }
-          });
-        <?php } else { ?>
-          const user_id = $("#center").val();
-          const sub_course_ids = $('#sub_course').val();
-          const admission_type_ids = $('#admission_type').val();
-          const course_category = $('#course_category').val();
-          //console.log(course_category);return false;
-          $.ajax({
-            url: '/app/application-form/duration?admission_type_id=' + admission_type_ids + '&sub_course_id=' + sub_course_ids + '&course_category=' + course_category + '&userId=' + user_id,
-            type: 'GET',
-            success: function(data) {
-              console.log(data);
-              $('#duration').html(data);
-              <?php
-              if (!empty($id)) {
+        const user_id = $("#center").val();
+        const sub_course_ids = $('#sub_course').val();
+        const admission_type_ids = $('#admission_type').val();
+        const course_category = $('#course_category').val();
+        //console.log(course_category);return false;
+        $.ajax({
+          url: '/app/application-form/duration?admission_type_id=' + admission_type_ids + '&sub_course_id=' + sub_course_ids + '&course_category=' + course_category + '&userId=' + user_id,
+          type: 'GET',
+          success: function (data) {
+            console.log(data);
+            $('#duration').html(data);
+            <?php
+            if (!empty($id)) {
               ?>
-                $('#duration').val("<?php echo !empty($student['Duration']) ? $student['Duration'] : ''; ?>");
+              $('#duration').val("<?php echo !empty($student['Duration']) ? $student['Duration'] : ''; ?>");
 
-              <?php } ?>
-              // $('#duration').val(<?php //print !empty($id) ? $student['Duration'] : '' 
-                                    ?>)
-            }
+            <?php } ?>
+            // $('#duration').val(<?php //print !empty($id) ? $student['Duration'] : '' 
+            ?>)
+      }
           })
-        <?php } ?>
-
+   
       }
 
 
@@ -2076,7 +2038,7 @@
           url: '/app/application-form/course-eligibility?id=' + sub_course_id + '&course_category=' + course_category,
           type: 'GET',
           dataType: 'json',
-          success: function(data) {
+          success: function (data) {
             if (data.status) {
               var col_size = 4;
               // var col_size = data.count == 1 ? 10 : data.count == 2 ? 5 : data.count == 3 ? 3 : data.count == 4 ? 2 : 2
@@ -2156,7 +2118,7 @@
     </script>
 
     <script type="text/javascript">
-      $(document).ready(function() {
+      $(document).ready(function () {
 
         $('#step_1').validate({
           rules: {
@@ -2212,11 +2174,11 @@
               required: true
             },
           },
-          highlight: function(element) {
+          highlight: function (element) {
             $(element).addClass('error');
             $(element).closest('.form-control').addClass('has-error');
           },
-          unhighlight: function(element) {
+          unhighlight: function (element) {
             $(element).removeClass('error');
             $(element).closest('.form-control').removeClass('has-error');
           }
@@ -2246,11 +2208,11 @@
               required: true
             },
           },
-          highlight: function(element) {
+          highlight: function (element) {
             $(element).addClass('error');
             $(element).closest('.form-control').addClass('has-error');
           },
-          unhighlight: function(element) {
+          unhighlight: function (element) {
             $(element).removeClass('error');
             $(element).closest('.form-control').removeClass('has-error');
           }
@@ -2267,11 +2229,11 @@
             <?php print (!empty($id) && empty($students_signature)) ? "student_signature: {required:true}," : "" ?>
             <?php print empty($id) ? "student_signature: {required:true}," : "" ?>
           },
-          highlight: function(element) {
+          highlight: function (element) {
             $(element).addClass('error');
             $(element).closest('.form-control').addClass('has-error');
           },
-          unhighlight: function(element) {
+          unhighlight: function (element) {
             $(element).removeClass('error');
             $(element).closest('.form-control').removeClass('has-error');
           }
@@ -2279,7 +2241,7 @@
 
 
         $('#rootwizard').bootstrapWizard({
-          onTabShow: function(tab, navigation, index) {
+          onTabShow: function (tab, navigation, index) {
             var $total = navigation.find('li').length;
             var $current = index + 1;
 
@@ -2315,7 +2277,7 @@
               btnPrev.removeClass('btn-animated');
             }
           },
-          onTabClick: function(activeTab, navigation, currentIndex, nextIndex) {
+          onTabClick: function (activeTab, navigation, currentIndex, nextIndex) {
             console.log(nextIndex, currentIndex);
             if (nextIndex <= currentIndex) {
               return;
@@ -2325,19 +2287,19 @@
             }
             return submitForm(nextIndex);
           },
-          onNext: function(tab, navigation, index) {
+          onNext: function (tab, navigation, index) {
             return submitForm(index);
           },
-          onPrevious: function(tab, navigation, index) {
+          onPrevious: function (tab, navigation, index) {
             console.log("previous");
           },
-          onInit: function() {
+          onInit: function () {
             $('#rootwizard ul').removeClass('nav-pills');
           }
         });
 
-        $('.remove-item').click(function() {
-          $(this).parents('tr').fadeOut(function() {
+        $('.remove-item').click(function () {
+          $(this).parents('tr').fadeOut(function () {
             $(this).remove();
           });
         });
@@ -2352,7 +2314,7 @@
         }
       }
 
-      $('#step_1').submit(function(e) {
+      $('#step_1').submit(function (e) {
         var formData = new FormData(this);
         formData.append('inserted_id', localStorage.getItem('inserted_id'));
         formData.append('lead_id', '<?php echo isset($_GET['lead_id']) ? $lead_id : 0 ?>');
@@ -2365,7 +2327,7 @@
           cache: false,
           processData: false,
           dataType: 'json',
-          success: function(data) {
+          success: function (data) {
             if (data.status == 200) {
               notification('success', data.message);
               localStorage.setItem('inserted_id', data.id);
@@ -2374,7 +2336,7 @@
               $('#previous-button').click();
             }
           },
-          error: function(data) {
+          error: function (data) {
             notification('danger', 'Server is not responding. Please try again later');
             $('#previous-button').click();
             console.log(data);
@@ -2382,7 +2344,7 @@
         });
       });
 
-      $('#step_2').submit(function(e) {
+      $('#step_2').submit(function (e) {
         var formData = new FormData(this);
         formData.append('inserted_id', localStorage.getItem('inserted_id'));
         e.preventDefault();
@@ -2394,7 +2356,7 @@
           cache: false,
           processData: false,
           dataType: 'json',
-          success: function(data) {
+          success: function (data) {
             if (data.status == 200) {
               notification('success', data.message);
             } else {
@@ -2402,7 +2364,7 @@
               $('#previous-button').click();
             }
           },
-          error: function(data) {
+          error: function (data) {
             notification('danger', 'Server is not responding. Please try again later');
             $('#previous-button').click();
             console.log(data);
@@ -2410,7 +2372,7 @@
         });
       });
 
-      $('#step_3').submit(function(e) {
+      $('#step_3').submit(function (e) {
         var formData = new FormData(this);
         formData.append('inserted_id', localStorage.getItem('inserted_id'));
         e.preventDefault();
@@ -2422,7 +2384,7 @@
           cache: false,
           processData: false,
           dataType: 'json',
-          success: function(data) {
+          success: function (data) {
             if (data.status == 200) {
               notification('success', data.message);
             } else {
@@ -2430,7 +2392,7 @@
               $('#previous-button').click();
             }
           },
-          error: function(data) {
+          error: function (data) {
             notification('danger', 'Server is not responding. Please try again later');
             $('#previous-button').click();
             console.log(data);
@@ -2438,7 +2400,7 @@
         });
       });
 
-      $('#step_4').submit(function(e) {
+      $('#step_4').submit(function (e) {
         var formData = new FormData(this);
         formData.append('inserted_id', localStorage.getItem('inserted_id'));
         e.preventDefault();
@@ -2450,7 +2412,7 @@
           cache: false,
           processData: false,
           dataType: 'json',
-          success: function(data) {
+          success: function (data) {
             if (data.status == 200) {
               localStorage.removeItem('inserted_id');
               localStorage.setItem('print_id', data.print_id);
@@ -2459,7 +2421,7 @@
               notification('danger', data.message);
             }
           },
-          error: function(data) {
+          error: function (data) {
             notification('danger', 'Server is not responding. Please try again later');
             console.log(data);
           }
