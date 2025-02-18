@@ -25,6 +25,11 @@
     border-radius: 10px !important;
     height: 48px !important;
   }
+  .btn-outline-primary.hover:not(.active), .btn-outline-primary:hover:not(.active), .btn-outline-primary .show .dropdown-toggle.btn-outline-primary {
+    background: #2b303b !important;
+    border: none !important;
+    color: white !important;
+}
 </style>
 <?php include($_SERVER['DOCUMENT_ROOT'] . '/includes/header-bottom.php'); ?>
 <?php include($_SERVER['DOCUMENT_ROOT'] . '/includes/menu.php'); ?>
@@ -59,10 +64,9 @@ unset($_SESSION['filterByVerticalType']); //kp
               ?>
               <div>
                 <?php if (isset($_SESSION['active_rr_session_id'])) { ?>
-                  <button class="btn btn-outline-primary btn-sm" onclick="resetRRSession()">Change
-                    Session</button>
-                  <a href="/app/re-registrations/export" target="_blank" class="btn btn-outline-info
-                  btn-sm">Download</a>
+                  <a class="btn btn-outline-primary btn-sm custom_add_button p-2 text-white" onclick="resetRRSession()">Change
+                    Session <i class="uil uil-exchange-alt ml-2"></i></a>
+                  <a href="/app/re-registrations/export" target="_blank" class="text-white p-2 custom_add_button">Download <i class="uil uil-down-arrow ml-2"></i></a>
                 <?php } ?>
               </div>
             </ol>
@@ -322,7 +326,7 @@ unset($_SESSION['filterByVerticalType']); //kp
             data: "Added_For"
           }
         ],
-        "sDom": "<'row mt-3 w-100 p-0 m-0'<'col-sm-6 pr-0 pl-0 custon_text_start'l><'col-sm-6 pr-0 pl-0'f>><t><'row'<p i>>",
+        "sDom": "<'row  w-100 p-0 m-0'<'col-sm-6 pr-0 pl-0 custon_text_start'l><'col-sm-6 pr-0 pl-0'f>><t><'row'<p i>>",
         "destroy": true,
         "scrollCollapse": true,
         "oLanguage": {
