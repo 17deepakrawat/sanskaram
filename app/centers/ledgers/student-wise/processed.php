@@ -91,13 +91,13 @@
                     $centerArr = array();
                     $center_fee_Query = $conn->query("SELECT Fee FROM `Center_Sub_Courses` WHERE `User_ID` = $centerID AND `Course_ID` = " . $student['Course_ID'] . "  AND `Sub_Course_ID` = " . $student['Sub_Course_ID'] . " ");
                     $centerArr = $center_fee_Query->fetch_assoc();
-                    $fee = number_format((-1) * $student['Amount'], 2) . " &#8377;";
+                    $fee = " &#8377; ". number_format((-1) * $student['Amount'], 2) ;
                     // $fee = number_format((-1) * $centerArr['Fee'], 2)." &#8377;";
                   } else {
-                    $fee = number_format((-1) * $student['Amount'], 2) . " &#8377;";
+                    $fee = " &#8377; ". number_format((-1) * $student['Amount'], 2) ;
 
                   } ?>
-                  <td><?= $fee; ?></td>
+                  <td><span class="text-danger"><?= $fee; ?></span></td>
                   <td>
                     <!-- <center><span class="cursor-pointer text-danger font-weight-bold"
                         onclick="cancelStudent('<?= $student['ID'] ?>', '<?= $id ?>')">Cancel</span></center> -->

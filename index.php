@@ -51,7 +51,7 @@
         <div class="p-l-50 p-r-50 p-t-50 m-t-30 sm-p-l-15 sm-p-r-15 sm-p-t-40">
           <div class="new_custom_h d-flex  align-items-start">
             <div class="university_new_logo" style="text-align:center;">
-              <img src="assets/img/university/sanskaram.png" class="img-fluid" alt="">
+              <img src="/assets/img/university/1739853790.jpg" class="img-fluid" alt="">
               <p class="universityname_t text-center">Sanskaram University</p>
             </div>
           </div>
@@ -66,18 +66,20 @@
             <?php if (!empty($dark_logo)) { ?>
               <img src="<?= $dark_logo ?>" alt="logo" data-src="<?= $dark_logo ?>" data-src-retina="<?= $dark_logo ?>" height="50">
             <?php } ?>
-            <h2 class="mt-3 fw-bold title_text_login">Welcome</h2>
-            <p class="mb-4 title_text_login">Sign in to your account</p>          
-              <form id="form-login" class="p-t-15" role="form" autocomplete="off" action="app/login/login">
+            <div class="d-flex justify-content-center">
+            <img src="/assets/img/university/1739853790.jpg" class="mob_university_logo  " style="width: 81px; height:70px;" alt=""></div>
+            <h2 class="fw-bold title_text_login m-0">Welcome</h2>
+            <p class="title_text_login">Sign in to your account</p>          
+              <form id="form-login" class="" role="form" autocomplete="off" action="app/login/login">
 
                 <div class="form-group form-group-default custom_new_fields">
-                  <label class="mb-2">User Name</label>
+                  <label class="">User Name</label>
                   <div class="controls">
                     <input type="text" name="username" style="text-transform: uppercase" placeholder="Username" class="form-control" required>
                   </div>
                 </div>
                 <div class="form-group form-group-default custom_new_fields">
-                  <label class="mb-2">Password</label>
+                  <label class="">Password</label>
                   <div class="controls">
                     <input type="password" class="form-control" name="password" placeholder="Credentials" required>
                   </div>
@@ -93,7 +95,7 @@
 
                   </div>
                   <div class="col-md-12 d-flex align-items-center justify-content-center">
-                    <button aria-label="" class="btn newlogin1 btn-lg m-t-10 w-50 rounded-pill custom_login_btn" type="submit">Sign in</button>
+                    <button aria-label="" class="btn newlogin1 btn-lg  w-50 rounded-pill custom_login_btn" type="submit">Sign in</button>
                   </div>
                 </div>
 
