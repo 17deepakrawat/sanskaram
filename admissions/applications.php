@@ -215,17 +215,7 @@ unset($_SESSION['filterByExamStatus']); //kp
                 </div>
 
                 <?php if ($_SESSION['Role'] != 'Sub-Center' && $_SESSION['Role'] != 'Center') { ?>
-                  <div class="col-md-2 m-b-10">
-                    <div class="form-group">
-                      <select class="full-width" style="width:40px" data-init-plugin="select2" id="vartical_type"
-                        onchange="addFilterVerticalType(this.value,'users', 'vartical_type')"
-                        data-placeholder="Choose Vertical Type">
-                        <option value="">Vertical Type</option>
-                        <option value="1">Edtech</option>
-                        <option value="0">IITS LLP Paramedical</option>
-                      </select>
-                    </div>
-                  </div>
+       
                   <div class="col-md-2 m-b-10">
                     <div class="form-group">
                       <select class="full-width" style="width:40px" data-init-plugin="select2" id="users"
@@ -259,8 +249,6 @@ unset($_SESSION['filterByExamStatus']); //kp
                     </div>
                   </div>
                 <?php } ?>
-                <?php if ($_SESSION['university_id'] == '47') { ?>
-
                   <div class="col-md-2 m-b-10">
                     <div class="form-group">
                       <select class="full-width" style="width:40px" data-init-plugin="select2" id="exam_exit_status"
@@ -272,7 +260,7 @@ unset($_SESSION['filterByExamStatus']); //kp
                       </select>
                     </div>
                   </div>
-                <?php } ?>
+               
 
               </div>
               <div class="clearfix"></div>
@@ -329,16 +317,10 @@ unset($_SESSION['filterByExamStatus']); //kp
                             <th>Payment Verification</th>
                             <th>Processed to University</th>
                             <th>Enrollment No.</th>
-                            <?php if ($_SESSION['university_id'] == 47) { ?>
-                              <th>Application Status</th>
-                            <?php } ?>
-                            <?php if ($_SESSION['university_id'] == 47) { ?>
-                              <th>Dispatched Status</th>
-                            <?php } ?>
+                            <th>Application Status</th>
+                            <th>Dispatched Status</th>
                             <th>ABC ID</th>
-                            <th>
-                              <?php print $_SESSION['university_id'] == '16' ? 'Form No.' : ($_SESSION['university_id'] == 14 ? 'SID Number' : 'OA Number') ?>
-                            </th>
+                            <th>OA Number</th>
                             <th>Adm Session</th>
                             <th>Created At</th>
                             <th>Adm Type</th>
@@ -346,9 +328,7 @@ unset($_SESSION['filterByExamStatus']); //kp
                             <th>Student Name</th>
                             <th>Father Name</th>
                             <th>Program</th>
-                            <?php if ($_SESSION['university_id'] == 48) { ?>
-                              <th>Course Category</th>
-                            <?php } ?>
+                            
                             <th>
                               <?php $alloted_modes = [];
                               if (isset($_SESSION['university_id'])) {
@@ -398,9 +378,7 @@ unset($_SESSION['filterByExamStatus']); //kp
                             <th>Student Name</th>
                             <th>Father Name</th>
                             <th>Program</th>
-                            <?php if ($_SESSION['university_id'] == 48) { ?>
-                              <th>Course Category</th>
-                            <?php } ?>
+                            
                             <th>
                               <?php $alloted_modes = [];
                               if (isset($_SESSION['university_id'])) {
@@ -447,9 +425,7 @@ unset($_SESSION['filterByExamStatus']); //kp
                             <th>Payment Verification</th>
                             <th>Enrollment No.</th>
                             <th>ABC ID</th>
-                            <th>
-                              <?php print $_SESSION['university_id'] == '16' ? 'Form No.' : ($_SESSION['university_id'] == 14 ? 'SID Number' : 'OA Number') ?>
-                            </th>
+                            <th>OA Number</th>
                             <th>Adm Session</th>
                             <th>Created At</th>
                             <th>Adm Type</th>
@@ -457,9 +433,7 @@ unset($_SESSION['filterByExamStatus']); //kp
                             <th>Student Name</th>
                             <th>Father Name</th>
                             <th>Program</th>
-                            <?php if ($_SESSION['university_id'] == 48) { ?>
-                              <th>Course Category</th>
-                            <?php } ?>
+                            
                             <th>
                               <?php $alloted_modes = [];
                               if (isset($_SESSION['university_id'])) {
@@ -507,9 +481,7 @@ unset($_SESSION['filterByExamStatus']); //kp
                             <th>Processed to University</th>
                             <th>Enrollment No.</th>
                             <th>ABC ID</th>
-                            <th>
-                              <?php print $_SESSION['university_id'] == '16' ? 'Form No.' : ($_SESSION['university_id'] == 14 ? 'SID Number' : 'OA Number') ?>
-                            </th>
+                            <th>OA Number</th>
                             <th>Adm Session</th>
                             <th>Created At</th>
                             <th>Adm Type</th>
@@ -517,9 +489,7 @@ unset($_SESSION['filterByExamStatus']); //kp
                             <th>Student Name</th>
                             <th>Father Name</th>
                             <th>Program</th>
-                            <?php if ($_SESSION['university_id'] == 48) { ?>
-                              <th>Course Category</th>
-                            <?php } ?>
+                            
                             <th>
                               <?php $alloted_modes = [];
                               if (isset($_SESSION['university_id'])) {
@@ -567,9 +537,7 @@ unset($_SESSION['filterByExamStatus']); //kp
                             <th>Processed to University</th>
                             <th>Enrollment No.</th>
                             <th>ABC ID</th>
-                            <th>
-                              <?php print $_SESSION['university_id'] == '16' ? 'Form No.' : ($_SESSION['university_id'] == 14 ? 'SID Number' : 'OA Number') ?>
-                            </th>
+                            <th>OA Number</th>
                             <th>Adm Session</th>
                             <th>Created At</th>
                             <th>Adm Type</th>
@@ -577,9 +545,7 @@ unset($_SESSION['filterByExamStatus']); //kp
                             <th>Student Name</th>
                             <th>Father Name</th>
                             <th>Program</th>
-                            <?php if ($_SESSION['university_id'] == 48) { ?>
-                              <th>Course Category</th>
-                            <?php } ?>
+                            
                             <th>
                               <?php $alloted_modes = [];
                               if (isset($_SESSION['university_id'])) {
@@ -627,9 +593,7 @@ unset($_SESSION['filterByExamStatus']); //kp
                             <th>Processed to University</th>
                             <th>Enrollment No.</th>
                             <th>ABC ID</th>
-                            <th>
-                              <?php print $_SESSION['university_id'] == '16' ? 'Form No.' : ($_SESSION['university_id'] == 14 ? 'SID Number' : 'OA Number') ?>
-                            </th>
+                            <th>OA Number</th>
                             <th>Adm Session</th>
                             <th>Created At</th>
                             <th>Adm Type</th>
@@ -637,9 +601,7 @@ unset($_SESSION['filterByExamStatus']); //kp
                             <th>Student Name</th>
                             <th>Father Name</th>
                             <th>Program</th>
-                            <?php if ($_SESSION['university_id'] == 48) { ?>
-                              <th>Course Category</th>
-                            <?php } ?>
+                            
                             <th>
                               <?php $alloted_modes = [];
                               if (isset($_SESSION['university_id'])) {

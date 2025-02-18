@@ -54,10 +54,13 @@ unset($_SESSION['filterByUniversity']);
                 <div class="form-group">
                   <select class="full-width" style="width:40px" data-init-plugin="select2" id="university"
                     onchange="addFilter(this.value, 'university')" data-placeholder="Choose University">
-                    <option value="">Select University</option>
-                    <option value="<?= UNIVERSITY_ID ?>">Bvoc Glocal University</option>
+                    <option value="">Choose University </option>
+                    <?php
+                      $universities = $conn->query("SELECT ID, CONCAT(Universities.Short_Name, ' (', Universities.Vertical, ')') as Name FROM Universities WHERE Status=1 AND  ID IS NOT NULL " . $_SESSION['UniversityQuery']);
+                      while ($university = $universities->fetch_assoc()) { ?>
+                        <option value="<?= $university['ID'] ?>"><?= $university['Name'] ?></option>
+                      <?php } ?>
                     <option value="1">University Not Alloted</option>
-
                   </select>
                 </div>
               </div>

@@ -111,127 +111,16 @@ unset($_SESSION['filterByVerticalType']); //kp
                     Wallet</button>
                 </div>
               </div>
-
-              <div class="col-md-4">
-                <div class="form-group">
-                  <div class="card card-transparent">
-                    <select class="full-width select2-hidden-accessible" data-init-plugin="select2" id="vartical_type"
-                      onchange="addFilterVerticalType(this.value,'users', 'vartical_type')" data-placeholder="Choose Vertical Type"
-                      tabindex="-1" aria-hidden="true">
-                      <option value="">Vertical Type</option>
-                      <option value="1">Edtech</option>
-                      <option value="0">IITS LLP Paramedical</option>
-                    </select>
-                  </div>
-                </div>
-
-              </div>
-              <div class="col-md-4 m-b-10">
-                <div class="form-group">
-
-                  <select class="full-width" data-init-plugin="select2" id="users"
-                    onchange="addFilter(this.value, 'users','')" data-placeholder="Choose User">
-
-
-                  </select>
-                </div>
-              </div>
-              <div class="col-md-4 m-b-10">
-                <div class="form-group">
-                  <select class="full-width" style="width:40px" data-init-plugin="select2" id="sub_center"
-                    onchange="addSubCenterFilter(this.value, 'users')" data-placeholder="Choose Sub Center">
-
-                  </select>
-                </div>
-              </div>
-              <div class="col-md-12">
-                <div class="card card-transparent">
-                  <!-- Nav tabs -->
-                  <ul class="nav nav-tabs nav-tabs-linetriangle" data-init-reponsive-tabs="dropdownfx">
-                    <li class="nav-item">
-                      <a class="active" data-toggle="tab" data-target="#applicableList" href="#"><span>Applicable Students -
-                          <span id="applicableCount">0</span></span></a>
-                    </li>
-                    <li class="nav-item">
-                      <a data-toggle="tab" data-target="#pending" href="#"><span>Pending - <span
-                            id="pendingCount">0</span></span></a>
-                    </li>
-                    <li class="nav-item">
-                      <a data-toggle="tab" data-target="#applied" href="#"><span>Applied - <span
-                            id="appliedCount">0</span></span></a>
-                    </li>
-                  </ul>
-                  <!-- Tab panes -->
-                  <div class="tab-content">
-                    <div class="tab-pane active" id="applicableList">
-                      <div class="row m-t-20">
-                        <div class="col-12">
-                          <table class="table table-striped nowrap " id="applicableTable">
-                            <thead>
-                              <tr>
-                                <th data-orderable="false"></th>
-                                <th>Student ID</th>
-                                <th>Student Name</th>
-                                <th>RR Sem</th>
-                                <th>Enrollemnt No</th>
-                                <th>Adm Session</th>
-                                <th>Course</th>
-                                <th>Owner</th>
-                              </tr>
-                            </thead>
-                          </table>
-                        </div>
-
-                      </div>
-                    </div>
-                    <div class="tab-pane" id="pending">
-                      <div class="row">
-                        <div class="col-lg-12">
-                          <div class="">
-                            <table class="table table-striped nowrap" id="pendingTable">
-                              <thead>
-                                <tr>
-                                  <th>Student ID</th>
-                                  <th>Student Name</th>
-                                  <th>RR Sem</th>
-                                  <th>Enrollemnt No</th>
-                                  <th>Adm Session</th>
-                                  <th>Course</th>
-                                  <th>Owner</th>
-                                  <th>Payment ID</th>
-                                </tr>
-                              </thead>
-                            </table>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                    <div class="tab-pane" id="applied">
-                      <div class="row">
-                        <div class="col-lg-12">
-                          <div class="">
-                            <table class="table table-striped nowrap" id="appliedTable">
-                              <thead>
-                                <tr>
-                                  <th>Student ID</th>
-                                  <th>Student Name</th>
-                                  <th>RR Sem</th>
-                                  <th>Enrollemnt No</th>
-                                  <th>Adm Session</th>
-                                  <th>Course</th>
-                                  <th>Owner</th>
-                                  <th>Payment From</th>
-                                  <th>Payment ID</th>
-                                </tr>
-                              </thead>
-                            </table>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-
+            </div>
+          </div>
+          <div class="row clearfix">
+    
+            <div class="col-md-4 m-b-10">
+              <div class="form-group">
+                
+                <select class="full-width" data-init-plugin="select2" id="users"
+                  onchange="addFilter(this.value, 'users','')" data-placeholder="Choose User">
+                </select>
               </div>
             </div>
           </div>

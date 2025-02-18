@@ -2429,7 +2429,7 @@
       });
 
       function printForm() {
-        window.open('/forms/47/index.php/?student_id=' + localStorage.getItem('print_id'));
+      //  window.open('/forms/47/index.php/?student_id=' + localStorage.getItem('print_id'));
       }
     </script>
 
