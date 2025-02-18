@@ -6,13 +6,17 @@
   <!-- BEGIN SIDEBAR MENU HEADER-->
   <div class="sidebar-header">
     <?php if (!empty($light_logo)) { ?>
-      <img src="<?= $light_logo ?>" alt="logo" class="brand" data-src="<?= $light_logo ?>" data-src-retina="<?= $light_logo_retina ?>" width="60">
+      <img src="<?= $light_logo ?>" alt="logo" class="brand" data-src="<?= $light_logo ?>"
+        data-src-retina="<?= $light_logo_retina ?>" width="60">
     <?php } ?>
     <div class="sidebar-header-controls">
-      <button aria-label="Toggle Drawer" type="button" class="btn btn-icon-link invert sidebar-slide-toggle m-l-20 m-r-10" data-pages-toggle="#appMenu">
+      <button aria-label="Toggle Drawer" type="button"
+        class="btn btn-icon-link invert sidebar-slide-toggle m-l-20 m-r-10" data-pages-toggle="#appMenu">
         <i class="pg-icon">chevron_down</i>
       </button>
-      <button aria-label="Pin Menu" type="button" class="btn btn-icon-link invert d-lg-inline-block d-xlg-inline-block d-md-inline-block d-sm-none d-none" data-toggle-pin="sidebar">
+      <button aria-label="Pin Menu" type="button"
+        class="btn btn-icon-link invert d-lg-inline-block d-xlg-inline-block d-md-inline-block d-sm-none d-none"
+        data-toggle-pin="sidebar">
         <i class="pg-icon"></i>
       </button>
     </div>
@@ -84,69 +88,28 @@
         <?php } ?>
 
         <?php if (in_array('ID Card', $_SESSION['LMS_Permissions'])) { ?>
-          <li class="">
+          <!-- <li class="">
             <a href="/student/id-card">
               <span class="title">ID Card</span>
             </a>
             <span class="icon-thumbnail-main">
               <i class="uil uil-postcard"></i>
             </span>
-          </li>
+          </li> -->
         <?php } ?>
-           <?php if ((trim(($_SESSION['Admission_Session']) == "July-21" && $_SESSION['Duration'] == '6') || (trim($_SESSION['Admission_Session']) == "July-22" && $_SESSION['Duration'] == '4') || (trim($_SESSION['Admission_Session']) == "July-23" && $_SESSION['Duration'] == '2' && $_SESSION['university_id']==47) ||  ( ($_SESSION['Admission_Session'] == 'Oct-23' || $_SESSION['Admission_Session'] == 'Apr-24' || $_SESSION['Admission_Session'] == 'July-24' || $_SESSION['Admission_Session'] == 'Nov-23' || $_SESSION['Admission_Session'] == 'Jun-24' || $_SESSION['Admission_Session']=='Sep-23' || $_SESSION['Admission_Session'] =='Mar-24' ||  $_SESSION['Admission_Session'] =='Feb-24') && $_SESSION['university_id']==48)) ) { ?>
-            <!--<li class="">-->
-            <!--  <a href="/student/exam-form">-->
-            <!--    <span class="title">Exam Form</span>-->
-            <!--  </a>-->
-            <!--  <span class="icon-thumbnail-main">-->
-            <!--    <i class="uil uil-meeting-board"></i>-->
-            <!--  </span>-->
-            <!--</li>-->
-          <?php } ?>
-          
-           <?php 
-          $session = $_SESSION['Admission_Session'];
-          $duration = $_SESSION['Duration'];
-          $university_id = $_SESSION['university_id'];
-          $category = '';
-          if ($university_id == 48 && strpos($duration, '/') !== false) {
-            list($dur, $category) = explode("/", $duration);
-          } else {
-            $dur = $duration;
-          }
-          
-          if (
-    (trim(($_SESSION['Admission_Session']) == "July-21" && $_SESSION['Duration'] == '6')
-  || (trim($_SESSION['Admission_Session']) == "July-22" && $_SESSION['Duration'] == '4')
-  || (trim($_SESSION['Admission_Session']) == "July-23" && $_SESSION['Duration'] == '2' && $_SESSION['university_id'] == 47)
-              || ((
-                $_SESSION['Admission_Session'] == 'Oct-23'
-                || $_SESSION['Admission_Session'] == 'Apr-24'
-                || $_SESSION['Admission_Session'] == 'July-24'
-                || $_SESSION['Admission_Session'] == 'Nov-23'
-                || $_SESSION['Admission_Session'] == 'Jun-24'
-                || $_SESSION['Admission_Session'] == 'Sep-23'
-                || $_SESSION['Admission_Session'] == 'Mar-24'
-                || $_SESSION['Admission_Session'] == 'Feb-24'
-                || $_SESSION['Admission_Session'] == 'May-24'
-                || $_SESSION['Admission_Session'] == 'Jan-24'
-                || $_SESSION['Admission_Session'] == 'Oct-24'
-                || (in_array($session, ['Sep-24']))
-                || (in_array($session, ['Aug-23', 'Sep-23', 'Oct-23', 'Nov-23','Dec-23','Jan-24']) && $dur == '11')
-                || (in_array($session, ['Feb-24', 'Mar-24', 'Apr-24','May-24','Jun-24']) && $dur == '6')
-                || (in_array($session, ['July-24', 'Aug-24', 'Jun-24','Sep-24']) && $dur == '3')
 
-                ) && $_SESSION['university_id'] == 48))
-          ) { ?>
-            <li class="">
-              <a href="/student/exam-form">
-                <span class="title">Exam Form</span>
-              </a>
-              <span class="icon-thumbnail-main">
-                <i class="uil uil-meeting-board"></i>
-              </span>
-            </li>
-          <?php } ?>
+
+
+
+
+        <li class="">
+          <a href="/student/exam-form">
+            <span class="title">Exam Form</span>
+          </a>
+          <span class="icon-thumbnail-main">
+            <i class="uil uil-meeting-board"></i>
+          </span>
+        </li>
 
 
         <?php
@@ -158,8 +121,8 @@
           in_array('Work Books', $_SESSION['LMS_Permissions']) ||
           in_array('Videos', $_SESSION['LMS_Permissions'])
         ) {
-        ?>
-        <li class="">
+          ?>
+          <li class="">
             <a href="/student/lms/lms">
               <span class="title">LMS</span>
             </a>
@@ -167,47 +130,41 @@
               <i class="uil uil-meeting-board"></i>
             </span>
           </li>
-          
-          <!-- <li class="">
-            <a href="/student/lms/subjects">
-              <span class="title">Subject</span>
-            </a>
-            <span class="icon-thumbnail-main">
-              <i class="uil uil-book"></i>
-            </span>
-          </li> -->
-          <?php if (in_array('Assignments', $_SESSION['LMS_Permissions'])) { ?>
-          <li class="">
-            <a href="/student/lms/assignments">
-              <span class="title">Assignments</span>
-            </a>
-            <span class="icon-thumbnail"><i class="pg-icon">As</i></span>
-          </li>
-          <?php } ?>
-           <?php
-        $getQuery = $conn->query("SELECT * FROM Agreements WHERE Role = 1");
-        if ($getQuery->num_rows > 0) { ?>
-          <li class="">
-            <a href="/student/lms/agreement">
-              <span class="title">Agreement</span>
-            </a>
-            <span class="icon-thumbnail"><i class="pg-icon">AT</i></span>
-          </li>
-        <?php } ?>
 
-          <li class="<?php print array_key_exists(2, $breadcrumbs) && $breadcrumbs[2] == 'lms' ? 'open active' : '' ?>"  style="display: none;">
+
+          <?php if (in_array('Assignments', $_SESSION['LMS_Permissions'])) { ?>
+            <li class="">
+              <a href="/student/lms/assignments">
+                <span class="title">Assignments</span>
+              </a>
+              <span class="icon-thumbnail"><i class="pg-icon">As</i></span>
+            </li>
+          <?php } ?>
+          <?php
+          $getQuery = $conn->query("SELECT * FROM Agreements WHERE Role = 1");
+          if ($getQuery->num_rows > 0) { ?>
+            <!-- <li class="">
+              <a href="/student/lms/agreement">
+                <span class="title">Agreement</span>
+              </a>
+              <span class="icon-thumbnail"><i class="pg-icon">AT</i></span>
+            </li> -->
+          <?php } ?>
+
+          <li class="<?php print array_key_exists(2, $breadcrumbs) && $breadcrumbs[2] == 'lms' ? 'open active' : '' ?>"
+            style="display: none;">
             <a href="javascript:;"><span class="title">LMS</span>
               <span class=" arrow <?php print $breadcrumbs[2] == 'lms' ? 'open active' : '' ?>"></span></a>
             <span class="icon-thumbnail-main"><i class="uil uil-meeting-board"></i></span></span>
             <ul class="sub-menu">
-                <li class="">
-                  <a href="/student/lms/lms">LMS</a>
-                  <span class="icon-thumbnail"><i class="uil uil-book"></i></span>
-                </li>
-               <li class="">
-                  <a href="/student/lms/subjects">Subject</a>
-                  <span class="icon-thumbnail"><i class="uil uil-book"></i></span>
-                </li>
+              <li class="">
+                <a href="/student/lms/lms">LMS</a>
+                <span class="icon-thumbnail"><i class="uil uil-book"></i></span>
+              </li>
+              <li class="">
+                <a href="/student/lms/subjects">Subject</a>
+                <span class="icon-thumbnail"><i class="uil uil-book"></i></span>
+              </li>
               <?php if (in_array('E-Books', $_SESSION['LMS_Permissions'])) { ?>
                 <li class="">
                   <a href="/student/lms/e-books">E-Books</a>
@@ -221,22 +178,22 @@
                 </li>
               <?php } ?>
               <?php if (in_array('Practicals', $_SESSION['LMS_Permissions'])) { ?>
-                <li class="">
+                <!-- <li class="">
                   <a href="/student/lms/practicals">Practicals</a>
                   <span class="icon-thumbnail"><i class="pg-icon">Pr</i></span>
-                </li>
+                </li> -->
               <?php } ?>
               <?php if (in_array('Projects', $_SESSION['LMS_Permissions'])) { ?>
-                <li class="">
+                <!-- <li class="">
                   <a href="/student/lms/projects">Projects</a>
                   <span class="icon-thumbnail"><i class="pg-icon">Pj</i></span>
-                </li>
+                </li> -->
               <?php } ?>
               <?php if (in_array('Work Books', $_SESSION['LMS_Permissions'])) { ?>
-                <li class="">
+                <!-- <li class="">
                   <a href="/student/lms/work-books">Work-Books</a>
                   <span class="icon-thumbnail"><i class="pg-icon">WB</i></span>
-                </li>
+                </li> -->
               <?php } ?>
               <?php if (in_array('Videos', $_SESSION['LMS_Permissions'])) { ?>
                 <li class="">
@@ -247,7 +204,7 @@
             </ul>
           </li>
         <?php } ?>
-       
+
         <?php
         if (
           in_array('Date Sheets', $_SESSION['LMS_Permissions']) ||
@@ -256,58 +213,35 @@
           in_array('Exams', $_SESSION['LMS_Permissions']) ||
           in_array('Results', $_SESSION['LMS_Permissions'])
         ) {
-        ?>
-          <li class="<?php print array_key_exists(2, $breadcrumbs) && $breadcrumbs[2] == 'examination' ? 'open active' : '' ?>">
+          ?>
+          <li
+            class="<?php print array_key_exists(2, $breadcrumbs) && $breadcrumbs[2] == 'examination' ? 'open active' : '' ?>">
             <a href="javascript:;"><span class="title">Examination</span>
               <span class=" arrow <?php print $breadcrumbs[2] == 'examination' ? 'open active' : '' ?>"></span></a>
             <span class="icon-thumbnail-main"><i class="uil uil-file-edit-alt"></i></span></span>
             <ul class="sub-menu">
-              
-              <?php
-              if($_SESSION['university_id']==48){?>
-                  
+
               <li class="">
-                  <a href="/student/examination/date-sheets">Date Sheets</a>
-                  <span class="icon-thumbnail"><i class="pg-icon">Ds</i></span>
-                </li>
-            <?php }  if(in_array($_SESSION['Admission_Session'], ["Jan-24","Jun-24"]) &&  in_array($_SESSION['Sub_Course_ID'], [1397, 1209, 1114])){
-             if (in_array('Date Sheets', $_SESSION['LMS_Permissions'])) { ?>
-                <!--<li class="">-->
-                <!--  <a href="/student/examination/date-sheets">Date Sheets</a>-->
-                <!--  <span class="icon-thumbnail"><i class="pg-icon">Ds</i></span>-->
-                <!--</li>-->
-              <?php } } ?>
-            <?php
-               $check_form_sql = $conn->query("SELECT Student_Id FROM Examination_Confirmation WHERE Student_Id ='".$_SESSION['ID']."'  AND Confirmation_Status=1");
-               
-               if($check_form_sql->num_rows > 0){
-              if (in_array('Admit Card', $_SESSION['LMS_Permissions'])) { ?>
-                <!-- <li class="">
-                  <a href="/student/examination/admit-card">Admit Card</a>
-                  <span class="icon-thumbnail"><i class="pg-icon">AC</i></span>
-                </li> -->
-              <?php } }?>
-              <?php if($_SESSION['university_id']==47 || $_SESSION['university_id']==48){ ?>
-                <li class="">
-                  <a href="/student/admit-cards/admit-card">Admit Card</a>
-                  <span class="icon-thumbnail"><i class="pg-icon">AC</i></span>
-                </li>
-              <?php } ?>
+                <a href="/student/admit-cards/admit-card">Admit Card</a>
+                <span class="icon-thumbnail"><i class="pg-icon">AC</i></span>
+              </li>
               <?php if (
-                in_array('Mock Tests', $_SESSION['LMS_Permissions']) ||
+             
                 in_array('Exams', $_SESSION['LMS_Permissions'])
               ) {
-              ?>
-                <li class="<?php print array_key_exists(3, $breadcrumbs) && $breadcrumbs[3] == 'online-exam' ? 'open active' : '' ?>">
+                ?>
+                <li
+                  class="<?php print array_key_exists(3, $breadcrumbs) && $breadcrumbs[3] == 'online-exam' ? 'open active' : '' ?>">
                   <a href="javascript:;"><span class="title">Online Exam</span>
-                    <span class="arrow <?php print array_key_exists(3, $breadcrumbs) && $breadcrumbs[3] == 'online-exam' ? 'open active' : '' ?>"></span></a>
+                    <span
+                      class="arrow <?php print array_key_exists(3, $breadcrumbs) && $breadcrumbs[3] == 'online-exam' ? 'open active' : '' ?>"></span></a>
                   <span class="icon-thumbnail"><i class="pg-icon">OE</i></span>
                   <ul class="sub-menu">
                     <?php if (in_array('Mock Tests', $_SESSION['LMS_Permissions'])) { ?>
-                      <li>
+                      <!-- <li>
                         <a href="/student/examination/date-sheets">Mock Test</a>
                         <span class="icon-thumbnail"><i class="pg-icon">Mt</i></span>
-                      </li>
+                      </li> -->
                     <?php } ?>
                     <?php if (in_array('Exams', $_SESSION['LMS_Permissions'])) { ?>
                       <li>
@@ -329,25 +263,25 @@
         <?php } ?>
 
         <?php if (in_array('Queries & Feedback', $_SESSION['LMS_Permissions'])) { ?>
-          <li class="">
+          <!-- <li class="">
             <a href="/student/queries-&-feedback">
               <span class="title">Queries & Feedback</span>
             </a>
             <span class="icon-thumbnail-main">
               <i class="uil uil-feedback"></i>
             </span>
-          </li>
+          </li> -->
         <?php } ?>
 
         <?php if (in_array('Dispatch', $_SESSION['LMS_Permissions'])) { ?>
-          <li class="">
+          <!-- <li class="">
             <a href="/student/dispatch">
               <span class="title">Dispatch</span>
             </a>
             <span class="icon-thumbnail-main">
               <i class="uil uil-truck-loading"></i>
             </span>
-          </li>
+          </li> -->
         <?php } ?>
       <?php } else { ?>
         <li class="m-t-20 ">
@@ -370,38 +304,38 @@
         <?php } ?>
 
         <?php if (in_array('Documents', $_SESSION['LMS_Permissions'])) { ?>
-          <li class="m-t-20">
+          <!-- <li class="m-t-20">
             <a href="/student/documents">
               <span class="title">My Documents</span>
             </a>
             <span class="icon-thumbnail-main">
               <i class="uil uil-file-lock-alt"></i>
             </span>
-          </li>
+          </li> -->
         <?php } ?>
 
         <?php if (in_array('Application Form', $_SESSION['LMS_Permissions'])) { ?>
-          <li class="">
+          <!-- <li class="">
             <a href="/student/admission-form">
               <span class="title">Form</span>
             </a>
             <span class="icon-thumbnail-main">
               <i class="uil uil-file-check-alt"></i>
             </span>
-          </li>
+          </li> -->
         <?php } ?>
 
       <?php } ?>
 
       <?php if (in_array('Contact Us', $_SESSION['LMS_Permissions'])) { ?>
-        <li class="">
+        <!-- <li class="">
           <a href="/student/contact-us">
             <span class="title">Contact Us</span>
           </a>
           <span class="icon-thumbnail-main">
             <i class="uil uil-phone"></i>
           </span>
-        </li>
+        </li> -->
       <?php } ?>
 
     </ul>

@@ -42,7 +42,7 @@ if (isset($_SESSION['current_session'])) {
 }
 
 
-$role_query = str_replace('{{ table }}', 'Students', isset($_SESSION['RoleQuery'])?$_SESSION['RoleQuery']:'');
+$role_query = str_replace('{{ table }}', 'Students', isset($_SESSION['RoleQuery']) ? $_SESSION['RoleQuery'] : '');
 $role_query = str_replace('{{ column }}', 'Added_For', $role_query);
 
 $step_query = "";
@@ -61,7 +61,7 @@ if ($searchValue != '') {
     $values = array_filter($values);
     if (!empty($values)) {
       $student_id_column = $_SESSION['student_id'] == 1 ? 'Students.Unique_ID' : "RIGHT(CONCAT('000000', Students.ID), 6)";
-      $column = strcasecmp($searchBy, 'student id') == 0 ?  $student_id_column : (strcasecmp($searchBy, 'enrollment') == 0 ? 'Students.Enrollment_No' : (strcasecmp($searchBy, 'oa number') == 0 ? 'OA_Number' : ''));
+      $column = strcasecmp($searchBy, 'student id') == 0 ? $student_id_column : (strcasecmp($searchBy, 'enrollment') == 0 ? 'Students.Enrollment_No' : (strcasecmp($searchBy, 'oa number') == 0 ? 'OA_Number' : ''));
       if (!empty($column)) {
         $values = "'" . implode("','", $values) . "'";
         $searchQuery = " AND $column IN ($values)";
@@ -109,7 +109,7 @@ $filterByExamStatus = "";
 if (isset($_SESSION['filterByExamStatus'])) {
   $filterByExamStatus = $_SESSION['filterByExamStatus'];
 }
-$searchQuery .= $filterByDepartment . $filterQueryUser . $filterByDate . $filterBySubCourse . $filterByStatus .$filterByVerticalType. $filterByExamStatus;
+$searchQuery .= $filterByDepartment . $filterQueryUser . $filterByDate . $filterBySubCourse . $filterByStatus . $filterByVerticalType . $filterByExamStatus;
 
 ## Total number of records without filtering
 $all_count = $conn->query("SELECT COUNT(Students.ID) as allcount FROM Students LEFT JOIN Admission_Sessions ON Students.Admission_Session_ID = Admission_Sessions.ID WHERE Students.University_ID = " . $_SESSION['university_id'] . " $is_not_deleted  $role_query $step_query $session_query");
@@ -150,12 +150,12 @@ while ($row = mysqli_fetch_assoc($empRecords)) {
   // Sub_Center Name 
   $sub_centers['Name'] = "";
   if (!empty($user)) {
-  $sub_centers = $conn->query("SELECT Users.ID, Code, Name FROM Users LEFT JOIN Center_SubCenter ON Users.ID = Center_SubCenter.Sub_Center WHERE `Sub_Center` = " . $row['Added_For']);
-  $sub_centers = mysqli_fetch_array($sub_centers);
-  }else{
+    $sub_centers = $conn->query("SELECT Users.ID, Code, Name FROM Users LEFT JOIN Center_SubCenter ON Users.ID = Center_SubCenter.Sub_Center WHERE `Sub_Center` = " . $row['Added_For']);
+    $sub_centers = mysqli_fetch_array($sub_centers);
+  } else {
     $sub_centers = '';
   }
-  
+
   // RM
   $rm['Name'] = "";
   if (!empty($user)) {
@@ -175,37 +175,31 @@ while ($row = mysqli_fetch_assoc($empRecords)) {
     '3' => 'Exit AD',
     '4' => 'Exit B',
     '5' => 'Enrolled',
-    '6'=>'Drop Out',
+    '6' => 'Drop Out',
   );
   $dispatchedStatus = "";
-  if($row['Dispatch_status']!=null)
-  {
-      if($row['Dispatch_status']==1)
-      {
-          $dispatchedStatus = "Not Dispatched";
-      }
-      elseif($row['Dispatch_status'])
-      {
-           $dispatchedStatus = "Dispatched";
-      }
-      else
-      {
-           $dispatchedStatus = "Pending";
-      }
+  if ($row['Dispatch_status'] != null) {
+    if ($row['Dispatch_status'] == 1) {
+      $dispatchedStatus = "Not Dispatched";
+    } elseif ($row['Dispatch_status']) {
+      $dispatchedStatus = "Dispatched";
+    } else {
+      $dispatchedStatus = "Pending";
+    }
 
   }
-  if($_SESSION['university_id'] == 47){
+
     $exit_status = '';
     if (!empty($row['Payment_Received']) && (empty($row['Enrollment_No']) || $row['Enrollment_No'] === NULL)) {
       $exit_status = 'Active';
-    } elseif (!empty($row['Enrollment_No']) && (empty($row['exam_exit_status']) || ($row['exam_exit_status']==5))) {
-        $exit_status = 'Enrolled';
-    } else if(!empty($row['exam_exit_status'])) {
-        $exit_status =  $exam_exit_status[$row['exam_exit_status']] ?? '';
+    } elseif (!empty($row['Enrollment_No']) && (empty($row['exam_exit_status']) || ($row['exam_exit_status'] == 5))) {
+      $exit_status = 'Enrolled';
+    } else if (!empty($row['exam_exit_status'])) {
+      $exit_status = $exam_exit_status[$row['exam_exit_status']] ?? '';
     }
     $data[] = array(
-       "updated_date" => !empty($row['Updated_At']) ? date("d-m-Y", strtotime($row['Updated_At'])) : '',
-      "University_id"=>$_SESSION['university_id'],
+      "updated_date" => !empty($row['Updated_At']) ? date("d-m-Y", strtotime($row['Updated_At'])) : '',
+      "University_id" => $_SESSION['university_id'],
       "Photo" => empty($row['Location']) ? '/assets/img/default-user.png' : $row['Location'],
       "First_Name" => $row['First_Name'],
       "Father_Name" => $row['Father_Name'],
@@ -227,54 +221,19 @@ while ($row = mysqli_fetch_assoc($empRecords)) {
       "RM" => $rm['Name'],
       "Status" => $row['Status'],
       "DOB" => $row['DOB'],
-      "form_completion_date" => !empty($row['form_completion_date']) ? date('d-m-Y',strtotime($row['form_completion_date'])) : '',
+      "form_completion_date" => !empty($row['form_completion_date']) ? date('d-m-Y', strtotime($row['form_completion_date'])) : '',
       "ID_Card" => $row['ID_Card'],
       "Admit_Card" => $row['Admit_Card'],
       "Exam" => $row['Exam'],
-      "Pendency" => empty($row['Pendency']) ? 0 : (int)$row['Pendency'],
-      "Pendency_Status" => empty($row['Pendency_Status']) ? 0 : (int)$row['Pendency_Status'],
+      "Pendency" => empty($row['Pendency']) ? 0 : (int) $row['Pendency'],
+      "Pendency_Status" => empty($row['Pendency_Status']) ? 0 : (int) $row['Pendency_Status'],
       "ID" => base64_encode($row['ID'] . 'W1Ebt1IhGN3ZOLplom9I'),
-      "ABC_ID" =>  !empty($row['ABC_ID']) ? $row['ABC_ID'] : '',
+      "ABC_ID" => !empty($row['ABC_ID']) ? $row['ABC_ID'] : '',
       "exam_exit_val" => $exit_status,
-      "Dispatch_status"=>$dispatchedStatus,
+      "Dispatch_status" => $dispatchedStatus,
     );
     //print_r($data);
-  }else{
-  $data[] = array(
-     "updated_date" => !empty($row['Updated_At']) ? date("d-m-Y", strtotime($row['Updated_At'])) : '',
-    "University_id"=>$_SESSION['university_id'] ,
-    "Photo" => empty($row['Location']) ? '/assets/img/default-user.png' : $row['Location'],
-    "First_Name" => $row['First_Name'],
-    "Father_Name" => $row['Father_Name'],
-    "Unique_ID" => $row['Unique_ID'],
-    "Enrollment_No" => !empty($row['Enrollment_No']) ? $row['Enrollment_No'] : '',
-    "OA_Number" => !empty($row['OA_Number']) ? $row['OA_Number'] : '',
-    "Course_Category" => $row['Course_Category'],
-    "Duration" => $row['Duration'],
-    "Step" => $row['Step'],
-    "Process_By_Center" => !empty($row['Process_By_Center']) ? date("d-m-Y", strtotime($row['Process_By_Center'])) : "1",
-    "Payment_Received" => !empty($row['Payment_Received']) ? date("d-m-Y", strtotime($row['Payment_Received'])) : "1",
-    "Document_Verified" => !empty($row['Document_Verified']) ? date("d-m-Y", strtotime($row['Document_Verified'])) : "1",
-    "Processed_To_University" => !empty($row['Processed_To_University']) ? date("d-m-Y", strtotime($row['Processed_To_University'])) : '1',
-    "Adm_Session" => $row['Adm_Session'],
-    "Adm_Type" => $row['Adm_Type'],
-    "Short_Name" => $row['Short_Name'],
-    "Center_Code" => $user['Code'],
-    "Center_Name" => $user['Name'],
-    "Sub_Center_Name" => (!empty($sub_centers['Name']) && $_SESSION['Role'] != 'Center') ? $sub_centers['Name'] : '',
-    "RM" => $rm['Name'],
-    "Status" => $row['Status'],
-    "DOB" => $row['DOB'],
-    "ID_Card" => $row['ID_Card'],
-    "Admit_Card" => $row['Admit_Card'],
-    "Exam" => $row['Exam'],
-   "form_completion_date" => !empty($row['form_completion_date']) ? date('d-m-Y',strtotime($row['form_completion_date'])) : '',
-    "Pendency" => empty($row['Pendency']) ? 0 : (int)$row['Pendency'],
-    "Pendency_Status" => empty($row['Pendency_Status']) ? 0 : (int)$row['Pendency_Status'],
-    "ID" => base64_encode($row['ID'] . 'W1Ebt1IhGN3ZOLplom9I'),
-    "ABC_ID" =>  !empty($row['ABC_ID']) ? $row['ABC_ID'] : '',
-  );
-}
+
 
 }
 

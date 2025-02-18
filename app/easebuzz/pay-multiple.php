@@ -35,51 +35,6 @@ if (isset($_POST['amount']) && isset($_POST['ids'])) {
   $salt = $_SESSION['secret_key'];
   $product_info = 'Fee Payment';
 
-  if ($_SESSION['Vertical_type'] == 0 && $_SESSION['Vertical_type'] != null) {
-    $iits_share = $amount;
-    $split_accounts = json_encode(array("IITS LLP Paramedical" => $iits_share));
-  }
-  if ($_SESSION['Vertical_type'] == 1) {
-    $edtech_share = $amount;
-    $split_accounts = json_encode(array("Edtech" => $edtech_share));
-  }
-  if ($_SESSION['Vertical_type'] == null) {
-    $subcenterArr = explode('.', $_SESSION['Code']);
-    $centerCode = $subcenterArr[0];
-    $centerArr = $conn->query("SELECT ID, Code, Name, Vertical_type FROM Users WHERE Code='".$centerCode."' and Role='Center'");
-    $centerData = $centerArr->fetch_assoc();
-    if ($centerData['Vertical_type'] == 0 && $centerData['Vertical_type'] != null) {
-      $iits_share = $amount;
-      $split_accounts = json_encode(array("IITS LLP Paramedical" => $iits_share));
-    } else {
-      $edtech_share = $amount;
-      $split_accounts = json_encode(array("Edtech" => $edtech_share));
-    }
-  }
-
-// echo $split_accounts; die;
-  //  if($_SESSION['university_id'] == 48){
-  //    if($idstd == 181){
-  //      $iits_share = 1;
-  //      $university_share = 1;
-  //      $amount  = 2;
-  //    }else{
-  //     $iits_share = $amount - $university_share;
-  //    }
-  // }else{
-  //    if($idstd == 181){
-  //      $iits_share = 5;
-  //      $university_share = 5;
-  //      $amount  = 10;
-  //    }else{
-  //     //$iits_share = $amount - $university_share;
-  //     $university_share = count($ids) * 0;
-  //     $iits_share = $amount - $university_share;
-  //    }
-  // }
-  
-  //  $split_accounts = json_encode(array("IITS LLP Paramedical" => $iits_share, "Glocal University" => $university_share));
-
   $value = $key . '|' . $transaction_id . '|' . $amount . '|' . $product_info . '|' . trim($_SESSION['Name']) . '|' . trim($_SESSION['Email']) . '|||||||||||' . $salt;
   $hash = hash('sha512', $value);
 

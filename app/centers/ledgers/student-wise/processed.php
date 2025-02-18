@@ -70,7 +70,7 @@
                 <th>Student Name</th>
                 <th>Duration</th>
                 <th>Paid</th>
-                <th></th>
+                <!-- <th></th> -->
               </tr>
             </thead>
             <tbody>
@@ -99,8 +99,8 @@
                   } ?>
                   <td><span class="text-danger"><?= $fee; ?></span></td>
                   <td>
-                    <center><span class="cursor-pointer badge badge-danger font-weight-bold"
-                        onclick="cancelStudent('<?= $student['ID'] ?>', '<?= $id ?>')">Cancel</span></center>
+                    <!-- <center><span class="cursor-pointer text-danger font-weight-bold"
+                        onclick="cancelStudent('<?= $student['ID'] ?>', '<?= $id ?>')">Cancel</span></center> -->
                   </td>
                 </tr>
               <?php } ?>

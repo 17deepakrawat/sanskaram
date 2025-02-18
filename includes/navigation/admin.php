@@ -87,18 +87,9 @@
           <span class=" arrow <?php print $breadcrumbs[1] == 'exam-students' ? 'open active' : '' ?>"></span></a>
         <span class="icon-thumbnail-main"><i class="uil uil-users-alt"></i></span></span>
         <ul class="sub-menu">
-
-          <?php if ($_SESSION['university_id'] == '48') { ?>
-            <li class="">
-              <a href="/exam-students/exam-status">Exam Status</a>
-              <span class="icon-thumbnail"><i class="pg-icon">ES</i></span>
-            </li>
-          <?php } else { ?>
             <li class="">
               <a href="/lms-settings/document-issue-ance">Document Issue ANCE</a>
             </li>
-          <?php } ?>
-
         </ul>
       </li>
       <li class="<?php print $breadcrumbs[1] == 'admissions' ? 'open active' : '' ?>">
@@ -107,11 +98,7 @@
         <span class="icon-thumbnail-main"><i class="uil uil-book-reader"></i></span></span>
         <ul class="sub-menu">
           <li class="">
-            <?php if ($_SESSION['university_id'] == 48) { ?>
-              <a href="/admissions/skills-application-form">Apply Fresh</a>
-            <?php } else { ?>
               <a href="/admissions/application-form">Apply Fresh</a>
-            <?php } ?>
             <span class="icon-thumbnail"><i class="pg-icon">AF</i></span>
           </li>
           <li class="">
@@ -131,7 +118,7 @@
       </li>
 
       <?php
-      $pages = $conn->query("SELECT Pages.ID, Pages.Name, Pages.Slug FROM Pages LEFT JOIN Page_Access ON Pages.ID = Page_Access.Page_ID WHERE Pages.`Type` = 'Accounts' GROUP BY Pages.Name");
+      $pages = $conn->query("SELECT Pages.ID, Pages.Name, Pages.Slug FROM Pages LEFT JOIN Page_Access ON Pages.ID = Page_Access.Page_ID WHERE Pages.`Type` = 'Accounts' AND Page_Access.Inhouse = 1 GROUP BY Pages.Name");
       if ($pages->num_rows > 0) {
         ?>
         <li class="<?php print $breadcrumbs[1] == 'accounts' ? 'open active' : '' ?>">
@@ -154,7 +141,7 @@
       $pages = $conn->query("SELECT Pages.ID, Pages.Name, Pages.Slug FROM Pages LEFT JOIN Page_Access ON Pages.ID = Page_Access.Page_ID WHERE Pages.`Type` = 'Download' GROUP BY Pages.Name");
       if ($pages->num_rows > 0) {
         ?>
-        <li class="<?php print $breadcrumbs[1] == 'downloads' ? 'open active' : '' ?>">
+        <!-- <li class="<?php print $breadcrumbs[1] == 'downloads' ? 'open active' : '' ?>">
           <a href="javascript:;"><span class="title">Download Center</span>
             <span class=" arrow <?php print $breadcrumbs[1] == 'downloads' ? 'open active' : '' ?>"></span></a>
           <span class="icon-thumbnail-main"><i class="uil uil-down-arrow"></i></span></span>
@@ -167,7 +154,7 @@
               </li>
             <?php } ?>
           </ul>
-        </li>
+        </li> -->
       <?php } ?>
 
 
@@ -216,10 +203,7 @@
           <span class=" arrow <?php print $breadcrumbs[1] == 'settings' ? 'open active' : '' ?>"></span></a>
         <span class="icon-thumbnail-main"><i class="uil uil-cog"></i></span></span>
         <ul class="sub-menu">
-          <!--<li class="">-->
-          <!--  <a href="/settings/crm">CRM</a>-->
-          <!--  <span class="icon-thumbnail"><i class="pg-icon">Cr</i></span>-->
-          <!--</li>-->
+    
           <li class="">
             <a href="/settings/admission">Admission</a>
             <span class="icon-thumbnail"><i class="pg-icon">Ad</i></span>

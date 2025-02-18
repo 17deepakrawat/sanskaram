@@ -93,7 +93,7 @@ function createWorker() {
         if ($emailData) {
             $stepsLog .= date(DATE_ATOM) ." :: Job run for => " . $emailData. "\n\n";
             $emailData = json_decode($emailData, true);
-            //sendMail($emailData['message'],'EDTech',$emailData['email'],"Notification from Glocal University");
+            //sendMail($emailData['message'],'EDTech',$emailData['email'],"Notification from Sanskaram University");
             $emptyCount = 0;
         } else {
             $stepsLog .= date(DATE_ATOM) . " :: Queue is empty.Stopping the worker. \n\n";

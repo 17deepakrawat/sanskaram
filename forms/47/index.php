@@ -8,7 +8,7 @@ if (isset($_GET['student_id'])) {
   require '../../includes/db-config.php';
   session_start();
 
-  if ($_SESSION['university_id'] == 47 || $_SESSION['university_id'] == 48) {
+
     $id = mysqli_real_escape_string($conn, $_GET['student_id']);
     $id = base64_decode($id);
     $id = intval(str_replace('W1Ebt1IhGN3ZOLplom9I', '', $id));
@@ -23,7 +23,7 @@ if (isset($_GET['student_id'])) {
     if ($student['Course'] == 'CERTIFICATION') {
       $pdf = new Fpdi();
       $pdf->SetTitle('Application Form');
-      $pageCount = $pdf->setSourceFile('Glocal-certificate.pdf');
+      $pageCount = $pdf->setSourceFile('Sanskaram-certificate.pdf');
       $pdf->SetFont('Arial', 'B', 11);
       $checke_image = '../../assets/img/form/checked.png';
       // Extensions
@@ -211,60 +211,7 @@ if (isset($_GET['student_id'])) {
         }
       }
 
-      // Academics
-      // $academis = array(
-      //   'High School', 'Intermediate', 'Under Graduation',
-      //   'Post Graduation', 'Other'
-      // );
-      // $y = '210';
-      // foreach ($academis as $academic) {
-      //   $x = '53';
-
-      //   // Details
-      //   $type = $academic == 'Under Graduation' ? 'UG' : ($academic ==
-      //     'Post Graduation' ? 'PG' : $academic);
-      //   $data = $conn->query("SELECT * FROM Student_Academics WHERE
-      //   Student_ID = $id AND Type = '$type'");
-      //   if ($data->num_rows > 0) {
-
-      //     $data = mysqli_fetch_assoc($data);
-
-      //     // $pdf->SetXY($x, $y);
-      //     // $pdf->Write(1, $academic);
-      //     $x += 3;
-      //     $pdf->SetXY($x, $y);
-      //     $pdf->Write(1, !empty($data['Board/Institute']) ?
-      //       substr($data['Board/Institute'], 0, 28) : '');
-
-      //     $x += 33;
-      //     $pdf->SetXY($x, $y);
-      //     $pdf->Write(1, !empty($data['Board/Institute']) ?
-      //       substr($data['Board/Institute'], 0, 28) : '');
-
-      //     $x += 30;
-      //     $pdf->SetXY($x, $y);
-      //     $pdf->Write(1, !empty($data['Year']) ? $data['Year'] : '');
-
-      //     $x += 11;
-      //     $pdf->SetXY($x, $y);
-      //     $pdf->Write(1, !empty($data['Subject']) ? $data['Subject'] : '');
-
-      //     $x += 30;
-      //     $pdf->SetXY($x, $y);
-      //     $pdf->Write(1, !empty($data['Marks_Obtained']) ? $data['Marks_Obtained'] : '');
-
-      //     $x += 15;
-      //     $pdf->SetXY($x, $y);
-      //     $pdf->Write(1, !empty($data['Total_Marks']) ? $data['Total_Marks'] : '');
-
-      //     // Roll No
-      //     $x += 48;
-      //     $pdf->SetXY($x, $y);
-      //     $pdf->Write(1, !empty($data['Marks_Obtained']) ? $data['Marks_Obtained'] : '');
-      //   }
-      //   $y += 8;
-      // }
-
+  
       $i = 0;
       $end = 3;
       while ($i < $end) {
@@ -288,7 +235,7 @@ if (isset($_GET['student_id'])) {
     } else {
       $pdf = new Fpdi();
       $pdf->SetTitle('Application Form');
-      $pageCount = $pdf->setSourceFile('Glocal-Admission-Form.pdf');
+      $pageCount = $pdf->setSourceFile('Sanskaram-Admission-Form.pdf');
       $pdf->SetFont('Arial', 'B', 11);
 
       // Tick Image
@@ -594,15 +541,6 @@ if (isset($_GET['student_id'])) {
       $pdf->useImportedPage($pageId, 0, 0, 210);
 
 
-      // Page 3
-      // $pageId = $pdf->importPage(3, PdfReader\PageBoundaries::MEDIA_BOX);
-      // $pdf->addPage();
-      // $pdf->useImportedPage($pageId, 0, 0, 210);
-
-      // // Date
-      // $pdf->SetXY(100.5, 190.5);
-      // $pdf->Write(1, date('d-m-Y'));
-
 
       $i = 0;
       $end = 3;
@@ -625,7 +563,5 @@ if (isset($_GET['student_id'])) {
 
       $pdf->Output('I', 'Application Form.pdf');
     }
-  } else {
-    header('Location: /');
-  }
+
 }

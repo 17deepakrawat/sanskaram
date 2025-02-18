@@ -227,9 +227,7 @@ if (isset($_GET['id'])) {
     })
 
     function getDetails(id) {
-      if (id == 48) {
-        $('#course_category_drp').removeClass('d-none')
-      }
+    
       $.ajax({
         url: '/app/sub-courses/courses?id=' + id,
         type: 'GET',

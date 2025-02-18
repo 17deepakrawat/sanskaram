@@ -1,7 +1,6 @@
 <?php
 require '../../includes/db-config.php';
 session_start();
-//if($_SESSION['university_id'] == 48){}
 ?>
 
 <!-- Modal -->

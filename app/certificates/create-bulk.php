@@ -20,7 +20,7 @@ session_start();
           <select required class="full-width" style="border: transparent;" id="course_type_id" name="course_type_id" onchange="getSubCourse(this.value);">
             <option value="">Select</option>
             <?php
-            $programs = $conn->query("SELECT ID,Name,Short_Name FROM Courses WHERE University_ID = 48");
+            $programs = $conn->query("SELECT ID,Name,Short_Name FROM Courses ");
             while ($program = $programs->fetch_assoc()) { ?>
               <option value="<?= $program['ID'] ?>">
                 <?= $program['Name'] . ' (' . $program['Short_Name'] . ')' ?>

@@ -41,9 +41,7 @@
             $syllabus_id = 0;
             $date_sheet_id = 0;
             $exam_sessions = $conn->query("SELECT ID FROM Exam_Sessions WHERE JSON_KEYS(Admission_Session) LIKE '%" . $_SESSION['Admission_Session_ID'] . "%'");
-            if($_SESSION['university_id'] == 48){
-              $exam_sessions = $conn->query("SELECT Admission_Session_ID as ID FROM Students_Exam_Sessions WHERE Admission_Session_ID = ".$_SESSION['Admission_Session_ID']." ");
-            }
+         
             
             if ($exam_sessions->num_rows > 0) {
               while ($exam_session = $exam_sessions->fetch_assoc()) {
@@ -131,10 +129,7 @@
       </script>
 
     <?php
-      // $check = $conn->query("SELECT ID FROM Exam_Attempts WHERE Student_ID = " . $_SESSION['ID'] . " AND Date_Sheet_ID = " . $date_sheet_id . "");
-      // if ($check->num_rows > 0) {
-      //   echo '<script>startExam()</script>';
-      // }
+
     } ?>
 
     <?php include($_SERVER['DOCUMENT_ROOT'] . '/includes/footer-bottom.php'); ?>

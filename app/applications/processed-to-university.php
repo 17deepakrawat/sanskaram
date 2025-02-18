@@ -10,32 +10,18 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
   $id = base64_decode($_REQUEST['id']);
   $id = intval(str_replace('W1Ebt1IhGN3ZOLplom9I', '', $id));
   if ($id != '') {
- 
+
     $student = $conn->query("SELECT * FROM `Students` LEFT JOIN `Admission_Sessions` ON `Admission_Sessions`.`ID`=`Students`.`Admission_Session_ID` WHERE `Students`.`ID`='" . $id . "'");
     if ($student->num_rows == 0) {
       exit(json_encode(['status' => 400, 'message' => 'Student id is not valid!']));
     }
     $row = $student->fetch_assoc();
-   	if($row['University_ID']==47)
-    {
-    	if($row['Admission_Session_ID']!=82)
-        {
-        	exit(json_encode(['status' => 400, 'message' => 'Session not allowed for enrollment!']));
-        }
-    }
+
     if ($row['Payment_Received'] != null && $row['Document_Verified'] != null && $row['Payment_Received'] != '' && $row['Document_Verified'] != '') {
       $course_name = $conn->query("SELECT `Name` FROM `Sub_Courses` where University_ID= '" . $row['University_ID'] . "' and id='" . $row['Sub_Course_ID'] . "'");
       $cName = $course_name->fetch_assoc();
-      $cCat = 2;
-      if ($row['University_ID'] == 47) {
-        $cCat = 3;
-      }
-      
-      if($row['University_ID']==47)
-      {
-        $cName['Name'] = $cName['Name'];
-      }
-      //print_r($cName['Name']);
+      $cCat = 3;
+      $cName['Name'] = $cName['Name'];
       $postData['cid'] = $cName['Name'];
       $address = json_decode($row['Address'], true);
       $postData['cCategory'] = $cCat;

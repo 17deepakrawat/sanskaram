@@ -85,7 +85,7 @@
           <div>
             <button type="button" class="btn btn-primary" onclick="pay('wallet')"> Pay Wallet</button>
             <?php if (isset($_SESSION['gateway'])) { ?>
-              <button type="button" class="btn btn-primary" disabled onclick="pay('Online')"> Pay Online</button>
+              <!-- <button type="button" class="btn btn-primary" disabled onclick="pay('Online')"> Pay Online</button> -->
             <?php } ?>
             <button type="button" class="btn btn-primary" disabled onclick="pay('Offline')">Pay Offline</button>
           </div>
@@ -179,38 +179,7 @@
     <?php if ($_SESSION['Role'] == 'Center' || $_SESSION['Role'] == 'Sub-Center') { ?>
       <script src="https://ebz-static.s3.ap-south-1.amazonaws.com/easecheckout/easebuzz-checkout.js"></script>
       <script type="text/javascript">
-        // function pay(by) {
-        //   if ($('.student-checkbox').filter(':checked').length == 0) {
-        //     notification('danger', 'Please select Student');
-        //   } else {
-        //     var center = '<?= $id ?>';
-        //     var ids = [];
-        //     $.each($("input[name='student_id']:checked"), function() {
-        //       ids.push($(this).val());
-        //     });
-
-        //     $.ajax({
-        //       url: '/app/centers/ledgers/payable-amount',
-        //       type: 'POST',
-        //       data: {
-        //         ids,
-        //         center
-        //       },
-        //       dataType: 'json',
-        //       success: function(data) {
-        //         if (data.status) {
-        //           if (by == 'Online') {
-        //             payOnline(ids, data.amount, center);
-        //           } else if (by == 'Offline') {
-        //             payOffline(ids, data.amount, center);
-        //           }
-        //         } else {
-        //           notification('danger', data.message);
-        //         }
-        //       }
-        //     })
-        //   }
-        // }
+ 
 
         function payOnline(ids, amount, center) {
           $.ajax({

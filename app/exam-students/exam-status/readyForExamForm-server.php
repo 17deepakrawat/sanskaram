@@ -445,7 +445,7 @@ function getExamApiResponse($uniqueIds)
   $curlHandles = [];
 
   foreach ($uniqueIds as $id) {
-    $url = 'https://glocal.exam-portal.in/api/answer-sheets/list?uniqueId=' . $id;
+   $url = "";
     $curl = curl_init();
 
     curl_setopt_array($curl, array(

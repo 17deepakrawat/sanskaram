@@ -275,10 +275,10 @@ if (isset($_POST['username']) && isset($_POST['password'])) {
           $conn->query("INSERT INTO OTP_Verifications (`User_ID`, `OTP`) VALUES ({$_SESSION['ID']}, '$otp')");
         }
         
-        $message = "Hi " . $_SESSION['Name'] . ",@@ @@ Your Glocal University ERP login OTP is *" . $otp . "*@@ @@ This code is valid for the next 5 minutes. Do not share this code with anyone.";
+        $message = "Hi " . $_SESSION['Name'] . ",@@ @@ Your Sanskaram University ERP login OTP is *" . $otp . "*@@ @@ This code is valid for the next 5 minutes. Do not share this code with anyone.";
         $curl = curl_init();
         curl_setopt_array($curl, array(
-          CURLOPT_URL => 'https://erpglocal.iitseducation.org/app/whatsapp/send-text',
+          CURLOPT_URL => 'https://sanskaram.edtechinnovate.in/app/whatsapp/send-text',
           CURLOPT_RETURNTRANSFER => true,
           CURLOPT_ENCODING => '',
           CURLOPT_MAXREDIRS => 10,

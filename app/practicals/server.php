@@ -55,7 +55,7 @@ $result_record = "SELECT Students.`ID` as student_id, CONCAT_WS(' ', Students.Fi
     Students.Enrollment_No, Sub_Courses.`Name` as sub_course_name, Sub_Courses.`Short_Name` as sub_course_short_name, Student_Practical_Result.id as resultId,
     Syllabi.`Name` as subject_name, Syllabi.ID as subject_id, Student_Practical.id as practical_id, Syllabi.`Code` as subject_code, Syllabi.Semester AS semester,Submitted_Practical.created_date,Submitted_Practical.student_practical_file,COALESCE(Submitted_Practical.uploaded_type,Student_Practical_Result.uploaded_type,'NULL') AS uploaded_type,Submitted_Practical.id,Student_Practical_Result.obtained_mark,Student_Practical_Result.remark,
     CASE WHEN Student_Practical_Result.id IS NOT NULL THEN Student_Practical_Result.status ELSE 'NOT EVALUATED' END AS eva_status,
-    CASE WHEN Universities.ID = 47 THEN 'BVOC PROGRAM' WHEN Universities.ID = 48 THEN 'SKILL PROGRAM' ELSE 'Unknown University' END AS universityname,
+    CASE WHEN Universities.ID = ".UNIVERSITY_ID." THEN 'BVOC PROGRAM'  ELSE 'Unknown University' END AS universityname,
     CASE WHEN Student_Practical.id IS NULL THEN 'NOT CREATED' ELSE 'CREATED' END AS practical_status,
     CASE WHEN Submitted_Practical.id IS NULL THEN 'NOT SUBMITTED' ELSE 'SUBMITTED' END AS student_status, 
     Students.`status`

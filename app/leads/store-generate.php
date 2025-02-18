@@ -99,9 +99,9 @@ if (isset($_POST['name']) && isset($_POST['email']) && isset($_POST['mobile']) &
     if ($add_lead_status) {
       if ($organization_name == "Vidya Planet") {
         if ($_SESSION['university_id'] == 17) {
-          echo json_encode(['status' => 200, 'message' => 'Lead created successfully!', 'url' => 'https://idladmissions.dpu.edu.in/login.aspx?utm_source=11409744966']);
+          echo json_encode(['status' => 200, 'message' => 'Lead created successfully!', 'url' => '/login.aspx?utm_source=11409744966']);
         } elseif ($_SESSION['university_id'] == 18) {
-          echo json_encode(['status' => 200, 'message' => 'Lead created successfully!', 'url' => 'https://admission.lpuonline.com/lp/mp.html?utm_source=322DL0017&utm_medium=DiljeetKaur&utm_campaign=9310828522']);
+          echo json_encode(['status' => 200, 'message' => 'Lead created successfully!', 'url' => '/lp/mp.html?utm_source=322DL0017&utm_medium=DiljeetKaur&utm_campaign=9310828522']);
         } else {
           echo json_encode(['status' => 200, 'message' => 'Lead created successfully!']);
         }

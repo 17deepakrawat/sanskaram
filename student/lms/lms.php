@@ -38,7 +38,7 @@
                                 if (count($breadcrumbs) == $i):
                                     $active = "active";
                                     $crumb = explode("?", $breadcrumbs[$i]);
-                                    echo '<li class="breadcrumb-item ' . $active . '">' . $crumb[0] . '</li>';
+                                    echo '<li class="breadcrumb-item ' . $active . '">' . strtoupper($crumb[0]) . '</li>';
                                 endif;
                             }
                             ?>
@@ -52,25 +52,13 @@
             </div>
             <!-- END JUMBOTRON -->
             <?php
-            if ($_SESSION['university_id'] == 48) {
-                if ($_SESSION['Duration'] == '11/advance-diploma') {
-                    $duration = '11/Advanced';
-                } elseif ($_SESSION['Duration'] == '11/certified') {
-                    $duration = '11/certified';
-                } elseif ($_SESSION['Duration'] == '6' && $_SESSION['Course_Category'] == 'certified') {
-                    $duration = '6/certified';
-                } else {
-                    $duration = $_SESSION['Duration'];
-                }
-            } else {
-                $duration = $_SESSION['Duration'];
-            }
+            $duration = $_SESSION['Duration'];
             ?>
 
             <div class="card">
                 <div class="card-header">
                     <div class="row justify-content-center">
-                        <?php if ($_SESSION['university_id'] == 47) { ?>
+                    
                             <div class="col-md-6">
                                 <div class="form-group form-group-default required">
                                     <label>Semester</label>
@@ -80,7 +68,7 @@
                                     </select>
                                 </div>
                             </div>
-                        <?php } ?>
+                      
                     </div>
                 </div>
                 <div class="card-body">
@@ -180,11 +168,8 @@
 
             $('#student_e_books_not').hide();
             var course_id = '<?= $_SESSION['Sub_Course_ID'] ?>';
-            if ('<?= $_SESSION['university_id'] ?>' == 47) {
-                var semester = $('#semester').val();
-            } else {
-                var semester = '<?= $duration ?>';
-            }
+            var semester = $('#semester').val();
+            
             if (course_id.length > 0 && semester.length > 0) {
                 $.ajax({
                     url: '/app/subjects/syllabus?course_id=' + course_id + '&semester=' + semester + '&lms=lms',
@@ -287,12 +272,6 @@
             });
         }
     </script>
-    <?php if ($_SESSION['university_id'] == 48) { ?>
-        <script>
-            $(document).ready(function () {
-                getTable();
-            })
-        </script>
-    <?php } ?>
+
 
     <?php include($_SERVER['DOCUMENT_ROOT'] . '/includes/footer-bottom.php'); ?>

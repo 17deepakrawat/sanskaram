@@ -66,13 +66,12 @@ unset($_SESSION['courseFilter']);
             <div class="row">
                 
               <div class="col-md-3 m-b-10">
-                  <?php if($_SESSION['university_id']==47){ ?>
+           
                 <div class="form-group">
                   <select class="full-width" style="width:40px" data-init-plugin="select2" id="duration"
                     onchange="addFilter(this.value, 'duration')" data-placeholder="Choose Duration">
                   </select>
                 </div>
-                <?php } ?>
               </div>
               <div class="col-md-6"></div>
               <div class="col-md-3">

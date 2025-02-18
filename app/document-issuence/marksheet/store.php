@@ -8,11 +8,9 @@ $export_data = array();
 
 if (isset($_FILES['file'])) {
 
-    if ($_SESSION['university_id'] == 48) {
+
         $header = array('Student_ID','Enrollment_No', 'Marksheet No','Exam Session','Duration','Remark');
-    } else {
-        $header = array('Student_ID','Enrollment_No', 'Marksheet No','Exam Session','Duration','Remark');
-    }
+    
     $export_data[] = $header;
 
     $mimes = [

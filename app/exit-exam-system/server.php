@@ -52,7 +52,7 @@ if($_SESSION['Role']=="Center" || $_SESSION['Role']=="Sub-Center"){
   $userQuery = " AND Added_For = ".$_SESSION['ID'];
 }
 
-$filterByUniversity = " AND Students.University_ID =47 AND Enrollment_No IS NOT NULL";
+$filterByUniversity = " AND Students.University_ID =".UNIVERSITY_ID." AND Enrollment_No IS NOT NULL";
 $searchQuery .= $filterByUniversity. $filterBysubCourse.$filterBySubCourses .$filterByUsers.$userQuery.$filterByExamStatus.$role_query;
 
 

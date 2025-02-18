@@ -88,7 +88,7 @@ $totalRecordwithFilter = $records['filtered'];
 
 
 ## Fetch records
-$result_record = "SELECT CASE WHEN Universities.ID = 47 THEN 'BVOC PROGRAM' WHEN Universities.ID = 48 THEN 'SKILL PROGRAM' ELSE 'Unknown University' END AS universityname,
+$result_record = "SELECT CASE WHEN Universities.ID = ".UNIVERSITY_ID." THEN 'BVOC PROGRAM' ELSE 'Unknown University' END AS universityname,
 CASE WHEN Users.Vertical_type = 1 THEN 'Edtech' WHEN Users.Vertical_type = 0 THEN 'IITS LLP Paramedical' END as verticaltypes,
 Students.`ID` as student_id, CONCAT_WS(' ', Students.First_Name, Students.Middle_Name, Students.Last_Name) AS student_name,
     Students.Enrollment_No, Sub_Courses.`Name` as sub_course_name, Sub_Courses.`Short_Name` as sub_course_short_name,

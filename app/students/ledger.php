@@ -126,11 +126,11 @@ if (isset($_GET['id'])) {
                       <td><?= date("d-m-Y", strtotime($ledger['Date'])) ?></td>
                     <td><?= $ledger['Type'] == 1 ? "Due" : "Paid" ?></td>
                     <td><?= $ledger['Source'] ?></td>
-                    <td><a href="/print/receipt/index.php?id=<?= $ledger['ID'] ?>&duration=<?= $ledger['Duration'] ?>" target="_blank"><u>
+                    <td>
                           <?php if (!empty($payments_arr)) : ?>
                             <?= $payments_arr['art_id'] ?>
                           <?php endif; ?>
-                        </u></a>
+                        
                     </td>
                     <td class="text-right">
                       <?php if ((int)$ledger['Fee']) {

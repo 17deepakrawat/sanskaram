@@ -3,7 +3,7 @@
 <div class="modal-header clearfix text-left">
   <button aria-label="" type="button" class="close" data-dismiss="modal" aria-hidden="true"><i class="pg-icon">close</i>
   </button>
-  <h5>Pay Online</h5>
+  <!-- <h5>Pay Online</h5> -->
 </div>
 <form role="form" id="payment-form" action="/app/easebuzz/pay">
   <div class="modal-body">

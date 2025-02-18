@@ -113,7 +113,7 @@ if ($sqldata->num_rows > 0) {
         $data[] = $row['subject_code'];
         $data[] = $max_marks;
         $data[] = $min_marks;
-        $data[] = ($_SESSION['university_id'] == 48) ? $row['obt_marks_ext'] : $row['obt_marks_int'];
+        $data[] = $row['obt_marks_int'];
         $data[] = $row['sub_course_name'];
         $data[] = $row['user_name'] . "(" . $row['Code'] . ")";
 

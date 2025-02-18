@@ -32,7 +32,7 @@
           </li>
 
           <?php if($_SESSION['crm']!=0){ ?>
-            <li class="<?php print $breadcrumbs[1]=='leads' ? 'open active' : '' ?>">
+            <!-- <li class="<?php print $breadcrumbs[1]=='leads' ? 'open active' : '' ?>">
               <a href="javascript:;"><span class="title">Leads</span>
               <span class=" arrow <?php print $breadcrumbs[1]=='leads' ? 'open active' : '' ?>"></span></a>
               <span class="icon-thumbnail-main"><i class="uil uil-user"></i></span></span>
@@ -50,7 +50,7 @@
                   <span class="icon-thumbnail"><i class="pg-icon">FU</i></span>
                 </li>
               </ul>
-            </li>
+            </li> -->
           <?php } ?>
           
          <li class="<?php print $breadcrumbs[1] == 'exam-students' ? 'open active' : '' ?>" >
@@ -58,16 +58,10 @@
            <span class=" arrow <?php print $breadcrumbs[1] == 'exam-students' ? 'open active' : '' ?>"></span></a>
            <span class="icon-thumbnail-main"><i class="uil uil-users-alt"></i></span></span>
            <ul class="sub-menu">
-                 <?php if($_SESSION['university_id'] == '48') {?>
-              <li class="">
-                <a href="/exam-students/exam-status">Exam Status</a>
-                <span class="icon-thumbnail"><i class="pg-icon">ES</i></span>
-              </li>
-             <?php }else{ ?>
+
                <li class="">
                <a href="/lms-settings/document-issue-ance">Document Issue ANCE</a>
              </li>
-             <?php } ?>
            </ul>
           </li>
           
@@ -88,7 +82,7 @@
                 <a href="/admissions/re-registrations">Re-Reg</a>
                 <span class="icon-thumbnail"><i class="pg-icon">RR</i></span>
               </li>
-              <li class="">
+              <!-- <li class="">
                 <a href="/admissions/back-papers">Back-Paper</a>
                 <span class="icon-thumbnail"><i class="pg-icon">BP</i></span>
               </li>
@@ -99,7 +93,7 @@
               <li class="">
                 <a href="/admissions/exam-schedules">Exam Schedule</a>
                 <span class="icon-thumbnail"><i class="pg-icon">ES</i></span>
-              </li>
+              </li> -->
             </ul>
           </li>
 
@@ -138,7 +132,7 @@
             $downloads = $conn->query("SELECT Pages.ID, Pages.Name, Pages.Slug FROM Pages LEFT JOIN Page_Access ON Pages.ID = Page_Access.Page_ID AND Page_Access.University_ID = ".$_SESSION['university_id']." WHERE Pages.`Type` = 'Download' AND Page_Access.Inhouse = 1");
             if($downloads->num_rows>0){
           ?>
-            <li class="<?php print $breadcrumbs[1]=='downloads' ? 'open active' : '' ?>">
+            <!-- <li class="<?php print $breadcrumbs[1]=='downloads' ? 'open active' : '' ?>">
               <a href="javascript:;"><span class="title">Download Center</span>
               <span class=" arrow <?php print $breadcrumbs[1]=='downloads' ? 'open active' : '' ?>"></span></a>
               <span class="icon-thumbnail-main"><i class="uil uil-down-arrow"></i></span></span>
@@ -150,7 +144,7 @@
                   </li>
                 <?php } ?>
               </ul>
-            </li>
+            </li> -->
           <?php } ?>
 
           <!--<li class="m-t-20">-->
@@ -161,13 +155,13 @@
           <!--  <span class="icon-thumbnail-main"><i class="uil uil-briefcase-alt"></i></span>-->
           <!--</li>-->
 
-          <li class="m-t-0">
+          <!-- <li class="m-t-0">
             <a href="#" class="detailed">
               <span class="title">Support</span>
               <span class="details">Coming Soon</span>
             </a>
             <span class="icon-thumbnail-main"><i class="uil uil-phone-alt"></i></span>
-          </li>
+          </li> -->
 
         </ul>
         <div class="clearfix"></div>

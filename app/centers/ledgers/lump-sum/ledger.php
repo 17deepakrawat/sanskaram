@@ -17,7 +17,7 @@
       <div class="col-lg-12 d-flex justify-content-end">
         <div>
           <?php if (isset($_SESSION['gateway'])) { ?>
-            <button type="button" class="btn btn-primary" onclick="add('<?php echo $_SESSION['gateway'] == 1 ? 'easebuzz' : '' ?>', 'md')"> Pay Online</button>
+            <!-- <button type="button" class="btn btn-primary" onclick="add('<?php echo $_SESSION['gateway'] == 1 ? 'easebuzz' : '' ?>', 'md')"> Pay Online</button> -->
           <?php } ?>
           <button type="button" class="btn btn-primary" onclick="add('offline-payments', 'lg')">Pay Offline</button>
         </div>

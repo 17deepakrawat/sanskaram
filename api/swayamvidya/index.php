@@ -16,7 +16,7 @@ if (isset($_POST['center'])) {
     $sub_course_id = $conn->query("SELECT ID FROM Sub_Courses WHERE Name Like '%" . $_POST['specialization'] . "%' OR Short_Name like '%" . $_POST['specialization'] . "%'");
     $center_id = $conn->query("SELECT ID FROM Users WHERE Name Like '%" . $_POST['center'] . "%' OR Short_Name like '%" . $_POST['center'] . "%' OR Code Like '%" . $_POST['center'] . "%'");
     $admission_session_id = mysqli_fetch_assoc($admission_session_id);
-    
+
     if (!isset($admission_session_id)) {
         echo json_encode(array(['status' => 'error', 'message' => 'Admission session not found.']));
         exit;
@@ -41,8 +41,7 @@ if (isset($_POST['center'])) {
         echo json_encode(array(['status' => 'error', 'message' => 'Center not found.']));
         exit;
     }
-    if(!isset($_POST['phone']) && !isset($_POST['phone']))
-    {
+    if (!isset($_POST['phone']) && !isset($_POST['phone'])) {
         echo json_encode(array(['status' => 'error', 'message' => 'Mobile number not exit.']));
         exit;
     }
@@ -100,58 +99,26 @@ if (isset($_POST['center'])) {
     $aadhar = mysqli_real_escape_string($conn, $_POST['aadhar']);
     $nationality = mysqli_real_escape_string($conn, $_POST['nationality']);
 
-    // echo "<pre>"; print_r($_POST); die;
 
-    // if(empty($center) || empty($admission_session) || empty($admission_type) || empty($course) || empty($sub_course) || empty($duration) || empty($first_name)){
-    //   echo json_encode(['status'=>400, 'message'=>'All fields are required']);
-    //   exit();
-    // }
-    if ($course_id['University_ID']  == 48) {
-        $course_category = mysqli_real_escape_string($conn, $_POST['course_category']);
-    }
     $mode = $conn->query("SELECT Mode_ID FROM Sub_Courses WHERE ID = $sub_course");
     $mode = mysqli_fetch_assoc($mode);
     $mode = $mode['Mode_ID'];
 
-    // $aadhar_check = $conn->query("SELECT ID FROM Students WHERE Aadhar_Number = '$aadhar' AND University_ID = " . $course_id['University_ID'] . "");
-    // if ($aadhar_check->num_rows > 0) {
-    //   echo json_encode(['status' => 400, 'message' => 'Aadhar number already exists!']);
-    //   exit();
-    // }
 
 
 
-    if ($course_id['University_ID'] == 47) {
-        $student_check = $conn->query("SELECT ID FROM Students WHERE First_Name = '$first_name' AND Father_Name = '$father_name' AND Mother_Name = '$mother_name' AND DOB = '$dob' AND University_ID = " . $course_id['University_ID'] . " AND Course_ID = $course AND Added_For = $center");
-        if ($student_check->num_rows > 0) {
-            echo json_encode(['status' => 'error', 'message' => 'Student with same details already exists!']);
-            exit();
-        }
+    $student_check = $conn->query("SELECT ID FROM Students WHERE First_Name = '$first_name' AND Father_Name = '$father_name' AND Mother_Name = '$mother_name' AND DOB = '$dob' AND University_ID = " . $course_id['University_ID'] . " AND Course_ID = $course AND Added_For = $center");
+    if ($student_check->num_rows > 0) {
+        echo json_encode(['status' => 'error', 'message' => 'Student with same details already exists!']);
+        exit();
     }
-    if ($course_id['University_ID']  == 48) {
-        $add_student = $conn->query("INSERT INTO Students (Added_By, Added_For, University_ID, Admission_Type_ID, Admission_Session_ID, Course_ID, Sub_Course_ID, Mode_ID, Duration, Course_Category, First_Name, Middle_Name, Last_Name, Father_Name, Mother_Name, DOB, Aadhar_Number, Category, Gender, Nationality, Employement_Status, Marital_Status, Religion, Step) VALUES(" . $center . ", $center, " . $course_id['University_ID'] . ", $admission_type, $admission_session, $course, $sub_course, $mode, '" . $duration . "', '$course_category', '$first_name', '$middle_name', '$last_name', '$father_name', '$mother_name', '$dob', '$aadhar', '$category', '$gender', '$nationality', '$employment_status', '$marital_status', '$religion', 1)");
-    } else {
-        $add_student = $conn->query("INSERT INTO Students (Added_By, Added_For, University_ID, Admission_Type_ID, Admission_Session_ID, Course_ID, Sub_Course_ID, Mode_ID, Duration,Adm_Duration, First_Name, Middle_Name, Last_Name, Father_Name, Mother_Name, DOB, Aadhar_Number, Category, Gender, Nationality, Employement_Status, Marital_Status, Religion, Step) VALUES(" . $center . ", $center, " . $course_id['University_ID'] . ", $admission_type, $admission_session, $course, $sub_course, $mode, '" . $duration . "', '" . $duration . "', '$first_name', '$middle_name', '$last_name', '$father_name', '$mother_name', '$dob', '$aadhar', '$category', '$gender', '$nationality', '$employment_status', '$marital_status', '$religion', 1)");
-    }
+
+
+    $add_student = $conn->query("INSERT INTO Students (Added_By, Added_For, University_ID, Admission_Type_ID, Admission_Session_ID, Course_ID, Sub_Course_ID, Mode_ID, Duration,Adm_Duration, First_Name, Middle_Name, Last_Name, Father_Name, Mother_Name, DOB, Aadhar_Number, Category, Gender, Nationality, Employement_Status, Marital_Status, Religion, Step) VALUES(" . $center . ", $center, " . $course_id['University_ID'] . ", $admission_type, $admission_session, $course, $sub_course, $mode, '" . $duration . "', '" . $duration . "', '$first_name', '$middle_name', '$last_name', '$father_name', '$mother_name', '$dob', '$aadhar', '$category', '$gender', '$nationality', '$employment_status', '$marital_status', '$religion', 1)");
+
     if ($add_student) {
         $student_id = $conn->insert_id;
-        if ($course_id['University_ID']  == 48) {
-            $admission_session_name = $conn->query("SELECT Name FROM Admission_Sessions WHERE ID = '" . $admission_session . "' ");
-            $admission_session_name = mysqli_fetch_assoc($admission_session_name);
-            $admission_session_name = $admission_session_name['Name'];
-            $date = date_parse($admission_session_name);
-            $add_months = '+' . $duration . ' months';
-            $month_name = date('M', strtotime($add_months, strtotime(date("F", mktime(0, 0, 0, $date['month'], 10)))));
-            //$m_name = $month_name.'-23';
-            $m_name = $month_name . '-24';
 
-            $exam_sessions = $conn->query("SELECT ID FROM Exam_Sessions WHERE Name = '" . $m_name . "' ");
-            if ($exam_sessions->num_rows > 0) {
-
-                $exam_session = mysqli_fetch_assoc($exam_sessions);
-                $conn->query("INSERT INTO Students_Exam_Sessions (Student_ID, Exam_Session_ID, Admission_Session_ID) VALUES ($student_id, '" . $exam_session['ID'] . "' , '$admission_session')");
-            }
-        }
 
         if (empty($lead_id)) {
             $has_unique_student_id = $conn->query("SELECT ID_Suffix, Max_Character FROM Universities WHERE ID = " . $course_id['University_ID'] . " AND Has_Unique_StudentID = 1");
@@ -212,7 +179,7 @@ if (isset($_POST['center'])) {
             exit();
         }
         $alternate_email = strtolower($alternate_email);
-        $contact = mysqli_real_escape_string($conn, $_POST['phone']?$_POST['phone']:($_POST['mobile']?$_POST['mobile']:0));
+        $contact = mysqli_real_escape_string($conn, $_POST['phone'] ? $_POST['phone'] : ($_POST['mobile'] ? $_POST['mobile'] : 0));
         if (strlen($contact) < 10) {
             echo json_encode(['status' => 'error', 'message' => 'Please Enter the 10 Digits Number!']);
         }
@@ -236,10 +203,9 @@ if (isset($_POST['center'])) {
 
         //////STEP 3 START FROM HERE
         include 'document_upload.php';
-        $uploadStatus = uploadDocuments($student_id,$_POST);
-        if(json_decode($uploadStatus,true)['status']=='error')
-        {
-            echo json_encode(array(['status'=>'error','message'=>$uploadStatus['message']]));
+        $uploadStatus = uploadDocuments($student_id, $_POST);
+        if (json_decode($uploadStatus, true)['status'] == 'error') {
+            echo json_encode(array(['status' => 'error', 'message' => $uploadStatus['message']]));
             exit;
         }
         /////STEP 3 ENDS HERE
@@ -249,5 +215,5 @@ if (isset($_POST['center'])) {
         echo json_encode(['status' => 'error', 'message' => 'Data not added']);
     }
 } else {
-    echo json_encode(array(['status' => 'error','message'=>'center name or code or short name required']));
+    echo json_encode(array(['status' => 'error', 'message' => 'center name or code or short name required']));
 }

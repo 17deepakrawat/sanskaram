@@ -328,6 +328,7 @@ function changeStatus(table, id, column = null,status=null) {
   }
 
   function getCenterList(id) {
+    
     $.ajax({
       url: '/app/students/center-list',
       type: 'GET',

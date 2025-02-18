@@ -82,20 +82,6 @@ $semesterArray = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12];
 $searchQuery = '';
 $mySyllabi = array();
 
-    //  if ($_SESSION['university_id'] == 48) {
-    //     if ($_SESSION['Duration'] == '11/advance-diploma') {
-    //         $duration = '11/Advanced';
-    //     } elseif ($_SESSION['Duration'] == '11/certified') {
-    //         $duration = '11/certified';
-    //     } elseif ($_SESSION['Duration'] == '6' && $_SESSION['Course_Category'] == 'certified') {
-    //         $duration = '6/certified';
-    //     } else {
-    //         $duration = $_SESSION['Duration'];
-    //     }
-    // } else{
-    //     $duration = $_SESSION['Duration'];
-    //   }
-
 if (isset($_GET['id'])) {
     $active = '';
     $mySyllabi[0] = $_GET['id'];
@@ -248,39 +234,7 @@ while ($rowArr = mysqli_fetch_assoc($results_records)) {
                             <div class="tab-pane p-20 <?php echo isset($_GET['type']) && $_GET['type'] == 3 ? 'active' : ''; ?>" id="subject" role="tabpanel">
                                 <div class="">
                                     <div class="row">
-                                        <!-- <div class="col-md-4">
-                                            <div class="list-group">
-                                                <a href="#" class="list-group-item list-group-item-action flex-column align-items-start active">
-                                                    <div class="d-flex w-100 justify-content-between align-items-center">
-                                                        <div>
-                                                            <h5 class="mb-0">Assessment Name</h5>
-                                                            <small><i class="ti-timer mr-1"></i>Dec 1, 2023</small>
-                                                        </div>
-                                                        <span class="badge bg-success"><i class="fa fa-check"></i> Completed</span>
-                                                    </div>
-                                                </a>
-                                                <a href="#" class="list-group-item list-group-item-action flex-column align-items-start">
-                                                    <div class="d-flex w-100 justify-content-between align-items-center">
-                                                        <div>
-                                                            <h5 class="mb-0">Assessment Name</h5>
-                                                            <small><i class="ti-timer mr-1"></i>Dec 1, 2023</small>
-                                                        </div>
-                                                        <i class="fa fa-play-circle fa-lg"></i>
-                                                    </div>
-                                                </a>
-                                                <a href="#" class="list-group-item list-group-item-action flex-column align-items-start ">
-                                                    <div class="d-flex w-100 justify-content-between align-items-center">
-                                                        <div>
-                                                            <h5 class="mb-0">Assessment Name</h5>
-                                                            <small><i class="ti-timer mr-1"></i>Dec 1, 2023</small>
-                                                        </div>
-                                                        <i class="fa fa-play-circle fa-lg"></i>
-                                                    </div>
-                                                </a>
-                                            </div>
-                                        </div>
-                                        <div class="col-md-8 border">
-                                        </div> -->
+                                      
                                         <div class="col-md-12">
                                             <p  class="text-center no_record">Coming Soon...</p>
                                         </div>

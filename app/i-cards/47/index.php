@@ -44,7 +44,7 @@ if (isset($_GET['id'])) {
 
   $pdf->SetTitle('ID Card');
 
-  $pageCount = $pdf->setSourceFile('Glocal-ID-Card3.pdf');
+  $pageCount = $pdf->setSourceFile('Sanskaram-ID-Card3.pdf');
 
   $pageId = $pdf->importPage(1, PdfReader\PageBoundaries::MEDIA_BOX);
   $pdf->addPage();

@@ -63,16 +63,10 @@
         <span class="icon-thumbnail-main"><i class="uil uil-users-alt"></i></span></span>
         <ul class="sub-menu">
       
-          <?php if ($_SESSION['university_id'] == '48') { ?>
-            <li class="">
-              <a href="/exam-students/exam-status">Exam Status</a>
-              <span class="icon-thumbnail"><i class="pg-icon">ES</i></span>
-            </li>
-          <?php } else { ?>
+      
             <li class="">
               <a href="/lms-settings/document-issue-ance">Document Issue ANCE</a>
             </li>
-          <?php } ?>
         </ul>
       </li>
 
@@ -115,7 +109,7 @@
             <a href="/admissions/re-registrations">Re-Reg</a>
             <span class="icon-thumbnail"><i class="pg-icon">RR</i></span>
           </li>
-          <li class="">
+          <!-- <li class="">
             <a href="/admissions/back-papers">Back-Paper</a>
             <span class="icon-thumbnail"><i class="pg-icon">BP</i></span>
           </li>
@@ -126,7 +120,7 @@
           <li class="">
             <a href="/admissions/exam-schedules">Exam Schedule</a>
             <span class="icon-thumbnail"><i class="pg-icon">ES</i></span>
-          </li>
+          </li> -->
         </ul>
       </li>
 
@@ -153,7 +147,7 @@
       $downloads = $conn->query("SELECT Pages.ID, Pages.Name, Pages.Slug FROM Pages LEFT JOIN Page_Access ON Pages.ID = Page_Access.Page_ID AND Page_Access.University_ID = " . $_SESSION['university_id'] . " WHERE Pages.`Type` = 'Download' AND Page_Access.Inhouse = 1");
       if ($downloads->num_rows > 0) {
       ?>
-        <li class="<?php print $breadcrumbs[1] == 'downloads' ? 'open active' : '' ?>">
+        <!-- <li class="<?php print $breadcrumbs[1] == 'downloads' ? 'open active' : '' ?>">
           <a href="javascript:;"><span class="title">Download Center</span>
             <span class=" arrow <?php print $breadcrumbs[1] == 'downloads' ? 'open active' : '' ?>"></span></a>
           <span class="icon-thumbnail-main"><i class="uil uil-down-arrow"></i></span></span>
@@ -165,7 +159,7 @@
               </li>
             <?php } ?>
           </ul>
-        </li>
+        </li> -->
       <?php } ?>
 
 
@@ -226,30 +220,30 @@
               <a href="/lms-settings/assignments">Assignments</a>
               <span class="icon-thumbnail"><i class="pg-icon">As</i></span>
             </li>
-            <li class="">
+            <!-- <li class="">
               <a href="/lms-settings/practicals">Practicals</a>
               <span class="icon-thumbnail"><i class="pg-icon">Pr</i></span>
-            </li>
+            </li> -->
             <li class="">
               <a href="/lms-settings/notifications">Notifications</a>
               <span class="icon-thumbnail"><i class="pg-icon">Nt</i></span>
             </li>
-            <li class="">
+            <!-- <li class="">
               <a href="/lms-settings/mock-tests">Mock Test</a>
               <span class="icon-thumbnail"><i class="pg-icon">Mt</i></span>
-            </li>
-            <li class="">
+            </li> -->
+            <!-- <li class="">
               <a href="/lms-settings/exams">Exam</a>
               <span class="icon-thumbnail"><i class="pg-icon">Ex</i></span>
-            </li>
+            </li> -->
             <li class="">
               <a href="/lms-settings/results">Results</a>
               <span class="icon-thumbnail"><i class="pg-icon">AC</i></span>
             </li>
-            <li class="">
+            <!-- <li class="">
               <a href="/lms-settings/queries-&-feedback">Queries & Feedback</a>
               <span class="icon-thumbnail"><i class="pg-icon">QF</i></span>
-            </li>
+            </li> -->
             <li class="">
               <a href="/lms-settings/e-books">E-Books</a>
               <span class="icon-thumbnail"><i class="pg-icon">EB</i></span>
@@ -258,14 +252,14 @@
               <a href="/lms-settings/videos">Videos</a>
               <span class="icon-thumbnail"><i class="pg-icon">Vi</i></span>
             </li>
-            <li class="">
+            <!-- <li class="">
               <a href="/lms-settings/dispatch">Dispatch</a>
               <span class="icon-thumbnail"><i class="pg-icon">Dt</i></span>
             </li>
             <li class="">
               <a href="/lms-settings/contact-us">Contact Us</a>
               <span class="icon-thumbnail"><i class="pg-icon">Co</i></span>
-            </li>
+            </li> -->
           </ul>
         </li>
       <?php } ?>
@@ -273,7 +267,7 @@
         <a href="/lms-settings/internal-marks">Internal Marks </a>
         <span class="icon-thumbnail"><i class="pg-icon">IM</i></span>
       </li>
-
+<!-- 
       <li class="m-t-20">
         <a href="#" class="detailed">
           <span class="title">HR & Payroll</span>
@@ -288,7 +282,7 @@
           <span class="details">Coming Soon</span>
         </a>
         <span class="icon-thumbnail-main"><i class="uil uil-phone-alt"></i></span>
-      </li>
+      </li> -->
 
     </ul>
     <div class="clearfix"></div>

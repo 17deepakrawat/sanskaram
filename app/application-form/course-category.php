@@ -12,36 +12,10 @@ if (isset($_GET['id'], $_GET['userId'])) {
     exit();
   }
 
-  //$admission_type = $conn->query("SELECT Name FROM Admission_Types WHERE ID = $admission_type_id");
-  //$admission_type = mysqli_fetch_assoc($admission_type);
-  //$admission_type = $admission_type['Name'];
-
-  // $column = "1";
-  //if(strcasecmp($admission_type, 'lateral')==0){
-  //  $column = "LE_Start";
-  // }
-  // if(strcasecmp($admission_type, 'credit transfer')==0){
-  // $column = "CT_Start";
-  // }
+ 
 
   $course_categories = array();
-  if ($_SESSION['university_id'] == 48) {
-    $table = "Center_Sub_Courses";
-    $checkIsSubCenter = $conn->query("SELECT ID FROM Users WHERE Role = 'Sub-Center' AND ID = $userId");
-    if ($checkIsSubCenter->num_rows > 0) {
-      $table = "Sub_Center_Sub_Courses";
-    }
-    $durationMapping = array('3' => 'certification','11/pg-diploma' => 'pg_diploma', '11/advance-diploma' => 'advance_diploma', '6' => 'certified', '11/certified' => 'certified');
-    // echo "SELECT Duration FROM $table WHERE Sub_Course_ID = $sub_course_id AND User_ID = $userId"; die;
-    $durations = $conn->query("SELECT Duration FROM $table WHERE Sub_Course_ID = $sub_course_id AND User_ID = $userId");
-    while ($duration = $durations->fetch_assoc()) {
-      // echo "<pre>"; 
-      // print_r($duration['Duration']);
-      $course_categories[] = $durationMapping[$duration['Duration']];
-    }
 
-    $course_categories = array_filter(array_unique($course_categories));
-  }
 
   if (!empty($course_categories) && is_array($course_categories)) {
     $option = "<option>Select Choose Category</option>";

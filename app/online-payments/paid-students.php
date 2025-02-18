@@ -64,17 +64,13 @@
                                         $roleArr = $roleQuery->fetch_assoc();
                                         if ($_SESSION['Role'] == "Center" || $_SESSION['Role'] == "Administrator") {
                                             if ($roleArr['Role'] == "Sub-Center") {
-                                                if ($_SESSION['university_id'] == 48) {
-                                                    $center_fee_Query = $conn->query("SELECT Fee FROM `Sub_Center_Sub_Courses` WHERE `User_ID` = $userTypeId  AND Duration = '" . $student['Duration'] . "' AND `Course_ID` = " . $student['Course_ID'] . " AND `Sub_Course_ID` = " . $student['Sub_Course_ID'] . " AND University_ID=" . $_SESSION['university_id'] . "");
-                                                } else {
+                                            
                                                     $center_fee_Query = $conn->query("SELECT Fee FROM `Sub_Center_Sub_Courses` WHERE `User_ID` = $userTypeId AND `Course_ID` = " . $student['Course_ID'] . "  AND `Sub_Course_ID` = " . $student['Sub_Course_ID'] . " AND University_ID=" . $_SESSION['university_id'] . "");
-                                                }
+                                                
                                             } else {
-                                                if ($_SESSION['university_id'] == 48) {
-                                                    $center_fee_Query = $conn->query("SELECT Fee FROM `Center_Sub_Courses` WHERE `User_ID` = $userTypeId  AND Duration = '" . $student['Duration'] . "' AND `Course_ID` = " . $student['Course_ID'] . " AND `Sub_Course_ID` = " . $student['Sub_Course_ID'] . " AND University_ID=" . $_SESSION['university_id'] . "");
-                                                } else {
+                                         
                                                     $center_fee_Query = $conn->query("SELECT Fee FROM `Center_Sub_Courses` WHERE `User_ID` = $userTypeId AND `Course_ID` = " . $student['Course_ID'] . "  AND `Sub_Course_ID` = " . $student['Sub_Course_ID'] . " AND University_ID=" . $_SESSION['university_id'] . "");
-                                                }
+                                                
                                             }
                                             $centerArr = $center_fee_Query->fetch_assoc(); ?>
                                             <td><?= "&#8377; " .number_format($student['amounts'], 2)  //number_format($centerArr['Fee'], 2); ?></td>

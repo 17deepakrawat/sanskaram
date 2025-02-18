@@ -1,6 +1,8 @@
 <?php include($_SERVER['DOCUMENT_ROOT'] . '/includes/header-top.php'); ?>
 <?php include($_SERVER['DOCUMENT_ROOT'] . '/includes/header-bottom.php'); ?>
-<?php include($_SERVER['DOCUMENT_ROOT'] . '/includes/menu.php'); ?>
+<?php include($_SERVER['DOCUMENT_ROOT'] . '/includes/menu.php');
+
+?>
 <!-- START PAGE-CONTAINER -->
 <div class="page-container ">
   <?php include($_SERVER['DOCUMENT_ROOT'] . '/includes/topbar.php'); ?>

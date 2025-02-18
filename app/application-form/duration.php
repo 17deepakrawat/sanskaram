@@ -11,7 +11,6 @@ if (isset($_GET['admission_type_id']) && isset($_GET['sub_course_id'])) {
     $userId = '';
   }
 
-
   if (empty($admission_type_id) || empty($sub_course_id)) {
     echo '<option value="">Please add sub-course</option>';
     exit();
@@ -29,67 +28,16 @@ if (isset($_GET['admission_type_id']) && isset($_GET['sub_course_id'])) {
     $column = "CT_Start";
   }
 
-  if ($_SESSION['university_id'] == 48) {
-    $course_category = mysqli_real_escape_string($conn, $_GET['course_category']);
-    $check = $conn->query("SELECT Duration FROM Sub_Center_Sub_Courses WHERE Sub_Course_ID = $sub_course_id AND User_ID = " . $_SESSION['ID'] . " AND Fee > 0");
 
-    if ($check->num_rows > 0) {
-      $durations = $conn->query("SELECT Min_Duration FROM Sub_Courses WHERE ID = $sub_course_id AND Course_Category = '$course_category'");
-    }
-    if ($check->num_rows == 0) {
-      //$durations = $conn->query("SELECT Duration FROM Sub_Courses WHERE ID = $sub_course_id ");
-      $check_center_subcourse = $conn->query("SELECT Duration FROM Center_Sub_Courses WHERE Sub_Course_ID = $sub_course_id AND Fee > 0");
+  $duration = $conn->query("SELECT $column FROM Sub_Courses WHERE ID = $sub_course_id");
+  $duration = mysqli_fetch_assoc($duration);
+  $duration = $duration[$column];
+  $all_durection = explode(',', $duration);
 
-      if ($check_center_subcourse->num_rows > 0) {
-        $durations = $conn->query("SELECT Course_Category FROM Sub_Courses WHERE ID = $sub_course_id AND Course_Category = '$course_category'");
-        //print_r($course_category);exit();
-
-      }
-      //$durations = $conn->query("SELECT Duration FROM Center_Sub_Courses WHERE Sub_Course_ID = $sub_course_id AND Fee > 0"); 
-    }
-    while ($duration = $durations->fetch_assoc()) {
-      $all_durection = json_decode($duration['Min_Duration']);
-    }
-  } else {
-    $duration = $conn->query("SELECT $column FROM Sub_Courses WHERE ID = $sub_course_id");
-    $duration = mysqli_fetch_assoc($duration);
-    $duration = $duration[$column];
-    $all_durection = explode(',', $duration);
-  }
   $option = "";
-  // foreach($all_durection as $duration){
-  if ($_SESSION['university_id'] == 48) {
-    $table = "Center_Sub_Courses";
-    $checkIsSubCenter = $conn->query("SELECT ID FROM Users WHERE Role = 'Sub-Center' AND ID = $userId");
-    if ($checkIsSubCenter->num_rows > 0) {
-      $table = "Sub_Center_Sub_Courses";
-    }
-    $allotedDurations = array();
-    $durations = $conn->query("SELECT Duration FROM $table WHERE Sub_Course_ID = $sub_course_id AND User_ID = $userId");
-    while ($duration = $durations->fetch_assoc()) {
-      $allotedDurations[] = $duration['Duration'];
-    }
 
-    if ($course_category == 'certification') {
-      //$option .= '<option value="'.$duration.'">'.$duration.'</option>';
-      $option .= '<option value="3">3</option>';
-    } else if ($course_category == 'advance_diploma') {
-      $option .= '<option value="11/advance-diploma">11</option>';
-    }  else if ($course_category == 'pg_diploma') {
-      $option .= '<option value="11/pg-diploma">11</option>';
-    } else if ($course_category == 'certified') {
-      if (in_array(6, $allotedDurations)) {
-        $option .= '<option value="6">6</option>';
-      }
+  $option .= '<option value="' . $duration . '">' . $duration . '</option>';
 
-      if (in_array('11/certified', $allotedDurations)) {
-        $option .= '<option value="11/certified">11</option>';
-      }
-    }
-  } else {
-    $option .= '<option value="' . $duration . '">' . $duration . '</option>';
-  }
-  //  }
 
   echo $option;
 }

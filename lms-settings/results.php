@@ -52,17 +52,8 @@
         <div class="card card-transparent">
           <div class="card-header">
             <div class=" row ">
-              <div class="col-md-3">
-                <div class="form-group">
-                  <select class="full-width" style="width:40px" data-init-plugin="select2" id="vertical_type"
-                    onchange="addFilter(this.value, 'vartical_type')" data-placeholder="Choose Vertical Type">
-                    <option value="">Select Vertical Type</option>
-                    <option value="1">Edtech</option>
-                    <option value="0">IITS LLP Paramedical</option>
-                  </select>
-                </div>
-              </div>
-              <div class="col-md-6"></div>
+            
+              <div class="col-md-9"></div>
               <div class="col-md-3 pull-right">
                 <input type="text" id="courses-search-table" class="form-control pull-right" placeholder="Search">
               </div>
