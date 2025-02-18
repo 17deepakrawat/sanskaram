@@ -1,3 +1,7 @@
+<?php
+
+use WpOrg\Requests\Session;
+?>
 <!-- Modals -->
 <div class="modal fade slide-up" id="mdmodal" tabindex="-1" role="dialog" data-keyboard="false" data-backdrop="static" aria-hidden="false">
   <div class="modal-dialog modal-md">
@@ -30,8 +34,12 @@
 <!-- Modal End -->
 <div class=" container-fluid  container-fixed-lg footer">
   <div class="copyright sm-text-center">
-    <p class="small-text no-margin pull-left sm-pull-reset">
-      2021-22 All Rights Reserved <?= $_SESSION['university_name'] ?> .
+    <p class="small-text no-margin pull-left sm-pull-reset text-center w-100">
+     <?= date('Y') ?> All Rights Reserved
+      <?php
+      echo($_SESSION['university_name']).'.';
+      // $organization_name 
+      ?>
     </p>
     <div class="clearfix"></div>
   </div>
