@@ -48,7 +48,6 @@ if (isset($_POST['online_amount'])) {
     exit();
   }
   
-  //$split_accounts = json_encode(array("IITS LLP Paramedical" => $iits_share, "Glocal University" => $university_share));
 
   $value = $key . '|' . $transaction_id . '|' . $amount . '|' . $product_info . '|' . trim($_SESSION['Name']) . '|' . trim($_SESSION['Email']) . '|||||||||||' . $salt;
   $hash = hash('sha512', $value);

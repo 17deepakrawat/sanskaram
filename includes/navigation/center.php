@@ -31,27 +31,6 @@
             <span class="icon-thumbnail-main"><i class="uil uil-home"></i></span>
           </li>
 
-          <!-- <?php if($_SESSION['crm']!=0){ ?>
-            <li class="<?php print $breadcrumbs[1]=='leads' ? 'open active' : '' ?>">
-              <a href="javascript:;"><span class="title">Leads</span>
-              <span class=" arrow <?php print $breadcrumbs[1]=='leads' ? 'open active' : '' ?>"></span></a>
-              <span class="icon-thumbnail-main"><i class="uil uil-user"></i></span></span>
-              <ul class="sub-menu">
-                <li class="">
-                  <a href="/leads/generate">Generate</a>
-                  <span class="icon-thumbnail"><i class="pg-icon">Le</i></span>
-                </li>
-                <li class="">
-                  <a href="/leads/lists">Leads</a>
-                  <span class="icon-thumbnail"><i class="pg-icon">Le</i></span>
-                </li>
-                <li class="">
-                  <a href="/leads/follow-ups">Follow-Ups</a>
-                  <span class="icon-thumbnail"><i class="pg-icon">FU</i></span>
-                </li>
-              </ul>
-            </li>
-          <?php } ?> -->
 
           <li class="<?php print $breadcrumbs[1]=='admissions' ? 'open active' : '' ?>">
             <a href="javascript:;"><span class="title">Admissions</span>
@@ -70,21 +49,21 @@
                 <a href="/admissions/re-registrations">Re-Reg</a>
                 <span class="icon-thumbnail"><i class="pg-icon">RR</i></span>
               </li>
-              <li class="">
+              <!-- <li class="">
                 <a href="/admissions/back-papers">Back-Paper</a>
                 <span class="icon-thumbnail"><i class="pg-icon">BP</i></span>
-              </li>
-              <li class="">
+              </li> -->
+              <!-- <li class="">
                 <a href="/admissions/results">Results</a>
                 <span class="icon-thumbnail"><i class="pg-icon">RT</i></span>
-              </li>
-              <li class="">
+              </li> -->
+              <!-- <li class="">
                 <a href="/admissions/exam-schedules">Exam Schedule</a>
                 <span class="icon-thumbnail"><i class="pg-icon">ES</i></span>
-              </li>
+              </li> -->
             </ul>
           </li>
-          <?php if ($_SESSION['university_id'] == 47) { ?>
+      
             <li class="<?php print $breadcrumbs[1] == 'exam-students' ? 'open active' : '' ?>">
               <a href="javascript:;"><span class="title">Exam </span>
                 <span class=" arrow <?php print $breadcrumbs[1] == 'exam-students' ? 'open active' : '' ?>"></span></a>
@@ -96,20 +75,7 @@
                 </li>
               </ul>
             </li>
-          <?php } ?>
-          <?php if ($_SESSION['university_id'] == 48) { ?>
-          <li class="<?php print $breadcrumbs[1] == 'exam-students' ? 'open active' : '' ?>">
-            <a href="javascript:;"><span class="title">Exam </span>
-              <span class=" arrow <?php print $breadcrumbs[1] == 'exam-students' ? 'open active' : '' ?>"></span></a>
-            <span class="icon-thumbnail-main"><i class="uil uil-users-alt"></i></span></span>
-            <ul class="sub-menu">
-              <li class="">
-                <a href="/exam-students/exam-status">Exam Status</a>
-                <span class="icon-thumbnail"><i class="pg-icon">ES</i></span>
-              </li>
-            </ul>
-          </li>
-          <?php } ?>
+   
           <?php
             $pages = $conn->query("SELECT Pages.ID, Pages.Name, Pages.Slug FROM Pages LEFT JOIN Page_Access ON Pages.ID = Page_Access.Page_ID AND Page_Access.University_ID = ".$_SESSION['university_id']." WHERE Pages.`Type` = 'Accounts' AND Page_Access.Center = 1");
             if($pages->num_rows>0){
@@ -144,7 +110,7 @@
             $downloads = $conn->query("SELECT Pages.ID, Pages.Name, Pages.Slug FROM Pages LEFT JOIN Page_Access ON Pages.ID = Page_Access.Page_ID AND Page_Access.University_ID = ".$_SESSION['university_id']." WHERE Pages.`Type` = 'Download' AND Page_Access.Center = 1");
             if($downloads->num_rows>0){
           ?>
-            <li class="<?php print $breadcrumbs[1]=='downloads' ? 'open active' : '' ?>">
+            <!-- <li class="<?php print $breadcrumbs[1]=='downloads' ? 'open active' : '' ?>">
               <a href="javascript:;"><span class="title">Download Center</span>
               <span class=" arrow <?php print $breadcrumbs[1]=='downloads' ? 'open active' : '' ?>"></span></a>
               <span class="icon-thumbnail-main"><i class="uil uil-down-arrow"></i></span></span>
@@ -156,7 +122,7 @@
                   </li>
                 <?php } ?>
               </ul>
-            </li>
+            </li> -->
           <?php } ?>
 
           <?php if($_SESSION['CanCreateSubCenter']==1){ ?>
@@ -171,68 +137,6 @@
                 </li>
               </ul>
             </li>
-          <?php } ?>
-
-          <?php if(isset($_SESSION['has_lms']) && $_SESSION['has_lms']==1){?>
-            <!-- <li class="<?php print $breadcrumbs[1]=='lms-settings' ? 'open active' : '' ?>">
-              <a href="javascript:;"><span class="title">LMS Settings</span>
-              <span class=" arrow <?php print $breadcrumbs[1]=='lms-settings' ? 'open active' : '' ?>"></span></a>
-              <span class="icon-thumbnail-main"><i class="uil uil-book-open"></i></span></span>
-              <ul class="sub-menu">
-                <li class="">
-                  <a href="/lms-settings/subjects">Subjects</a>
-                  <span class="icon-thumbnail"><i class="pg-icon">Sb</i></span>
-                </li>
-                <li class="">
-                  <a href="/lms-settings/datesheets">Date Sheets</a>
-                  <span class="icon-thumbnail"><i class="pg-icon">DS</i></span>
-                </li>
-                <li class="">
-                  <a href="/lms-settings/assignments">Assignments</a>
-                  <span class="icon-thumbnail"><i class="pg-icon">As</i></span>
-                </li>
-                <li class="">
-                  <a href="/lms-settings/practicals">Practicals</a>
-                  <span class="icon-thumbnail"><i class="pg-icon">Pr</i></span>
-                </li>
-                <li class="">
-                  <a href="/lms-settings/notifications">Notifications</a>
-                  <span class="icon-thumbnail"><i class="pg-icon">Nt</i></span>
-                </li>
-                <li class="">
-                  <a href="/lms-settings/mock-tests">Mock Test</a>
-                  <span class="icon-thumbnail"><i class="pg-icon">Mt</i></span>
-                </li>
-                <li class="">
-                  <a href="/lms-settings/exams">Exam</a>
-                  <span class="icon-thumbnail"><i class="pg-icon">Ex</i></span>
-                </li>
-                <li class="">
-                  <a href="/lms-settings/results">Results</a>
-                  <span class="icon-thumbnail"><i class="pg-icon">AC</i></span>
-                </li>
-                <li class="">
-                  <a href="/lms-settings/queries-&-feedback">Queries & Feedback</a>
-                  <span class="icon-thumbnail"><i class="pg-icon">QF</i></span>
-                </li>
-                <li class="">
-                  <a href="/lms-settings/e-books">E-Books</a>
-                  <span class="icon-thumbnail"><i class="pg-icon">EB</i></span>
-                </li>
-                <li class="">
-                  <a href="/lms-settings/videos">Videos</a>
-                  <span class="icon-thumbnail"><i class="pg-icon">Vi</i></span>
-                </li>
-                <li class="">
-                  <a href="/lms-settings/dispatch">Dispatch</a>
-                  <span class="icon-thumbnail"><i class="pg-icon">Dt</i></span>
-                </li>
-                <li class="">
-                  <a href="/lms-settings/contact-us">Contact Us</a>
-                  <span class="icon-thumbnail"><i class="pg-icon">Co</i></span>
-                </li>
-              </ul>
-            </li> -->
           <?php } ?>
           <li class="">
               <a href="/lms-settings/internal-marks">Internal Marks </a>

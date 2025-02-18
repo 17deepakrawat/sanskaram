@@ -71,7 +71,7 @@ require '../../includes/helpers.php';
     }
 </style>
 <?php
-$url = "https://erpglocal.iitseducation.org";
+$url = WEB_URL;
 $passFail = "PASS";
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
@@ -97,7 +97,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
 
     $rows = [];
-    $get_result_data_url = "https://erpglocal.iitseducation.org/student/examination/api" . $webQuery;
+    $get_result_data_url = WEB_URL."/student/examination/api" . $webQuery;
     $result = file_get_contents($get_result_data_url);
     $rows = json_decode($result, true);
     if (isset($rows['status']) && $rows['status'] == 1) {
@@ -108,7 +108,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             <div class="mt-5 body"
                 style="border:3px solid #1e1919;height: 1145px;; width: 900px; margin: 0 auto; background-position: center; background-size: contain; background-repeat: no-repeat; padding: 0px;">
                 <div class="" style="display:flex; justify-content:center;">
-                    <img src="https://vocational.glocaluniversity.edu.in/assets/images/downloadfooter.webp" alt=""
+                    <img src="<?= LOGO ?>" alt=""
                         style="margin-top: 15px;width:27%">
                 </div>
                 <p style="margin-top:1%;text-align: center;font-weight: 700;font-size: 20px!important;color:black !important;">
@@ -120,7 +120,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                         <?= ucwords(strtolower($row['course'])) ?>
                     </p>
                     <p class="text-center text-dark fw-bold">Admission Session :<?= ucwords($row['Admission_Session']) ?></p>
-                    <img src="https://erpglocal.iitseducation.org/<?= $row['Photo'] ?>" alt="" width="100" height="100"
+                    <img src="<?=  WEB_URL ?>/<?= $row['Photo'] ?>" alt="" width="100" height="100"
                         class="img-pp">
                     <div class="row">
                         <div class="col-lg-12 mb-1">
@@ -135,7 +135,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                                                     style="color: #05519E;"> Enrollment No:</span><span
                                                     class="text-dark fw-bold"> <?= $row['Enrollment_No'] ?></span></td>
                                         </tr>
-                                        <?php if ($row['University_ID'] == 47) { ?>
+                                        
                                             <tr>
                                                 <td class="col text-start" style="width:600px; height:40px;"><span class="fw-bold "
                                                         style="color: #05519E;">Father Name:</span> <span
@@ -148,23 +148,13 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                                             <tr>
                                                 <td class="col text-start" style="width:600px; height:40px;"><span class="fw-bold "
                                                         style="color: #05519E;">School:</span> <span
-                                                        class="text-dark fw-bold">Glocal School Of
+                                                        class="text-dark fw-bold">Sanskaram School Of
                                                         <?= $row['university_name'] ?></span></td>
                                                 <td class="col text-start" style="width:400px; height:40px;"><span class="fw-bold "
                                                         style="color: #05519E;">Exam Session:</span><span class="text-dark fw-bold">
                                                         <?= $row['stu_exam_session'] ?> </span></td>
                                             </tr>
-                                        <?php } else { ?>
-                                            <tr>
-                                                <td class="col text-start" style="width:600px; height:40px;"><span class="fw-bold "
-                                                        style="color: #05519E;">School:</span> <span
-                                                        class="text-dark fw-bold">Glocal School Of
-                                                        <?= $row['university_name'] ?></span></td>
-                                                <td class="col text-start" style="width:400px; height:40px;"><span class="fw-bold "
-                                                        style="color: #05519E;"><?= $row['mode_type'] ?> :</span><span
-                                                        class="text-dark fw-bold"> <?= $row['durMonthYear'] ?> </span></td>
-                                            </tr>
-                                        <?php } ?>
+                                 
                                     </tbody>
                                 </table>
                             </div>
@@ -289,10 +279,10 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                             <span class="top-heading-u"></span>Disclaimer :
                         </p>
                         <p style="position: relative; top: 10px;color: #05519E;font-weight: 700;display: inline-block;"><span
-                                class="top-heading-u"></span> The published result is provisional only. Glocal University is not
+                                class="top-heading-u"></span> The published result is provisional only. Sanskaram University is not
                             responsible for any inadvertent error that may have crept in the data / results being published
                             online.This is being published just for the immediate information to the examinees. The final mark
-                            sheet(s) issued by Glocal University will only be treated authentic &amp; final in this regard.</p>
+                            sheet(s) issued by Sanskaram University will only be treated authentic &amp; final in this regard.</p>
                     </div>
                 </div>
             </div>

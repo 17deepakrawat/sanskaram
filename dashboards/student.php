@@ -127,42 +127,9 @@
                 <h4 class="mb-0">Subjects</h4>
 
                 <?php
-
-                if ($_SESSION['university_id'] == 48) {
-                  if ($_SESSION['Duration'] == '11/advance-diploma') {
-                    $duration = '11/Advanced';
-                  } elseif ($_SESSION['Duration'] == '11/certified') {
-                    $duration = '11/certified';
-                  } elseif ($_SESSION['Duration'] == '6' && $_SESSION['Course_Category'] == 'certified') {
-                    $duration = '6/certified';
-                  } else {
-                    $duration = $_SESSION['Duration'];
-                  }
-                }else{
                 $duration = $_SESSION['Duration'];
-              }
-
-                
-              if ($_SESSION['university_id'] == 48) {
-
-               $center_id = getUserIdFunc($conn, $_SESSION['Added_For']);
-
-                $getCenterID = $conn->query("select Code from Users where ID = '$center_id'");
-                if ($getCenterID->num_rows > 0) {
-                  $codeArr = $getCenterID->fetch_assoc();
-                  $code = $codeArr['Code'];
-                  $userQuery = " AND JSON_CONTAINS(User_ID, '\"" . mysqli_real_escape_string($conn, $code) . "\"')";
-                }else{
-                  $code ='';
-                  $userQuery = '';
-                }
-                $sub_count = $conn->query("SELECT Syllabi.Name FROM Syllabi WHERE  Course_ID='" . $_SESSION['Course_ID'] . "' AND Sub_Course_ID='" . $_SESSION['Sub_Course_ID'] . "' AND Semester = '" .$duration  . "' AND University_ID ='" . $_SESSION['university_id'] . "'  $userQuery "); 
-              }else{
                 $sub_count = $conn->query("SELECT Syllabi.Name FROM Syllabi WHERE Course_ID='" . $_SESSION['Course_ID'] . "' AND Sub_Course_ID='" . $_SESSION['Sub_Course_ID'] . "' AND Semester = '" .$duration  . "' AND University_ID ='" . $_SESSION['university_id'] . "'"); 
-
-              }
-?>
-
+                 ?>
                 <h4 class="mb-0"><?= $sub_count->num_rows; ?></h4>
               </div>
               <div class="tile-footer">
@@ -239,11 +206,7 @@
       <div class="card-body">
         <div class="table-responsive">
           <?php
-          if($_SESSION['university_id']==48){
-            $getSyllabi =  $conn->query("SELECT Syllabi.ID as subject_id,Syllabi.Name,Sub_Course_ID, Syllabi.Credit FROM Syllabi  LEFT JOIN Sub_Courses ON Syllabi.Sub_Course_ID = Sub_Courses.ID LEFT JOIN Modes ON Sub_Courses.Mode_Id = Modes.ID  WHERE Syllabi.Sub_Course_ID ='" . $_SESSION['Sub_Course_ID'] . "' AND Syllabi.Semester='" . $_SESSION['Duration'] . "' $userQuery");
-          }else{
             $getSyllabi =  $conn->query("SELECT Syllabi.ID as subject_id,Syllabi.Name,Sub_Course_ID, Syllabi.Credit FROM Syllabi  LEFT JOIN Sub_Courses ON Syllabi.Sub_Course_ID = Sub_Courses.ID LEFT JOIN Modes ON Sub_Courses.Mode_Id = Modes.ID  WHERE Syllabi.Sub_Course_ID ='" . $_SESSION['Sub_Course_ID'] . "' AND Syllabi.Semester='" . $_SESSION['Duration'] . "'");
-          }
           if ($getSyllabi->num_rows > 0) { ?>
             <table class="table table-striped">
               <thead>

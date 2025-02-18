@@ -32,7 +32,7 @@
                             for ($i = 1; $i <= count($breadcrumbs); $i++) {
                                 if (count($breadcrumbs) == $i) : $active = "active";
                                     $crumb = explode("?", $breadcrumbs[$i]);
-                                    echo '<li class="breadcrumb-item ' . $active . '">' . $crumb[0] . '</li>';
+                                    echo '<li class="breadcrumb-item ' . $active . '">' . strtoupper($crumb[0]) . '</li>';
                                 endif;
                             }
                             ?>
@@ -77,9 +77,9 @@
                                     <li class="nav-item">
                                         <a href="#" class="nav-link" data-toggle="tab" data-target="#documents"><span>Documents</span></a>
                                     </li>
-                                    <li class="nav-item">
+                                    <!-- <li class="nav-item">
                                         <a href="#" class="nav-link" data-toggle="tab" data-target="#form"><span>Application Form</span></a>
-                                    </li>
+                                    </li> -->
                                 </ul>
                                 <!-- Tab panes -->
                                 <div class="tab-content">
@@ -249,7 +249,7 @@
                                     <div class="tab-pane fade" id="form">
                                         <div class="row">
                                             <div class="col-md-12">
-                                                <iframe src="/forms/<?= $_SESSION['university_id'] ?>/index.php?student_id=<?= base64_encode($_SESSION['ID'] . 'W1Ebt1IhGN3ZOLplom9I') ?>" frameborder=0 width="100%" height="700px"></iframe>
+                                                <!-- <iframe src="/forms/<?= $_SESSION['university_id'] ?>/index.php?student_id=<?= base64_encode($_SESSION['ID'] . 'W1Ebt1IhGN3ZOLplom9I') ?>" frameborder=0 width="100%" height="700px"></iframe> -->
                                             </div>
                                         </div>
                                     </div>

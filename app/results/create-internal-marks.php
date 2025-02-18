@@ -18,7 +18,7 @@ $marks_type ="Internal";
 <form role="form" id="form-add-results" action="/app/results/store-internal-marks" method="POST"
     enctype="multipart/form-data">
     <div class="modal-body">
-        <?php if($_SESSION['university_id'] ==47){ ?>
+  
         <div class="row mt-4">
             <div class="col-md-12">
                 <div class="form-group form-group-default required">
@@ -37,7 +37,7 @@ $marks_type ="Internal";
                 </div>
             </div>
         </div>
-        <?php } ?>
+     
         <div class="subject-box">
         </div>
     </div>

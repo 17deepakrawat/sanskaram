@@ -26,7 +26,7 @@ if($students_temps['mode']=="Monthly"){
     $durMonthYear="Years";
 }
 $total_duration=0;
-if($students_temps['University_ID']==47 ){//|| $students_temps['mode']=="Sem"
+//|| $students_temps['mode']=="Sem"
     $total_duration=0; 
     if (str_contains($students_temps['total_duration'], '"')) { 
         $a=str_replace('"', '', $students_temps['total_duration']);
@@ -34,14 +34,7 @@ if($students_temps['University_ID']==47 ){//|| $students_temps['mode']=="Sem"
     }else{
         $total_duration=(int)$students_temps['total_duration'];
     }
-}else{
-    if (str_contains($students_temps['Duration'], '/')) { 
-        $a=explode("/",$students_temps['Duration']);
-        $total_duration=(int)$a[0];
-    }else{
-        $total_duration=(int)$students_temps['Duration'];
-    }
-}
+
 
 $courseCategory="";
 if (str_contains($students_temps['Course_Category'], '_')) { 
@@ -91,13 +84,7 @@ require_once('../../extras/vendor/setasign/fpdf/fpdf.php');
 require_once('../../extras/vendor/setasign/fpdi/src/autoload.php');
 
 $pdf = new FPDI('L', 'mm', array(299, 210));
-//$pageCount = $pdf->setSourceFile('a.pdf');
-// $pageCount = $pdf->setSourceFile('../../assets/img/glocal-skill.pdf');
-// for ($i = 1; $i <= $pageCount; $i++) {
-//     $tplIdx = $pdf->importPage($i, '/MediaBox');
-//     $pdf->AddPage();
-//     $pdf->useTemplate($tplIdx);
-// }
+
 
 
 $pdf->AddPage();
@@ -176,170 +163,3 @@ if($add){
   }
 
 //$pdf->Output(); 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-// error_reporting(1);
-
-// require '../../includes/db-config.php';
-
-// session_start();
-
-// $id=$_GET['student_id'];
-// //$id = intval($_POST['student_id']);
-
-// //University_ID = 48 AND
-// $students_temps_result = $conn->query("SELECT students.*,sub_courses.Min_Duration as total_duration,modes.Name as mode,sub_courses.Name as course,courses.Name as program_Type FROM students left join sub_courses on sub_courses.ID=students.Sub_Course_ID left join modes on students.University_ID=modes.University_ID left join courses on students.Course_ID=courses.ID  WHERE students.ID = '".$id."' ");    //AND Duration = $sem 
-// if($students_temps_result->num_rows > 0){
-//     $students_temps = $students_temps_result->fetch_assoc();
-// }else{
-//     $students_temps['duration'] = '';
-// }
-
-// $durMonthYear="";
-// if($students_temps['mode']=="Monthly"){
-//     $durMonthYear="Months";
-// }elseif($students_temps['mode']=="Sem"){
-//     $durMonthYear="Semesters";
-// }else{
-//     $durMonthYear="Years";
-// }
-// $total_duration=0;
-// if($students_temps['University_ID']==47 ){//|| $students_temps['mode']=="Sem"
-//     $total_duration=0; 
-//     if (str_contains($students_temps['total_duration'], '"')) { 
-//         $a=str_replace('"', '', $students_temps['total_duration']);
-//         $total_duration=(int)$a;
-//     }else{
-//         $total_duration=(int)$students_temps['total_duration'];
-//     }
-// }else{
-//     if (str_contains($students_temps['Duration'], '/')) { 
-//         $a=explode("/",$students_temps['Duration']);
-//         $total_duration=(int)$a[0];
-//     }else{
-//         $total_duration=(int)$students_temps['Duration'];
-//     }
-// }
-
-// $courseCategory="";
-// if (str_contains($students_temps['Course_Category'], '_')) { 
-//     $a=str_replace('_',' ', $students_temps['Course_Category']);
-//     $courseCategory=ucfirst($a);
-// }else{
-//     $courseCategory=ucfirst($students_temps['Course_Category']);
-// }
-
-// $hours=0;
-
-// if($total_duration==3 && $durMonthYear=="Months"){
-//     $hours=160;
-// }elseif($total_duration==6 && $durMonthYear=="Months"){
-//     $hours=320;
-// }elseif($total_duration==11 && $durMonthYear=="Months"){
-//     $hours=960;
-// }elseif ($total_duration==6 && $durMonthYear=="Semester"){
-//     $hours=NA;
-// }
-
-// $a=implode(' ', array_slice(explode(' ', $students_temps['course']), 0, 6));
-// $b=implode(' ', array_slice(explode(' ', $students_temps['course']), 6));
-
-// $name=$students_temps['First_Name']." ".$students_temps['Middle_Name']." ".$students_temps['Last_Name'];
-
-// use setasign\Fpdi\Fpdi;
-// use setasign\Fpdi\PdfReader;
-    
-// ob_end_clean(); 
-// require_once('../../extras/vendor/setasign/fpdf/fpdf.php');
-// require_once('../../extras/vendor/setasign/fpdi/src/autoload.php');
-
-// //$pdf = new FPDI();
-
-// $pdf = new \setasign\Fpdi\Fpdi();
-// //$pdf->AddPage('L', 'A4');
-// $pdf->AddPage('L');
-// // $pdf->setSourceFile('../../assets/img/University_Certification.pdf'); 
-// // //$pdf->useTemplate($tplIdx, 0, 0, 0, 0, true); //dont use
-// // //$pdf->SetLeftMargin(0); // dont use
-// // $pageId = $pdf->importPage(1, \setasign\Fpdi\PdfReader\PageBoundaries::MEDIA_BOX);
-// // $pdf->useImportedPage($pageId, 0, 0, 297,210);
-// //$pdf->useImportedPage($pageId, 0, 0, 297,185);
-// //$pdf->SetMargins(0,-25,0);
-
-// // // Instantiate and use the FPDF class  
-// //$pdf = new FPDF('P','mm',array(297,210)); 
-// // $pdf->AddPage('L'); 
-// // $pdf->Image('../../assets/img/certificate.jpeg', 0, 0,297,210); //$pdf->w, $pdf->h
-
-// $pdf->SetY(118);
-// $pdf->AddFont('GreatVibes-Regular','','GreatVibes-Regular.php');
-// $pdf->AddFont('OpenSans-Regular','','OpenSans-VariableFont_wdth,wght.php');
-
-// $pdf->SetFont('GreatVibes-Regular','',24);
-// $pdf->MultiCell(0,16, $name ,0,'C',0);
-
-// $pdf->SetFont('Arial', 'B', 14); 
-// $pdf->SetX(156);
-// $pdf->MultiCell(0,13, $courseCategory ,0,0,0);
-// $pdf->SetFont('Arial', 'B', 16); 
-// $pdf->MultiCell(0, 7, strtoupper($students_temps['course']),0,'C',0);
-
-// $pdf->SetFont('Arial', '', 13); 
-// $pdf->MultiCell(0, 11, "",0,0,0);
-// $pdf->SetFont('Arial', 'B', 15); 
-// $pdf->SetX(96);
-// $pdf->MultiCell(0, 5, "AY 2023-24",0,0,0);
-// $pdf->SetX(172);
-// $pdf->MultiCell(0, -5, $hours." hours/".$total_duration." ".$durMonthYear,0,0,0);
-
-
-
-// // $filename=$students_temps['Unique_ID']."_".time().".pdf";
-// // // return the generated output 
-// // $pdf->Output('../../uploads/certificates/'.$filename,"F");
-// // $student_id=$id;
-// // $enrollment_no=$students_temps['Enrollment_No'];
-// // $file_path="uploads/certificates/".$filename;
-// // $file_type="pdf";
-// // $status=1;
-// // $created_by=$_SESSION['ID'];
-// // $created_at=date("Y-m-d:H:i:s");
-// // $add = $conn->query("INSERT INTO `certificates`(`student_id`, `enrollment_no`, `file_path`, `file_type`, `status`,`created_by`, `created_at`) VALUES ('".$student_id."', '".$enrollment_no."', '".$file_path."', '".$file_type."','".$status."', '".$created_by."', '".$created_at."' ) ");
-
-// // if($add){
-// //     echo json_encode(['status'=>200, 'message'=> "Certificate generated succefully!!"]);
-// //   }else{
-// //     echo json_encode(['status'=>400, 'message'=>'Something went to wrong!!']);
-// //   }
-
-// $pdf->Output(); 
-
-
-
-
-
-
-
-
-
-  

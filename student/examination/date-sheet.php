@@ -55,18 +55,7 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <tr>
-                                        <td>Jan-25</td>
-                                        <td></td>
-                                        <td>Mock Test</td>
-                                        <td>Wednesday, 5th Feb, 2025</td>
-                                        <td>10:30 AM to 12:30 PM</td>
-                                        <td><a target="_blank" href="https://glocal.exam-portal.in/auth/student">Click
-                                                Here</a>
-                                        </td>
-                                        <td><?= $_SESSION['Unique_ID'] ?> </td>
-                                         <td><?= date('d-M-Y', strtotime($_SESSION['DOB'])) ?> </td>
-                                    </tr>
+                                  
                                 </tbody>
                             </table>
                         </div>

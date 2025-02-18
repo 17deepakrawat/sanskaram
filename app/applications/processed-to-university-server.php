@@ -83,7 +83,7 @@ $filterByVerticalType = "";
 if (isset($_SESSION['filterByVerticalType'])) {
   $filterByVerticalType = $_SESSION['filterByVerticalType'];
 }
-$searchQuery .= $filterByDepartment . $filterQueryUser . $filterByDate . $filterBySubCourse . $filterByStatus .$filterByVerticalType;
+$searchQuery .= $filterByDepartment . $filterQueryUser . $filterByDate . $filterBySubCourse . $filterByStatus . $filterByVerticalType;
 $is_not_deleted = " AND Deleted_At IS NULL ";
 ## Total number of records without filtering
 $all_count = $conn->query("SELECT COUNT(Students.ID) as allcount FROM Students LEFT JOIN Admission_Sessions ON Students.Admission_Session_ID = Admission_Sessions.ID WHERE Students.University_ID = " . $_SESSION['university_id'] . " AND Process_By_Center IS NOT NULL AND Step = 4 AND Document_Verified IS NOT NULL AND Processed_To_University IS NOT NULL AND Enrollment_No IS NULL $is_not_deleted $role_query $step_query $session_query");
@@ -113,13 +113,13 @@ while ($row = mysqli_fetch_assoc($empRecords)) {
   }
 
   $user = mysqli_fetch_array($user);
-  
-      // Sub_Center Name 
+
+  // Sub_Center Name 
   $sub_centers['Name'] = "";
   if (!empty($user)) {
-  $sub_centers = $conn->query("SELECT Users.ID, Code, Name FROM Users LEFT JOIN Center_SubCenter ON Users.ID = Center_SubCenter.Sub_Center WHERE `Sub_Center` = " . $row['Added_For']);
-  $sub_centers = mysqli_fetch_array($sub_centers);
-  }else{
+    $sub_centers = $conn->query("SELECT Users.ID, Code, Name FROM Users LEFT JOIN Center_SubCenter ON Users.ID = Center_SubCenter.Sub_Center WHERE `Sub_Center` = " . $row['Added_For']);
+    $sub_centers = mysqli_fetch_array($sub_centers);
+  } else {
     $sub_centers = '';
   }
 
@@ -134,70 +134,38 @@ while ($row = mysqli_fetch_assoc($empRecords)) {
       $rm = $user;
     }
   }
-  if($_SESSION['university_id'] == 47){
-  $data[] = array(
-    "Photo" => empty($row['Location']) ? '/assets/img/default-user.png' : $row['Location'],
-    "Sub_Center_Name" => (!empty($sub_centers['Name']) && $_SESSION['Role'] != 'Center') ? $sub_centers['Name'] : '',
-    "First_Name" => $row['First_Name'],
-    "Father_Name" => $row['Father_Name'],
-    "Unique_ID" => empty($row['Unique_ID']) ? sprintf("%'.06d\n", $row['ID']) : $row['Unique_ID'],
-    "Enrollment_No" => !empty($row['Enrollment_No']) ? $row['Enrollment_No'] : '',
-    "OA_Number" => !empty($row['OA_Number']) ? $row['OA_Number'] : '',
-    "Duration" => $row['Duration'],
-    "Step" => $row['Step'],
-    "Process_By_Center" => !empty($row['Process_By_Center']) ? date("d-m-Y", strtotime($row['Process_By_Center'])) : "1",
-    "Payment_Received" => !empty($row['Payment_Received']) ? date("d-m-Y", strtotime($row['Payment_Received'])) : "1",
-    "Document_Verified" => !empty($row['Document_Verified']) ? date("d-m-Y", strtotime($row['Document_Verified'])) : "1",
-    "Processed_To_University" => !empty($row['Processed_To_University']) ? date("d-m-Y", strtotime($row['Processed_To_University'])) : '1',
-    "Adm_Session" => $row['Adm_Session'],
-    "Adm_Type" => $row['Adm_Type'],
-    "Short_Name" => $row['Short_Name'],
-    "Center_Code" => $user['Code'],
-    "Center_Name" => $user['Name'],
-    "RM" => $rm['Name'],
-    "Status" => $row['Status'],
-    "DOB" => $row['DOB'],
-    "ID_Card" => $row['ID_Card'],
-    "Admit_Card" => $row['Admit_Card'],
-    "Exam" => $row['Exam'],
-    "Pendency" => empty($row['Pendency']) ? 0 : (int)$row['Pendency'],
-    "ID" => base64_encode($row['ID'] . 'W1Ebt1IhGN3ZOLplom9I'),
-    'ABC_ID' => !empty($row['ABC_ID']) ? $row['ABC_ID'] : '',
-    "updated_date" => !empty($row['Updated_At']) ? date("d-m-Y", strtotime($row['Updated_At'])) : '',
-  );
-}else{
-  $data[] = array(
+
+    $data[] = array(
+      "Photo" => empty($row['Location']) ? '/assets/img/default-user.png' : $row['Location'],
       "Sub_Center_Name" => (!empty($sub_centers['Name']) && $_SESSION['Role'] != 'Center') ? $sub_centers['Name'] : '',
-    "Photo" => empty($row['Location']) ? '/assets/img/default-user.png' : $row['Location'],
-    "First_Name" => $row['First_Name'],
-    "Father_Name" => $row['Father_Name'],
-    "Unique_ID" => empty($row['Unique_ID']) ? sprintf("%'.06d\n", $row['ID']) : $row['Unique_ID'],
-    "Enrollment_No" => !empty($row['Enrollment_No']) ? $row['Enrollment_No'] : '',
-    "OA_Number" => !empty($row['OA_Number']) ? $row['OA_Number'] : '',
-    "Duration" => $row['Duration'],
-    "Course_Category" => $row['Course_Category'],
-    "Step" => $row['Step'],
-    "Process_By_Center" => !empty($row['Process_By_Center']) ? date("d-m-Y", strtotime($row['Process_By_Center'])) : "1",
-    "Payment_Received" => !empty($row['Payment_Received']) ? date("d-m-Y", strtotime($row['Payment_Received'])) : "1",
-    "Document_Verified" => !empty($row['Document_Verified']) ? date("d-m-Y", strtotime($row['Document_Verified'])) : "1",
-    "Processed_To_University" => !empty($row['Processed_To_University']) ? date("d-m-Y", strtotime($row['Processed_To_University'])) : '1',
-    "Adm_Session" => $row['Adm_Session'],
-    "Adm_Type" => $row['Adm_Type'],
-    "Short_Name" => $row['Short_Name'],
-    "Center_Code" => $user['Code'],
-    "Center_Name" => $user['Name'],
-    "RM" => $rm['Name'],
-    "Status" => $row['Status'],
-    "DOB" => $row['DOB'],
-    "ID_Card" => $row['ID_Card'],
-    "Admit_Card" => $row['Admit_Card'],
-    "Exam" => $row['Exam'],
-    "Pendency" => empty($row['Pendency']) ? 0 : (int)$row['Pendency'],
-    "ID" => base64_encode($row['ID'] . 'W1Ebt1IhGN3ZOLplom9I'),
-    'ABC_ID' => !empty($row['ABC_ID']) ? $row['ABC_ID'] : '',
-    "updated_date" => !empty($row['Updated_At']) ? date("d-m-Y", strtotime($row['Updated_At'])) : '',
-  );
-}
+      "First_Name" => $row['First_Name'],
+      "Father_Name" => $row['Father_Name'],
+      "Unique_ID" => empty($row['Unique_ID']) ? sprintf("%'.06d\n", $row['ID']) : $row['Unique_ID'],
+      "Enrollment_No" => !empty($row['Enrollment_No']) ? $row['Enrollment_No'] : '',
+      "OA_Number" => !empty($row['OA_Number']) ? $row['OA_Number'] : '',
+      "Duration" => $row['Duration'],
+      "Step" => $row['Step'],
+      "Process_By_Center" => !empty($row['Process_By_Center']) ? date("d-m-Y", strtotime($row['Process_By_Center'])) : "1",
+      "Payment_Received" => !empty($row['Payment_Received']) ? date("d-m-Y", strtotime($row['Payment_Received'])) : "1",
+      "Document_Verified" => !empty($row['Document_Verified']) ? date("d-m-Y", strtotime($row['Document_Verified'])) : "1",
+      "Processed_To_University" => !empty($row['Processed_To_University']) ? date("d-m-Y", strtotime($row['Processed_To_University'])) : '1',
+      "Adm_Session" => $row['Adm_Session'],
+      "Adm_Type" => $row['Adm_Type'],
+      "Short_Name" => $row['Short_Name'],
+      "Center_Code" => $user['Code'],
+      "Center_Name" => $user['Name'],
+      "RM" => $rm['Name'],
+      "Status" => $row['Status'],
+      "DOB" => $row['DOB'],
+      "ID_Card" => $row['ID_Card'],
+      "Admit_Card" => $row['Admit_Card'],
+      "Exam" => $row['Exam'],
+      "Pendency" => empty($row['Pendency']) ? 0 : (int) $row['Pendency'],
+      "ID" => base64_encode($row['ID'] . 'W1Ebt1IhGN3ZOLplom9I'),
+      'ABC_ID' => !empty($row['ABC_ID']) ? $row['ABC_ID'] : '',
+      "updated_date" => !empty($row['Updated_At']) ? date("d-m-Y", strtotime($row['Updated_At'])) : '',
+    );
+
 }
 
 ## Response

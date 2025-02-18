@@ -125,7 +125,7 @@ function generateStudentLedger($conn, $student_id)
     return true;
   }
 
-  $durationQuery = $student['University_ID'] == 48 ? " AND Duration = '" . $student['Duration'] . "'" : "";
+  $durationQuery = "";
 
   $centerFee = 0;
   if ($student['Role'] == 'Sub-Center') {
@@ -151,7 +151,7 @@ function generateStudentLedger($conn, $student_id)
     $studentFee = $studentFee['Fee'];
 
     $date = date('Y-m-d', strtotime($student['Created_At']));
-    if ($student['University_ID'] == 47) {
+
       
       if ($student['Admission_Session_ID'] <= 76) {
         if (!empty($centerFee)) {
@@ -216,15 +216,7 @@ function generateStudentLedger($conn, $student_id)
           $update = $conn->query("UPDATE Student_Ledgers SET Settlement_Amount = $settlementAmount, Center_Fee = $centerFee WHERE ID = $ledgerId");
         }
       }
-    } else {
-      $add = $conn->query("INSERT INTO Student_Ledgers (Date, Student_ID, Duration, University_ID, Type, Fee, Fee_Without_Sharing, Status) VALUES ('$date', $student_id, '" . $student['Duration'] . "', " . $student['University_ID'] . ", 1, '$studentFee', '$studentFee', 1)");
-      if ($add && $student['Role'] == 'Sub-Center') {
-        // Settlement Amount
-        $ledgerId = $conn->insert_id;
-        $settlementAmount = $studentFee - $centerFee;
-        $update = $conn->query("UPDATE Student_Ledgers SET Settlement_Amount = $settlementAmount, Center_Fee = $centerFee WHERE ID = $ledgerId");
-      }
-    }
+   
 
 	// Other Fee
 	$startDate = date("Y-m-d", strtotime($student['Created_At']));
@@ -514,7 +506,7 @@ function isJson($string) {
 }
 
 function getSettlementAmount($conn, $studentId, $universityId, $duration){
-    $durationCondition = $universityId==47 ? " AND Duration = '$duration'" : "";
+    $durationCondition = " AND Duration = '$duration'";
     
     // Debit
     $debit = $conn->query("SELECT * FROM Student_Ledgers WHERE Student_ID = $studentId AND University_ID = $universityId AND `Type` = 1 $durationCondition");
@@ -575,21 +567,9 @@ function totalUloadedSubjectsFunc($conn, $university_id, $student_id, $duration)
 {
   $getStuData = $conn->query("SELECT Course_ID,Sub_Course_ID,Added_For,University_ID  FROM Students WHERE ID = $student_id");
   $stuData = $getStuData->fetch_assoc();
-  if ($university_id == 48) {
-    $center_id = getUserIdFunc($conn, $stuData['Added_For']);
-    $getCenterID = $conn->query("select Code from Users where ID = '$center_id'");
-    if ($getCenterID->num_rows > 0) {
-      $codeArr = $getCenterID->fetch_assoc();
-      $code = trim($codeArr['Code']);
-      $userQuery = " AND JSON_CONTAINS(User_ID, '\"" . mysqli_real_escape_string($conn, $code) . "\"')";
-    } else {
-      $code = '';
-      $userQuery = '';
-    }
-    $sub_count = $conn->query("SELECT Syllabi.Name FROM Syllabi WHERE  Course_ID='" . $stuData['Course_ID'] . "' AND Sub_Course_ID='" . $stuData['Sub_Course_ID'] . "' AND Semester = '" . $duration . "' AND University_ID ='" . $stuData['University_ID'] . "'  $userQuery ");
-  } else {
+
     $sub_count = $conn->query("SELECT Syllabi.Name FROM Syllabi WHERE Course_ID='" . $stuData['Course_ID'] . "' AND Sub_Course_ID='" . $stuData['Sub_Course_ID'] . "' AND Semester = '" . $duration . "' AND University_ID ='" . $stuData['University_ID'] . "'");
-  }
+  
    
   $subjectArr = [];
   while ($row = $sub_count->fetch_assoc()) {

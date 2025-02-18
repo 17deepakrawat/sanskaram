@@ -87,7 +87,7 @@ if (isset($_GET['student_id']) || isset($_GET['student_ids'])) {
 
     $pdf->SetTitle('Admit Card');
 
-    $pageCount = $pdf->setSourceFile('Glocal Admit Card.pdf');
+    $pageCount = $pdf->setSourceFile('Sanskaram Admit Card.pdf');
 
     $pageId = $pdf->importPage(1, PdfReader\PageBoundaries::MEDIA_BOX);
     $pdf->addPage();

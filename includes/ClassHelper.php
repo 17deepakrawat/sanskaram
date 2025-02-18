@@ -33,17 +33,6 @@ class ClassHelper
 
     public function getDurationFunc($duration, $category, $uni_id)
     {
-        if ($uni_id == 48) {
-            if (strtolower($category) == 'certified' && ($duration == 6 || $duration == 11)) {
-                $duration = $duration . '/' . $category;
-            } elseif (strtolower($category) == 'certification') {
-                $duration = $duration . '/certification';
-            } elseif (strtolower($category) == 'advance_diploma' || $duration == '11/advance-diploma') {
-                $duration = '11/advanced';
-            } elseif (strtolower($category) == 'post_graduate') {
-                $duration = '24/post-graduate';
-            }
-        }
         return $duration;
     }
 

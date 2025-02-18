@@ -9,7 +9,7 @@ require '../../includes/helpers.php';
 session_start();
 $username = $_GET['user_id'];
 $password  = $_GET['password'];
-$url = "https://erpglocal.iitseducation.org";
+$url = WEB_URL;
 $passFail = "PASS";
 
 
@@ -18,8 +18,7 @@ $student = $conn->query("SELECT Students.ID FROM Students LEFT JOIN Modes on Stu
 if ($student->num_rows > 0) {
  
   $student = $student->fetch_assoc();
-  $data = array('status'=>true, 'url'=>'https://erpglocal.iitseducation.org/student/examination/result-pdf?id='.$student['ID']);
-  // $data = array('status'=>true, 'url'=>'http://glocal-erp.local/student/examination/result-pdf?id='.$student['ID']);
+  $data = array('status'=>true, 'url'=>WEB_URL.'/student/examination/result-pdf?id='.$student['ID']);
 
   echo json_encode($data);
 } else {

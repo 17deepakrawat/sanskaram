@@ -40,7 +40,7 @@
               if (count($breadcrumbs) == $i):
                 $active = "active";
                 $crumb = explode("?", $breadcrumbs[$i]);
-                echo '<li class="breadcrumb-item ' . $active . '">' . $crumb[0] . '</li>';
+                echo '<li class="breadcrumb-item ' . $active . '">' . strtoupper($crumb[0]) . '</li>';
               endif;
             }
             ?>

@@ -58,49 +58,8 @@ if (isset($_POST['amount']) && isset($_POST['transaction_id'])) {
     $added_by = $added_by->fetch_assoc();
     $added_by = $added_by['Added_For'];
   }
-
-
-
-
   $add = $conn->query("INSERT INTO Wallets (Type, Transaction_Date, Transaction_ID, Gateway_ID, Bank, Amount, Payment_Mode, Added_By, File, University_ID $added_for_column) VALUES (1, '$transaction_date', '$transaction_id', '$gateway_id', '$bank_name', '$amount', '$payment_type', " . $added_by . ", '$file', " . $_SESSION['university_id'] . " $added_for_value)");
-
-
   if ($add) {
-    $userdata = $conn->query("SELECT * FROM Users WHERE ID = $added_by");
-    $userdata = $userdata->fetch_assoc();
-    $center_name = $userdata['Name'] . '(' . $userdata['Code'] . ')';
-    $vartical_type = $userdata['Vertical_type'];
-     date_default_timezone_set('Asia/Kolkata');
-    $currentTime = date("d-m-Y h:i:sa");
-    $subject = "Amount addition request " . $amount . " rupees from {$center_name} for wallet through Offline Mode";
-
-    $message = "
-        <p>Dear Reporting Manager,</p>
-        <p>I hope this email finds you well.</p>
-        <p>A request has been made to add <strong>₹{$amount}</strong> to the wallet of <b>{$center_name}</b>. Kindly review and approve this request at your earliest convenience on {$currentTime}.</p>
-        <p><em><strong>This is a system-generated email. Please do not reply.</strong></em></p>
-        <p>Thanks & Regards,<br>Edtech Innovate Pvt. Ltd.</p>
-    ";
-
-    if ($vartical_type == 0) { // 1- edtech  and 0-iits
-      $accountent_email = "groupaccounts@iitseducation.org";
-      if ($_SESSION['university_id'] == 48) {
-        $operation_email = "syam@iitseducation.org";
-      } else {
-        $operation_email = "akhil@iitseducation.org";
-      }
-    } else {
-      $accountent_email = "Finance@edtechinnovate.com";
-      $operation_email = "arya@edtechinnovate.com";
-    }
-
-    // $accountent_email = "karuna@edtechinnovate.com";
-    // $operation_email = "karuna@edtechinnovate.com";
-
-    $to = $accountent_email . "," . $operation_email;
-    sendMail($to, $subject, $message);
-
-
     echo json_encode(['status' => 200, 'message' => 'Wallets amount added successfully!']);
   } else {
     echo json_encode(['status' => 400, 'message' => 'Something went wrong!']);

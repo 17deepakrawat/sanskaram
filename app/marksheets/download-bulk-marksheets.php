@@ -4,7 +4,7 @@ require '../../includes/db-config.php';
 require '../../includes/helpers.php';
 session_start();
 
-$url = "https://erpglocal.iitseducation.org";
+$url = WEB_URL;
 $passFail = "PASS";
 
 use setasign\Fpdi\PdfReader;
@@ -188,7 +188,7 @@ if ($student->num_rows > 0) {
             $total_duration = '';
 
 
-            $data['university_name'] = "Glocal School of Vocational Studies";
+            $data['university_name'] = "Sanskaram School of Vocational Studies";
             $data['mode_type'] = "Semester";
             $durations = "B. VOC";
 

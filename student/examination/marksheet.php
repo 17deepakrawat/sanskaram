@@ -4,7 +4,7 @@
 
 <?php include($_SERVER['DOCUMENT_ROOT'] . '/includes/menu.php');
 ini_set('display_errors', 1);
-require '../../includes/db-config.php';
+// require '../../includes/db-config.php';
 require '../../includes/helpers.php';
 
 ?>
@@ -122,9 +122,8 @@ require '../../includes/helpers.php';
                         }
                     }
                     $rows = [];
-                  //  $get_result_data_url = "http://glocal.local/student/examination/api" . $webQuery;
-
-                    $get_result_data_url = "https://erpglocal.iitseducation.org/student/examination/api" . $webQuery;
+            
+                    $get_result_data_url = WEB_URL."/student/examination/api" . $webQuery;
                     $result = file_get_contents($get_result_data_url);
                     $rows = json_decode($result, true);
 
@@ -134,7 +133,7 @@ require '../../includes/helpers.php';
                     if (isset($rows['status']) && $rows['status'] == 1) {
                         $row = $rows['data'];
 
-                        if ($row['University_ID'] == 47) {
+                      
                             ?>
 
                             <div class="text-center mt-5">
@@ -148,13 +147,13 @@ require '../../includes/helpers.php';
                                     </select>
                                 </div>
                             </div>
-                        <?php } ?>
+                       
                         <div id="contentpdf" class="html-content">
                             <div class="result_section">
                                 <div class="mt-5 body"
                                     style="border:3px solid #1e1919; height: 1204px; width: 900px; margin: 0 auto; background-position: center; background-size: contain; background-repeat: no-repeat; padding: 20px;">
                                     <div class="" style="display:flex; justify-content:center;">
-                                        <img src="https://vocational.glocaluniversity.edu.in/assets/images/downloadfooter.webp"
+                                        <img src="<?= LOGO ?>"
                                             alt="" style="margin-top: 15px;width:27%">
                                     </div>
                                     <p
@@ -171,7 +170,7 @@ require '../../includes/helpers.php';
                                         <p class="text-center text-dark fw-bold" style="font-size:medium; font-weight:700">
                                             Admission Session
                                             :<?= ucwords($row['Admission_Session']) ?></p>
-                                        <img src="https://erpglocal.iitseducation.org/<?= $row['Photo'] ?>" alt=""
+                                        <img src="<?= WEB_URL?>/<?= $row['Photo'] ?>" alt=""
                                             width="100" height="100" class="img-pp"
                                             style="position: absolute;right: 1px;top: 10px;">
                                         <div class="row" style="margin-top: 50px;">
@@ -196,7 +195,7 @@ require '../../includes/helpers.php';
                                                                         style="font-size:medium; font-weight:700"><?= $row['Enrollment_No'] ?></span>
                                                                 </td>
                                                             </tr>
-                                                            <?php if ($row['University_ID'] == 47) { ?>
+                                                          
                                                                 <tr>
                                                                     <td class="col text-start"
                                                                         style="width:600px; height:40px;">
@@ -221,7 +220,7 @@ require '../../includes/helpers.php';
                                                                         <span class="fw-bold "
                                                                             style="color: #05519E;font-size:medium; font-weight:700">School:</span>
                                                                         <span class="text-dark fw-bold"
-                                                                            style="color: #05519E;font-size:medium; font-weight:700">Glocal
+                                                                            style="color: #05519E;font-size:medium; font-weight:700">Sanskaram
                                                                             School Of
                                                                             <?= $row['university_name'] ?></span>
                                                                     </td>
@@ -232,23 +231,7 @@ require '../../includes/helpers.php';
                                                                             style="color: #05519E;font-size:medium; font-weight:700">
                                                                             <?= $row['stu_exam_session'] ?> </span></td>
                                                                 </tr>
-                                                            <?php } else { ?>
-                                                                <tr>
-                                                                    <td class="col text-start"
-                                                                        style="width:600px; height:40px;"><span class="fw-bold "
-                                                                            style="color: #05519E;font-size:medium; font-weight:700">School:</span>
-                                                                        <span class="text-dark fw-bold"
-                                                                            style="color: #05519E;font-size:medium; font-weight:700">Glocal
-                                                                            School Of
-                                                                            <?= $row['university_name'] ?></span></td>
-                                                                    <td class="col text-start"
-                                                                        style="width:400px; height:40px;"><span class="fw-bold "
-                                                                            style="color: #05519E;font-size:medium; font-weight:700"><?= $row['mode_type'] ?>
-                                                                            :</span><span class="text-dark fw-bold"
-                                                                            style="color: #05519E;font-size:medium; font-weight:700">
-                                                                            <?= $row['durMonthYear'] ?> </span></td>
-                                                                </tr>
-                                                            <?php } ?>
+                                                       
 
                                                         </tbody>
                                                     </table>
@@ -258,7 +241,6 @@ require '../../includes/helpers.php';
                                         <div class="table-box">
                                             <table width="100%"
                                                 style="border-collapse: collapse; border: 2px solid #8b8b8b; width: 100%;">
-                                                <?php if ($row['University_ID'] == 47) { ?>
                                                     <tbody>
                                                         <tr class="text-center border-bottom-0">
                                                             <th scope="col" class="col blue"
@@ -324,49 +306,7 @@ require '../../includes/helpers.php';
                                                             </tr>
                                                         <?php } ?>
                                                     </tbody>
-                                                <?php } else { ?>
-                                                    <tbody>
-                                                        <tr class="text-center"
-                                                            style="color: #05519E;font-size:medium; font-weight:700">
-                                                            <th style="width:119px;border: 2px solid #8b8b8b;font-size:medium;  font-weight:700"
-                                                                rowspan="2">
-                                                                Subject Code</th>
-                                                            <th
-                                                                style="width: 350px; border: 2px solid #8b8b8b;font-size:medium; font-weight:700; ">
-                                                                Subject Name
-                                                            </th>
-                                                            <th style="border: 2px solid #8b8b8b;font-size:medium; font-weight:700"
-                                                                rowspan="2">Obtained Marks
-                                                            </th>
-                                                            <th style="border: 2px solid #8b8b8b;font-size:medium; font-weight:700"
-                                                                rowspan="2">MIN. MARKS</th>
-                                                            <th style="border: 2px solid #8b8b8b;font-size:medium; font-weight:700"
-                                                                rowspan="2">MAX. MARKS</th>
-                                                            <th style="border: 2px solid #8b8b8b;font-size:medium; font-weight:700"
-                                                                rowspan="2">REMARKS</th>
-                                                        </tr>
-                                                        <tr class="text-center" style="color: #05519E; font-weight: 700;"> </tr>
-                                                        <?php foreach ($row['marks'] as $result) { ?>
-                                                            <tr class="text-center" style="font-weight: 700;">
-                                                                <td style="padding: 6px;border-left: 2px solid #8b8b8b;border-radius: 2px solid #8b8b8b;font-size: 14px; "
-                                                                    class="text-dark"><?= $result['Code'] ?></td>
-                                                                <td class="text-left text-dark"
-                                                                    style="padding: 6px;border-left: 2px solid #8b8b8b;border-radius: 2px solid #8b8b8b;font-size: 14px;  text-align:start !important;">
-                                                                    <?= $result['subject_name'] ?>
-                                                                </td>
-                                                                <td style="padding: 6px;border-left: 2px solid #8b8b8b;border-radius: 2px solid #8b8b8b;font-size: 14px;"
-                                                                    class="text-dark"><?= $result['obt_marks_ext'] ?></td>
-                                                                <td style="padding: 6px;border-left: 2px solid #8b8b8b;border-radius: 2px solid #8b8b8b;font-size: 14px;"
-                                                                    class="text-dark"><?= $result['minimum_marks'] ?></td>
-                                                                <td style="padding: 6px;border-left: 2px solid #8b8b8b;border-radius: 2px solid #8b8b8b;font-size: 14px;"
-                                                                    class="text-dark"><?= $result['Max_Marks'] ?></td>
-                                                                <td style="padding: 6px;border-left: 2px solid #8b8b8b;border-radius: 2px solid #8b8b8b;font-size: 14px;"
-                                                                    class="text-dark"><?= ucwords(strtolower($result['remarks_status'])) ?>
-                                                                </td>
-                                                            </tr>
-                                                        <?php } ?>
-                                                    </tbody>
-                                                <?php } ?>
+                                            
                                             </table>
                                         </div>
                                         <p class="text-center mt-3 mb-3"
@@ -430,12 +370,12 @@ require '../../includes/helpers.php';
                                             <p
                                                 style="position: relative; top: 17px;color: #05519E;font-weight: 700;display: inline-block;">
                                                 <span class="top-heading-u"></span> The published result is provisional
-                                                only. Glocal
+                                                only. Sanskaram
                                                 University is not responsible for any inadvertent error that may have crept
                                                 in the data
                                                 / results being published online.This is being published just for the
                                                 immediate
-                                                information to the examinees. The final mark sheet(s) issued by Glocal
+                                                information to the examinees. The final mark sheet(s) issued by Sanskaram
                                                 University will
                                                 only be treated authentic &amp; final in this regard.
                                             </p>

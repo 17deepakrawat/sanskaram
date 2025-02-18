@@ -18,7 +18,7 @@ require '../../includes/helpers.php';
     }
 </style>
 <?php
-$url = "https://erpglocal.iitseducation.org";
+$url = WEB_URL;
 $passFail = "PASS";
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
@@ -47,7 +47,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $total_max = 0;
     $percentage = 0;
     $durations_query = "";
-    if ($Students_temps['University_ID'] == 47 && isset($year_sem)) {
+    if (isset($year_sem)) {
         $durations_query = "AND s.Semester = " . $year_sem;
     }
     $getDataSQL = $conn->query("SELECT s.Name as subject_name, s.Code,s.Max_Marks, s.Min_Marks,m.obt_marks,m.remarks,m.obt_marks_ext,m.obt_marks_int From marksheets AS m LEFT JOIN Syllabi AS s ON m.subject_id = s.ID WHERE m.enrollment_no = '" . $Students_temps['Enrollment_No'] . "' AND s.Course_ID = " . $Students_temps['Course_ID'] . " AND  s.Sub_Course_ID = " . $Students_temps['Sub_Course_ID'] . " $durations_query ");
@@ -70,11 +70,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         $obt_marks_ext = $getDataArr['obt_marks_ext'];
         $obt_marks_int = $getDataArr['obt_marks_int'];
         $total_obt = $total_obt + $obt_marks_ext + $obt_marks_int;
-        if ($Students_temps['University_ID'] == 47) {
-            $total_max = $total_max + $getDataArr['Min_Marks'] + $getDataArr['Max_Marks'];
-        } else {
-            $total_max = $total_max + $getDataArr['Max_Marks'];
-        }
+
+        $total_max = $total_max + $getDataArr['Min_Marks'] + $getDataArr['Max_Marks'];
+
         $Students_temps['marks'][] = $getDataArr;
     }
 
@@ -100,25 +98,19 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $Students_temps['mode_type'] = "Semester";
     $Students_temps['durMonthYear'] = $year_sem . $durMonthYear;
     $Students_temps['Enrollment_No'] = isset($Students_temps['Enrollment_No']) ? $Students_temps['Enrollment_No'] : '';
-    $Students_temps['university_name'] = "Glocal School Of Vocational Studies";
+    $Students_temps['university_name'] = "Sanskaram School Of Vocational Studies";
     $Students_temps['duration_val'] = "B. VOC";
     $Students_temps['mode_type'] = "Semester";
     $min_duration = json_decode($Students_temps['Min_Duration']);
     $sem = $year_sem;
     $typoArr = ["th", "st", "nd", "rd", "th", "th", "th", "th", "th"];
-    if ($Students_temps['University_ID'] == 47) {
-        $Students_temps['durMonthYear'] = $sem . $typoArr[$sem];
-    } else {
-        $Students_temps['durMonthYear'] = $Students_temps['Duration'] . $durMonthYear;
-    }
+
+    $Students_temps['durMonthYear'] = $sem . $typoArr[$sem];
+
 
     $getDataSQL = "";
-    if ($Students_temps['University_ID'] == 48) {
-        $exam_date = $conn->query("SELECT m.exam_month,m.exam_year FROM marksheets AS m LEFT JOIN Syllabi AS s ON m.subject_id = s.ID WHERE m.enrollment_no = '" . $Students_temps['Enrollment_No'] . "' AND s.Course_ID = " . $Students_temps['Course_ID'] . "  AND  s.Sub_Course_ID = " . $Students_temps['Sub_Course_ID'] . "   GROUP BY m.enrollment_no");
-    } else {
-        // echo " SELECT m.exam_month,m.exam_year FROM marksheets AS m LEFT JOIN Syllabi AS s ON m.subject_id = s.ID WHERE m.enrollment_no = '" . $Students_temps['Enrollment_No'] . "' AND s.Course_ID = " . $Students_temps['Course_ID'] . "  AND  s.Sub_Course_ID = " . $Students_temps['Sub_Course_ID'] . "  AND s.Semester=$year_sem  GROUP BY m.enrollment_no";die;
-        $exam_date = $conn->query(" SELECT m.exam_month,m.exam_year FROM marksheets AS m LEFT JOIN Syllabi AS s ON m.subject_id = s.ID WHERE m.enrollment_no = '" . $Students_temps['Enrollment_No'] . "' AND s.Course_ID = " . $Students_temps['Course_ID'] . "  AND  s.Sub_Course_ID = " . $Students_temps['Sub_Course_ID'] . "  AND s.Semester=$year_sem  GROUP BY m.enrollment_no");
-    }
+    $exam_date = $conn->query(" SELECT m.exam_month,m.exam_year FROM marksheets AS m LEFT JOIN Syllabi AS s ON m.subject_id = s.ID WHERE m.enrollment_no = '" . $Students_temps['Enrollment_No'] . "' AND s.Course_ID = " . $Students_temps['Course_ID'] . "  AND  s.Sub_Course_ID = " . $Students_temps['Sub_Course_ID'] . "  AND s.Semester=$year_sem  GROUP BY m.enrollment_no");
+
     if ($exam_date->num_rows > 0) {
         $examArr = $exam_date->fetch_assoc();
 
@@ -130,7 +122,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     }
     $html = '<div id="content" class="html-content" style="background: #fff;">';
     $html .= '<div class="mt-5 body" style="border:3px solid #1e1919;height: 1111px;; width: 900px; margin: 0 auto; background-position: center; background-size: contain; background-repeat: no-repeat; padding: 0px;">
-            <div class="" style="display:flex; justify-content:center;"><img src="https://vocational.glocaluniversity.edu.in/assets/images/downloadfooter.webp" alt=""style="margin-top: 15px;width:27%"></div>
+            <div class="" style="display:flex; justify-content:center;"><img src="'.LOGO.'" alt=""style="margin-top: 15px;width:27%"></div>
               <p style="margin-top:1%;text-align: center;font-weight: 700;font-size: 20px!important;color:black !important;">(A University Established by UP Act 2 of 2012)</p>
             <div class="main-result-box" style="padding: 0px; height: 0px; margin: 0 auto; position: relative; top: 0px; right: 0px;">
                     
@@ -232,8 +224,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 			<div class="des" style="width:92%">
 				<p style="position: relative;font-size: 20px; top: 14px; right: 10px;color: #05519E;font-weight: 700;display: inline-block;"><span class="top-heading-u"></span>Disclaimer :</p>
 				<p style="position: relative; top: 10px;color: #05519E;font-weight: 700;display: inline-block;"><span class="top-heading-u"></span>
-					The published result is provisional only. Glocal University is not responsible for any inadvertent error that may have crept in the data / results being published online.
-					This is being published just for the immediate information to the examinees. The final mark sheet(s) issued by Glocal University will only be treated authentic & final in this regard.
+					The published result is provisional only. Sanskaram University is not responsible for any inadvertent error that may have crept in the data / results being published online.
+					This is being published just for the immediate information to the examinees. The final mark sheet(s) issued by Sanskaram University will only be treated authentic & final in this regard.
 
 				</p></div>';
     $html .= '</div>

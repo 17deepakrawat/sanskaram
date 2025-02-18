@@ -63,7 +63,7 @@
 			$encrypted_data=encrypt($postData1,$working_key);
 			$postData['encRequest'] = $encrypted_data;
 			$postData['access_code'] = $access_code;
-            $url = "https://erp.glocaluniversity.edu.in/onboard/securecheck.php?api=chck_details";
+            $url = "https://sanskaram.edtechinnovate.in/onboard/securecheck.php?api=chck_details";
             $ch = curl_init();
             curl_setopt($ch, CURLOPT_URL, $url);
             curl_setopt($ch, CURLOPT_POST, 1);

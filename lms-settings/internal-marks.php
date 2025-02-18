@@ -41,7 +41,7 @@ function verticalTypeFunc()
                 if (count($breadcrumbs) == $i):
                   $active = "active";
                   $crumb = explode("?", $breadcrumbs[$i]);
-                  $marks_type = ($_SESSION['university_id'] == 48) ? "External Marks List" : "Internal Marks List";
+                  $marks_type =  "Internal Marks List";
                   echo '<li class="breadcrumb-item ' . $active . '">' . $marks_type . '</li>';
                 endif;
               }
@@ -154,7 +154,7 @@ function verticalTypeFunc()
 
           {
             data: "Duration",
-            visible: (uni_id == 48) ? true : false,
+          
           },
           {
             data: "user_name",

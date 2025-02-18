@@ -1,7 +1,6 @@
 <?php
 require '../../includes/db-config.php';
 session_start();
-//if($_SESSION['university_id'] == 48){}
 ?>
 
 <!-- Modal -->
@@ -130,13 +129,10 @@ session_start();
 
     function getStudent(id) {
         var [sub_course_id, scheme_id, university_id] = id.split('|');
-        if (university_id == 48) {
-            $(".student_id").removeClass("studentData");
-            $(".skillTab").show();
-         } else {
+        
             $(".student_id").addClass("studentData");
             $(".skillTab").hide();
-        }
+        
         $(".students").show()
         var course_id = $("#course_type_id").val();
 

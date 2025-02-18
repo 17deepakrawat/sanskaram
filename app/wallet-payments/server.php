@@ -32,10 +32,9 @@ if (isset($_SESSION['filterByUser'])) {
   $role_query = str_replace('{{ table }}', 'Wallets', $_SESSION['RoleQuery']);
   $role_query = str_replace('{{ column }}', 'Added_By', $role_query);
 }
-$verticalSearchQuery="";
-if(in_array($_SESSION['Code'],['EMP0006','EMP0010']))
-{
-   $verticalSearchQuery = 'AND Users.Vertical_type=0';
+$verticalSearchQuery = "";
+if (in_array($_SESSION['Code'], ['EMP0006', 'EMP0010'])) {
+  $verticalSearchQuery = 'AND Users.Vertical_type=0';
 }
 ## Search 
 $searchQuery = " ";
@@ -88,74 +87,58 @@ $data = array();
 
 while ($row = mysqli_fetch_assoc($empRecords)) {
   // Added_For
-  if ($row['Payment_Mode'] == "Settelment By Sub-Center" && $_SESSION['university_id'] == 48) {
+  $users = $conn->query("SELECT ID, Code, Name FROM Users WHERE ID = " . $row['Added_By'] . " $verticalSearchQuery ");
 
-    $subUser = $conn->query("SELECT ID,Added_By as Sub_Center  FROM Wallet_Payments WHERE Transaction_ID = '" . $row['Transaction_ID'] . "'");
-
-    $subUserArr = mysqli_fetch_array($subUser);
-    $sub_centerId = $subUserArr['Sub_Center'];
-    $users = $conn->query("SELECT ID, Code, Name FROM Users WHERE ID = $sub_centerId $verticalSearchQuery");
-  } else {
-    $users = $conn->query("SELECT ID, Code, Name FROM Users WHERE ID = ".$row['Added_By']." $verticalSearchQuery "  );
-  }
 
   $user = mysqli_fetch_array($users);
 
-    if($user && array_key_exists('Code',$user))
-    {
-        // $user = $conn->query("SELECT ID, Code, Name FROM Users WHERE ID = " . $row['Added_By'] . " ");
-  // $user = $conn->query("SELECT ID, Code, Name FROM Users WHERE ID = " . $row['Added_By'] . " AND Role != 'Sub-Center'");
-  // if ($user->num_rows == 0) {
-  //   $user = $conn->query("SELECT Users.ID, Code, Name FROM Users LEFT JOIN Center_SubCenter ON Users.ID = Center_SubCenter.Center WHERE `Sub_Center` = " . $row['Added_By']);
-  // }
-  // $user = mysqli_fetch_array($user);
+  if ($user && array_key_exists('Code', $user)) {
 
-  // RM
-  $rm['Name'] = "";
-  if (!empty($user)) {
-    // RM
-    $rm = $conn->query("SELECT CONCAT(Users.Name, ' (', Users.Code, ')') as Name FROM Alloted_Center_To_Counsellor LEFT JOIN Users ON Alloted_Center_To_Counsellor.Counsellor_ID = Users.ID AND Alloted_Center_To_Counsellor.University_ID = " . $_SESSION['university_id'] . " WHERE Alloted_Center_To_Counsellor.Code = " . $user['ID'] . " AND Alloted_Center_To_Counsellor.University_ID = " . $_SESSION['university_id']);
-    if ($rm->num_rows > 0) {
-      $rm = mysqli_fetch_array($rm);
-    } else {
-      $rm = $user;
+    $rm['Name'] = "";
+    if (!empty($user)) {
+      // RM
+      $rm = $conn->query("SELECT CONCAT(Users.Name, ' (', Users.Code, ')') as Name FROM Alloted_Center_To_Counsellor LEFT JOIN Users ON Alloted_Center_To_Counsellor.Counsellor_ID = Users.ID AND Alloted_Center_To_Counsellor.University_ID = " . $_SESSION['university_id'] . " WHERE Alloted_Center_To_Counsellor.Code = " . $user['ID'] . " AND Alloted_Center_To_Counsellor.University_ID = " . $_SESSION['university_id']);
+      if ($rm->num_rows > 0) {
+        $rm = mysqli_fetch_array($rm);
+      } else {
+        $rm = $user;
+      }
     }
-  }
 
-  $students = $conn->query("SELECT CONCAT(TRIM(CONCAT(Students.First_Name, ' ', Students.Middle_Name, ' ', Students.Last_Name)), ' (', IF(Students.Unique_ID='' OR Students.Unique_ID IS NULL, RIGHT(CONCAT('000000', Students.ID), 6), Students.Unique_ID), ')') as Student_Name , Students.ID as std_ID FROM Invoices LEFT JOIN Students ON Invoices.Student_ID = Students.ID WHERE `User_ID` = " . $row['Added_By'] . " AND Invoice_No = '" . $row['Transaction_ID'] . "'  AND Invoices.University_ID = " . $_SESSION['university_id'] . " ");
-  $student_name = array();
-  while ($student = mysqli_fetch_assoc($students)) {
-    $student_name[] = $student['std_ID'];
-  }
-
-  $file_type = "";
-  if (!empty($row['File'])) {
-    $extension = explode(".", $row['File']);
-    $extension = end($extension);
-    $file_type = strcasecmp($extension, 'pdf') == 0 ? "pdf" : "image";
-  }
-
-  $data[] = array(
-    "File" => empty($row['File']) ? '' : $row['File'],
-    "File_Type" => $file_type,
-    "Transaction_ID" => empty($row['Transaction_ID']) ? '' : $row['Transaction_ID'],
-    "Transaction_Date" => empty($row['Transaction_Date']) ? '' : date("d-m-Y", strtotime($row['Transaction_Date'])),
-    "Gateway_ID" => empty($row['Gateway_ID']) ? '' : $row['Gateway_ID'],
-    "Bank" => empty($row['Bank']) ? '' : $row['Bank'],
-    "amounts" => empty($row['Amount']) ? '' : $row['Amount'],
-    "Amount" => empty($row['Amount']) ? '' : "&#8377; " . number_format($row['Amount'], 2),
-    "Payment_Mode" => empty($row['Payment_Mode']) ? '' : $row['Payment_Mode'],
-    "University" => empty($row['University']) ? '' : $row['University'],
-    "Center_Code" => $user['Code'],
-    "Center_Name" => $user['Name'],
-    "RM" => $rm['Name'],
-    "Status" => $row['Status'],
-    "ID" => $row['ID'],
-    "Student" => $student_name,
-    "user_id" => $row['user_id'],
-    "Type" => $row['Type'] == 1 ? "Offline" : "Online",
-  );   
+    $students = $conn->query("SELECT CONCAT(TRIM(CONCAT(Students.First_Name, ' ', Students.Middle_Name, ' ', Students.Last_Name)), ' (', IF(Students.Unique_ID='' OR Students.Unique_ID IS NULL, RIGHT(CONCAT('000000', Students.ID), 6), Students.Unique_ID), ')') as Student_Name , Students.ID as std_ID FROM Invoices LEFT JOIN Students ON Invoices.Student_ID = Students.ID WHERE `User_ID` = " . $row['Added_By'] . " AND Invoice_No = '" . $row['Transaction_ID'] . "'  AND Invoices.University_ID = " . $_SESSION['university_id'] . " ");
+    $student_name = array();
+    while ($student = mysqli_fetch_assoc($students)) {
+      $student_name[] = $student['std_ID'];
     }
+
+    $file_type = "";
+    if (!empty($row['File'])) {
+      $extension = explode(".", $row['File']);
+      $extension = end($extension);
+      $file_type = strcasecmp($extension, 'pdf') == 0 ? "pdf" : "image";
+    }
+
+    $data[] = array(
+      "File" => empty($row['File']) ? '' : $row['File'],
+      "File_Type" => $file_type,
+      "Transaction_ID" => empty($row['Transaction_ID']) ? '' : $row['Transaction_ID'],
+      "Transaction_Date" => empty($row['Transaction_Date']) ? '' : date("d-m-Y", strtotime($row['Transaction_Date'])),
+      "Gateway_ID" => empty($row['Gateway_ID']) ? '' : $row['Gateway_ID'],
+      "Bank" => empty($row['Bank']) ? '' : $row['Bank'],
+      "amounts" => empty($row['Amount']) ? '' : $row['Amount'],
+      "Amount" => empty($row['Amount']) ? '' : "&#8377; " . number_format($row['Amount'], 2),
+      "Payment_Mode" => empty($row['Payment_Mode']) ? '' : $row['Payment_Mode'],
+      "University" => empty($row['University']) ? '' : $row['University'],
+      "Center_Code" => $user['Code'],
+      "Center_Name" => $user['Name'],
+      "RM" => $rm['Name'],
+      "Status" => $row['Status'],
+      "ID" => $row['ID'],
+      "Student" => $student_name,
+      "user_id" => $row['user_id'],
+      "Type" => $row['Type'] == 1 ? "Offline" : "Online",
+    );
+  }
 }
 
 ## Response

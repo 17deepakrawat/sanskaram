@@ -5,8 +5,6 @@ ini_set('display_errors', 1);
 require '../../includes/db-config.php';
 require '../../includes/helpers.php';
 session_start();
-
-// $url = "https://erpglocal.iitseducation.org";
 $passFail = "PASS";
 $typoArr = ["th", "st", "nd", "rd", "th", "th", "th", "th", "th"];
 
@@ -26,11 +24,6 @@ $student = $conn->query("SELECT  Students.Unique_ID,Students.Exam, Students.ID,S
 $Students_temps = [];
 if ($student->num_rows > 0) {
     $Students_temps = $student->fetch_assoc();
-    //  ECHO $_SESSION['Role']; die;
-    // if ($Students_temps['Exam'] == 1 && (isset($_SESSION['Role']) && $_SESSION['Role'] == 'Student')) {
-    //     echo json_encode(['status' => false, 'msg' => 'Result not published yet!']);
-    //     die();
-    // }
 
     $result_test = "";
     $semQuery = '';
@@ -38,40 +31,28 @@ if ($student->num_rows > 0) {
     $due_val = '';
     $obt_query = "";
 
-    if ($Students_temps['University_ID'] == 47) {
-        if (isset($_GET['year_sem'])) {
-            $sem = $_GET['year_sem'];
-        } else {
-            $sem = 1;
-        }
-        $due_val = $sem;
-        $semQuery = ' AND s.Semester=' . $sem;
-        $obt_query = " AND m.obt_marks_int IS NOT NULL AND m.obt_marks_ext IS NOT NULL ";
 
+    if (isset($_GET['year_sem'])) {
+        $sem = $_GET['year_sem'];
     } else {
-        if (is_numeric($Students_temps['Duration'])) {
-            $category_type = ($Students_temps['Course_Category'] == 'advance_diploma') ? 'advanced' : $Students_temps['Course_Category'];
-
-            $due_val = $Students_temps['Duration'] . '/' . $category_type;
-        } else {
-            $due_val = ($Students_temps['Duration'] == '11/advance-diploma') ? '11/advanced' : $Students_temps['Duration'];
-        }
-        $semQuery = " AND s.Semester='" . $due_val . "'";
+        $sem = 1;
     }
+    $due_val = $sem;
+    $semQuery = ' AND s.Semester=' . $sem;
+    $obt_query = "";
+    // $obt_query = " AND m.obt_marks_int IS NOT NULL AND m.obt_marks_ext IS NOT NULL ";
+
+
 
     $total_subject = totalUloadedSubjectsFunc($conn, $Students_temps['University_ID'], $Students_temps['ID'], $due_val);
     $total_subject_count = count($total_subject);
-	
+
     $getDataSQL = $conn->query("SELECT Paper_Type,s.Name as subject_name,m.exam_month,m.exam_year, s.Code,s.Max_Marks, s.Min_Marks, m.obt_marks,m.remarks,m.obt_marks_ext,m.obt_marks_int From marksheets AS m LEFT JOIN Syllabi AS s ON m.subject_id = s.ID WHERE m.enrollment_no = '" . $Students_temps['Enrollment_No'] . "' AND s.Course_ID = " . $Students_temps['Course_ID'] . " AND  s.Sub_Course_ID = " . $Students_temps['Sub_Course_ID'] . "   $semQuery $obt_query ORDER BY s.Code");
     if ($getDataSQL->num_rows == 0) {
         echo json_encode(['status' => false, 'msg' => 'Result Not Published Yet.']);
         die;
     }
-//   print_r($total_subject_count);die;
-    // if ($total_subject_count != $getDataSQL->num_rows && $Students_temps['University_ID']==48) {
-    //     echo json_encode(['status' => false, 'msg' => 'The results for all subjects have not been published yet. Please ensure that the results for all subjects are uploaded before proceeding.']);
-    //     die;
-    // }
+
 
     $photo = $conn->query("SELECT Location FROM Student_Documents WHERE Student_ID = " . $Students_temps['ID'] . " AND Type = 'Photo'");
     if ($photo->num_rows > 0) {
@@ -113,17 +94,12 @@ if ($student->num_rows > 0) {
         }
         // end min value
         // start remarks_status
-        if ($Students_temps['University_ID'] == 48) {
-            if ($total_obt < $min_val || $getDataArr['obt_marks_ext'] == 0 || $getDataArr['obt_marks_ext'] == 'AB') {
-                $getDataArr['remarks_status'] = "FAIL";
-            }
-            $total_max = $total_max + $getDataArr['Max_Marks'];
-        } else {
-            if ($total_obt <= $min_val || $getDataArr['obt_marks_ext'] == 0 || $getDataArr['obt_marks_ext'] == 'AB' || $getDataArr['obt_marks_int'] == 0 || $getDataArr['obt_marks_int'] == 'AB') {
-                $getDataArr['remarks_status'] = "FAIL";
-            }
-            $total_max = $total_max + $getDataArr['Min_Marks'] + $getDataArr['Max_Marks'];
+
+        if ($total_obt <= $min_val || $getDataArr['obt_marks_ext'] == 0 || $getDataArr['obt_marks_ext'] == 'AB' || $getDataArr['obt_marks_int'] == 0 || $getDataArr['obt_marks_int'] == 'AB') {
+            $getDataArr['remarks_status'] = "FAIL";
         }
+        $total_max = $total_max + $getDataArr['Min_Marks'] + $getDataArr['Max_Marks'];
+
         // end remarks_status
         $getDataArr['obt_marks_ext'] = ($getDataArr['obt_marks_ext'] == 'AB') ? 'AB' : trim($getDataArr['obt_marks_ext']);
         $getDataArr['obt_marks_int'] = ($getDataArr['obt_marks_int'] == 'AB') ? 'AB' : trim($getDataArr['obt_marks_int']);
@@ -184,43 +160,20 @@ if ($student->num_rows > 0) {
         $durMonthYear = " Years";
     }
 
-    if ($Students_temps['University_ID'] == 48) {
-        $Students_temps['mode_type'] = "Duration";
-        $Students_temps['university_name'] = "Skill Education Development";
-    } else {
-        $Students_temps['mode_type'] = "Semester";
-        $Students_temps['university_name'] = "Vocational Studies";
-    }
+
+    $Students_temps['mode_type'] = "Semester";
+    $Students_temps['university_name'] = "Vocational Studies";
+
     $durations = '';
-    if ($Students_temps['University_ID'] == 47) {
-        $durations = "B. VOC";
-        $Students_temps['durMonthYear'] = $sem . $typoArr[$sem];
-    } else {
-        if ($Students_temps['Duration'] == 3) {
-            $durations = "Certification Course";
-            $hours = 160;
-        } else if ($Students_temps['Duration'] == 6) {
-            $durations = "Certified Skill Diploma";
-            $hours = 320;
-        } elseif ($Students_temps['Duration'] == "11/certified") {
-            $hours = 960;
-            $durations = "Certified Skill Diploma";
-        } else if ($Students_temps['Duration'] == "11/advance-diploma") {
-            $hours = 960;
-            $durations = "Advanced Certification Skill Diploma";
-            // $data['Durations'] = 11;
-        } elseif ($Students_temps['Duration'] == 6 && $durMonthYear == "Semester") {
-            $hours = 'NA';
-        }
-        $Students_temps['durMonthYear'] = $Students_temps['Duration'] . $durMonthYear . '/' . $hours . " hours";
-    }
+
+    $durations = "B. VOC";
+    $Students_temps['durMonthYear'] = $sem . $typoArr[$sem];
+
     $Students_temps['duration_val'] = $durations;
     $Students_temps['stu_name'] = strtoupper($Students_temps['stu_name']);
     $Students_temps['Father_Name'] = strtoupper($Students_temps['Father_Name']);
 
-    if ($Students_temps['University_ID'] == 48 && ($Students_temps['Duration'] == '11/certified' || $Students_temps['Duration'] == '11/advance-diploma')) {
-        $Students_temps['durMonthYear'] = "11 Months" . '/' . $hours . " hours";
-    }
+
     $Students_temps['Min_Duration'] = json_decode($Students_temps['Min_Duration'], true)[0];
 
     //echo "<pre>";

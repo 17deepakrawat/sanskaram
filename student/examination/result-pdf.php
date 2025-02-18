@@ -4,8 +4,8 @@ require '../../includes/helpers.php';
 
 session_start();
 $username = $_GET['user_id'];
-$password  = $_GET['password'];
-$url = "https://erpglocal.iitseducation.org";
+$password = $_GET['password'];
+$url = WEB_URL;
 $passFail = "PASS";
 
 use setasign\Fpdi\Fpdi;
@@ -28,11 +28,11 @@ if (isset($_GET['id'])) {
   $total_obt = 0;
   $total_max = 0;
   $html_marks = '';
-  
-$durations_query = "";
-if ($data['University_ID'] == 47) {
-	$durations_query = " AND Syllabi.Semester = " . $data['Duration'];
-}
+
+  $durations_query = "";
+
+  $durations_query = " AND Syllabi.Semester = " . $data['Duration'];
+
   $temp_subjects = $conn->query("SELECT * FROM Syllabi WHERE Syllabi.Sub_Course_ID = " . $data['Sub_Course_ID'] . " $durations_query");
   // echo "<pre>"; print_r($data);die;
   $resultPublishDay = "";
@@ -53,11 +53,9 @@ if ($data['University_ID'] == 47) {
         // $total_obt = $total_obt + $obt_marks_ext + $obt_marks_int;
         $total_obt = $total_obt + $obt_marks_ext + $obt_marks_int;
 
-        if ($data['University_ID'] == 47) {
-          $total_max = $total_max + $mark_subjects['Min_Marks'] + $mark_subjects['Max_Marks'];
-        } else {
-          $total_max = $total_max + $mark_subjects['Max_Marks'];
-        }
+
+        $total_max = $total_max + $mark_subjects['Min_Marks'] + $mark_subjects['Max_Marks'];
+
         $data['marks'][] = $mark_subjects;
       }
     }
@@ -70,12 +68,10 @@ if ($data['University_ID'] == 47) {
     } else {
       $percentage = 0;
     }
-// echo  $percentage;die;
+    // echo  $percentage;die;
     // $data['temp_subject'] = $temp_subject_data;
 
-
-
-    $marksWords =  ucwords(strtolower(numberToWordFunc($total_obt)));
+    $marksWords = ucwords(strtolower(numberToWordFunc($total_obt)));
 
     $html_marks .= '<tr>
                     <th colspan="3" style="border: 1.5px solid #05519E;" > <span style="display: inline-block; float: left; margin-left: 10px; text-transform: capitalize">
@@ -115,27 +111,15 @@ if ($data['University_ID'] == 47) {
              ';
   }
 
-  if ($data['University_ID'] == 48) {
-    $data['university_name'] = "Skill Education Development";
-  } else {
-    $data['university_name'] = "Glocal School Of Vocational Studies";
-  }
+
+  $data['university_name'] = "Sanskaram School Of Vocational Studies";
+
 
 
   $durations = '';
-  if ($data['University_ID'] == 48) {
-    if ($data['Duration'] == 3) {
-      $durations = "Certification Course";
-    } else if ($data['Duration'] == 6) {
-      $durations = "Certified Skill Diploma";
-    } else if ($data['Duration'] == '11/advance-diploma') {
-      $durations = "Advanced Certification Skill Diploma";
-    } else if ($data['Duration'] == '11/certified') {
-      $durations = "Certified Skill Diploma";
-    }
-  } else {
-    $durations = "B. VOC";
-  }
+
+  $durations = "B. VOC";
+
 
   $data['duration_val'] = $durations;
 
@@ -149,46 +133,19 @@ if ($data['University_ID'] == 47) {
     $durMonthYear = " Years";
   }
 
-  if ($data['University_ID'] == 48) {
-    $data['mode_type'] = "Duration";
-  } else {
-    $data['mode_type'] = "Semester";
-  }
-  if ($data['University_ID'] == 48) {
-    $data['durMonthYear'] = $data['Duration'] . $durMonthYear;
-  } else {
-    $data['durMonthYear'] = $data['Duration'] . $typoArr[$data['Duration']];
-  }
+
+  $data['mode_type'] = "Semester";
+
+
+  $data['durMonthYear'] = $data['Duration'] . $typoArr[$data['Duration']];
+
 
   $hours = '';
   $total_duration = '';
 
-  if ($data['University_ID'] == 48) {
-    $data['mode_type'] = "Duration";
-    $total_duration = $data['Duration'];
-    $data['Durations'] = $data['Duration'];
-    if ($total_duration == 3) {
-      $certificate = "Certification Course";
-      $hours = 160;
-    } elseif ($total_duration == 6) {
-      $certificate = "Certified Skill Diploma";
-      $hours = 320;
-    } elseif ($total_duration == "11/advance-diploma"|| $total_duration == "11/certified") {
-      $hours = 960;
-      $data['Durations']=11;
-    } elseif ($total_duration == 6 && $durMonthYear == "Semester") {
-      $hours = 'NA';
-    }
-  } else {
-    $data['mode_type'] = "Semester";
-  }
-  // echo $hours;
-// echo $data['Durations'];die;
-  if ($data['University_ID'] == 48) {
-   
-    $data['durMonthYear'] = $data['Durations'] . $durMonthYear . '/' . $hours . " hours";
-  }
-  // $data['durMonthYear'] = $data['Duration'] . $durMonthYear;
+
+  $data['mode_type'] = "Semester";
+
 
   $total_obt = 0;
   $total_max = 0;
@@ -208,238 +165,132 @@ if ($data['University_ID'] == 47) {
 
   $pdf = new Fpdi();
   $pdf->AddPage();
-  // $pdf->setSourceFile("../../assets/mark-sheet.pdf");
 
-  // $tplId = $pdf->importPage(1);
-  // $pdf->useTemplate($tplId); 
-
-  if ($data['University_ID'] == 48) {
-    $pdf->SetFont("times", '', 10);
- //   $pdf->SetXY(182, 22.4);
-  //  $pdf->Cell(0, 0,  $data['OA_Number'] , 0, 0, 'C', 0);
-    
-  
-    // $imagePath = $data['Photo'];
-    // $pdf->Image($imagePath, 163, 50, 30, 30);
-    $pdf->SetXY(15, 65);
-    $pdf->Cell(0, 0, 'Statement of Marks', 0, 0, 'C', 0);
-   
-    $pdf->SetXY(15, 72.4);
-    $pdf->Cell(0, 0,  $data['duration_val'] . ' ' . 'in' . ' ' . $data['course'], 0, 0, 'C', 0);
-    $pdf->SetXY(15, 81);
-    $pdf->Cell(0, 0, 'AY  2023-24' . '', 0, 0, 'C', 0);
-    $pdf->SetXY(16.1, 86);
-    $pdf->Cell(107, 10,  'Name : ' . ucwords(strtolower($data['First_Name'])) . ' ' . ucwords(strtolower($data['Middle_Name'])) . ' ' . ucwords(strtolower($data['Last_Name'])), 'TL', 0, 'L', 0);
-    $pdf->SetXY(123, 86);
-    $pdf->Cell(70, 10,  'Enrollment No : ' . $data['Enrollment_No'], 'LTR', 0, 'L', 0);
-    $pdf->SetXY(16.1, 96);
-    $pdf->Cell(107, 10, 'School : ' . 'School Of' . ' ' . ucwords(strtolower($data['university_name'])), 'LTB', 0, 'L', 0);
-    $pdf->SetXY(123, 96);
-    $pdf->Cell(70, 10, $data['mode_type'] . ' ' . ':' . ' ' . $data['durMonthYear'], 1, 0, 'L', 0);
-
-    $pdf->SetFont('Arial', 'B',  10);
-    $cellWidth = 20;
-    $cellHeight = 10;
-    $pdf->SetXY(16.1, 110);
-    $pdf->MultiCell(25, 10,  'Subject Code', 'TLB',   'C');
-    $pdf->SetXY(41, 110);
-    $pdf->MultiCell(71, 10,  'Subject Name ', 'TLB',   'C');
-    $pdf->SetXY(112, 110);
-    $pdf->MultiCell(20, 5,  'Obtained Marks', 'TLB',   'C');
-    $pdf->SetXY(132, 110);
-    $pdf->MultiCell(20, 5,  'Min. Marks', 'TLB',  'C');
-    $pdf->SetXY(152, 110);
-    $pdf->MultiCell(19.8, 5,  'Max. Marks', 'TLB',   'C');
-    $pdf->SetXY(172, 110);
-    $pdf->MultiCell(22, 10,  'Remarks', 1,   'C');
-    $pdf->SetXY(10, 110);
-    $pdf->Ln();
-    $pdf->SetFont('Arial', '', 10);
-    $x_cor = 16;
+  $pdf->SetFont("times", '', 12);
+  $pdf->SetXY(15, 55);
+  $imagePath = $data['Photo'];
+  $pdf->Image($imagePath, 163, 50, 30, 30);
+  $pdf->SetXY(15, 60);
+  $pdf->Cell(0, 0, 'Statement of Marks', 0, 0, 'C', 0);
+  $pdf->SetXY(15, 67.4);
+  $pdf->Cell(0, 0, $data['duration_val'] . ' ' . 'in' . ' ' . $data['course'], 0, 0, 'C', 0);
+  $pdf->SetXY(15, 75);
+  $pdf->Cell(0, 0, 'Admission Session :' . ucwords(strtolower($data['Admission_Session'])) . '', 0, 0, 'C', 0);
+  $pdf->SetXY(16.1, 82);
+  $pdf->Cell(107, 10, 'Name : ' . ucwords(strtolower(($data['First_Name'])) . ' ' . ucwords(strtolower($data['Middle_Name'])) . ' ' . ucwords(strtolower($data['Last_Name']))), 'TL', 0, 'L', 0);
+  $pdf->SetXY(123, 82);
+  $pdf->Cell(70, 10, 'Enrollment No : ' . $data['Enrollment_No'], 'LTR', 0, 'L', 0);
+  $pdf->SetXY(16.1, 92);
+  $pdf->Cell(107, 10, 'Father Name : ' . ucwords(strtolower($data['Father_Name'])), 'LTB', 0, 'L', 0);
+  $pdf->SetXY(123, 92);
+  $pdf->Cell(70, 10, $data['mode_type'] . ' ' . ':' . ' ' . $data['durMonthYear'], 1, 0, 'L', 0);
+  $pdf->SetXY(16.1, 102);
+  $pdf->Cell(107, 10, 'School : ' . ' ' . $data['university_name'], 'LTB', 0, 'L', 0);
+  $pdf->SetXY(123, 102);
+  $pdf->Cell(70, 10, 'Exam Session : ' . ' ' . ucwords(strtolower($data['Exam_Session'])), 1, 0, 'L', 0);
+  $pdf->SetFont('Arial', 'B', 10);
+  $cellWidth = 25;
+  $cellHeight = 10;
+  $pdf->SetXY(16.1, 115);
+  $pdf->MultiCell(25, 10, 'Subject Code', 'TL', 'C');
+  $pdf->SetXY(41, 115);
+  $pdf->MultiCell(76, 10, 'Subject Name ', 'TL', 'C');
+  $pdf->SetXY(117, 115);
+  $pdf->MultiCell(25, 10, 'Internal', 'TL', 'C');
+  $pdf->SetXY(142, 115);
+  $pdf->MultiCell(25, 10, 'External', 'TL', 'C');
+  $pdf->SetXY(167, 115);
+  $pdf->MultiCell(26, 10, 'Total', 'TLR', 'C');
+  $pdf->SetXY(16.1, 125);
+  $pdf->MultiCell(25, 10, '', 'LB', 'C');
+  $pdf->SetXY(41, 125);
+  $pdf->MultiCell(76, 10, ' ', 'LB', 'C');
+  $pdf->SetXY(117, 125);
+  $pdf->MultiCell(12.6, 10, 'Obt', 'TBL', 'C');
+  $pdf->SetXY(129.8, 125);
+  $pdf->MultiCell(12, 10, 'Max', 'TBL', 'C');
+  $pdf->SetXY(142, 125);
+  $pdf->MultiCell(12.5, 10, 'Obt', 'TBL', 'C');
+  $pdf->SetXY(154.8, 125);
+  $pdf->MultiCell(12, 10, 'Max', 'TBL', 'C');
+  $pdf->SetXY(167, 125);
+  $pdf->MultiCell(14, 10, 'Obt', 'TBL', 'C');
+  $pdf->SetXY(181, 125);
+  $pdf->MultiCell(12, 10, 'Max', 'TLBR', 'C');
+  $pdf->SetXY(10, 125);
+  $pdf->Ln();
+  $pdf->SetFont('Arial', '', 10);
+  $x_cor = 16;
+  $pdf->SetX($x_cor);
+  foreach ($data['marks'] as $mark) {
     $pdf->SetX($x_cor);
-    // $data['marks']=array();
-    foreach ($data['marks'] as $mark) {
-      $pdf->SetX($x_cor);
-      if (strlen($mark['subject_name']) > 30) {
-        $cellHeight = 20;
-      } else {
-        $cellHeight = 10;
-      }
-      if (strlen($mark['subject_name']) > 30) {
-        $pdf->Cell(25, $cellHeight - 10, $mark['Code'], 'LB', 0, 'L');
-        $nameParts = explode("\n", wordwrap($mark['subject_name'], 30));
-        $pdf->MultiCell(71, 5, $nameParts[0] . chr(10) . $nameParts[1], 'LB', 0, 0, 'L');
-        $x = $pdf->GetX();
-        $y = $pdf->GetY();
-        $pdf->SetXY($x + 102, $y - 10);
-        $pdf->Cell($cellWidth, $cellHeight - 10, $mark['obt_marks'], 'LB', 0, 'C');
-        $pdf->Cell($cellWidth, $cellHeight - 10, $mark['Min_Marks'], 'LB', 0, 'C');
-        $pdf->Cell($cellWidth, $cellHeight - 10, $mark['Max_Marks'], 'LB', 0, 'C');
-        $pdf->Cell(22, $cellHeight - 10, $mark['remarks'], 'LBR', 0, 'C');
-      } else {
-        $pdf->Cell(25, $cellHeight, $mark['Code'], 'LB', 0, 'L');
-        $pdf->Cell(71, $cellHeight, $mark['subject_name'], 'LB', 0, 'L');
-        $pdf->Cell($cellWidth, $cellHeight, $mark['obt_marks'], 'LB', 0, 'C');
-        $pdf->Cell($cellWidth, $cellHeight, $mark['Min_Marks'], 'LB', 0, 'C');
-        $pdf->Cell($cellWidth, $cellHeight, $mark['Max_Marks'], 'LB', 0, 'C');
-        $pdf->Cell(22, $cellHeight, $mark['remarks'], 'LBR', 0, 'C');
-      }
-      $pdf->Ln();
+    if (strlen($mark['subject_name']) > 30) {
+      $cellHeight = 20;
+    } else {
+      $cellHeight = 10;
     }
-    $pdf->SetXY(16, 217.4);
-    $pdf->SetFont('Arial', 'B',  10);
-    $pdf->Cell(0, 0, 'Aggregate Marks', 0, 0, 'C', 0);
-    $pdf->SetXY(16, 221.4);
-    $pdf->Cell(65, 8, 'Marks', 'TL', 1, 'C', 0);
-    $pdf->SetXY(81, 221.4);
-    $pdf->Cell(35, 8, 'Grand Total', 'TL', 1, 'C', 0);
-    $pdf->SetXY(116, 221.4);
-    $pdf->Cell(35, 8, 'Result', 'LTB', 1, 'C', 0);
-    $pdf->SetXY(151, 221.4);
-    $pdf->Cell(42, 8, 'Percentage', 1, 1, 'C', 0);
-    $pdf->SetFont('Arial', '',  10);
-    $pdf->SetXY(16, 229.4);
-    $pdf->Cell(65, 8, ' Obtained Mark', 'TL', 1, 'C', 0);
-    $pdf->SetXY(81, 229.4);
-    $pdf->Cell(35, 8, $data['total_obt'], 'TL', 1, 'C', 0);
-    $pdf->SetXY(116, 229.4);
-    $pdf->Cell(35, 8, $data['remarks'], 'TLR', 1, 'C', 0);
-    $pdf->SetXY(151, 229.4);
-    $pdf->Cell(42, 8, number_format($data['percentage'], 2) . "%", 'TR', 1, 'C', 0);
-    $pdf->SetXY(16, 237.3);
-    $pdf->Cell(65, 8, 'Maximum Mark', 'TLB', 1, 'C', 0);
-    $pdf->SetXY(81, 237.3);
-    $pdf->Cell(35, 8, $data['total_max'], 'LBT', 1, 'C', 0);
-    $pdf->SetXY(116, 237.3);
-    $pdf->Cell(35, 8, '', 'LRB', 'LB', 'C', 0);
-    $pdf->SetXY(151, 237.3);
-    $pdf->Cell(42, 8, '', 'RB', 'RB', 'C', 0);
-  } else {
-    $pdf->SetFont("times", '', 12);
-    $pdf->SetXY(15, 55);
-    $imagePath = $data['Photo'];
-    $pdf->Image($imagePath, 163, 50, 30, 30);
-    $pdf->SetXY(15, 60);
-    $pdf->Cell(0, 0, 'Statement of Marks', 0, 0, 'C', 0);
-    $pdf->SetXY(15, 67.4);
-    $pdf->Cell(0, 0,  $data['duration_val'] . ' ' . 'in' . ' ' . $data['course'], 0, 0, 'C', 0);
-    $pdf->SetXY(15, 75);
-    $pdf->Cell(0, 0, 'Admission Session :' . ucwords(strtolower($data['Admission_Session'] )). '', 0, 0, 'C', 0);
-    $pdf->SetXY(16.1, 82);
-    $pdf->Cell(107, 10,  'Name : ' . ucwords(strtolower(($data['First_Name'])) . ' ' .ucwords(strtolower( $data['Middle_Name'])) . ' ' . ucwords(strtolower($data['Last_Name']))), 'TL', 0, 'L', 0);
-    $pdf->SetXY(123, 82);
-    $pdf->Cell(70, 10,  'Enrollment No : ' . $data['Enrollment_No'], 'LTR', 0, 'L', 0);
-    $pdf->SetXY(16.1, 92);
-    $pdf->Cell(107, 10, 'Father Name : ' . ucwords(strtolower($data['Father_Name'])), 'LTB', 0, 'L', 0);
-    $pdf->SetXY(123, 92);
-    $pdf->Cell(70, 10, $data['mode_type'] . ' ' . ':' . ' ' . $data['durMonthYear'], 1, 0, 'L', 0);
-    $pdf->SetXY(16.1, 102);
-    $pdf->Cell(107, 10, 'School : ' .  ' ' . $data['university_name'], 'LTB', 0, 'L', 0);
-    $pdf->SetXY(123, 102);
-    $pdf->Cell(70, 10,  'Exam Session : '. ' ' . ucwords(strtolower($data['Exam_Session'])), 1, 0, 'L', 0);
-    $pdf->SetFont('Arial', 'B',  10);
-    $cellWidth = 25;
-    $cellHeight = 10;
-    $pdf->SetXY(16.1, 115);
-    $pdf->MultiCell(25, 10,  'Subject Code', 'TL',  'C');
-    $pdf->SetXY(41, 115);
-    $pdf->MultiCell(76, 10,  'Subject Name ', 'TL', 'C');
-    $pdf->SetXY(117, 115);
-    $pdf->MultiCell(25, 10,  'Internal', 'TL',  'C');
-    $pdf->SetXY(142, 115);
-    $pdf->MultiCell(25, 10,  'External', 'TL',  'C');
-    $pdf->SetXY(167, 115);
-    $pdf->MultiCell(26, 10,  'Total', 'TLR',  'C');
-    $pdf->SetXY(16.1, 125);
-    $pdf->MultiCell(25, 10,  '', 'LB',  'C');
-    $pdf->SetXY(41, 125);
-    $pdf->MultiCell(76, 10,  ' ', 'LB',  'C');
-    $pdf->SetXY(117, 125);
-    $pdf->MultiCell(12.6, 10,  'Obt', 'TBL',  'C');
-    $pdf->SetXY(129.8, 125);
-    $pdf->MultiCell(12, 10,  'Max', 'TBL',  'C');
-    $pdf->SetXY(142, 125);
-    $pdf->MultiCell(12.5, 10,  'Obt', 'TBL',  'C');
-    $pdf->SetXY(154.8, 125);
-    $pdf->MultiCell(12, 10,  'Max', 'TBL',  'C');
-    $pdf->SetXY(167, 125);
-    $pdf->MultiCell(14, 10,  'Obt', 'TBL',  'C');
-    $pdf->SetXY(181, 125);
-    $pdf->MultiCell(12, 10,  'Max', 'TLBR', 'C');
-    $pdf->SetXY(10, 125);
+    if (strlen($mark['subject_name']) > 30) {
+      $pdf->Cell(25, $cellHeight - 10, $mark['Code'], 'BL', 0, 'L');
+      $nameParts = explode("\n", wordwrap($mark['subject_name'], 30));
+      $pdf->MultiCell(76, 5, $nameParts[0] . chr(10) . $nameParts[1], 'BL', 0, 0, 'L');
+      $x = $pdf->GetX();
+      $y = $pdf->GetY();
+      $pdf->SetXY($x + 107, $y - 10);
+      $pdf->Cell(12.8, 10, $mark['obt_marks_int'], 'LB', 0, 'C');
+      $pdf->Cell(12.2, 10, $mark['Min_Marks'], 'LB', 0, 'C');
+      $pdf->Cell(12.8, 10, $mark['obt_marks_ext'], 'BL', 0, 'C');
+      $pdf->Cell(12.2, 10, $mark['Max_Marks'], 'BL', 0, 'C');
+      $pdf->Cell(14, 10, $mark['obt_marks'], 'BL', 0, 'C');
+      $pdf->Cell(12, 10, $mark['Min_Marks'] + $mark['Max_Marks'], 'BLR', 0, 'C');
+      // $pdf->Cell($cellWidth, $cellHeight - 10, $mark['obt_marks'], 'LB', 0, 'C');
+      // $pdf->Cell($cellWidth, $cellHeight - 10, $mark['Min_Marks'], 'LB', 0, 'C');
+      // $pdf->Cell($cellWidth, $cellHeight - 10, $mark['Max_Marks'], 'LB', 0, 'C');
+      // $pdf->Cell(27, $cellHeight - 10, $mark['remarks'], 'LBR', 0, 'C');
+    } else {
+      $pdf->Cell(25, $cellHeight, $mark['Code'], 'LB', 0, 'L');
+      $pdf->Cell(76, $cellHeight, $mark['subject_name'], 'LB', 0, 'L');
+      // $pdf->Cell($cellWidth, $cellHeight, $mark['obt_marks'], 'LB', 0, 'C');
+      // $pdf->Cell($cellWidth, $cellHeight, $mark['Min_Marks'], 'LB', 0, 'C');
+      // $pdf->Cell($cellWidth, $cellHeight, $mark['Max_Marks'], 'LB', 0, 'C');
+      // $pdf->Cell(27, $cellHeight, $mark['remarks'], 'LBR', 0, 'C');
+      $pdf->Cell(12.8, 10, $mark['obt_marks_int'], 'LB', 0, 'C');
+      $pdf->Cell(12.2, 10, $mark['Min_Marks'], 'LB', 0, 'C');
+      $pdf->Cell(12.8, 10, $mark['obt_marks_ext'], 'BL', 0, 'C');
+      $pdf->Cell(12.2, 10, $mark['Max_Marks'], 'BL', 0, 'C');
+      $pdf->Cell(14, 10, $mark['obt_marks'], 'BL', 0, 'C');
+      $pdf->Cell(12, 10, $mark['Min_Marks'] + $mark['Max_Marks'], 'BLR', 0, 'C');
+    }
     $pdf->Ln();
-    $pdf->SetFont('Arial', '', 10);
-    $x_cor = 16;
-    $pdf->SetX($x_cor);
-    foreach ($data['marks'] as $mark) {
-        $pdf->SetX($x_cor);
-        if (strlen($mark['subject_name']) > 30) {
-            $cellHeight = 20;
-        } else {
-            $cellHeight = 10;
-        }
-        if (strlen($mark['subject_name']) > 30) {
-            $pdf->Cell(25, $cellHeight - 10, $mark['Code'], 'BL', 0, 'L');
-            $nameParts = explode("\n", wordwrap($mark['subject_name'], 30));
-            $pdf->MultiCell(76, 5, $nameParts[0] . chr(10) . $nameParts[1], 'BL', 0, 0, 'L');
-            $x = $pdf->GetX();
-            $y = $pdf->GetY();
-            $pdf->SetXY($x + 107, $y-10);
-            $pdf->Cell(12.8, 10,  $mark['obt_marks_int'], 'LB',0,  'C');
-            $pdf->Cell(12.2, 10, $mark['Min_Marks'] , 'LB',0,  'C');
-            $pdf->Cell(12.8, 10,  $mark['obt_marks_ext'], 'BL',0,  'C');
-            $pdf->Cell(12.2, 10,  $mark['Max_Marks'] , 'BL',0,  'C');
-            $pdf->Cell(14, 10, $mark['obt_marks']  , 'BL',0,  'C');
-            $pdf->Cell(12, 10,  $mark['Min_Marks']+$mark['Max_Marks'], 'BLR',0, 'C');
-            // $pdf->Cell($cellWidth, $cellHeight - 10, $mark['obt_marks'], 'LB', 0, 'C');
-            // $pdf->Cell($cellWidth, $cellHeight - 10, $mark['Min_Marks'], 'LB', 0, 'C');
-            // $pdf->Cell($cellWidth, $cellHeight - 10, $mark['Max_Marks'], 'LB', 0, 'C');
-            // $pdf->Cell(27, $cellHeight - 10, $mark['remarks'], 'LBR', 0, 'C');
-        } else {
-            $pdf->Cell(25, $cellHeight, $mark['Code'], 'LB', 0, 'L');
-            $pdf->Cell(76, $cellHeight, $mark['subject_name'], 'LB', 0, 'L');
-            // $pdf->Cell($cellWidth, $cellHeight, $mark['obt_marks'], 'LB', 0, 'C');
-            // $pdf->Cell($cellWidth, $cellHeight, $mark['Min_Marks'], 'LB', 0, 'C');
-            // $pdf->Cell($cellWidth, $cellHeight, $mark['Max_Marks'], 'LB', 0, 'C');
-            // $pdf->Cell(27, $cellHeight, $mark['remarks'], 'LBR', 0, 'C');
-            $pdf->Cell(12.8, 10,    $mark['obt_marks_int'], 'LB',0,  'C');
-            $pdf->Cell(12.2, 10,$mark['Min_Marks'], 'LB',0,  'C');
-            $pdf->Cell(12.8, 10,   $mark['obt_marks_ext'], 'BL',0,  'C');
-            $pdf->Cell(12.2, 10, $mark['Max_Marks'] , 'BL',0,  'C');
-            $pdf->Cell(14, 10,$mark['obt_marks'] , 'BL',0,  'C');
-            $pdf->Cell(12, 10,    $mark['Min_Marks']+$mark['Max_Marks'], 'BLR',0, 'C');
-        }
-        $pdf->Ln();
-    }
-    $pdf->SetXY(16, 230.4);
-    $pdf->SetFont('Arial', 'B',  10);
-    $pdf->Cell(0, 0, 'Aggregate Marks', 0, 0, 'C', 0);
-    $pdf->SetXY(16, 232.4);
-    $pdf->Cell(65, 8, 'Marks', 'TL', 1, 'C', 0);
-    $pdf->SetXY(81, 232.4);
-    $pdf->Cell(35, 8, 'Grand Total', 'TL', 1, 'C', 0);
-    $pdf->SetXY(116, 232.4);
-    $pdf->Cell(35, 8, 'Result', 'LT', 1, 'C', 0);
-    $pdf->SetXY(151, 232.4);
-    $pdf->Cell(42, 8, 'Percentage', 'LTR', 1, 'C', 0);
-    $pdf->SetFont('Arial', '',  10);
-    $pdf->SetXY(16, 240.4);
-    $pdf->Cell(65, 8, ' Obtained Mark', 'TL', 1, 'C', 0);
-    $pdf->SetXY(81, 240.4);
-    $pdf->Cell(35, 8, $data['total_obt'], 'TL', 1, 'C', 0);
-    $pdf->SetXY(116, 240.4);
-    $pdf->Cell(35, 8, $data['remarks'], 'TLR', 1, 'C', 0);
-    $pdf->SetXY(151, 240.4);
-    $pdf->Cell(42, 8, number_format($data['percentage'], 2) . "%", 'TR', 1, 'C', 0);
-    $pdf->SetXY(16, 247.3);
-    $pdf->Cell(65, 8, 'Maximum Mark', 'TLB', 1, 'C', 0);
-    $pdf->SetXY(81, 247.3);
-    $pdf->Cell(35, 8, $data['total_max'], 'LBT', 1, 'C', 0);
-    $pdf->SetXY(116, 247.3);
-    $pdf->Cell(35, 8, '', 'LRB', 'LB', 'C', 0);
-    $pdf->SetXY(151, 247.3);
-    $pdf->Cell(42, 8, '', 'RB', 'RB', 'C', 0);
   }
+  $pdf->SetXY(16, 230.4);
+  $pdf->SetFont('Arial', 'B', 10);
+  $pdf->Cell(0, 0, 'Aggregate Marks', 0, 0, 'C', 0);
+  $pdf->SetXY(16, 232.4);
+  $pdf->Cell(65, 8, 'Marks', 'TL', 1, 'C', 0);
+  $pdf->SetXY(81, 232.4);
+  $pdf->Cell(35, 8, 'Grand Total', 'TL', 1, 'C', 0);
+  $pdf->SetXY(116, 232.4);
+  $pdf->Cell(35, 8, 'Result', 'LT', 1, 'C', 0);
+  $pdf->SetXY(151, 232.4);
+  $pdf->Cell(42, 8, 'Percentage', 'LTR', 1, 'C', 0);
+  $pdf->SetFont('Arial', '', 10);
+  $pdf->SetXY(16, 240.4);
+  $pdf->Cell(65, 8, ' Obtained Mark', 'TL', 1, 'C', 0);
+  $pdf->SetXY(81, 240.4);
+  $pdf->Cell(35, 8, $data['total_obt'], 'TL', 1, 'C', 0);
+  $pdf->SetXY(116, 240.4);
+  $pdf->Cell(35, 8, $data['remarks'], 'TLR', 1, 'C', 0);
+  $pdf->SetXY(151, 240.4);
+  $pdf->Cell(42, 8, number_format($data['percentage'], 2) . "%", 'TR', 1, 'C', 0);
+  $pdf->SetXY(16, 247.3);
+  $pdf->Cell(65, 8, 'Maximum Mark', 'TLB', 1, 'C', 0);
+  $pdf->SetXY(81, 247.3);
+  $pdf->Cell(35, 8, $data['total_max'], 'LBT', 1, 'C', 0);
+  $pdf->SetXY(116, 247.3);
+  $pdf->Cell(35, 8, '', 'LRB', 'LB', 'C', 0);
+  $pdf->SetXY(151, 247.3);
+  $pdf->Cell(42, 8, '', 'RB', 'RB', 'C', 0);
+
 
 
   $pdf->SetXY(39, 260.5);

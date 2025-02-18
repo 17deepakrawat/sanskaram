@@ -22,7 +22,7 @@ require $_SERVER['DOCUMENT_ROOT'].'/includes/db-config.php';
     }
     
     if(!in_array($_SESSION['ID'], $userIds)){
-        echo '<option value="Online">Online</option>';
+        // echo '<option value="Online">Online</option>';
     }
       ?>
     </select>

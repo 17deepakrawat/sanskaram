@@ -77,7 +77,7 @@ if(isset($_POST['send_to']) && isset($_POST['heading']) && isset($_POST['content
 
 function sendNotificationMail($params, $send_to) {
   $user_list = ($send_to == 'student') ? getAllNoitifyStudentList($params) : getAllNoitifyCenterList($params);
-  $url = "http://glocal.local/app/notifications/createQueue";
+  $url = WEB_URL."/app/notifications/createQueue";
   
   try {
     $request = json_encode([

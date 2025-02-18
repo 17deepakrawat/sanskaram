@@ -141,18 +141,7 @@ if (isset($_GET['id'])) {
                                 </select>
                             </div>
                         </div>
-                        <?php if ($_SESSION['university_id'] == 48) { ?>
-                            <div class="col-md-6">
-                                <div class="form-group">
-                                    <label for="exam_type">Select Exam Type</label>
-                                    <select class="form-control" name="exam_type" id="exam_type">
-                                        <option value="">Select Exam Type</option>
-                                        <option value="1" <?php echo (isset($data['Exam_Type']) && $data['Exam_Type'] == 1) ? 'selected' : ''; ?>>Center</option>
-                                        <option value="0" <?php echo (isset($data['Exam_Type']) && $data['Exam_Type'] == 0) ? 'selected' : ''; ?>>Online</option>
-                                    </select>
-                                </div>
-                            </div>
-                        <?php } ?>
+               
 
                         <div class="col-md-6">
                             <div class="form-group">

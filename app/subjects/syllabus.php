@@ -6,35 +6,14 @@ session_start();
 if ((isset($_GET['course_id']) && isset($_GET['semester']) && empty($_GET['lms'])) || (empty($_GET['lms']) && isset($_GET['duration']) && isset($_GET['course_id']) && $_GET['duration'] != 'undefined')) {
   $sub_course_id = intval($_GET['course_id']);
   $duration = isset($_GET['duration']) ? $_GET['duration'] : '';
-  $course_category = isset($_GET['course_category']) ? $_GET['course_category'] : '';
-
-  if ($duration == 'advance_diploma' && ($course_category == 'advance_diploma' || $course_category == '11/advanced')) {
-    $duration = "11/advanced";
-  } else if ($duration == 'certified' && ($course_category == 'certified' || $course_category == '6/certified')) {
-    $duration = "6/certified";
-  } else if ($duration == 'certification' && ($course_category == 'certification' || $course_category == '3')) {
-    $duration = "3";
-  }
   // echo $duration; die;
   if ($duration != null) {
-
-    if ($_SESSION['university_id'] == "48") {
-      $syllabus = $conn->query("SELECT Syllabi.*, Users.Name as user_name, Sub_Courses.Name as sub_course_name  FROM Syllabi LEFT JOIN Users ON Syllabi.User_ID = Users.ID LEFT JOIN Sub_Courses ON Syllabi.Sub_Course_ID = Sub_Courses.ID  WHERE Semester ='" . $duration . "' AND Users.Role = 'Center' AND Syllabi.Sub_Course_ID = $sub_course_id ORDER BY ID DESC");
-    } else {
-      $syllabus = $conn->query("SELECT Syllabi.*, Sub_Courses.Name as sub_course_name  FROM Syllabi  LEFT JOIN Sub_Courses ON Syllabi.Sub_Course_ID = Sub_Courses.ID  WHERE Semester ='" . $duration . "'  AND Syllabi.Sub_Course_ID = $sub_course_id ORDER BY ID DESC");
-    }
+    $syllabus = $conn->query("SELECT Syllabi.*, Sub_Courses.Name as sub_course_name  FROM Syllabi  LEFT JOIN Sub_Courses ON Syllabi.Sub_Course_ID = Sub_Courses.ID  WHERE Semester ='" . $duration . "'  AND Syllabi.Sub_Course_ID = $sub_course_id ORDER BY ID DESC");
   } else {
-
     $semester = explode("|", $_GET['semester']);
     $scheme = $semester[0];
     $semester = $semester[1];
-    if ($_SESSION['university_id'] == 48) {
-      // $syllabus = $conn->query("SELECT Syllabi.*, Users.Name as user_name, Sub_Courses.Name as sub_course_name FROM Syllabi LEFT JOIN Sub_Courses ON Syllabi.Sub_Course_ID = Sub_Courses.ID  LEFT JOIN Users ON Syllabi.User_ID = Users.ID WHERE Sub_Course_ID = $sub_course_id AND Users.Role = 'Center' AND Syllabi.Scheme_ID = $scheme AND Syllabi.Semester = $semester ORDER BY ID DESC");
-
-      $syllabus = $conn->query("SELECT Syllabi.*, Sub_Courses.Name as sub_course_name FROM Syllabi LEFT JOIN Sub_Courses ON Syllabi.Sub_Course_ID = Sub_Courses.ID  WHERE Sub_Course_ID = $sub_course_id AND Syllabi.Scheme_ID = $scheme AND Syllabi.Semester = $semester ORDER BY ID DESC");
-    } else {
-      $syllabus = $conn->query("SELECT Syllabi.*, Sub_Courses.Name as sub_course_name FROM Syllabi LEFT JOIN Sub_Courses ON Syllabi.Sub_Course_ID = Sub_Courses.ID WHERE Sub_Course_ID = $sub_course_id AND Syllabi.Scheme_ID = $scheme AND Syllabi.Semester = $semester ORDER BY ID DESC");
-    }
+    $syllabus = $conn->query("SELECT Syllabi.*, Sub_Courses.Name as sub_course_name FROM Syllabi LEFT JOIN Sub_Courses ON Syllabi.Sub_Course_ID = Sub_Courses.ID WHERE Sub_Course_ID = $sub_course_id AND Syllabi.Scheme_ID = $scheme AND Syllabi.Semester = $semester ORDER BY ID DESC");
   }
   // print_r($syllabus);die;
   ?>
@@ -46,9 +25,6 @@ if ((isset($_GET['course_id']) && isset($_GET['semester']) && empty($_GET['lms']
           <tr>
             <th>Code</th>
             <th>Name</th>
-            <?php if ($_SESSION['university_id'] == 48) { ?>
-              <!-- <th>Center Name</th> -->
-            <?php } ?>
             <th>Sub-Course Name</th>
             <th>Credit</th>
             <th>Duration</th>
@@ -68,11 +44,7 @@ if ((isset($_GET['course_id']) && isset($_GET['semester']) && empty($_GET['lms']
                 <td>
                   <?= $row['Name'] ?>
                 </td>
-                <?php if ($_SESSION['university_id'] == 48) { ?>
-                  <!-- <td> -->
-                  <?php //ucwords(strtolower($row['user_name'])) ?>
-                  <!-- </td> -->
-                <?php } ?>
+
                 <td> <?= $row['sub_course_name'] ?>
                 </td>
                 <td>
@@ -110,14 +82,13 @@ if ((isset($_GET['course_id']) && isset($_GET['semester']) && empty($_GET['lms']
                 </td>
                 <td>
                   <?php
-                  	if($_SESSION['Role']!='Student')  
-                    {
-                    	?>
-                  			<i class="bi bi-pen" id="editsubject" onclick="editsubject(<?= $row['ID']; ?>)"></i>
-                  		<?php
-                    }
+                  if ($_SESSION['Role'] != 'Student') {
+                    ?>
+                    <i class="bi bi-pen" id="editsubject" onclick="editsubject(<?= $row['ID']; ?>)"></i>
+                    <?php
+                  }
                   ?>
-                  
+
                 </td>
               </tr>
             <?php }
@@ -134,31 +105,9 @@ if ((isset($_GET['course_id']) && isset($_GET['semester']) && empty($_GET['lms']
 <?php } else if (isset($_GET['course_id']) && isset($_GET['semester']) && $_GET['lms'] == "lms") {
   $sub_course_ids = intval($_GET['course_id']);
   $query = '';
-  if ($_SESSION['university_id'] == 47) {
-    $semesterArr = explode("|", $_GET['semester']);
-    $schemes = $semesterArr[0];
-    $query = 'AND Scheme_ID = ' . $schemes;
-    $semesters = $semesterArr[1];
-  } else {
-    $semesters = $_GET['semester'];
-  }
+  list($scheme, $semesters) = explode('|',$_GET['semester']);
 
-  if ($_SESSION['university_id'] == 48) {
-    $center_id = getUserIdFunc($conn, $_SESSION['Added_For']);
-   
-    $getCenterID = $conn->query("select Code from Users where ID = '$center_id'");
-    if ($getCenterID->num_rows > 0) {
-      $codeArr = $getCenterID->fetch_assoc();
-      $code = trim($codeArr['Code']);
-    }else{
-      $code ='';
-    }
-    $syllabus_query = $conn->query("SELECT Name, ID FROM Syllabi WHERE JSON_CONTAINS(User_ID, '\"" . mysqli_real_escape_string($conn, $code) . "\"') AND Sub_Course_ID = " . intval($sub_course_ids) . "  AND Semester = '" . mysqli_real_escape_string($conn, $semesters) . "' $query ORDER BY ID DESC");
-    //$syllabus_query = $conn->query("SELECT Name, ID FROM Syllabi WHERE  Sub_Course_ID = " . intval($sub_course_ids) . "  AND Semester = '" . mysqli_real_escape_string($conn, $semesters) . "' $query ORDER BY ID DESC");
-  } else {
-    $syllabus_query = $conn->query("SELECT Name, ID FROM Syllabi WHERE Sub_Course_ID = " . intval($sub_course_ids) . "  AND Semester = '" . mysqli_real_escape_string($conn, $semesters) . "' $query ORDER BY ID DESC");
-  }
-
+  $syllabus_query = $conn->query("SELECT Name, ID FROM Syllabi WHERE Sub_Course_ID = " . intval($sub_course_ids) . "  AND Semester = '" . mysqli_real_escape_string($conn, $semesters) . "' $query ORDER BY ID DESC");
   $bg_colors = array("0" => "bg-yellow-gradient", "1" => "bg-purple-gradient", "2" => "bg-green-gradient", "3" => "bg-aqua-gradient", "4" => "bg-red-gradient", "5" => "bg-aqua-gradient", "6" => "bg-maroon-gradient", "7" => "bg-teal-gradient", "8" => "bg-blue-gradient");
   $colorIndex = 0;
 
@@ -203,7 +152,7 @@ if ((isset($_GET['course_id']) && isset($_GET['semester']) && empty($_GET['lms']
     <?php }
   } else { ?>
       <div class="col-md-4"></div>
-      <div class="col-md-4" style="font-weight:700;font-size:19px"> Subjects Not Alloted To Center!</div>
+      <div class="col-md-4" style="font-weight:700;font-size:19px"> Subjects Not Found!</div>
       <div class="col-md-4"></div>
   <?php } ?>
 <?php } else {
@@ -217,13 +166,9 @@ if ((isset($_GET['course_id']) && isset($_GET['semester']) && empty($_GET['lms']
     $course_sql .= ' AND Sub_Course_ID =' . $_GET['id'];
   }
 
-  if ($_SESSION['university_id'] == 48) {
-    // $syllabuss = $conn->query("SELECT Syllabi.*, Users.Name as user_name, Sub_Courses.Name as sub_course_name FROM Syllabi LEFT JOIN Sub_Courses ON Syllabi.Sub_Course_ID = Sub_Courses.ID LEFT JOIN Users ON Syllabi.User_ID = Users.ID WHERE  Users.Role = 'Center' AND Syllabi.University_ID = " . $_SESSION['university_id'] . "  $course_sql $usersFilter  ORDER BY Syllabi.ID DESC ");
 
-    $syllabuss = $conn->query("SELECT Syllabi.*,  Sub_Courses.Name as sub_course_name FROM Syllabi LEFT JOIN Sub_Courses ON Syllabi.Sub_Course_ID = Sub_Courses.ID  WHERE  Syllabi.University_ID = " . $_SESSION['university_id'] . "  $course_sql $usersFilter  ORDER BY Syllabi.ID DESC ");
-  } else {
-    $syllabuss = $conn->query("SELECT Syllabi.*, Sub_Courses.Name as sub_course_name FROM Syllabi LEFT JOIN Sub_Courses ON Syllabi.Sub_Course_ID = Sub_Courses.ID WHERE Syllabi.University_ID = " . $_SESSION['university_id'] . "  $course_sql  ORDER BY Syllabi.ID DESC ");
-  }
+  $syllabuss = $conn->query("SELECT Syllabi.*, Sub_Courses.Name as sub_course_name FROM Syllabi LEFT JOIN Sub_Courses ON Syllabi.Sub_Course_ID = Sub_Courses.ID WHERE Syllabi.University_ID = " . $_SESSION['university_id'] . "  $course_sql  ORDER BY Syllabi.ID DESC ");
+
   ?>
     <div class="col-md-12">
       <div class="table-responsive">
@@ -233,9 +178,7 @@ if ((isset($_GET['course_id']) && isset($_GET['semester']) && empty($_GET['lms']
               <th>Code</th>
               <th>Name</th>
               <th>Duration</th>
-            <?php if ($_SESSION['university_id'] == 48) { ?>
-                <!-- <th>Center Name</th> -->
-            <?php } ?>
+
 
               <th>Sub-Course Name</th>
               <th>Credit</th>
@@ -257,12 +200,6 @@ if ((isset($_GET['course_id']) && isset($_GET['semester']) && empty($_GET['lms']
                   <?= $row['Name'] ?>
                   </td>
                   <td><?= $row['Semester'] ?></td>
-
-                <?php if ($_SESSION['university_id'] == 48) { ?>
-                    <!-- <td> -->
-                  <?php // ucwords(strtolower($row['user_name'])) ?>
-                    <!-- </td> -->
-                <?php } ?>
                   <td> <?= ucwords(strtolower($row['sub_course_name'])) ?></td>
                   <td>
                   <?= $row['Credit'] ?>
@@ -289,14 +226,13 @@ if ((isset($_GET['course_id']) && isset($_GET['semester']) && empty($_GET['lms']
                   </td>
 
                   <td>
-                   <?php
-                  	if($_SESSION['Role']!='Student')  
-                    {
-                    	?>
-                  			<i class="bi bi-pen" id="editsubject" onclick="editsubject(<?= $row['ID']; ?>)"></i>
-                  		<?php
+                    <?php
+                    if ($_SESSION['Role'] != 'Student') {
+                      ?>
+                      <i class="bi bi-pen" id="editsubject" onclick="editsubject(<?= $row['ID']; ?>)"></i>
+                    <?php
                     }
-                  ?>
+                    ?>
                   </td>
                 </tr>
             <?php }
