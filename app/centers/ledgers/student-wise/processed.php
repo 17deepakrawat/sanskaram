@@ -99,7 +99,7 @@
                   } ?>
                   <td><?= $fee; ?></td>
                   <td>
-                    <center><span class="cursor-pointer text-danger font-weight-bold"
+                    <center><span class="cursor-pointer badge badge-danger font-weight-bold"
                         onclick="cancelStudent('<?= $student['ID'] ?>', '<?= $id ?>')">Cancel</span></center>
                   </td>
                 </tr>

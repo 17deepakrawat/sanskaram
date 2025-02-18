@@ -20982,7 +20982,7 @@ Main components
   justify-content: center !important;
 }
 .bg-pic {
-  background: #1a688b;
+  background: #214e7c;
 }
 .custom_login_form_card {
   border-radius: 30px;
@@ -21008,7 +21008,7 @@ Main components
   margin-top: 20px;
 }
 .custom_login_btn:hover {
-  background-color:  #1a688b !important;
+  background-color:  #baa256 !important;
   color: white !important;
   
 }
@@ -21075,12 +21075,12 @@ width:70%; !important;
 }
 .universityname_t{
   font-size: 16px;
-  color: #1a688b;
+  color: #214e7c;
   font-weight: 700;
   /* font-family: ; */
 }
 .newlogin1{
-background-color:  #1a688b;
+background-color:  #baa256 !important;
 color: white;
 }
 .custom_login_btn2 {
@@ -21517,4 +21517,41 @@ font-size: 17px;
 }
 .re_reg_radius:hover .custom_re_reg_txt{
   color: white !important;
+}
+.select2-results .select2-results__option--highlighted {
+  background-color: #55638d !important;
+  border-radius: 3px;
+  color: #ffffff !important;
+}
+.marksheet_custom_field{
+  border-radius: 10px;
+    padding: 8px 11px;
+}
+.mark_round {
+  padding: 10px;
+  border-radius: 10px;
+}
+.mob_university_logo{
+  display: none;
+}
+@media(min-width: 300px) and (max-width: 991px){
+  .mob_university_logo{
+    display: block;
+  }
+  .form-group-default {
+    padding-bottom: 5px !important;
+    padding-left: 0px;
+}
+.custom_login_btn {
+  height: 41px !important;
+  font-size: 14px !important;
+  margin-top: 13px !important;
+  width: 103px !important;
+}
+.title_text_login{
+text-align: start !important;
+}
+}
+.custom_shadow{
+  box-shadow: none !important;
 }
