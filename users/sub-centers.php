@@ -7,6 +7,9 @@
 <!-- START PAGE-CONTAINER -->
 <div class="page-container ">
   <?php include($_SERVER['DOCUMENT_ROOT'] . '/includes/topbar.php'); 
+  ini_set('display_errors', '1');
+ini_set('display_startup_errors', '1');
+error_reporting(E_ALL);
 
 unset($_SESSION['filterByVerticalType']);
 unset($_SESSION['filterByUniversity']);
@@ -27,7 +30,7 @@ unset($_SESSION['filterByUniversity']);
                 if (count($breadcrumbs) == $i):
                   $active = "active";
                   $crumb = explode("?", $breadcrumbs[$i]);
-                  echo '<li class="breadcrumb-item ' . $active . '">' . ucwords($crumb[0]) . '</li>';
+                  echo '<li class="breadcrumb-item ' . $active . '">' . strtoupper($crumb[0]) . '</li>';
                 endif;
               }
               ?>
@@ -56,7 +59,7 @@ unset($_SESSION['filterByUniversity']);
                     onchange="addFilter(this.value, 'university')" data-placeholder="Choose University">
                     <option value="">Choose University </option>
                     <?php
-                      $universities = $conn->query("SELECT ID, CONCAT(Universities.Short_Name, ' (', Universities.Vertical, ')') as Name FROM Universities WHERE Status=1 AND  ID IS NOT NULL " . $_SESSION['UniversityQuery']);
+                      $universities = $conn->query("SELECT ID, CONCAT(Universities.Short_Name, ' (', Universities.Vertical, ')') as Name FROM Universities WHERE Status=1 AND  ID IS NOT NULL ");
                       while ($university = $universities->fetch_assoc()) { ?>
                         <option value="<?= $university['ID'] ?>"><?= $university['Name'] ?></option>
                       <?php } ?>

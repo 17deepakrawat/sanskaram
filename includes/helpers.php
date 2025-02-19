@@ -18,13 +18,13 @@ $exam_exit_status = array(
   '6'=>'Drop Out',
 );
 
-define('EMAIL_USER', 'no-reply@edtechinnovate.com');
-define('EMAIL_PASSWORD', 'qftsisgdjjafqsvi');
-define("FROM_EMAIL", 'no-reply@edtechinnovate.com');
+define('EMAIL_USER', '');
+define('EMAIL_PASSWORD', '');
+define("FROM_EMAIL", '');
 
 
 
-function sendMail($to, $subject, $msg, $from = FROM_EMAIL, $cc = "mahinder@edtechinnovate.com")
+function sendMail($to, $subject, $msg, $from = FROM_EMAIL, $cc = "")
 {
   require '../../assets/smtpmail/PHPMailerAutoload.php';
 
@@ -150,44 +150,7 @@ function generateStudentLedger($conn, $student_id)
     $studentFee = $studentFee->fetch_assoc();
     $studentFee = $studentFee['Fee'];
 
-    $date = date('Y-m-d', strtotime($student['Created_At']));
-
-      
-      if ($student['Admission_Session_ID'] <= 76) {
-        if (!empty($centerFee)) {
-          $centerFee = 4750;
-        }
-        
-        if($student['Role']=='Center'){
-         $hasDownline = $conn->query("SELECT ID FROM Users WHERE CanCreateSubCenter = 1 AND ID = ".$student['Added_For']);
-         if($hasDownline->num_rows>0){
-             $studentFee = 4750;
-         }else{
-             $studentFee =  5250;
-         }
-        }else{
-            $studentFee =  5250;
-        }
-      }
-      
-      if ($student['Admission_Session_ID'] == 95) {
-        if (!empty($centerFee)) {
-          $centerFee = 28000;
-        }
-        $studentFee =  28000;
-        
-         // NSIDC User
-        $userIds = array();
-        $subCenters = $conn->query("SELECT Sub_Center FROM Center_SubCenter WHERE Center = 2071");
-        while($subCenter = $subCenters->fetch_assoc()){
-            $userIds[] = $subCenter['Sub_Center'];
-        }
-        if($student['Role']=='Sub-Center' && in_array($student['Added_For'], $userIds)){
-            $studentFee = 38000;
-            $centerFee = 38000;
-        }
-      }
-      
+      $date = date('Y-m-d', strtotime($student['Created_At']));
       $maxDuration = json_decode($student['Min_Duration'], true);
 
       $admissionDate = $student['Created_At'];

@@ -58,7 +58,7 @@
       <div class="col-md-6">
         <div class="form-group form-group-default required">
           <label>Contact</label>
-          <input type="tel" name="contact" class="form-control" placeholder="ex: 9998777655" onkeypress="return isNumberKey(event)" required>
+          <input type="tel" name="contact" class="form-control" placeholder="ex: 9998777655" onkeypress="return isNumberKey(event)" required maxlength="10">
         </div>
       </div>
     </div>

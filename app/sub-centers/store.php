@@ -1,4 +1,7 @@
 <?php
+ini_set('display_errors', 1);
+ini_set('display_startup_errors', 1);
+error_reporting(E_ALL);
   if(isset($_POST['name']) && isset($_POST['reporting']) && isset($_POST['email']) && isset($_POST['mobile'])){
     require '../../includes/db-config.php';
     session_start();
@@ -52,7 +55,7 @@
     }
      
     $password = "12345";
-    $add = $conn->query("INSERT INTO `Users`(`Name`, `Email`, `Mobile`, `Code`, `Password`, `Role`, `Designation`, `Photo`, `Created_By`,`Vertical_type`) VALUES ('$name', '$email',  '$mobile', '$code', AES_ENCRYPT('$password','60ZpqkOnqn0UQQ2MYTlJ'), 'Sub-Center', 'Sub-Center', '$filename', ".$_SESSION['ID'].",$vertical_type)");
+    $add = $conn->query("INSERT INTO `Users`(`Name`, `Email`, `Mobile`, `Code`, `Password`, `Role`, `Designation`, `Photo`, `Created_By`) VALUES ('$name', '$email',  '$mobile', '$code', AES_ENCRYPT('$password','60ZpqkOnqn0UQQ2MYTlJ'), 'Sub-Center', 'Sub-Center', '$filename', ".$_SESSION['ID'].")");
     $add = $conn->query("INSERT INTO `Center_SubCenter`(`Center`, `Sub_Center`) VALUES ($reporting, $conn->insert_id)");
     
     if($add){

@@ -1341,9 +1341,9 @@
                 <img src="/assets/img/success.gif" alt="" class="step_image_final" style="border-radius: 10px;">
                 <h1>Thank you for providing the requested information.<h1>
                     <h3>Please use the link below to print the pre-filled application form.
-                      <button class="btn btn-success btn-lg m-b-10 border-0 custom_round_print" onclick="printForm()"><i
-                          class="uil uil-print"></i>
-                        &nbsp;Print </button>
+                      <!--<button class="btn btn-success btn-lg m-b-10 border-0 custom_round_print" onclick="printForm()"><i-->
+                      <!--    class="uil uil-print"></i>-->
+                      <!--  &nbsp;Print </button>-->
                     </h3>
               </div>
             </div>
