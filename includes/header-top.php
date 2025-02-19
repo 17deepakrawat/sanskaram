@@ -34,6 +34,8 @@ include ($_SERVER['DOCUMENT_ROOT'].'/includes/db-config.php');
     <meta content="" name="description" />
     <meta content="" name="author" />
     <link href="/assets/plugins/pace/pace-theme-flash.css" rel="stylesheet" type="text/css" />
+    <link href="/assets/css/font-awesome.min.css" rel="stylesheet" type="text/css" />
+
     <link href="/assets/css/icons.min.css" rel="stylesheet" type="text/css" />
     <link href="/assets/plugins/bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">

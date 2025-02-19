@@ -19,12 +19,12 @@
                 if (count($breadcrumbs) == $i):
                   $active = "active";
                   $crumb = explode("?", $breadcrumbs[$i]);
-                  echo '<li class="breadcrumb-item ' . $active . '">' . $crumb[0] . '</li>';
+                  echo '<li class="breadcrumb-item ' . $active . '">' . ucwords($crumb[0]) . '</li>';
                 endif;
               }
               ?>
               <div class="text-end">
-                <span class="text-muted bold cursor-pointer" onclick="add('accountants','lg')"> Add</sapn>
+                <span class="custom_add_button text-white cursor-pointer" onclick="add('accountants','lg')"> Add <i class="uil uil-plus-circle ml-2"></i></sapn>
               </div>
             </ol>
             <!-- END BREADCRUMB -->
@@ -41,7 +41,7 @@
           <div class="card-header">
             <div class="pull-right">
               <div class="col-xs-12">
-                <input type="text" id="users-search-table" class="form-control pull-right" placeholder="Search">
+                <input type="text" id="users-search-table" class="form-control pull-right custom_search_section" placeholder="Search">
               </div>
             </div>
             <div class="clearfix"></div>
@@ -57,8 +57,8 @@
                     <th>Email</th>
                     <th>Alloted Universities</th>
                     <th data-orderable="false">Password</th>
-                    <th data-orderable="false"></th>
-                    <th data-orderable="false"></th>
+                    <th data-orderable="false">Status</th>
+                    <th data-orderable="false" class="text-center">Action</th>
                   </tr>
                 </thead>
               </table>
@@ -73,7 +73,7 @@
     <!-- END PAGE CONTENT -->
     <?php include($_SERVER['DOCUMENT_ROOT'] . '/includes/footer-top.php'); ?>
     <script type="text/javascript">
-      $(function () {
+      $(function() {
 
         var table = $('#users-table');
 
@@ -84,61 +84,67 @@
           'ajax': {
             'url': '/app/accountants/server'
           },
-          'columns': [
-            {
+          'columns': [{
               data: "Photo",
-              "render": function (data, type, row) {
+              "render": function(data, type, row) {
                 return '<span class="thumbnail-wrapper d48 circular inline">\
-                <img src="'+ data + '" alt="" data-src="' + data + '"\
-                  data-src-retina="'+ data + '" width="32" height="32">\
+                <img src="' + data + '" alt="" data-src="' + data + '"\
+                  data-src-retina="' + data + '" width="32" height="32">\
               </span>';
               }
             },
             {
               data: "Name",
-              "render": function (data, type, row) {
+              "render": function(data, type, row) {
                 return '<strong>' + data + '</strong>';
               }
             },
             {
               data: "Code",
-              "render": function (data, type, row) {
+              "render": function(data, type, row) {
                 return '<strong>' + data + '</strong>';
               }
             },
-            { data: "Email" },
-            { data: "University" },
+            {
+              data: "Email"
+            },
+            {
+              data: "University"
+            },
             {
               data: "Password",
-              "render": function (data, type, row) {
+              "render": function(data, type, row) {
                 return '<div class="row" style="width:250px !important;">\
                 <div class="col-md-10">\
-                  <input type="password" class="form-control" disabled="" style="border: 0ch;" value="'+ data + '" id="myInput' + row.ID + '">\
+                  <input type="password" class="form-control" disabled="" style="border: 0ch;" value="' + data + '" id="myInput' + row.ID + '">\
                 </div>\
                 <div class="col-md-2">\
-                  <i class="uil uil-eye pt-2 cursor-pointer" onclick="showPassword('+ row.ID + ')"></i>\
+                  <i class="uil uil-eye pt-2 cursor-pointer" onclick="showPassword(' + row.ID + ')"></i>\
                 </div>\
               </div>';
               }
             },
             {
               data: "Status",
-              "render": function (data, type, row) {
-                var active = data == 1 ? 'Active' : 'Inactive';
+              "render": function(data, type, row) {
+                var active = data == 1 ?
+                  '<span class="badge badge-success">Active</span>' :
+                  '<span class="badge badge-danger">Inactive</span>';
                 var checked = data == 1 ? 'checked' : '';
+
                 return '<div class="form-check form-check-inline switch switch-lg success">\
-                <input onclick="changeStatus(&#39;Users&#39;, &#39;'+ row.ID + '&#39;)" type="checkbox" ' + checked + ' id="status-switch-' + row.ID + '">\
-                <label for="status-switch-'+ row.ID + '">' + active + '</label>\
-              </div>';
+      <input onclick="changeStatus(&#39;Users&#39;, &#39;' + row.ID + '&#39;)" type="checkbox" ' + checked + ' id="status-switch-' + row.ID + '">\
+      <label for="status-switch-' + row.ID + '">' + active + '</label>\
+    </div>';
               }
             },
             {
               data: "ID",
-              "render": function (data, type, row) {
+              "render": function(data, type, row) {
                 return '<div class="button-list text-end">\
-                <i class="uil uil-plus-circle icon-xs cursor-pointer" title="Allot University" onclick="allot(&#39;'+ data + '&#39, &#39;lg&#39;)"></i>\
-                <i class="uil uil-edit icon-xs cursor-pointer" title="Edit" onclick="edit(&#39;accountants&#39;, &#39;'+ data + '&#39, &#39;lg&#39;)"></i>\
-                <i class="uil uil-trash icon-xs cursor-pointer" title="Delete" onclick="destroy(&#39;accountants&#39;, &#39;'+ data + '&#39)"></i>\
+                <i class="uil uil-plus-circle icon-xs cursor-pointer custom_edit_button" title="Allot University" onclick="allot(&#39;' + data + '&#39, &#39;lg&#39;)"></i>\
+                <i class="uil uil-edit icon-xs cursor-pointer custom_edit_button" title="Edit" onclick="edit(&#39;accountants&#39;, &#39;' + data + '&#39, &#39;lg&#39;)"></i>\
+                <i class="uil uil-trash icon-xs cursor-pointer custom_edit_button" title="Delete" onclick="destroy(&#39;accountants&#39;, &#39;' + data + '&#39)"></i>\
               </div>'
               }
             },
@@ -152,7 +158,7 @@
           },
           "aaSorting": [],
           "iDisplayLength": 5,
-          "drawCallback": function (settings) {
+          "drawCallback": function(settings) {
             $('[data-toggle="tooltip"]').tooltip();
           },
         };
@@ -160,7 +166,7 @@
         table.dataTable(settings);
 
         // search box for table
-        $('#users-search-table').keyup(function () {
+        $('#users-search-table').keyup(function() {
           table.fnFilter($(this).val());
         });
 
@@ -172,7 +178,7 @@
         $.ajax({
           url: '/app/accountants/allot-universities?id=' + id,
           type: 'GET',
-          success: function (data) {
+          success: function(data) {
             $('#' + modal + '-modal-content').html(data);
             $('#' + modal + 'modal').modal('show');
           }

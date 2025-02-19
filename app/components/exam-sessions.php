@@ -11,7 +11,7 @@
 
       <div class="row p-b-20">
         <div class="col-lg-12 text-end">
-          <button type="button" class="btn btn-primary" onclick="addComponents('exam-sessions', 'lg', <?= $university_id ?>)">Add</button>
+          <button type="button" class="btn custom_add_button" onclick="addComponents('exam-sessions', 'lg', <?= $university_id ?>)">Add <i class="uil uil-plus-circle ml-2"></i></button>
         </div>
       </div>
 
@@ -26,7 +26,7 @@
                   <th data-orderable="false">Re-Reg</th>
                   <th data-orderable="false">Back-Paper</th>
                   <th data-orderable="false">Status</th>
-                  <th data-orderable="false"></th>
+                  <th data-orderable="false" class="text-end">Action</th>
                 </tr>
               </thead>
             </table>
@@ -60,54 +60,69 @@
       {
         data: "RR_Status",
         "render": function(data, type, row) {
-          var active = data == 1 ? 'Active' : 'Inactive';
+          var active = data == 1 ?
+            '<span class="badge badge-success">Active</span>' :
+            '<span class="badge badge-danger">Inactive</span>';
           var checked = data == 1 ? 'checked' : '';
+
           var statusSwitch = '<div class="form-check form-check-inline switch switch-lg success">\
-            <input onclick="changeRRStatus(\'' + row.ID + '\');" type="checkbox" ' + checked + ' id="le-status-switch-' + row.ID + '">\
-            <label for="le-status-switch-' + row.ID + '">' + active + '</label>\
-          </div>';
-          var lastDate = row.RR_Last_Date.length > 0 ? row.RR_Last_Date : 'N/A';
-          var lastDateEditButton = '<i class="uil uil-edit m-l-10 cursor-pointer" onclick="updateLastDate(&#39;RR&#39;, ' + row.ID + ')"></i>'
+      <input onclick="changeRRStatus(\'' + row.ID + '\');" type="checkbox" ' + checked + ' id="rr-status-switch-' + row.ID + '">\
+      <label for="rr-status-switch-' + row.ID + '">' + active + '</label>\
+    </div>';
+
+          var lastDate = row.RR_Last_Date && row.RR_Last_Date.length > 0 ? row.RR_Last_Date : 'N/A';
+          var lastDateEditButton = '<i class="uil uil-edit m-l-10 cursor-pointer" onclick="updateLastDate(&#39;RR&#39;, ' + row.ID + ')"></i>';
+
           var lastDateForRR = '<div>\
-          <span>Last Date: ' + lastDate + lastDateEditButton + '</span>\
-          </div>';
+      <span>Last Date: ' + lastDate + ' ' + lastDateEditButton + '</span>\
+    </div>';
+
           return statusSwitch + lastDateForRR;
         }
       },
       {
         data: "BP_Status",
         "render": function(data, type, row) {
-          var active = data == 1 ? 'Active' : 'Inactive';
+          var active = data == 1 ?
+            '<span class="badge badge-success">Active</span>' :
+            '<span class="badge badge-danger">Inactive</span>';
           var checked = data == 1 ? 'checked' : '';
+
           var statusSwitch = '<div class="form-check form-check-inline switch switch-lg success">\
-            <input onclick="changeBPStatus(\'' + row.ID + '\');" type="checkbox" ' + checked + ' id="ct-status-switch-' + row.ID + '">\
-            <label for="ct-status-switch-' + row.ID + '">' + active + '</label>\
-          </div>';
-          var lastDate = row.BP_Last_Date.length > 0 ? row.BP_Last_Date : 'N/A';
-          var lastDateEditButton = '<i class="uil uil-edit m-l-10 cursor-pointer" onclick="updateLastDate(&#39;BP&#39;, ' + row.ID + ')"></i>'
+      <input onclick="changeBPStatus(\'' + row.ID + '\');" type="checkbox" ' + checked + ' id="bp-status-switch-' + row.ID + '">\
+      <label for="bp-status-switch-' + row.ID + '">' + active + '</label>\
+    </div>';
+
+          var lastDate = row.BP_Last_Date && row.BP_Last_Date.length > 0 ? row.BP_Last_Date : 'N/A';
+          var lastDateEditButton = '<i class="uil uil-edit m-l-10 cursor-pointer" onclick="updateLastDate(&#39;BP&#39;, ' + row.ID + ')"></i>';
+
           var lastDateForBP = '<div>\
-          <span>Last Date: ' + lastDate + lastDateEditButton + '</span>\
-          </div>';
+      <span>Last Date: ' + lastDate + ' ' + lastDateEditButton + '</span>\
+    </div>';
+
           return statusSwitch + lastDateForBP;
         }
       },
       {
         data: "Status",
         "render": function(data, type, row) {
-          var active = data == 1 ? 'Active' : 'Inactive';
+          var active = data == 1 ?
+            '<span class="badge badge-success">Active</span>' :
+            '<span class="badge badge-danger">Inactive</span>';
           var checked = data == 1 ? 'checked' : '';
+
           return '<div class="form-check form-check-inline switch switch-lg success">\
-            <input onclick="changeComponentStatus(\'Exam_Sessions\', \'ExamSessions\', \'' + row.ID + '\');" type="checkbox" ' + checked + ' id="exam-session-status-switch-' + row.ID + '">\
-            <label for="exam-session-status-switch-' + row.ID + '">' + active + '</label>\
-          </div>';
+      <input onclick="changeComponentStatus(\'Exam_Sessions\', \'ExamSessions\', \'' + row.ID + '\');" type="checkbox" ' + checked + ' id="exam-session-status-switch-' + row.ID + '">\
+      <label for="exam-session-status-switch-' + row.ID + '">' + active + '</label>\
+    </div>';
         }
       },
       {
         data: "ID",
         "render": function(data, type, row) {
           return '<div class="text-end">\
-            <i class="uil uil-edit icon-xs cursor-pointer" onclick="editComponents(\'exam-sessions\', \'' + data + '\', \'md\');"></i>\
-            <i class="uil uil-trash icon-xs cursor-pointer" onclick="destroyComponents(\'exam-sessions\', \'ExamSessions\', \'' + data + '\');"></i>\
+            <i class="uil uil-edit icon-xs cursor-pointer custom_edit_button" onclick="editComponents(\'exam-sessions\', \'' + data + '\', \'md\');"></i>\
+            <i class="uil uil-trash icon-xs cursor-pointer custom_edit_button" onclick="destroyComponents(\'exam-sessions\', \'ExamSessions\', \'' + data + '\');"></i>\
           </div>'
         }
       },

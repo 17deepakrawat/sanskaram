@@ -11,7 +11,7 @@
 
       <div class="row p-b-20">
         <div class="col-lg-12 text-end">
-          <button type="button" class="btn btn-primary" onclick="addComponents('admission-types', 'md', <?=$university_id?>)">Add</button>
+          <button type="button" class="btn custom_add_button" onclick="addComponents('admission-types', 'md', <?=$university_id?>)">Add <i class="uil uil-plus-circle ml-2"></i></button>
         </div>
       </div>
 
@@ -22,7 +22,7 @@
               <thead>
                 <tr>
                   <th width="50%">Name</th>
-                  <th data-orderable="false"></th>
+                  <th data-orderable="false" class="text-end">Action</th>
                 </tr>
               </thead>
             </table>
@@ -52,8 +52,8 @@
       { data: "ID",
         "render": function(data, type, row){
           return '<div class="text-end">\
-            <i class="uil uil-edit icon-xs cursor-pointer" onclick="editComponents(\'admission-types\', \''+data+'\', \'md\');"></i>\
-            <i class="uil uil-trash icon-xs cursor-pointer" onclick="destroyComponents(\'admission-types\', \'AdmissionType\', \''+data+'\');"></i>\
+            <i class="uil uil-edit icon-xs cursor-pointer custom_edit_button" onclick="editComponents(\'admission-types\', \''+data+'\', \'md\');"></i>\
+            <i class="uil uil-trash icon-xs cursor-pointer custom_edit_button" onclick="destroyComponents(\'admission-types\', \'AdmissionType\', \''+data+'\');"></i>\
           </div>'
         }
       },

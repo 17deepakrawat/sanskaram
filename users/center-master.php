@@ -1,9 +1,22 @@
 <?php include($_SERVER['DOCUMENT_ROOT'] . '/includes/header-top.php'); ?>
+<style>
+  .select2-container .select2-selection {
+    border-radius: 10px;
+    height: 48px !important;
+    font-size: 17px;
+    font-family: system-ui;
+  }
+
+  .select2-container .select2-selection .select2-selection__arrow {
+    top: auto;
+    bottom: 11px;
+  }
+</style>
 <?php include($_SERVER['DOCUMENT_ROOT'] . '/includes/header-bottom.php'); ?>
 <?php include($_SERVER['DOCUMENT_ROOT'] . '/includes/menu.php');
 unset($_SESSION['filterByUniversity']);
 unset($_SESSION['filterByVerticalType'])
-  ?>
+?>
 <!-- START PAGE-CONTAINER -->
 <div class="page-container ">
   <?php include($_SERVER['DOCUMENT_ROOT'] . '/includes/topbar.php'); ?>
@@ -22,15 +35,15 @@ unset($_SESSION['filterByVerticalType'])
                 if (count($breadcrumbs) == $i):
                   $active = "active";
                   $crumb = explode("?", $breadcrumbs[$i]);
-                  echo '<li class="breadcrumb-item ' . $active . '">' . $crumb[0] . '</li>';
+                  echo '<li class="breadcrumb-item ' . $active . '">' . ucwords($crumb[0]) . '</li>';
                 endif;
               }
               ?>
               <?php if (in_array($_SESSION['Role'], ['Administrator', 'University Head', 'Counsellor', 'Operations'])) { ?>
                 <div class="text-end">
-                  <button class="btn btn-link" aria-label="" title="" data-toggle="tooltip" data-original-title="Download"
+                  <button class="btn btn-link custom_add_button" aria-label="" title="" data-toggle="tooltip" data-original-title="Download"
                     onclick="exportData()"> <i class="uil uil-down-arrow"></i></button>
-                  <button class="btn btn-link" aria-label="" title="" data-toggle="tooltip" data-original-title="Add"
+                  <button class="btn btn-link custom_add_button" aria-label="" title="" data-toggle="tooltip" data-original-title="Add"
                     onclick="add('center-master','lg')"> <i class="uil uil-plus-circle"></i></button>
                 </div>
               <?php } ?>
@@ -50,30 +63,30 @@ unset($_SESSION['filterByVerticalType'])
             <div class="row">
               <div class="col-md-3 m-b-10">
                 <div class="form-group">
-                <select class="full-width" style="width:40px" data-init-plugin="select2" id="university"
+                  <select class="full-width" style="width:40px" data-init-plugin="select2" id="university"
                     onchange="addFilter(this.value, 'university')" data-placeholder="Choose University">
                     <option value="">Choose University </option>
                     <?php
-                      $universities = $conn->query("SELECT ID, CONCAT(Universities.Short_Name, ' (', Universities.Vertical, ')') as Name FROM Universities WHERE Status=1 AND  ID IS NOT NULL " . $_SESSION['UniversityQuery']);
-                      while ($university = $universities->fetch_assoc()) { ?>
-                        <option value="<?= $university['ID'] ?>"><?= $university['Name'] ?></option>
-                      <?php } ?>
+                    $universities = $conn->query("SELECT ID, CONCAT(Universities.Short_Name, ' (', Universities.Vertical, ')') as Name FROM Universities WHERE Status=1 AND  ID IS NOT NULL " . $_SESSION['UniversityQuery']);
+                    while ($university = $universities->fetch_assoc()) { ?>
+                      <option value="<?= $university['ID'] ?>"><?= $university['Name'] ?></option>
+                    <?php } ?>
                     <option value="1">University Not Alloted</option>
                   </select>
                 </div>
               </div>
               <div class="col-md-6 m-b-10">
-             </div>
+              </div>
               <div class="col-md-3">
-                <input type="text" id="users-search-table" class="form-control pull-right" placeholder="Search">
+                <input type="text" id="users-search-table" class="form-control pull-right custom_search_section" placeholder="Search">
               </div>
             </div>
             <div class="clearfix"></div>
           </div>
 
           <div class="card-body">
-            <div class="table-responsive">
-              <table class="table table-hover nowrap" id="users-table">
+            <div class="">
+              <table class="table table-hover nowrap table-responsive" id="users-table">
                 <thead>
                   <tr>
                     <th data-orderable="false"></th>
@@ -87,7 +100,7 @@ unset($_SESSION['filterByVerticalType'])
                     <th>Current Balance</th>
                     <th data-orderable="false">Can Create Sub-Center?</th>
                     <th data-orderable="false"></th>
-                    <th data-orderable="false"></th>
+                    <th data-orderable="false" class="text-center">Action</th>
                   </tr>
                 </thead>
               </table>
@@ -103,7 +116,7 @@ unset($_SESSION['filterByVerticalType'])
     <!-- END PAGE CONTENT -->
     <?php include($_SERVER['DOCUMENT_ROOT'] . '/includes/footer-top.php'); ?>
     <script type="text/javascript">
-      $(function () {
+      $(function() {
 
         var table = $('#users-table');
         var role = '<?= $_SESSION['Role'] ?>'
@@ -115,31 +128,31 @@ unset($_SESSION['filterByVerticalType'])
             'url': '/app/center-master/server'
           },
           'columns': [{
-            data: "Photo",
-            "render": function (data, type, row) {
-              return '<span class="thumbnail-wrapper d48 circular inline">\
+              data: "Photo",
+              "render": function(data, type, row) {
+                return '<span class="thumbnail-wrapper d48 circular inline">\
                 <img src="' + data + '" alt="" data-src="' + data + '"\
                   data-src-retina="' + data + '" width="32" height="32">\
               </span>';
-            }
-          },
-          {
-            data: "Name",
-            "render": function (data, type, row) {
-              return '<strong>' + data + '</strong>';
-            }
-          },
-          {
-            data: "Code",
-            "render": function (data, type, row) {
-              return '<strong>' + data + '</strong>';
-            }
-          },
-         
-          {
-            data: "Password",
-            "render": function (data, type, row) {
-              return '<div class="row" style="width:250px !important;">\
+              }
+            },
+            {
+              data: "Name",
+              "render": function(data, type, row) {
+                return '<strong>' + data + '</strong>';
+              }
+            },
+            {
+              data: "Code",
+              "render": function(data, type, row) {
+                return '<strong>' + data + '</strong>';
+              }
+            },
+
+            {
+              data: "Password",
+              "render": function(data, type, row) {
+                return '<div class="row" style="width:250px !important;">\
                 <div class="col-md-10">\
                   <input type="password" class="form-control" disabled="" style="border: 0ch;" value="' + data + '" id="myInput' + row.ID + '">\
                 </div>\
@@ -147,59 +160,63 @@ unset($_SESSION['filterByVerticalType'])
                   <i class="uil uil-eye pt-2 cursor-pointer" onclick="showPassword(' + row.ID + ')"></i>\
                 </div>\
               </div>';
-            }
-          },
-           {
-            data: "Email"
-          },
-         
-          {
-            data: "Created_At"
-          },
-              {
-            data: "sub_center_count"
-          },
-          {
-            data: "Admission"
-          },
-          {
-            data: "totalamount"
-          },
-          {
-            data: "CanCreateSubCenter",
-            "render": function (data, type, row) {
-              var active = data == 1 ? 'Yes' : 'No';
-              var checked = data == 1 ? 'checked' : '';
-              return '<div class="form-check form-check-inline switch switch-lg success">\
-                <input onclick="changeSubCenterStatus(&#39;' + row.ID + '&#39;)" type="checkbox" ' + checked + ' id="sub-center-switch-' + row.ID + '">\
-                <label for="sub-center-switch-' + row.ID + '">' + active + '</label>\
-              </div>';
-            }
-          },
-          {
-            data: "Status",
-            "render": function (data, type, row) {
-              var active = data == 1 ? 'Active' : 'Inactive';
-              var checked = data == 1 ? 'checked' : '';
-              return '<div class="form-check form-check-inline switch switch-lg success">\
+              }
+            },
+            {
+              data: "Email"
+            },
+
+            {
+              data: "Created_At"
+            },
+            {
+              data: "sub_center_count"
+            },
+            {
+              data: "Admission"
+            },
+            {
+              data: "totalamount"
+            },
+            {
+              data: "CanCreateSubCenter",
+              "render": function(data, type, row) {
+                var active = data == 1 ?
+                  '<span class="badge badge-success">Yes</span>' :
+                  '<span class="badge badge-danger">No</span>';
+
+                var checked = data == 1 ? 'checked' : '';
+
+                return '<div class="form-check form-check-inline switch switch-lg success">\
+                          <input onclick="changeSubCenterStatus(&#39;' + row.ID + '&#39;)" type="checkbox" ' + checked + ' id="sub-center-switch-' + row.ID + '">\
+                          <label for="sub-center-switch-' + row.ID + '">' + active + '</label>\
+                        </div>';
+              }
+            },
+            {
+              data: "Status",
+              "render": function(data, type, row) {
+                var active = data == 1 ? 'Active' : 'Inactive';
+                var checked = data == 1 ? 'checked' : '';
+                return '<div class="form-check form-check-inline switch switch-lg success">\
                 <input onclick="changeStatus(&#39;Users&#39;, &#39;' + row.ID + '&#39;)" type="checkbox" ' + checked + ' id="status-switch-' + row.ID + '">\
                 <label for="status-switch-' + row.ID + '">' + active + '</label>\
               </div>';
+              },
+              visible: false
             },
-            visible: false
-          },
-          {
-            data: "ID",
-            "render": function (data, type, row) {
-              var allotButton = ['Administrator', 'University Head'].includes(role) ? '<i class="uil uil-plus-circle icon-xs cursor-pointer" title="Allot University" onclick="allot(&#39;' + data + '&#39, &#39;lg&#39;)"></i>' : '';
-              var deleteBtn = ['Administrator', 'University Head'].includes(role) ? '<i class="uil uil-trash icon-xs cursor-pointer" title="Delete" onclick="destroy(&#39;center-master&#39;, &#39;' + data + '&#39)"></i>' : '';
-              return '<div class="button-list text-end">\
+            {
+              data: "ID",
+              "render": function(data, type, row) {
+                var allotButton = ['Administrator', 'University Head'].includes(role) ? '<i class="uil uil-plus-circle icon-xs cursor-pointer custom_edit_button" title="Allot University" onclick="allot(&#39;' + data + '&#39, &#39;lg&#39;)"></i>' : '';
+                var deleteBtn = ['Administrator', 'University Head'].includes(role) ? '<i class="uil uil-trash icon-xs cursor-pointer custom_edit_button" title="Delete" onclick="destroy(&#39;center-master&#39;, &#39;' + data + '&#39)"></i>' : '';
+                return '<div class="button-list text-end">\
                 ' + allotButton + '\
-                <i class="uil uil-edit icon-xs cursor-pointer" title="Edit" onclick="edit(&#39;center-master&#39;, &#39;' + data + '&#39, &#39;lg&#39;)"></i>\
+                <i class="uil uil-edit icon-xs cursor-pointer custom_edit_button" title="Edit" onclick="edit(&#39;center-master&#39;, &#39;' + data + '&#39, &#39;lg&#39;)"></i>\
                 ' + deleteBtn + '\
               </div>'
-            }
-          },
+              }
+            },
           ],
           "sDom": "<t><'row'<p i>>",
           "destroy": true,
@@ -210,7 +227,7 @@ unset($_SESSION['filterByVerticalType'])
           },
           "aaSorting": [],
           "iDisplayLength": 25,
-          "drawCallback": function (settings) {
+          "drawCallback": function(settings) {
             $('[data-toggle="tooltip"]').tooltip();
           },
         };
@@ -218,7 +235,7 @@ unset($_SESSION['filterByVerticalType'])
         table.dataTable(settings);
 
         // search box for table
-        $('#users-search-table').keyup(function () {
+        $('#users-search-table').keyup(function() {
           table.fnFilter($(this).val());
         });
 
@@ -235,7 +252,7 @@ unset($_SESSION['filterByVerticalType'])
             by
           },
           dataType: 'json',
-          success: function (data) {
+          success: function(data) {
             if (data.status) {
               $('.table').DataTable().ajax.reload(null, false);
               // $("#sub_center").html(data.subCenterName);
@@ -248,11 +265,12 @@ unset($_SESSION['filterByVerticalType'])
           }
         })
       }
+
       function allot(id, modal) {
         $.ajax({
           url: '/app/center-master/allot-universities?id=' + id,
           type: 'GET',
-          success: function (data) {
+          success: function(data) {
             $('#' + modal + '-modal-content').html(data);
             $('#' + modal + 'modal').modal('show');
           }
@@ -267,7 +285,7 @@ unset($_SESSION['filterByVerticalType'])
             id: id
           },
           dataType: 'json',
-          success: function (data) {
+          success: function(data) {
             if (data.status == 200) {
               notification('success', data.message);
               $('#users-table').DataTable().ajax.reload(null, false);
@@ -296,8 +314,6 @@ unset($_SESSION['filterByVerticalType'])
         var url = search.length > 0 ? "?search=" + search : "";
         window.open('/app/center-master/export' + url);
       }
-
-
     </script>
 
     <?php include($_SERVER['DOCUMENT_ROOT'] . '/includes/footer-bottom.php'); ?>

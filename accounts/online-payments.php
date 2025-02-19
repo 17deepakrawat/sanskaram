@@ -1,6 +1,19 @@
 <?php include($_SERVER['DOCUMENT_ROOT'] . '/includes/header-top.php'); ?>
 <link href="/assets/plugins/bootstrap-datepicker/css/datepicker3.css" rel="stylesheet" type="text/css" media="screen">
 <link href="/assets/plugins/bootstrap-daterangepicker/daterangepicker-bs3.css" rel="stylesheet" type="text/css" media="screen">
+<style>
+  .select2-container .select2-selection {
+    border-radius: 10px;
+    height: 48px !important;
+    font-size: 17px;
+    font-family: system-ui;
+  }
+
+  .btn:hover {
+    background: #2b303b !important;
+    color: white !important;
+  }
+</style>
 <?php
 unset($_SESSION['filterByUser']);
 unset($_SESSION['filterByDate']);
@@ -20,20 +33,20 @@ unset($_SESSION['filterByDate']);
           <div class="inner">
             <!-- START BREADCRUMB -->
             <ol class="breadcrumb d-flex flex-wrap justify-content-between align-self-start">
-              <?php 
-                ini_set('display_errors', 1); 
+              <?php
+              ini_set('display_errors', 1);
 
               $breadcrumbs = array_filter(explode("/", $_SERVER['REQUEST_URI']));
-              
+
               for ($i = 1; $i <= count($breadcrumbs); $i++) {
                 if (count($breadcrumbs) == $i) : $active = "active";
                   $crumb = explode("?", $breadcrumbs[$i]);
-                  echo '<li class="breadcrumb-item ' . $active . '">' . $crumb[0] . '</li>';
+                  echo '<li class="breadcrumb-item ' . $active . '">' . ucwords($crumb[0]) . '</li>';
                 endif;
               }
               ?>
               <div>
-                <a href="/app/payments/export?type=2" target="_blank" class="btn btn-link" aria-label="" title="" data-toggle="tooltip" data-original-title="Download"> <i class="uil uil-down-arrow"></i></a>
+                <a href="/app/payments/export?type=2" target="_blank" class="btn text-white custom_add_button " aria-label="" title="" data-toggle="tooltip" data-original-title="Download"> <i class="uil uil-down-arrow"></i></a>
                 <?php if (isset($_SESSION['gateway'])) { ?>
                   <!-- <button class="btn btn-link" aria-label="" title="" data-toggle="tooltip" data-original-title="Pay Now" onclick="add('<?php echo $_SESSION['gateway'] == 1 ? 'easebuzz' : '' ?>', 'md')"> <i class="uil uil-plus-circle"></i></button> -->
                 <?php } ?>
@@ -49,31 +62,36 @@ unset($_SESSION['filterByDate']);
         <!-- BEGIN PlACE PAGE CONTENT HERE -->
         <div class="card card-transparent">
           <div class="card-header">
-            <div class="row">
-              <div class="col-md-12 d-flex justify-content-start">
-                <div class="col-md-3 m-b-10">
-                  <div class="input-daterange input-group" id="datepicker-range">
-                    <input type="text" class="input-sm form-control" placeholder="Select Date" id="startDateFilter" name="start" />
-                    <div class="input-group-addon">to</div>
-                    <input type="text" class="input-sm form-control" placeholder="Select Date" id="endDateFilter" onchange="addDateFilter()" name="end" />
-                  </div>
-                </div>
-                <?php if ($_SESSION['Role'] != 'Sub-Center') { ?>
-                  <div class="col-md-3 m-b-10">
-                    <div class="form-group">
-                      <select class="full-width" style="width:40px" data-init-plugin="select2" id="users" onchange="addFilter(this.value, 'users', 1)" data-placeholder="Choose User">
-
-                      </select>
+            <div class="d-flex justify-content-between">
+              <div class="row">
+                <div class="col-md-12 d-flex justify-content-start">
+                  <div class="col-md-12 m-b-10">
+                    <div class="input-daterange input-group" id="datepicker-range">
+                      <input type="text" class="input-sm form-control custom_input_st_en" placeholder="Select Date" id="startDateFilter" name="start" />
+                      <div class="input-group-addon custom_input_st_en_to">to</div>
+                      <input type="text" class="input-sm form-control custom_input_st_en1" placeholder="Select Date" id="endDateFilter" onchange="addDateFilter()" name="end" />
                     </div>
                   </div>
-                <?php } ?>
+                  <?php if ($_SESSION['Role'] != 'Sub-Center') { ?>
+                    <div class="col-md-10 m-b-10">
+                      <div class="form-group">
+                        <select class="full-width" style="width:40px" data-init-plugin="select2" id="users" onchange="addFilter(this.value, 'users', 1)" data-placeholder="Choose User">
 
+                        </select>
+                      </div>
+                    </div>
+                  <?php } ?>
+
+                </div>
+              </div>
+              <div class="">
+                <input type="text" id="payments-search-table" class="form-control pull-right custom_search_section" placeholder="Search">
               </div>
             </div>
             <div class="pull-right">
-              <div class="col-xs-12">
-                <input type="text" id="payments-search-table" class="form-control pull-right" placeholder="Search">
-              </div>
+              <!-- <div class="col-xs-12">
+                <input type="text" id="payments-search-table" class="form-control pull-right custom_search_section" placeholder="Search">
+              </div> -->
             </div>
             <div class="clearfix"></div>
           </div>
@@ -161,28 +179,28 @@ unset($_SESSION['filterByDate']);
             },
             {
               data: "Amount"
-            },{
+            }, {
               data: "Student",
               "render": function(data, type, row) {
                 var Std_name = [];
                 var transaction_id = row.Gateway_ID;
                 //for(let i=0; i <data.length; i++){
-                  //Std_name.push(data[i]);
+                //Std_name.push(data[i]);
                 //}
                 // Assuming data is an array of student names
                 if (Array.isArray(data)) {
-                    Std_name = data;  // If data is already an array, you can assign it directly
+                  Std_name = data; // If data is already an array, you can assign it directly
                 } else {
-                    // If data is not an array, make sure it is handled appropriately
-                    // You might need to adjust this part based on the actual structure of your data
-                    Std_name.push(data);
+                  // If data is not an array, make sure it is handled appropriately
+                  // You might need to adjust this part based on the actual structure of your data
+                  Std_name.push(data);
                 }
-                return '<strong class="cursor-pointer" onclick="show_students(\'' + transaction_id + '\');">' +data.length+'<span id="sdsds_'+transaction_id+'" data-value="'+Std_name+'"></span></strong>';
+                return '<strong class="cursor-pointer" onclick="show_students(\'' + transaction_id + '\');">' + data.length + '<span id="sdsds_' + transaction_id + '" data-value="' + Std_name + '"></span></strong>';
               }
             },
             {
               data: "Sub_Center_Name",
-            },         
+            },
             {
               data: "Center_Name",
               "render": function(data, type, row) {
@@ -330,19 +348,19 @@ unset($_SESSION['filterByDate']);
       }
     </script>
     <script>
-    function show_students(transaction_id){
-      console.log(transaction_id);
-      modal = 'md';
-      var sdsds = $('#sdsds_'+transaction_id).attr('data-value');
-      $.ajax({
-        url: '/app/online-payments/paid-students?ids='+sdsds,
-        type: 'GET',
-        success: function(data) {
-          $('#' + modal + '-modal-content').html(data);
-          $('#' + modal + 'modal').modal('show');
-        }
-      })
+      function show_students(transaction_id) {
+        console.log(transaction_id);
+        modal = 'md';
+        var sdsds = $('#sdsds_' + transaction_id).attr('data-value');
+        $.ajax({
+          url: '/app/online-payments/paid-students?ids=' + sdsds,
+          type: 'GET',
+          success: function(data) {
+            $('#' + modal + '-modal-content').html(data);
+            $('#' + modal + 'modal').modal('show');
+          }
+        })
 
-    }
-  </script>
+      }
+    </script>
     <?php include($_SERVER['DOCUMENT_ROOT'] . '/includes/footer-bottom.php'); ?>

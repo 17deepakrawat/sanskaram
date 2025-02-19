@@ -11,7 +11,7 @@
 
       <div class="row p-b-20">
         <div class="col-lg-12 text-end">
-          <button type="button" class="btn btn-primary" onclick="addComponents('fee-structures', 'md', <?=$university_id?>)">Add</button>
+          <button type="button" class="btn custom_add_button" onclick="addComponents('fee-structures', 'md', <?= $university_id ?>)">Add <i class="uil uil-plus-circle ml-2"></i></button>
         </div>
       </div>
 
@@ -26,7 +26,7 @@
                   <th data-orderable="false">Constant</th>
                   <th data-orderable="false">Applicable on</th>
                   <th data-orderable="false">Status</th>
-                  <th data-orderable="false"></th>
+                  <th data-orderable="false">Action</th>
                 </tr>
               </thead>
             </table>
@@ -45,32 +45,44 @@
     'serverSide': true,
     'serverMethod': 'post',
     'ajax': {
-      'url':'/app/components/fee-structures/server',
+      'url': '/app/components/fee-structures/server',
       type: 'POST',
-      "data":function(data) {
-        data.university_id = '<?=$university_id?>';
+      "data": function(data) {
+        data.university_id = '<?= $university_id ?>';
       },
     },
-    'columns': [  
-      { data: "Name"},
-      { data: "Sharing"},
-      { data: "Is_Conctant"},
-      { data: "Applicable"},
-      { data: "Status",
-        "render": function(data, type, row){
-          var active = data==1 ? 'Active' : 'Inactive';
-          var checked = data==1 ? 'checked' : '';
+    'columns': [{
+        data: "Name"
+      },
+      {
+        data: "Sharing"
+      },
+      {
+        data: "Is_Conctant"
+      },
+      {
+        data: "Applicable"
+      },
+      {
+        data: "Status",
+        "render": function(data, type, row) {
+          var active = data == 1 ?
+            '<span class="badge badge-success">Active</span>' :
+            '<span class="badge badge-danger">Inactive</span>';
+          var checked = data == 1 ? 'checked' : '';
+
           return '<div class="form-check form-check-inline switch switch-lg success">\
-            <input onclick="changeComponentStatus(\'Fee-Structures\', \'FeeStructures\', \''+row.ID+'\');" type="checkbox" '+checked+' id="fee-structure-switch-'+row.ID+'">\
-            <label for="fee-structure-switch-'+row.ID+'">'+active+'</label>\
-          </div>';
+      <input onclick="changeComponentStatus(\'Fee-Structures\', \'FeeStructures\', \'' + row.ID + '\');" type="checkbox" ' + checked + ' id="fee-structure-switch-' + row.ID + '">\
+      <label for="fee-structure-switch-' + row.ID + '">' + active + '</label>\
+    </div>';
         }
       },
-      { data: "ID",
-        "render": function(data, type, row){
+      {
+        data: "ID",
+        "render": function(data, type, row) {
           return '<div class="text-end">\
-            <i class="uil uil-edit icon-xs cursor-pointer" onclick="editComponents(\'fee-structures\', \''+data+'\', \'md\');"></i>\
-            <i class="uil uil-trash icon-xs cursor-pointer" onclick="destroyComponents(\'fee-structures\', \'FeeStructures\', \''+data+'\');"></i>\
+            <i class="uil uil-edit icon-xs cursor-pointer custom_edit_button" onclick="editComponents(\'fee-structures\', \'' + data + '\', \'md\');"></i>\
+            <i class="uil uil-trash icon-xs cursor-pointer custom_edit_button" onclick="destroyComponents(\'fee-structures\', \'FeeStructures\', \'' + data + '\');"></i>\
           </div>'
         }
       },
@@ -79,8 +91,8 @@
     "destroy": true,
     "scrollCollapse": true,
     "oLanguage": {
-        "sLengthMenu": "_MENU_ ",
-        "sInfo": "Showing <b>_START_ to _END_</b> of _TOTAL_ entries"
+      "sLengthMenu": "_MENU_ ",
+      "sInfo": "Showing <b>_START_ to _END_</b> of _TOTAL_ entries"
     },
     "aaSorting": [],
     "iDisplayLength": 5

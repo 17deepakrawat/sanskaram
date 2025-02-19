@@ -1,4 +1,23 @@
 <?php include($_SERVER['DOCUMENT_ROOT'] . '/includes/header-top.php'); ?>
+<style>
+  .select2-container .select2-selection {
+    border-radius: 10px;
+    height: 48px !important;
+    font-size: 17px;
+    font-family: system-ui;
+  }
+
+  .select2-container .select2-selection .select2-selection__arrow {
+    top: auto;
+    bottom: 11px;
+  }
+
+  .btn-link.hover:not(.active),
+  .btn-link:hover:not(.active) {
+    background: #2b303b !important;
+    color: white !important;
+  }
+</style>
 <?php if ($_SESSION['Role'] == 'Center' && $_SESSION['CanCreateSubCenter'] != 1) {
   echo '<script>window.location.href="/admissions/applications"</script>';
 } ?>
@@ -6,12 +25,12 @@
 <?php include($_SERVER['DOCUMENT_ROOT'] . '/includes/menu.php'); ?>
 <!-- START PAGE-CONTAINER -->
 <div class="page-container ">
-  <?php include($_SERVER['DOCUMENT_ROOT'] . '/includes/topbar.php'); 
+  <?php include($_SERVER['DOCUMENT_ROOT'] . '/includes/topbar.php');
 
-unset($_SESSION['filterByVerticalType']);
-unset($_SESSION['filterByUniversity']);
+  unset($_SESSION['filterByVerticalType']);
+  unset($_SESSION['filterByUniversity']);
 
-?>
+  ?>
   <!-- START PAGE CONTENT WRAPPER -->
   <div class="page-content-wrapper ">
     <!-- START PAGE CONTENT -->
@@ -32,9 +51,9 @@ unset($_SESSION['filterByUniversity']);
               }
               ?>
               <div class="text-end">
-                <button class="btn btn-link" aria-label="" title="" data-toggle="tooltip" data-original-title="Download"
+                <button class="btn btn-link custom_add_button" aria-label="" title="" data-toggle="tooltip" data-original-title="Download"
                   onclick="exportData()"> <i class="uil uil-down-arrow"></i></button>
-                <button class="btn btn-link" aria-label="" title="" data-toggle="tooltip" data-original-title="Add"
+                <button class="btn btn-link custom_add_button" aria-label="" title="" data-toggle="tooltip" data-original-title="Add"
                   onclick="add('sub-centers','lg')"> <i class="uil uil-plus-circle"></i></button>
               </div>
             </ol>
@@ -50,24 +69,24 @@ unset($_SESSION['filterByUniversity']);
         <div class="card card-transparent">
           <div class="card-header">
             <div class="row">
-            <div class="col-md-3 m-b-10">
+              <div class="col-md-3 m-b-10">
                 <div class="form-group">
                   <select class="full-width" style="width:40px" data-init-plugin="select2" id="university"
                     onchange="addFilter(this.value, 'university')" data-placeholder="Choose University">
                     <option value="">Choose University </option>
                     <?php
-                      $universities = $conn->query("SELECT ID, CONCAT(Universities.Short_Name, ' (', Universities.Vertical, ')') as Name FROM Universities WHERE Status=1 AND  ID IS NOT NULL " . $_SESSION['UniversityQuery']);
-                      while ($university = $universities->fetch_assoc()) { ?>
-                        <option value="<?= $university['ID'] ?>"><?= $university['Name'] ?></option>
-                      <?php } ?>
+                    $universities = $conn->query("SELECT ID, CONCAT(Universities.Short_Name, ' (', Universities.Vertical, ')') as Name FROM Universities WHERE Status=1 AND  ID IS NOT NULL " . $_SESSION['UniversityQuery']);
+                    while ($university = $universities->fetch_assoc()) { ?>
+                      <option value="<?= $university['ID'] ?>"><?= $university['Name'] ?></option>
+                    <?php } ?>
                     <option value="1">University Not Alloted</option>
                   </select>
                 </div>
               </div>
-            
+
               <div class="col-md-6 m-b-10"></div>
               <div class="col-md-3">
-                <input type="text" id="users-search-table" class="form-control pull-right" placeholder="Search">
+                <input type="text" id="users-search-table" class="form-control pull-right custom_search_section" placeholder="Search">
               </div>
             </div>
             <div class="clearfix"></div>
@@ -84,9 +103,9 @@ unset($_SESSION['filterByUniversity']);
                     <th data-orderable="false">Admissions</th>
                     <th>Wallet Amount</th>
                     <th data-orderable="false" width="100%">Password</th>
-                
-                    <th data-orderable="false"></th>
-                    <th data-orderable="false"></th>
+
+                    <th data-orderable="false">Status</th>
+                    <th data-orderable="false" class="text-center">Action</th>
                   </tr>
                 </thead>
               </table>
@@ -101,7 +120,7 @@ unset($_SESSION['filterByUniversity']);
     <!-- END PAGE CONTENT -->
     <?php include($_SERVER['DOCUMENT_ROOT'] . '/includes/footer-top.php'); ?>
     <script type="text/javascript">
-      $(function () {
+      $(function() {
         var table = $('#users-table');
         var role = '<?= $_SESSION['Role'] ?>';
         var settings = {
@@ -112,39 +131,39 @@ unset($_SESSION['filterByUniversity']);
             'url': '/app/sub-centers/server'
           },
           'columns': [{
-            data: "Photo",
-            "render": function (data, type, row) {
-              return '<span class="thumbnail-wrapper d48 circular inline">\
+              data: "Photo",
+              "render": function(data, type, row) {
+                return '<span class="thumbnail-wrapper d48 circular inline">\
                 <img src="' + data + '" alt="" data-src="' + data + '"\
                   data-src-retina="' + data + '" width="32" height="32">\
               </span>';
-            }
-          },
-          {
-            data: "Name",
-            "render": function (data, type, row) {
-              return '<strong>' + data + '</strong>';
-            }
-          },
-          {
-            data: "Code",
-            "render": function (data, type, row) {
-              return '<strong>' + data + '</strong>';
-            }
-          },
-          {
-            data: "Reporting"
-          },
-          {
-            data: "Admission"
-          },
-           {
-            data: "wallet_amount"
-          },
-          {
-            data: "Password",
-            "render": function (data, type, row) {
-              return '<div class="row" style="width:250px !important;">\
+              }
+            },
+            {
+              data: "Name",
+              "render": function(data, type, row) {
+                return '<strong>' + data + '</strong>';
+              }
+            },
+            {
+              data: "Code",
+              "render": function(data, type, row) {
+                return '<strong>' + data + '</strong>';
+              }
+            },
+            {
+              data: "Reporting"
+            },
+            {
+              data: "Admission"
+            },
+            {
+              data: "wallet_amount"
+            },
+            {
+              data: "Password",
+              "render": function(data, type, row) {
+                return '<div class="row" style="width:250px !important;">\
                 <div class="col-md-10">\
                   <input type="password" class="form-control" disabled="" style="border: 0ch;" value="' + data + '" id="myInput' + row.ID + '">\
                 </div>\
@@ -152,32 +171,35 @@ unset($_SESSION['filterByUniversity']);
                   <i class="uil uil-eye pt-2 cursor-pointer" onclick="showPassword(' + row.ID + ')"></i>\
                 </div>\
               </div>';
-            }
-          },
+              }
+            },
 
-          {
-            data: "Status",
-            "render": function (data, type, row) {
-              var active = data == 1 ? 'Active' : 'Inactive';
-              var checked = data == 1 ? 'checked' : '';
-              return '<div class="form-check form-check-inline switch switch-lg success">\
-                <input onclick="changeStatus(&#39;Users&#39;, &#39;' + row.ID + '&#39;)" type="checkbox" ' + checked + ' id="status-switch-' + row.ID + '">\
-                <label for="status-switch-' + row.ID + '">' + active + '</label>\
-              </div>';
-            }
-          },
-          {
-            data: "ID",
-            "render": function (data, type, row) {
-              var allotButton = ['Administrator', 'University Head'].includes(role) ? '<i class="uil uil-plus-circle icon-xs cursor-pointer" title="Allot University" onclick="allot(&#39;' + data + '&#39, &#39;lg&#39;)"></i>' : '';
-              var deleteBtn = ['Administrator', 'University Head'].includes(role) ? '<i class="uil uil-trash icon-xs cursor-pointer" title="Delete" onclick="destroy(&#39;sub-centers&#39;, &#39;' + data + '&#39)"></i>' : '';
-              return '<div class="button-list text-end">\
+            {
+              data: "Status",
+              "render": function(data, type, row) {
+                var active = data == 1 ?
+                  '<span class="badge badge-success">Active</span>' :
+                  '<span class="badge badge-danger">Inactive</span>';
+                var checked = data == 1 ? 'checked' : '';
+
+                return '<div class="form-check form-check-inline switch switch-lg success">\
+                          <input onclick="changeStatus(&#39;Users&#39;, &#39;' + row.ID + '&#39;)" type="checkbox" ' + checked + ' id="status-switch-' + row.ID + '">\
+                          <label for="status-switch-' + row.ID + '">' + active + '</label>\
+                        </div>';
+              }
+            },
+            {
+              data: "ID",
+              "render": function(data, type, row) {
+                var allotButton = ['Administrator', 'University Head'].includes(role) ? '<i class="uil uil-plus-circle icon-xs cursor-pointer custom_edit_button" title="Allot University" onclick="allot(&#39;' + data + '&#39, &#39;lg&#39;)"></i>' : '';
+                var deleteBtn = ['Administrator', 'University Head'].includes(role) ? '<i class="uil uil-trash icon-xs cursor-pointer custom_edit_button" title="Delete" onclick="destroy(&#39;sub-centers&#39;, &#39;' + data + '&#39)"></i>' : '';
+                return '<div class="button-list text-end">\
                 ' + allotButton + '\
-                <i class="uil uil-edit icon-xs cursor-pointer" title="Edit" onclick="edit(&#39;sub-centers&#39;, &#39;' + data + '&#39, &#39;lg&#39;)"></i>\
+                <i class="uil uil-edit icon-xs cursor-pointer custom_edit_button" title="Edit" onclick="edit(&#39;sub-centers&#39;, &#39;' + data + '&#39, &#39;lg&#39;)"></i>\
                 ' + deleteBtn + '\
               </div>'
-            }
-          },
+              }
+            },
           ],
           "sDom": "<t><'row'<p i>>",
           "destroy": true,
@@ -188,7 +210,7 @@ unset($_SESSION['filterByUniversity']);
           },
           "aaSorting": [],
           "iDisplayLength": 25,
-          "drawCallback": function (settings) {
+          "drawCallback": function(settings) {
             $('[data-toggle="tooltip"]').tooltip();
           },
         };
@@ -196,7 +218,7 @@ unset($_SESSION['filterByUniversity']);
         table.dataTable(settings);
 
         // search box for table
-        $('#users-search-table').keyup(function () {
+        $('#users-search-table').keyup(function() {
           table.fnFilter($(this).val());
         });
 
@@ -219,7 +241,7 @@ unset($_SESSION['filterByUniversity']);
         $.ajax({
           url: '/app/sub-centers/allot-universities?id=' + id,
           type: 'GET',
-          success: function (data) {
+          success: function(data) {
             $('#' + modal + '-modal-content').html(data);
             $('#' + modal + 'modal').modal('show');
           }
@@ -235,7 +257,7 @@ unset($_SESSION['filterByUniversity']);
             by
           },
           dataType: 'json',
-          success: function (data) {
+          success: function(data) {
             if (data.status) {
               $('.table').DataTable().ajax.reload(null, false);
               if ('<?= $_SESSION['Role'] ?>' == 'Administrator') {

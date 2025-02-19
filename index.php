@@ -67,7 +67,7 @@
               <img src="<?= $dark_logo ?>" alt="logo" data-src="<?= $dark_logo ?>" data-src-retina="<?= $dark_logo ?>" height="50">
             <?php } ?>
             <div class="d-flex justify-content-center">
-            <img src="/assets/img/university/1739853790.jpg" class="mob_university_logo  " style="width: 81px; height:70px;" alt=""></div>
+            <img src="/assets/img/university/Untitled-design.png" class="mob_university_logo  " style="width: 180px; height: 67px" alt=""></div>
             <h2 class="fw-bold title_text_login m-0">Welcome</h2>
             <p class="title_text_login">Sign in to your account</p>          
               <form id="form-login" class="" role="form" autocomplete="off" action="app/login/login">

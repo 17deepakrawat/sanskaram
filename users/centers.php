@@ -1,4 +1,21 @@
 <?php include($_SERVER['DOCUMENT_ROOT'] . '/includes/header-top.php'); ?>
+<style>
+  .select2-container .select2-selection {
+    border-radius: 10px;
+    height: 48px !important;
+    font-size: 17px;
+    font-family: system-ui;
+  }
+
+  .select2-container .select2-selection .select2-selection__arrow {
+    top: auto;
+    bottom: 11px;
+  }
+  .btn-link.hover:not(.active), .btn-link:hover:not(.active) {
+    background: #2b303b !important;
+    color: white !important;
+  }
+</style>
 <?php include($_SERVER['DOCUMENT_ROOT'] . '/includes/header-bottom.php'); ?>
 <?php include($_SERVER['DOCUMENT_ROOT'] . '/includes/menu.php'); ?>
 <!-- START PAGE-CONTAINER -->
@@ -18,12 +35,12 @@
               for ($i = 1; $i <= count($breadcrumbs); $i++) {
                 if (count($breadcrumbs) == $i) : $active = "active";
                   $crumb = explode("?", $breadcrumbs[$i]);
-                  echo '<li class="breadcrumb-item ' . $active . '">' . $crumb[0] . '</li>';
+                  echo '<li class="breadcrumb-item ' . $active . '">' . ucwords($crumb[0]) . '</li>';
                 endif;
               }
               ?>
               <div class="text-end">
-                <button class="btn btn-link" aria-label="" title="" data-toggle="tooltip" data-original-title="Download" onclick="exportData()"> <i class="uil uil-down-arrow"></i></button>
+                <button class="btn btn-link custom_add_button" aria-label="" title="" data-toggle="tooltip" data-original-title="Download" onclick="exportData()"> <i class="uil uil-down-arrow"></i></button>
               </div>
             </ol>
             <!-- END BREADCRUMB -->
@@ -39,7 +56,7 @@
           <div class="card-header">
             <div class="pull-right">
               <div class="col-xs-12">
-                <input type="text" id="users-search-table" class="form-control pull-right" placeholder="Search">
+                <input type="text" id="users-search-table" class="form-control pull-right custom_search_section" placeholder="Search">
               </div>
             </div>
             <div class="clearfix"></div>
@@ -87,7 +104,7 @@
                           <th>Admissions</th>
                           <th data-orderable="false">RM</th>
                           <th data-orderable="false">Password</th>
-                          <th data-orderable="false"></th>
+                          <th data-orderable="false" class="text-center">Action</th>
                         </tr>
                       </thead>
                     </table>
@@ -169,9 +186,9 @@
             {
               data: "ID",
               "render": function(data, type, row) {
-                var allotButton = ['Administrator', 'University Head'].includes(role) ? '<i class="uil uil-plus-circle icon-xs cursor-pointer" data-toggle="tooltip" data-original-title="University Allotment" title="" onclick="allot(&#39;' + data + '&#39, &#39;lg&#39;)"></i>' : '';
+                var allotButton = ['Administrator', 'University Head'].includes(role) ? '<i class="uil uil-plus-circle icon-xs cursor-pointer custom_edit_button" data-toggle="tooltip" data-original-title="University Allotment" title="" onclick="allot(&#39;' + data + '&#39, &#39;lg&#39;)"></i>' : '';
                 return '<div class="button-list text-end">\
-                <i class="uil uil-whatsapp icon-xs cursor-pointer" data-toggle="tooltip" data-original-title="Send WhatsApp" title="" onclick="sendWhatsApp(&#39;' + data + '&#39)"></i>\
+                <i class="uil uil-whatsapp icon-xs cursor-pointer custom_edit_button" data-toggle="tooltip" data-original-title="Send WhatsApp" title="" onclick="sendWhatsApp(&#39;' + data + '&#39)"></i>\
                 ' + allotButton + '\
               </div>'
               }

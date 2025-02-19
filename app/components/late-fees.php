@@ -11,7 +11,7 @@
 
       <div class="row p-b-20">
         <div class="col-lg-12 text-end">
-          <button type="button" class="btn btn-primary" onclick="addComponents('late-fees', 'md', <?= $university_id ?>)">Add</button>
+          <button type="button" class="btn custom_add_button" onclick="addComponents('late-fees', 'md', <?= $university_id ?>)">Add <i class="uil uil-plus-circle ml-2"></i></button>
         </div>
       </div>
 

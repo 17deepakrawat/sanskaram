@@ -30,7 +30,7 @@
               for ($i = 1; $i <= count($breadcrumbs); $i++) {
                 if (count($breadcrumbs) == $i) : $active = "active";
                   $crumb = explode("?", $breadcrumbs[$i]);
-                  echo '<li class="breadcrumb-item ' . $active . '">' . $crumb[0] . '</li>';
+                  echo '<li class="breadcrumb-item ' . $active . '">' . ucwords($crumb[0]) . '</li>';
                 endif;
               }
               ?>
@@ -46,45 +46,46 @@
       <!-- START CONTAINER FLUID -->
       <div class=" container-fluid">
         <!-- BEGIN PlACE PAGE CONTENT HERE -->
-        <div class="row d-flex justify-content-center">
-          <div class="col-md-8">
-            <div class="card">
-              <div class="card-body">
-                <div class="form-group form-group-default required">
-                  <label>Students</label>
-                  <select class="full-width" style="border: transparent;" data-init-plugin="select2" id="student" onchange="getLedger(this.value)">
-                    <option value="">Select</option>
-                  </select>
+        <div class="card card-body py-0 py-3">
+          <div class="row justify-content-center ">
+            <div class="col-md-8">
+              <div class="card shadow-none mb-0">
+                <div class="card-body p-0">
+                  <div class="form-group form-group-default required marksheet_custom_field mb-0">
+                    <label>Students</label>
+                    <select class="full-width" style="border: transparent;" data-init-plugin="select2" id="student" onchange="getLedger(this.value)">
+                      <option value="">Select</option>
+                    </select>
+                  </div>
                 </div>
               </div>
             </div>
           </div>
-        </div>
-
-        <div class="row m-t-20">
-          <div class="col-md-12" id="ledger">
-
+          <div class="row m-t-20">
+            <div class="col-md-12" id="ledger">
+            </div>
           </div>
         </div>
-        <!-- END PLACE PAGE CONTENT HERE -->
       </div>
-      <!-- END CONTAINER FLUID -->
+      <!-- END PLACE PAGE CONTENT HERE -->
     </div>
-    <!-- END PAGE CONTENT -->
-    <?php include($_SERVER['DOCUMENT_ROOT'] . '/includes/footer-top.php'); ?>
+    <!-- END CONTAINER FLUID -->
+  </div>
+  <!-- END PAGE CONTENT -->
+  <?php include($_SERVER['DOCUMENT_ROOT'] . '/includes/footer-top.php'); ?>
 
-    <script type="text/javascript">
-      function getLedger(id) {
-        $.ajax({
-          url: '/app/students/ledger?id=' + id,
-          type: 'GET',
-          success: function(data) {
-            $("#ledger").html(data);
-          }
-        })
-      }
+  <script type="text/javascript">
+    function getLedger(id) {
+      $.ajax({
+        url: '/app/students/ledger?id=' + id,
+        type: 'GET',
+        success: function(data) {
+          $("#ledger").html(data);
+        }
+      })
+    }
 
-      getStudentList('student');
-    </script>
+    getStudentList('student');
+  </script>
 
-    <?php include($_SERVER['DOCUMENT_ROOT'] . '/includes/footer-bottom.php'); ?>
+  <?php include($_SERVER['DOCUMENT_ROOT'] . '/includes/footer-bottom.php'); ?>

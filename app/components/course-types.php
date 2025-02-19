@@ -11,7 +11,7 @@
 
       <div class="row p-b-20">
         <div class="col-lg-12 text-end">
-          <button type="button" class="btn btn-primary" onclick="addComponents('course-types', 'md', <?= $university_id ?>)">Add</button>
+          <button type="button" class="btn custom_add_button" onclick="addComponents('course-types', 'md', <?= $university_id ?>)">Add <i class="uil uil-plus-circle ml-2"></i></button>
         </div>
       </div>
 
@@ -23,7 +23,7 @@
                 <tr>
                   <th width="30%">Name</th>
                   <th data-orderable="false">Status</th>
-                  <th data-orderable="false"></th>
+                  <th data-orderable="false">Action</th>
                 </tr>
               </thead>
             </table>
@@ -54,20 +54,23 @@
       {
         data: "Status",
         "render": function(data, type, row) {
-          var active = data == 1 ? 'Active' : 'Inactive';
+          var active = data == 1 ?
+            '<span class="badge badge-success">Active</span>' :
+            '<span class="badge badge-danger">Inactive</span>';
           var checked = data == 1 ? 'checked' : '';
+
           return '<div class="form-check form-check-inline switch switch-lg success">\
-            <input onclick="changeComponentStatus(\'Course-Types\', \'CourseTypes\', \'' + row.ID + '\');" type="checkbox" ' + checked + ' id="scheme-status-switch-' + row.ID + '">\
-            <label for="scheme-status-switch-' + row.ID + '">' + active + '</label>\
-          </div>';
+      <input onclick="changeComponentStatus(\'Course-Types\', \'CourseTypes\', \'' + row.ID + '\');" type="checkbox" ' + checked + ' id="scheme-status-switch-' + row.ID + '">\
+      <label for="scheme-status-switch-' + row.ID + '">' + active + '</label>\
+    </div>';
         }
       },
       {
         data: "ID",
         "render": function(data, type, row) {
           return '<div class="text-end">\
-            <i class="uil uil-edit icon-xs cursor-pointer" onclick="editComponents(\'course-types\', \'' + data + '\', \'md\');"></i>\
-            <i class="uil uil-trash icon-xs cursor-pointer" onclick="destroyComponents(\'course-types\', \'CourseTypes\', \'' + data + '\');"></i>\
+            <i class="uil uil-edit icon-xs cursor-pointer custom_edit_button" onclick="editComponents(\'course-types\', \'' + data + '\', \'md\');"></i>\
+            <i class="uil uil-trash icon-xs cursor-pointer custom_edit_button" onclick="destroyComponents(\'course-types\', \'CourseTypes\', \'' + data + '\');"></i>\
           </div>'
         }
       },

@@ -111,7 +111,7 @@ unset($_SESSION['filterByVerticalType']); //kp
                   <?= $_SESSION['active_rr_session_name'] ?>
                 </h5>
                 <div>
-                 <button class="btn btn-primary btn-sm payment-btn d-none" onclick="payNow('wallet')">Pay by
+                 <button class="btn btn-primary btn-sm payment-btn d-none p-2" onclick="payNow('wallet')">Pay by
                     Wallet</button>
                 </div>
               </div>
