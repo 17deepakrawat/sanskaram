@@ -14,10 +14,10 @@
       echo json_encode(['status'=>403, 'message'=>'All fields are mandatory!']);
       exit();
     }
-    $center_id  = getCenterIdFunc($conn, $id);
-    $center_code = $conn->query("SELECT Code,Vertical_type FROM Users WHERE ID = $center_id");
-    $center_code_arr = mysqli_fetch_array($center_code);
-    $vertical_type = $center_code_arr['Vertical_type'];
+    // $center_id  = getCenterIdFunc($conn, $id);
+    // $center_code = $conn->query("SELECT Code,Vertical_type FROM Users WHERE ID = $center_id");
+    // $center_code_arr = mysqli_fetch_array($center_code);
+    // $vertical_type = $center_code_arr['Vertical_type'];
 
     
     if(isset($_FILES["image"]["name"]) && $_FILES["image"]["name"]!=''){
@@ -35,7 +35,7 @@
       $filename = "/assets/img/default-user.png";
     }
 
-    $add = $conn->query("UPDATE `Users` SET `Name` = '$name', `Email` = '$email', `Mobile` = '$mobile', `Photo` = '$filename',`Vertical_type`= $vertical_type WHERE ID = $id");
+    $add = $conn->query("UPDATE `Users` SET `Name` = '$name', `Email` = '$email', `Mobile` = '$mobile', `Photo` = '$filename' WHERE ID = $id");
     if($add){
       echo json_encode(['status'=>200, 'message'=>'Sub-Center updated successlly!']);
     }else{

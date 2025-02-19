@@ -45,6 +45,7 @@
     $scheme = $scheme['Scheme_ID'];
 
     $is_vocational = $conn->query("SELECT ID FROM Universities WHERE Is_Vocational = 1 AND ID = $university_id");
+    
     if($is_vocational->num_rows>0){
       $ids = array();
       $sub_course_ids = $conn->query("SELECT DISTINCT Sub_Course_ID FROM Center_Sub_Courses WHERE `User_ID` = $user_id AND University_ID = $university_id AND Course_ID = $course_id AND Fee > 0  AND Sub_Courses_Status = 0");

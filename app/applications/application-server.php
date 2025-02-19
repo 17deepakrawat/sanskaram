@@ -2,7 +2,7 @@
 ## Database configuration
 include '../../includes/db-config.php';
 
-ini_set('display_errors', 1);
+// ini_set('display_errors', 1);
 session_start();
 ## Read value
 $draw = $_POST['draw'];
