@@ -14,12 +14,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $maxMarks = $conn->real_escape_string($_POST['maxMarks']);
     $code = $conn->real_escape_string($_POST['subjectcode']);
     $semester = $conn->real_escape_string($_POST['seme']);
-    $exam_type = isset($_POST['exam_type']) ? intval($_POST['exam_type']) : "";
+    
     // Handle file upload
 
-   if($universities==48){
-       $semester = strtolower($semester);
-   }
+
     $sql = "UPDATE Syllabi SET 
     University_ID = '$universities',
     Course_ID = '$coursetype',
@@ -31,9 +29,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 Min_Marks = '$minMarks', 
                 Max_Marks = '$maxMarks', 
                 Code = '$code',
-                Semester = '$semester',
-                Exam_Type = $exam_type
-            WHERE ID = '$id'";
+                Semester = $semester
+            WHERE ID = $id";
       
     if ($conn->query($sql) === TRUE) {
             echo json_encode(['status'=>200, 'message'=>'Counsellor updated successlly!']);

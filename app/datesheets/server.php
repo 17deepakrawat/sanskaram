@@ -58,7 +58,7 @@ $records = mysqli_fetch_assoc($filter_count);
 $totalRecordwithFilter = $records['filtered'];
 
 ## Fetch records
-$result_record = "SELECT Date_Sheets.*, Exam_Sessions.Name as Exam_Session, Syllabi.Name as subject_name, Syllabi.Code,Syllabi.Semester,Sub_Courses.Name AS sub_course_name FROM Date_Sheets LEFT JOIN Syllabi ON Date_Sheets.Syllabus_ID = Syllabi.ID LEFT JOIN Exam_Sessions ON Date_Sheets.Exam_Session_ID = Exam_Sessions.ID LEFT JOIN Sub_Courses on Syllabi.Sub_Course_ID =  Sub_Courses.ID  WHERE  1= 1  $searchQuery  $orderby LIMIT ".$row.",".$rowperpage;
+$result_record = "SELECT Date_Sheets.*, Exam_Sessions.Name as Exam_Session, Syllabi.Name as subject_name, Syllabi.Code,Syllabi.Semester,Sub_Courses.Name AS sub_course, CONCAT(Sub_Courses.Name,'(',Courses.Short_Name,')') as sub_course_name  FROM Date_Sheets LEFT JOIN Syllabi ON Date_Sheets.Syllabus_ID = Syllabi.ID LEFT JOIN Exam_Sessions ON Date_Sheets.Exam_Session_ID = Exam_Sessions.ID LEFT JOIN Sub_Courses on Syllabi.Sub_Course_ID =  Sub_Courses.ID LEFT JOIN Courses on Syllabi.Course_ID =  Courses.ID  WHERE  1= 1  $searchQuery  $orderby LIMIT ".$row.",".$rowperpage;
 
 // $result_record = "SELECT Syllabi.ID,Syllabi.Semester, Syllabi.Name as subject_name, Syllabi.Code,Sub_Courses.Name AS sub_course_name, Syllabi.User_ID , Min_Marks, Max_Marks, Paper_Type, Credit FROM Syllabi LEFT JOIN Sub_Courses on Syllabi.Sub_Course_ID =  Sub_Courses.ID WHERE 1=1  $searchQuery  $orderby LIMIT ".$row.",".$rowperpage;
 $empRecords = mysqli_query($conn, $result_record);
@@ -70,7 +70,7 @@ while ($row = mysqli_fetch_assoc($empRecords)) {
     $data[] = array( 
       "ID"=> $row['ID'],
       "subject_name" => $row['subject_name'],
-      "sub_course_name" => ucwords(strtolower($row['sub_course_name'])),
+      "sub_course_name" => $row['sub_course_name'],
       "Exam_Session" => $row['Exam_Session'],
       "Code" => $row['Code'],
       "Semester"      => $row["Semester"],

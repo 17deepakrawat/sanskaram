@@ -11,7 +11,8 @@
     $light_logo_retina = "";
     $login_cover = "";
     define("UNIVERSITY_ID", 47);
-    define("WEB_URL", "https://sanskaram.edtechinnovate.in");
+    // define("WEB_URL", "https://sanskaram.edtechinnovate.in");
+    define("WEB_URL", "http://sanskaram.local");
     define("LOGO", WEB_URL . "/assets/img/university/1739855228.png");
     
 

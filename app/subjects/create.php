@@ -201,7 +201,7 @@ $course = $getClassFunc->getProgram($conn);
           if (data.status == 200) {
             $('.modal').modal('hide');
             notification('success', data.message);
-            $('#form-add-subjects-table').DataTable().ajax.reload(null, false);
+            $('#users-table').DataTable().ajax.reload(null, false);
           } else {
             $(':input[type="submit"]').prop('disabled', false);
             notification('danger', data.message);

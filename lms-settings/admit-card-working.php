@@ -1,6 +1,18 @@
 <?php include($_SERVER['DOCUMENT_ROOT'] . '/includes/header-top.php'); ?>
+<?php include($_SERVER['DOCUMENT_ROOT'] . '/includes/header-bottom.php'); ?>
+<?php include($_SERVER['DOCUMENT_ROOT'] . '/includes/menu.php');
+unset($_SESSION['filterByUniversity']);
+unset($_SESSION['subCourseFilter']);
+unset($_SESSION['durationFilter']);
+unset($_SESSION['usersFilter']);
+
+?>
 <style>
-  .custom-field {
+  thead tr th {
+    font-weight: 700 !important;
+  }
+  
+  .select2-container .select2-selection {
     border-radius: 10px;
     height: 48px !important;
     font-size: 17px;
@@ -11,38 +23,7 @@
     top: auto;
     bottom: 11px;
   }
-
-  thead tr th {
-    font-weight: 700 !important;
-  }
-
-  .custom-field {
-    border-radius: 10px;
-    height: 48px !important;
-    font-size: 17px;
-    font-family: system-ui;
-  }
-
-  .btn:hover {
-    /* background: #2b303b !important; */
-    color: white !important;
-    font-size: 14px !important;
-  }
-
-  .table-hover tbody tr:hover .custom_hover_dot {
-    background-color: #d3eeff !important;
-  }
-
-  .btn:hover:not(.active) {
-    background: #2b303b !important;
-  }
 </style>
-<?php include($_SERVER['DOCUMENT_ROOT'] . '/includes/header-bottom.php'); ?>
-<?php include($_SERVER['DOCUMENT_ROOT'] . '/includes/menu.php');
-unset($_SESSION['filterByUniversity']);
-unset($_SESSION['subCourseFilter']);
-unset($_SESSION['durationFilter']); ?>
-
 <!-- START PAGE-CONTAINER -->
 <div class="page-container ">
   <?php include($_SERVER['DOCUMENT_ROOT'] . '/includes/topbar.php'); ?>
@@ -66,11 +47,8 @@ unset($_SESSION['durationFilter']); ?>
               }
               ?>
               <div>
-                <button class="custom_add_button" aria-label="" title="" data-toggle="tooltip" data-original-title="Add Subject" onclick="add('subjects','lg')">Add <i class="uil uil-plus-circle ml-1"></i></button>
-
                 <button class="custom_add_button" aria-label="" title="" data-toggle="tooltip" data-original-title="Upload"
-                  onclick="upload('subjects', 'lg')"> <i class="uil uil-export"></i></button>
-
+                  onclick="upload('datesheets', 'lg')"> <i class="uil uil-export"></i></button>
               </div>
             </ol>
             <!-- END BREADCRUMB -->
@@ -86,10 +64,11 @@ unset($_SESSION['durationFilter']); ?>
         <div class="card card-transparent">
           <div class="card-header">
             <div class="row">
+
               <div class="col-md-3 m-b-10">
-                <div class="form-group custom-field">
+                <div class="form-group">
                   <?php $get_course = $conn->query("SELECT ID, Name FROM Sub_Courses WHERE Status = 1 AND University_ID = " . $_SESSION['university_id'] . " ORDER BY Name ASC"); ?>
-                  <select class="full-width " style="width:40px" data-init-plugin="select2" id="sub_course"
+                  <select class="full-width" style="width:40px" data-init-plugin="select2" id="sub_course"
                     onchange="addFilter(this.value, 'sub_course')" data-placeholder="Choose Sub-Courses">
                     <option value="">Select Sub-Courses</option>
                     <?php while ($row = $get_course->fetch_assoc()) { ?>
@@ -98,10 +77,12 @@ unset($_SESSION['durationFilter']); ?>
                   </select>
                 </div>
               </div>
+
               <div class="col-md-3 m-b-10">
-                <div class="form-group custom-field">
+                <div class="form-group">
                   <select class="full-width" style="width:40px" data-init-plugin="select2" id="duration"
                     onchange="addFilter(this.value, 'duration')" data-placeholder="Choose Duration">
+
                   </select>
                 </div>
               </div>
@@ -112,25 +93,27 @@ unset($_SESSION['durationFilter']); ?>
             </div>
             <div class="clearfix"></div>
           </div>
+
           <div class="card-body">
-            <div class="">
+            <div class="table-responsive">
               <table class="table table-hover nowrap" id="users-table">
                 <thead>
                   <tr>
-                    <th>Code</th>
-                    <th>Name</th>
-                    <th>Sub-Course Name</th>
-                    <th>Duration</th>
-                    <th>Min/Max Marks</th>
-                    <th>Paper Type</th>
-                    <th>Credit</th>
-                    <th>Action</th>
+                    <th><b>Exam Session</b></th>
+                    <th><b>Paper Code</b></th>
+                    <th><b>Subject Name</b></th>
+                    <th><b>Exam Date</b></th>
+                    <th><b>Time</b></th>
+                    <th><b>Duration</b></th>
+                    <th><b>Sub-Course Name</b></th>
                   </tr>
                 </thead>
               </table>
             </div>
           </div>
+
         </div>
+
         <!-- END PLACE PAGE CONTENT HERE -->
       </div>
       <!-- END CONTAINER FLUID -->
@@ -138,7 +121,7 @@ unset($_SESSION['durationFilter']); ?>
     <!-- END PAGE CONTENT -->
     <?php include($_SERVER['DOCUMENT_ROOT'] . '/includes/footer-top.php'); ?>
     <script type="text/javascript">
-      $(function() {
+      $(function () {
 
         var table = $('#users-table');
         var role = '<?= $_SESSION['Role'] ?>';
@@ -147,61 +130,33 @@ unset($_SESSION['durationFilter']); ?>
           'serverSide': true,
           'serverMethod': 'post',
           'ajax': {
-            'url': '/app/subjects/server'
+            'url': '/app/admit-cards/server'
           },
-          'columns': [{
+          'columns': [
+            {
+              data: "Exam_Session",
+            },
+            {
               data: "Code",
             },
             {
               data: "subject_name",
             },
-
             {
-              data: "sub_course_name"
+              data: "exam_date"
             },
+            {
+              data: "exam_time"
+            },
+            
             {
               data: "Semester"
             },
             {
-              data: "Marks",
+              data: "sub_course_name"
             },
-            {
-              data: "Paper_Type"
-            },
-            {
-              data: "Credit"
-            },
-            {
-              data: "ID",
-              className: "text-center",
-              "render": function(data, type, row) {
-                var uni_id = '<?= $_SESSION['university_id'] ?>';
-                let downloadSylBtn = "";
-                if (row.files != null) {
-                  downloadSylBtn = '<a class="dropdown-item" href="..' + row.files + '"><i class="uil uil-down-arrow"></i> Download</a>';
-                }
-
-                var deleteBtn = ['Administrator', 'University Head'].includes(role) ?
-                  '<a class="dropdown-item custom_drpdown_btn" href="#" onclick="destroy(\'subjects\', \'' + data + '\')"><i class="uil uil-trash"></i> Delete</a>' : '';
-
-                var uploadSylBtn = ['Administrator', 'University Head'].includes(role) ?
-                  '<a class="dropdown-item custom_drpdown_btn" href="#" onclick="upload(\'subjects\', \'' + data + '\', \'' + row.Code + '\', \'' + row.subject_name + '\')"><i class="uil uil-upload"></i> Upload</a>' : '';
-
-                var editBtn = '<a class="dropdown-item custom_drpdown_btn" href="#" onclick="edit(\'subjects\', \'' + data + '\', \'lg\')"><i class="uil uil-edit"></i> Edit</a>';
-
-                return `<div class="dropdown text-center">
-                       <button class="border-0 bg-white custom_hover_dot" type="button" id="dropdownMenu-${data}" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                           <i class="uil uil-ellipsis-v"></i>
-                       </button>
-                       <div class="dropdown-menu dropdown-menu-right custom_drop_div" aria-labelledby="dropdownMenu-${data}">
-                           ${downloadSylBtn}
-                           ${uploadSylBtn}
-                           ${editBtn}
-                           ${deleteBtn}
-                       </div>
-                   </div>`;
-              }
-            },
+            
+           
           ],
           "sDom": "<t><'row'<p i>>",
           "destroy": true,
@@ -212,14 +167,14 @@ unset($_SESSION['durationFilter']); ?>
           },
           "aaSorting": [],
           "iDisplayLength": 25,
-          "drawCallback": function(settings) {
+          "drawCallback": function (settings) {
             $('[data-toggle="tooltip"]').tooltip();
           },
         };
 
         table.dataTable(settings);
         // search box for table
-        $('#users-search-table').keyup(function() {
+        $('#users-search-table').keyup(function () {
           table.fnFilter($(this).val());
         });
 
@@ -228,61 +183,45 @@ unset($_SESSION['durationFilter']); ?>
 
     <script>
       function addFilter(id, by) {
+
         $.ajax({
-          url: '/app/subjects/filter',
+          url: '/app/datesheets/filter',
           type: 'POST',
           data: {
             id,
             by
           },
           dataType: 'json',
-          success: function(data) {
-            if (by == "sub_course") {
+          success: function (data) {
+            const universityId = <?php echo json_encode($_SESSION['university_id']); ?>;
+            if (by == "sub_course" && universityId == 47) {
               getDuration(id);
             }
-            if (data.status) {
+
+            // if (data.status) {
               $('.table').DataTable().ajax.reload(null, false);
-            }
+
+            // }
           }
         })
       }
-
-      $(document).ready(function() {
+      
+      $(document).ready(function () {
         getDuration();
+        
         $("#sub_course").select2({
           placeholder: 'Choose Sub Course',
         })
       })
-
       function getDuration(id) {
+
         $.ajax({
           url: '/app/subjects/get-duration',
-          data: {
-            id: id
-          },
+          data: { id: id },
           type: 'POST',
-          success: function(data) {
+          success: function (data) {
             $("#duration").html(data);
             addFilter(id);
-          }
-        })
-      }
-
-
-      function upload(url, id, code, subject_name) {
-        var modal = 'md';
-        $.ajax({
-          url: '/app/' + url + '/upload',
-          type: 'POST',
-          data: {
-            id: id,
-            modal: modal,
-            code: code,
-            subject_name: subject_name
-          },
-          success: function(data) {
-            $('#' + modal + '-modal-content').html(data);
-            $('#' + modal + 'modal').modal('show');
           }
         })
       }

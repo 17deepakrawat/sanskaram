@@ -1,13 +1,16 @@
 <?php
 session_start();
 require $_SERVER['DOCUMENT_ROOT'] . '/includes/db-config.php';
+
 ?>
 <style>
-@media only screen and (min-width: 720px) {
-    form .row [class*="col-"]:not(:first-child), form .row [class*="col-"]:not(:last-child) {
-        padding-right: -4px !important;
+    @media only screen and (min-width: 720px) {
+
+        form .row [class*="col-"]:not(:first-child),
+        form .row [class*="col-"]:not(:last-child) {
+            padding-right: -4px !important;
+        }
     }
-}
 </style>
 <!-- Modal -->
 <div class="modal-body">
@@ -20,14 +23,14 @@ require $_SERVER['DOCUMENT_ROOT'] . '/includes/db-config.php';
         enctype="multipart/form-data">
         <input type="hidden" name="created" value="<?php echo $_SESSION['Role']; ?>">
         <div class="row">
-           <div class="col-sm-6">
+            <div class="col-sm-6">
                 <div class="form-group">
                     <label for="adm_session">Session</label>
-                    <?php $getSession = $conn->query("SELECT ID, Name FROM Admission_Sessions WHERE 1=1  AND University_ID = '".$_SESSION['university_id']."' ORDER BY ID DESC"); ?>
+                    <?php $getSession = $conn->query("SELECT ID, Name FROM Admission_Sessions WHERE 1=1  AND University_ID = '" . $_SESSION['university_id'] . "' ORDER BY ID DESC"); ?>
                     <select class="form-control" id="adm_session" name="adm_session" required>
                         <option value="">Select Session</option>
-                        <?php foreach ($getSession as $row){ ?>
-                        <option value="<?php echo $row['ID'];?>"><?php echo $row['Name'];?></option>
+                        <?php foreach ($getSession as $row) { ?>
+                            <option value="<?php echo $row['ID']; ?>"><?php echo $row['Name']; ?></option>
                         <?php } ?>
                     </select>
                 </div>

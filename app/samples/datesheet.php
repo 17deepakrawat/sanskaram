@@ -5,7 +5,7 @@
   // Create a file pointer 
   $f = fopen('php://memory', 'w'); 
 
-  $fields = array('Course','Sub-Course','Exam Session', 'Paper Code', 'Exam Date (dd-mm-yyyy)', 'Start Time', 'End Time','Duration');
+  $fields = array('Course','Sub-Course','Exam Session', 'Subject Code', 'Exam Date (dd-mm-yyyy)', 'Start Time', 'End Time','Duration');
   fputcsv($f, $fields, $delimiter);
 
   fseek($f, 0); 

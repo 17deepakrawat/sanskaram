@@ -23,7 +23,7 @@
                             for ($i = 1; $i <= count($breadcrumbs); $i++) {
                                 if (count($breadcrumbs) == $i) : $active = "active";
                                     $crumb = explode("?", $breadcrumbs[$i]);
-                                    echo '<li class="breadcrumb-item ' . $active . '">' . $crumb[0] . '</li>';
+                                    echo '<li class="breadcrumb-item ' . $active . '">' . strtoupper($crumb[0]) . '</li>';
                                 endif;
                             }
                             ?>
@@ -42,14 +42,15 @@
                             $viewed_records = mysqli_fetch_assoc($viewed_notification);
                             $viewed_id = json_decode($viewed_records['Notification_ID']);
                         }
-                        if (in_array($records['ID'], $viewed_id)) {
+                        if (!empty($records['ID']) && in_array($records['ID'], $viewed_id)) {
                             $record_count = '';
                         } else {
                             $record_count = 1;
+                            
                         }
                         ?>
                         <div class="justify-content-between align-self-end" id="show-notification">
-                            <?php if ($record_count != '') { ?>
+                            <?php if ($record_count != '' && !empty($records['ID'])) { ?>
                                 <a type="button" onclick="show_notification('<?= $records['ID'] ?>')"><iconify-icon icon="uil:bell"></iconify-icon>
                                 <?php echo "One New Notification regarding " . $records['Heading'];
                             } else {
@@ -193,6 +194,9 @@
                                             $university_id = mysqli_real_escape_string($conn, $_SESSION['university_id']);
                                             $query = "SELECT Notifications_Generated.ID , Notification_Heading.Name as `heading` , JSON_UNQUOTE(JSON_EXTRACT(Notifications_Generated.published_on,'$[0].published')) AS `send_on` ,Notifications_Generated.Send_To as `send_to` , Notifications_Generated.Attachment as `document` FROM `Notifications_Generated` LEFT JOIN Notification_Heading ON Notification_Heading.ID = Notifications_Generated.Heading WHERE Notifications_Generated.Status = '1' AND (Notifications_Generated.Send_To = 'center' OR Notifications_Generated.Send_To = 'all') AND Notifications_Generated.university_id = '$university_id' $searchQuery";
                                             $result_record = $conn->query($query);
+                                            if($result_record->num_rows == 0){
+                                                 echo "<tr><td colspan='5'>No records found.</td></tr>";
+                                            }
                                             $data = array();
                                             while ($row = $result_record->fetch_assoc()) { ?>
                                                 <tr>

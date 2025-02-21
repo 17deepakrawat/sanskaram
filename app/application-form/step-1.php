@@ -60,10 +60,22 @@ if (isset($_POST['center'])) {
   date_default_timezone_set('Asia/Kolkata');
   $updated_date = date("Y-m-d H:i:s");
 
+  if (isset($_POST['abc_id']) && !empty($_POST['abc_id'])) {
+    $abcid = mysqli_real_escape_string($conn, $_POST['abc_id']);
+    if (strlen($abcid) != 12) {
+      echo json_encode(['status' => 400, 'message' => 'ABC ID must be exactly 12 characters in length!']);
+      exit();
+    }
+  }
+
   if (!empty($id)) {
 
     $add_student = $conn->query("UPDATE Students SET Updated_At='$updated_date', Admission_Type_ID = $admission_type, Admission_Session_ID = $admission_session, Course_ID = $course, Sub_Course_ID = $sub_course, Mode_ID = $mode, Duration = '" . $duration . "', First_Name = '$first_name', Middle_Name = '$middle_name', Last_Name = '$last_name', Father_Name = '$father_name', Mother_Name = '$mother_name', DOB = '$dob', Aadhar_Number = '$aadhar', Category = '$category', Gender = '$gender', Nationality = '$nationality', Employement_Status = '$employment_status', Marital_Status = '$marital_status', Religion = '$religion' WHERE ID = $id");
     if ($add_student) {
+      if (isset($_POST['abc_id'])) {
+        $abcid = mysqli_real_escape_string($conn, $_POST['abc_id']);
+        $conn->query("UPDATE Students SET ABC_ID = '$abcid' WHERE ID = $id");
+      }
 
       generateStudentLedger($conn, $id);
       echo json_encode(['status' => 200, 'message' => 'Step 1 details saved successfully!', 'id' => $id]);
@@ -78,15 +90,12 @@ if (isset($_POST['center'])) {
     //   exit();
     // }
 
+    $student_check = $conn->query("SELECT ID FROM Students WHERE First_Name = '$first_name' AND Father_Name = '$father_name' AND Mother_Name = '$mother_name' AND DOB = '$dob' AND University_ID = " . $_SESSION['university_id'] . " AND Course_ID = $course AND Added_For = $center");
+    if ($student_check->num_rows > 0) {
+      echo json_encode(['status' => 400, 'message' => 'Student with same details already exists!']);
+      exit();
+    }
 
-
-
-      $student_check = $conn->query("SELECT ID FROM Students WHERE First_Name = '$first_name' AND Father_Name = '$father_name' AND Mother_Name = '$mother_name' AND DOB = '$dob' AND University_ID = " . $_SESSION['university_id'] . " AND Course_ID = $course AND Added_For = $center");
-      if ($student_check->num_rows > 0) {
-        echo json_encode(['status' => 400, 'message' => 'Student with same details already exists!']);
-        exit();
-      }
-    
 
     $add_student = $conn->query("INSERT INTO Students (Added_By, Added_For, University_ID, Admission_Type_ID, Admission_Session_ID, Course_ID, Sub_Course_ID, Mode_ID, Duration,Adm_Duration, First_Name, Middle_Name, Last_Name, Father_Name, Mother_Name, DOB, Aadhar_Number, Category, Gender, Nationality, Employement_Status, Marital_Status, Religion, Step) VALUES(" . $_SESSION['ID'] . ", $center, " . $_SESSION['university_id'] . ", $admission_type, $admission_session, $course, $sub_course, $mode, '" . $duration . "', '" . $duration . "', '$first_name', '$middle_name', '$last_name', '$father_name', '$mother_name', '$dob', '$aadhar', '$category', '$gender', '$nationality', '$employment_status', '$marital_status', '$religion', 1)");
 
@@ -102,12 +111,11 @@ if (isset($_POST['center'])) {
           $characters = $has_unique_student_id['Max_Character'];
           $unique_id = generateStudentID($conn, $suffix, $characters, $_SESSION['university_id']);
           $conn->query("UPDATE Students SET Unique_ID = '$unique_id' WHERE ID = $student_id");
-
-          // ABC ID update
           if (isset($_POST['abc_id'])) {
             $abcid = mysqli_real_escape_string($conn, $_POST['abc_id']);
             $conn->query("UPDATE Students SET ABC_ID = '$abcid' WHERE ID = $student_id");
           }
+
         }
       } else {
         $unique_id = $conn->query("SELECT Unique_ID FROM Lead_Status WHERE ID = $lead_id");

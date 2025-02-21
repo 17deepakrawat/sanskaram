@@ -8,7 +8,7 @@ $sub_course_id = intval($_POST['sub_course_id']);
 $semester = intval($_POST['semester']);
 
 // Prepare SQL query
-$studentSubjects = "SELECT Syllabi.ID as subject_id, Syllabi.Name FROM Syllabi WHERE Syllabi.Sub_Course_ID = $sub_course_id AND Semester=$semester";
+$studentSubjects = "SELECT Syllabi.ID as subject_id, CONCAT(Syllabi.Name,'(',Syllabi.Code,')') AS Name  FROM Syllabi WHERE Syllabi.Sub_Course_ID = $sub_course_id AND Semester=$semester";
 print_r($studentSubjects);
 $subjects = mysqli_query($conn, $studentSubjects);
 

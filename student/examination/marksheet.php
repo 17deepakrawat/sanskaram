@@ -99,11 +99,10 @@ require '../../includes/helpers.php';
                 <div class="card card-transparent">
 
                     <?php
-
                     $webQuery = '';
                     $semQuery = '';
                     $sem = '';
-                    $studentId='';
+                    $studentId = '';
                     if (isset($_GET['year_sem'])) {
                         $sem = $_GET['year_sem'];
                         $semQuery = "&year_sem=" . $sem;
@@ -122,277 +121,271 @@ require '../../includes/helpers.php';
                         }
                     }
                     $rows = [];
-            
-                    $get_result_data_url = WEB_URL."/student/examination/api" . $webQuery;
+
+                    $get_result_data_url = WEB_URL . "/student/examination/api" . $webQuery;
                     $result = file_get_contents($get_result_data_url);
                     $rows = json_decode($result, true);
 
-                 
-                    // print_r($rows['msg']);
-
                     if (isset($rows['status']) && $rows['status'] == 1) {
                         $row = $rows['data'];
+                        ?>
+                                <div class="text-center mt-5">
+                                    <div class="col-md-3" style="margin: -38px 0px 0px 25px;">
+                                        <select class="form-control" name="year_semester" id="year_semester">
+                                            <option value="">Select</option>
+                                            <?php for ($i = 1; $i <= $row['Min_Duration']; $i++) { ?>
+                                                    <option value="<?= $i ?>" <?= ($i == $sem) ? 'selected' : '' ?>>Semester <?= $i ?></option>
 
-                      
-                            ?>
-
-                            <div class="text-center mt-5">
-                                <div class="col-md-3" style="margin: -38px 0px 0px 25px;">
-                                    <select class="form-control" name="year_semester" id="year_semester">
-                                        <option value="">Select</option>
-                                        <?php for ($i = 1; $i <= $row['Min_Duration']; $i++) { ?>
-                                            <option value="<?= $i ?>" <?= ($i == $sem) ? 'selected' : '' ?>>Semester <?= $i ?></option>
-
-                                        <?php } ?>
-                                    </select>
-                                </div>
-                            </div>
-                       
-                        <div id="contentpdf" class="html-content">
-                            <div class="result_section">
-                                <div class="mt-5 body"
-                                    style="border:3px solid #1e1919; height: 1204px; width: 900px; margin: 0 auto; background-position: center; background-size: contain; background-repeat: no-repeat; padding: 20px;">
-                                    <div class="" style="display:flex; justify-content:center;">
-                                        <img src="<?= LOGO ?>"
-                                            alt="" style="margin-top: 15px;width:27%">
+                                            <?php } ?>
+                                        </select>
                                     </div>
-                                    <p
-                                        style="margin-top:1%;text-align: center;font-weight: 700;font-size: 20px!important;color:black !important;">
-                                        (A University Established by UP Act 2 of 2012)</p>
-                                    <div class="main-result-box"
-                                        style="padding: 0px; height: 0px; margin: 0 auto; position: relative; top: 0px; right: 0px;">
-                                        <p class="text-center text-dark fw-bold" style="font-size:medium; font-weight:700">
-                                            Statement Of Marks</p>
-                                        <p class="text-center text-dark fw-bold" style="font-size:medium; font-weight:700">
-                                            <?= ucwords(strtolower($row['duration_val'])) ?> in
-                                            <?= ucwords(strtolower($row['course'])) ?>
-                                        </p>
-                                        <p class="text-center text-dark fw-bold" style="font-size:medium; font-weight:700">
-                                            Admission Session
-                                            :<?= ucwords($row['Admission_Session']) ?></p>
-                                        <img src="<?= WEB_URL?>/<?= $row['Photo'] ?>" alt=""
-                                            width="100" height="100" class="img-pp"
-                                            style="position: absolute;right: 1px;top: 10px;">
-                                        <div class="row" style="margin-top: 50px;">
-                                            <div class="col-lg-12 mb-1">
-                                                <div class="table-resposive">
-                                                    <table class="table-bordered mb-3">
-                                                        <tbody>
-                                                            <tr>
-                                                                <td class="col text-start"
-                                                                    style="width:600px; height:40px;">
-                                                                    <span class="fw-bold"
-                                                                        style="color: #05519E;font-size:medium; font-weight:700">Name:</span>
-                                                                    <span class="text-dark fw-bold"
-                                                                        style="font-size:medium; font-weight:700"><?= $row['stu_name'] ?></span>
-                                                                </td>
-                                                                <td class="col text-start"
-                                                                    style="width:400px; height:40px;">
-                                                                    <span class="fw-bold"
-                                                                        style="color: #05519E;font-size:medium; font-weight:700">
-                                                                        Enrollment No:</span>
-                                                                    <span class="text-dark fw-bold"
-                                                                        style="font-size:medium; font-weight:700"><?= $row['Enrollment_No'] ?></span>
-                                                                </td>
-                                                            </tr>
-                                                          
+                                </div>
+                       
+                            <div id="contentpdf" class="html-content">
+                                <div class="result_section">
+                                    <div class="mt-5 body"
+                                        style="border:3px solid #1e1919; height: 1204px; width: 900px; margin: 0 auto; background-position: center; background-size: contain; background-repeat: no-repeat; padding: 20px;">
+                                        <div class="" style="display:flex; justify-content:center;">
+                                            <img src="<?= WEB_URL . $_SESSION['university_logo'] ?>"
+                                                alt="" style="margin-top: 15px;width:27%">
+                                        </div>
+                                        <p
+                                            style="margin-top:1%;text-align: center;font-weight: 700;font-size: 20px!important;color:black !important;">
+                                            (A University Established by UP Act 2 of 2012)</p>
+                                        <div class="main-result-box"
+                                            style="padding: 0px; height: 0px; margin: 0 auto; position: relative; top: 0px; right: 0px;">
+                                            <p class="text-center text-dark fw-bold" style="font-size:medium; font-weight:700">
+                                                Statement Of Marks</p>
+                                            <p class="text-center text-dark fw-bold" style="font-size:medium; font-weight:700">
+                                                <?= ucwords(strtolower($row['duration_val'])) ?> in
+                                                <?= ucwords(strtolower($row['course'])) ?>
+                                            </p>
+                                            <p class="text-center text-dark fw-bold" style="font-size:medium; font-weight:700">
+                                                Admission Session
+                                                :<?= ucwords($row['Admission_Session']) ?></p>
+                                            <img src="<?= WEB_URL ?>/<?= $row['Photo'] ?>" alt=""
+                                                width="100" height="100" class="img-pp"
+                                                style="position: absolute;right: 1px;top: 10px;">
+                                            <div class="row" style="margin-top: 50px;">
+                                                <div class="col-lg-12 mb-1">
+                                                    <div class="table-resposive">
+                                                        <table class="table-bordered mb-3">
+                                                            <tbody>
                                                                 <tr>
                                                                     <td class="col text-start"
                                                                         style="width:600px; height:40px;">
-                                                                        <span class="fw-bold "
-                                                                            style="color: #05519E;font-size:medium; font-weight:700">Father
-                                                                            Name:</span>
+                                                                        <span class="fw-bold"
+                                                                            style="color: #05519E;font-size:medium; font-weight:700">Name:</span>
                                                                         <span class="text-dark fw-bold"
-                                                                            style="color: #05519E;font-size:medium; font-weight:700"><?= $row['Father_Name'] ?></span>
+                                                                            style="font-size:medium; font-weight:700"><?= $row['stu_name'] ?></span>
                                                                     </td>
                                                                     <td class="col text-start"
                                                                         style="width:400px; height:40px;">
                                                                         <span class="fw-bold"
-                                                                            style="color: #05519E;font-size:medium; font-weight:700"><?= $row['mode_type'] ?>:</span>
-                                                                        <span class="text-dark fw-bold"
                                                                             style="color: #05519E;font-size:medium; font-weight:700">
-                                                                            <?= $row['durMonthYear'] ?> </span>
+                                                                            Enrollment No:</span>
+                                                                        <span class="text-dark fw-bold"
+                                                                            style="font-size:medium; font-weight:700"><?= $row['Enrollment_No'] ?></span>
                                                                     </td>
                                                                 </tr>
-                                                                <tr>
-                                                                    <td class="col text-start"
-                                                                        style="width:600px; height:40px;">
-                                                                        <span class="fw-bold "
-                                                                            style="color: #05519E;font-size:medium; font-weight:700">School:</span>
-                                                                        <span class="text-dark fw-bold"
-                                                                            style="color: #05519E;font-size:medium; font-weight:700">Sanskaram
-                                                                            School Of
-                                                                            <?= $row['university_name'] ?></span>
-                                                                    </td>
-                                                                    <td class="col text-start"
-                                                                        style="width:400px; height:40px;"><span class="fw-bold "
-                                                                            style="color: #05519E;font-size:medium; font-weight:700">Exam
-                                                                            Session:</span><span class="text-dark fw-bold "
-                                                                            style="color: #05519E;font-size:medium; font-weight:700">
-                                                                            <?= $row['stu_exam_session'] ?> </span></td>
-                                                                </tr>
+                                                          
+                                                                    <tr>
+                                                                        <td class="col text-start"
+                                                                            style="width:600px; height:40px;">
+                                                                            <span class="fw-bold "
+                                                                                style="color: #05519E;font-size:medium; font-weight:700">Father
+                                                                                Name:</span>
+                                                                            <span class="text-dark fw-bold"
+                                                                                style="color: #05519E;font-size:medium; font-weight:700"><?= $row['Father_Name'] ?></span>
+                                                                        </td>
+                                                                        <td class="col text-start"
+                                                                            style="width:400px; height:40px;">
+                                                                            <span class="fw-bold"
+                                                                                style="color: #05519E;font-size:medium; font-weight:700"><?= $row['mode_type'] ?>:</span>
+                                                                            <span class="text-dark fw-bold"
+                                                                                style="color: #05519E;font-size:medium; font-weight:700">
+                                                                                <?= $row['durMonthYear'] ?> </span>
+                                                                        </td>
+                                                                    </tr>
+                                                                    <tr>
+                                                                        <td class="col text-start"
+                                                                            style="width:600px; height:40px;">
+                                                                            <span class="fw-bold "
+                                                                                style="color: #05519E;font-size:medium; font-weight:700">School:</span>
+                                                                            <span class="text-dark fw-bold"
+                                                                                style="color: #05519E;font-size:medium; font-weight:700">Sanskaram
+                                                                                School Of
+                                                                                <?= $row['university_name'] ?></span>
+                                                                        </td>
+                                                                        <td class="col text-start"
+                                                                            style="width:400px; height:40px;"><span class="fw-bold "
+                                                                                style="color: #05519E;font-size:medium; font-weight:700">Exam
+                                                                                Session:</span><span class="text-dark fw-bold "
+                                                                                style="color: #05519E;font-size:medium; font-weight:700">
+                                                                                <?= $row['stu_exam_session'] ?> </span></td>
+                                                                    </tr>
                                                        
 
-                                                        </tbody>
-                                                    </table>
+                                                            </tbody>
+                                                        </table>
+                                                    </div>
                                                 </div>
                                             </div>
-                                        </div>
-                                        <div class="table-box">
-                                            <table width="100%"
-                                                style="border-collapse: collapse; border: 2px solid #8b8b8b; width: 100%;">
-                                                    <tbody>
-                                                        <tr class="text-center border-bottom-0">
-                                                            <th scope="col" class="col blue"
-                                                                style="width: 10%;border-bottom: 1px solid #fff;font-size:medium; font-weight:700; border-right: 2px solid #8b8b8b;">
-                                                                Subject Code
-                                                            </th>
-                                                            <th scope="col" class="col blue"
-                                                                style="width: 60%;border-bottom: 1px solid #fff;font-size:medium; font-weight:700; border-right: 2px solid #8b8b8b;">
-                                                                Subject Name
-                                                            </th>
-                                                            <th scope="col" colspan="2" class="blue"
-                                                                style="font-size:medium; font-weight:700; border-right: 2px solid #8b8b8b;">
-                                                                Internal</th>
-                                                            <th scope="col" colspan="2" class="col blue"
-                                                                style="width: 10%;font-size:medium; font-weight:700; border-right: 2px solid #8b8b8b;">
-                                                                External</th>
-                                                            <th scope="col" colspan="2" class="col blue"
-                                                                style="width: 10%;font-size:medium; font-weight:700; ">
-                                                                Total</th>
-                                                        </tr>
-                                                        <tr class="border-top-0 text-center">
-                                                            <th scope="col"></th>
-                                                            <th scope="col" style="border-left: 2px solid #8b8b8b;"></th>
-                                                            <th scope="col" class="col border-top-1 blue"
-                                                                style="width:10%; border-top: 1px solid #8b8b8b;font-size:medium; font-weight:700; border-left: 2px solid #8b8b8b; border-bottom: 2px solid #8b8b8b;">
-                                                                OBT</th>
-                                                            <th scope="col" class="col border-top-1 blue"
-                                                                style=" width:10%; border-top: 1px solid #8b8b8b;font-size:medium; font-weight:700; border-bottom: 2px solid #8b8b8b;">
-                                                                Max</th>
-                                                            <th scope="col" class="col border-top-1 blue"
-                                                                style=" width:10%; border-top: 1px solid #8b8b8b;font-size:medium; font-weight:700; border-bottom: 2px solid #8b8b8b;">
-                                                                OBT</th>
-                                                            <th scope="col" class="col border-top-1 blue"
-                                                                style=" width:10%; border-top: 1px solid #8b8b8b;font-size:medium; font-weight:700; border-bottom: 2px solid #8b8b8b;">
-                                                                Max</th>
-                                                            <th scope="col" class="col border-top-1 blue"
-                                                                style=" width:10%; border-top: 1px solid #8b8b8b;font-size:medium; font-weight:700; border-bottom: 2px solid #8b8b8b;">
-                                                                OBT</th>
-                                                            <th scope="col" class="col border-top-1 blue"
-                                                                style=" width:10%; border-top: 1px solid #8b8b8b;font-size:medium; font-weight:700; border-bottom: 2px solid #8b8b8b;">
-                                                                Max</th>
-                                                        </tr>
-                                                        <?php foreach ($row['marks'] as $result) { ?>
-                                                            <tr class="text-center" style="font-weight: 700;">
-                                                                <td style="padding: 6px;border-left: 2px solid #8b8b8b;border-radius: 2px solid #8b8b8b;font-size: 14px;border-top: 2px solid #8b8b8b;"
-                                                                    class="text-dark"><?= $result['Code'] ?></td>
-                                                                <td class="text-left text-dark"
-                                                                    style="padding: 6px;border-left: 2px solid #8b8b8b;border-radius: 2px solid #8b8b8b;font-size: 14px; border-top: 2px solid #8b8b8b; text-align:start !important;">
-                                                                    <?= $result['subject_name'] ?>
-                                                                </td>
-                                                                <td style="padding: 6px;border-left: 2px solid #8b8b8b;border-radius: 2px solid #8b8b8b;font-size: 14px;"
-                                                                    class="text-dark"><?= $result['obt_marks_int'] ?></td>
-                                                                <td style="padding: 6px;border-left: 2px solid #8b8b8b;border-radius: 2px solid #8b8b8b;font-size: 14px;"
-                                                                    class="text-dark"><?= $result['Min_Marks'] ?></td>
-                                                                <td style="padding: 6px;border-left: 2px solid #8b8b8b;border-radius: 2px solid #8b8b8b;font-size: 14px;"
-                                                                    class="text-dark"><?= $result['obt_marks_ext'] ?></td>
-                                                                <td style="padding: 6px;border-left: 2px solid #8b8b8b;border-radius: 2px solid #8b8b8b;font-size: 14px;"
-                                                                    class="text-dark"><?= $result['Max_Marks'] ?></td>
-                                                                <td style="padding: 6px;border-left: 2px solid #8b8b8b;border-radius: 2px solid #8b8b8b;font-size: 14px;"
-                                                                    class="text-dark"><?= ($result['total_obtain_ext_int']) ?></td>
-                                                                <td style="padding: 6px;border-left: 2px solid #8b8b8b;border-radius: 2px solid #8b8b8b;font-size: 14px;"
-                                                                    class="text-dark"><?= ($result['grand_total_ext_int']) ?></td>
+                                            <div class="table-box">
+                                                <table width="100%"
+                                                    style="border-collapse: collapse; border: 2px solid #8b8b8b; width: 100%;">
+                                                        <tbody>
+                                                            <tr class="text-center border-bottom-0">
+                                                                <th scope="col" class="col blue"
+                                                                    style="width: 10%;border-bottom: 1px solid #fff;font-size:medium; font-weight:700; border-right: 2px solid #8b8b8b;">
+                                                                    Subject Code
+                                                                </th>
+                                                                <th scope="col" class="col blue"
+                                                                    style="width: 60%;border-bottom: 1px solid #fff;font-size:medium; font-weight:700; border-right: 2px solid #8b8b8b;">
+                                                                    Subject Name
+                                                                </th>
+                                                                <th scope="col" colspan="2" class="blue"
+                                                                    style="font-size:medium; font-weight:700; border-right: 2px solid #8b8b8b;">
+                                                                    Internal</th>
+                                                                <th scope="col" colspan="2" class="col blue"
+                                                                    style="width: 10%;font-size:medium; font-weight:700; border-right: 2px solid #8b8b8b;">
+                                                                    External</th>
+                                                                <th scope="col" colspan="2" class="col blue"
+                                                                    style="width: 10%;font-size:medium; font-weight:700; ">
+                                                                    Total</th>
                                                             </tr>
-                                                        <?php } ?>
-                                                    </tbody>
+                                                            <tr class="border-top-0 text-center">
+                                                                <th scope="col"></th>
+                                                                <th scope="col" style="border-left: 2px solid #8b8b8b;"></th>
+                                                                <th scope="col" class="col border-top-1 blue"
+                                                                    style="width:10%; border-top: 1px solid #8b8b8b;font-size:medium; font-weight:700; border-left: 2px solid #8b8b8b; border-bottom: 2px solid #8b8b8b;">
+                                                                    OBT</th>
+                                                                <th scope="col" class="col border-top-1 blue"
+                                                                    style=" width:10%; border-top: 1px solid #8b8b8b;font-size:medium; font-weight:700; border-bottom: 2px solid #8b8b8b;">
+                                                                    Max</th>
+                                                                <th scope="col" class="col border-top-1 blue"
+                                                                    style=" width:10%; border-top: 1px solid #8b8b8b;font-size:medium; font-weight:700; border-bottom: 2px solid #8b8b8b;">
+                                                                    OBT</th>
+                                                                <th scope="col" class="col border-top-1 blue"
+                                                                    style=" width:10%; border-top: 1px solid #8b8b8b;font-size:medium; font-weight:700; border-bottom: 2px solid #8b8b8b;">
+                                                                    Max</th>
+                                                                <th scope="col" class="col border-top-1 blue"
+                                                                    style=" width:10%; border-top: 1px solid #8b8b8b;font-size:medium; font-weight:700; border-bottom: 2px solid #8b8b8b;">
+                                                                    OBT</th>
+                                                                <th scope="col" class="col border-top-1 blue"
+                                                                    style=" width:10%; border-top: 1px solid #8b8b8b;font-size:medium; font-weight:700; border-bottom: 2px solid #8b8b8b;">
+                                                                    Max</th>
+                                                            </tr>
+                                                            <?php foreach ($row['marks'] as $result) { ?>
+                                                                    <tr class="text-center" style="font-weight: 700;">
+                                                                        <td style="padding: 6px;border-left: 2px solid #8b8b8b;border-radius: 2px solid #8b8b8b;font-size: 14px;border-top: 2px solid #8b8b8b;"
+                                                                            class="text-dark"><?= $result['Code'] ?></td>
+                                                                        <td class="text-left text-dark"
+                                                                            style="padding: 6px;border-left: 2px solid #8b8b8b;border-radius: 2px solid #8b8b8b;font-size: 14px; border-top: 2px solid #8b8b8b; text-align:start !important;">
+                                                                            <?= $result['subject_name'] ?>
+                                                                        </td>
+                                                                        <td style="padding: 6px;border-left: 2px solid #8b8b8b;border-radius: 2px solid #8b8b8b;font-size: 14px;"
+                                                                            class="text-dark"><?= $result['obt_marks_int'] ?></td>
+                                                                        <td style="padding: 6px;border-left: 2px solid #8b8b8b;border-radius: 2px solid #8b8b8b;font-size: 14px;"
+                                                                            class="text-dark"><?= $result['Min_Marks'] ?></td>
+                                                                        <td style="padding: 6px;border-left: 2px solid #8b8b8b;border-radius: 2px solid #8b8b8b;font-size: 14px;"
+                                                                            class="text-dark"><?= $result['obt_marks_ext'] ?></td>
+                                                                        <td style="padding: 6px;border-left: 2px solid #8b8b8b;border-radius: 2px solid #8b8b8b;font-size: 14px;"
+                                                                            class="text-dark"><?= $result['Max_Marks'] ?></td>
+                                                                        <td style="padding: 6px;border-left: 2px solid #8b8b8b;border-radius: 2px solid #8b8b8b;font-size: 14px;"
+                                                                            class="text-dark"><?= ($result['total_obtain_ext_int']) ?></td>
+                                                                        <td style="padding: 6px;border-left: 2px solid #8b8b8b;border-radius: 2px solid #8b8b8b;font-size: 14px;"
+                                                                            class="text-dark"><?= ($result['grand_total_ext_int']) ?></td>
+                                                                    </tr>
+                                                            <?php } ?>
+                                                        </tbody>
                                             
-                                            </table>
-                                        </div>
-                                        <p class="text-center mt-3 mb-3"
-                                            style="text-align:center;font-size: 22px; font-weight: 900; color: #05519E;">
-                                            AGGREGATE
-                                            MARKS</p>
-                                        <div class="table-box-bottom">
-                                            <table class="text-center"
-                                                style="border-collapse: collapse;border: 2px solid #8b8b8b;width: 100%;">
-                                                <tbody>
-                                                    <tr style="color: #05519E; font-weight: 700;">
-                                                        <th
-                                                            style="border: 2px solid #8b8b8b;font-size:medium; font-weight:700">
-                                                            Marks</th>
-                                                        <th
-                                                            style="border: 2px solid #8b8b8b;font-size:medium; font-weight:700">
-                                                            GRAND TOTAL</th>
-                                                        <th
-                                                            style="border: 2px solid #8b8b8b;font-size:medium; font-weight:700">
-                                                            RESULT</th>
-                                                        <th
-                                                            style="border: 2px solid #8b8b8b;font-size:medium; font-weight:700">
-                                                            PERCENTAGE</th>
-                                                    </tr>
-                                                    <tr>
-                                                        <th style="border: 2px solid #8b8b8b;font-size:medium; font-weight:700"
-                                                            class="text-dark">Obtained
-                                                            Mark</th>
-                                                        <td style="border: 2px solid #8b8b8b;font-size:medium; font-weight:700"
-                                                            class="text-dark">
-                                                            <?= $row['total_obt'] ?>
-                                                        </td>
-                                                        <td rowspan="2"
-                                                            style="border: 2px solid #8b8b8b;font-size:medium; font-weight:700"
-                                                            class="text-dark">
-                                                            <?= $row['result_status'] ?>
-                                                        </td>
-                                                        <td rowspan="2"
-                                                            style="border: 2px solid #8b8b8b;font-size:medium; font-weight:700"
-                                                            class="text-dark">
-                                                            <?= $row['percentage'] ?>
-                                                        </td>
-                                                    </tr>
-                                                    <tr>
-                                                        <th style="border: 2px solid #8b8b8b;font-size:medium; font-weight:700"
-                                                            class="text-dark"> Maximum
-                                                            Mark</th>
-                                                        <td style="border: 2px solid #8b8b8b;font-size:medium; font-weight:700"
-                                                            class="text-dark">
-                                                            <?= $row['total_max'] ?>
-                                                        </td>
-                                                    </tr>
-                                                </tbody>
-                                            </table>
-                                        </div>
-                                        <div class="des">
-                                            <p class="p-0 m-0"
-                                                style="position: relative;font-size: 20px; top: 14px; right: 10px;color: #05519E;font-weight: 700;display: inline-block;">
-                                                <span class="top-heading-u"></span>Disclaimer :
-                                            </p>
-                                            <p
-                                                style="position: relative; top: 17px;color: #05519E;font-weight: 700;display: inline-block;">
-                                                <span class="top-heading-u"></span> The published result is provisional
-                                                only. Sanskaram
-                                                University is not responsible for any inadvertent error that may have crept
-                                                in the data
-                                                / results being published online.This is being published just for the
-                                                immediate
-                                                information to the examinees. The final mark sheet(s) issued by Sanskaram
-                                                University will
-                                                only be treated authentic &amp; final in this regard.
-                                            </p>
+                                                </table>
+                                            </div>
+                                            <p class="text-center mt-3 mb-3"
+                                                style="text-align:center;font-size: 22px; font-weight: 900; color: #05519E;">
+                                                AGGREGATE
+                                                MARKS</p>
+                                            <div class="table-box-bottom">
+                                                <table class="text-center"
+                                                    style="border-collapse: collapse;border: 2px solid #8b8b8b;width: 100%;">
+                                                    <tbody>
+                                                        <tr style="color: #05519E; font-weight: 700;">
+                                                            <th
+                                                                style="border: 2px solid #8b8b8b;font-size:medium; font-weight:700">
+                                                                Marks</th>
+                                                            <th
+                                                                style="border: 2px solid #8b8b8b;font-size:medium; font-weight:700">
+                                                                GRAND TOTAL</th>
+                                                            <th
+                                                                style="border: 2px solid #8b8b8b;font-size:medium; font-weight:700">
+                                                                RESULT</th>
+                                                            <th
+                                                                style="border: 2px solid #8b8b8b;font-size:medium; font-weight:700">
+                                                                PERCENTAGE</th>
+                                                        </tr>
+                                                        <tr>
+                                                            <th style="border: 2px solid #8b8b8b;font-size:medium; font-weight:700"
+                                                                class="text-dark">Obtained
+                                                                Mark</th>
+                                                            <td style="border: 2px solid #8b8b8b;font-size:medium; font-weight:700"
+                                                                class="text-dark">
+                                                                <?= $row['total_obt'] ?>
+                                                            </td>
+                                                            <td rowspan="2"
+                                                                style="border: 2px solid #8b8b8b;font-size:medium; font-weight:700"
+                                                                class="text-dark">
+                                                                <?= $row['result_status'] ?>
+                                                            </td>
+                                                            <td rowspan="2"
+                                                                style="border: 2px solid #8b8b8b;font-size:medium; font-weight:700"
+                                                                class="text-dark">
+                                                                <?= $row['percentage'] ?>
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <th style="border: 2px solid #8b8b8b;font-size:medium; font-weight:700"
+                                                                class="text-dark"> Maximum
+                                                                Mark</th>
+                                                            <td style="border: 2px solid #8b8b8b;font-size:medium; font-weight:700"
+                                                                class="text-dark">
+                                                                <?= $row['total_max'] ?>
+                                                            </td>
+                                                        </tr>
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                            <div class="des">
+                                                <p class="p-0 m-0"
+                                                    style="position: relative;font-size: 20px; top: 14px; right: 10px;color: #05519E;font-weight: 700;display: inline-block;">
+                                                    <span class="top-heading-u"></span>Disclaimer :
+                                                </p>
+                                                <p
+                                                    style="position: relative; top: 17px;color: #05519E;font-weight: 700;display: inline-block;">
+                                                    <span class="top-heading-u"></span> The published result is provisional
+                                                    only. Sanskaram
+                                                    University is not responsible for any inadvertent error that may have crept
+                                                    in the data
+                                                    / results being published online.This is being published just for the
+                                                    immediate
+                                                    information to the examinees. The final mark sheet(s) issued by Sanskaram
+                                                    University will
+                                                    only be treated authentic &amp; final in this regard.
+                                                </p>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
-                        </div>
-                        <div class="text-center no-print mb-4 mt-3">
-                            <button type="button" class="btn btn-primary" id="cmd" onclick="printDiv('contentpdf')">Download
-                                as
-                                PDF/Print</button>
-                        </div>
+                            <div class="text-center no-print mb-4 mt-3">
+                                <button type="button" class="btn btn-primary" id="cmd" onclick="printDiv('contentpdf')">Download
+                                    as
+                                    PDF/Print</button>
+                            </div>
                     <?php } else { ?>
-                        <div class="mt-5 mb-4 text-center" style="margin-top:220px;">
-                            <h5><?= $rows['msg']?></h5>
-                        </div>
+                            <div class="mt-5 mb-4 text-center" style="margin-top:220px;">
+                                <h5><?= $rows['msg'] ?></h5>
+                            </div>
                     <?php } ?>
                 </div>
 
@@ -408,24 +401,24 @@ require '../../includes/helpers.php';
         <script type="text/javascript" src="https://html2canvas.hertzen.com/dist/html2canvas.js"></script>
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
         <?php if (isset($_SESSION['Role']) && $_SESSION['Role'] == "Student") { ?>
-            <script type="text/javascript">
-                // $(document).ready(function () {
-                //     $("#year_semester").change(function () {
-                //         var year_sem = $("#year_semester").val();
+                <script type="text/javascript">
+                    // $(document).ready(function () {
+                    //     $("#year_semester").change(function () {
+                    //         var year_sem = $("#year_semester").val();
                         
-                //         window.location.href = '/student/examination/marksheet?studentId='+$_GET['studentId']+'&year_sem=' + year_sem;
-                //     });
-                // });
-            </script>
+                    //         window.location.href = '/student/examination/marksheet?studentId='+$_GET['studentId']+'&year_sem=' + year_sem;
+                    //     });
+                    // });
+                </script>
         <?php } else { ?>
-            <script type="text/javascript">
-                    $("#year_semester").change(function () {
-                        var year_sem = $("#year_semester").val();
+                <script type="text/javascript">
+                        $("#year_semester").change(function () {
+                            var year_sem = $("#year_semester").val();
                         
-                        window.location.href = '/student/examination/marksheet?studentId='+<?= $studentId ?>+'&year_sem=' + year_sem;
-                    });
+                            window.location.href = '/student/examination/marksheet?studentId='+<?= $studentId ?>+'&year_sem=' + year_sem;
+                        });
        
-            </script>
+                </script>
         <?php } ?>
         <script>
             function printDiv(divName) {

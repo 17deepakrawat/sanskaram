@@ -27,7 +27,6 @@ if (isset($_FILES['file'])) {
 
       foreach ($reader as $row) {
 
-
         $course = mysqli_real_escape_string($conn, trim($row[0]));
         $sub_course = mysqli_real_escape_string($conn, trim($row[1]));
         $enrollment = mysqli_real_escape_string($conn, $row[2]);
@@ -63,12 +62,20 @@ if (isset($_FILES['file'])) {
         $sub_course_id = $sub_course['ID'];
         $sub_course_name = $sub_course['Name'];
 
-        if ((empty($obt_int_marks) || $obt_int_marks == '' || $obt_int_marks == 0) && $_SESSION['university_id'] == UNIVERSITY_ID) {
+        if ((empty($obt_int_marks) || $obt_int_marks == '' || $obt_int_marks == 0 || isset($obt_int_marks)) && $_SESSION['university_id'] == UNIVERSITY_ID) {
           $checkres = $conn->query("SELECT marksheets.obt_marks_int FROM marksheets LEFT JOIN Syllabi on subject_id = Syllabi.ID  WHERE enrollment_no ='$enrollment' AND University_ID = " . $_SESSION['university_id'] . " AND Code = '$subject_code' AND Syllabi.Semester =  '" . $semester . "'  AND Course_ID = $course_id AND Sub_Course_ID = $sub_course_id");
           if ($checkres->num_rows > 0) {
             $obt_int_marks = $checkres->fetch_assoc()['obt_marks_int'];
           }
         }
+
+        $checkstudent = $conn->query("SELECT ID FROM Students WHERE Enrollment_No = '$enrollment'");
+
+        if ($checkstudent->num_rows == 0) {
+            $export_data[] = array_merge($row, ['Enrollment not found!']);
+            continue;
+        }
+
 
         $check_student_sub_course = $conn->query("SELECT Users.Code,Users.ID, Role FROM Students LEFT JOIN Users on Added_For= Users.ID WHERE Enrollment_No = '$enrollment' AND Sub_Course_ID = '$sub_course_id' AND Course_ID = '$course_id'");
         if ($check_student_sub_course->num_rows == 0) {

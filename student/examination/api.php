@@ -176,9 +176,9 @@ if ($student->num_rows > 0) {
 
     $Students_temps['Min_Duration'] = json_decode($Students_temps['Min_Duration'], true)[0];
 
-    //echo "<pre>";
-    //print_r($Students_temps);die;
-
+    
+    $Students_temps['logo'] = $_SESSION['university_logo']??"";
+ 
     echo json_encode(['status' => true, 'data' => $Students_temps]);
 
 } else {

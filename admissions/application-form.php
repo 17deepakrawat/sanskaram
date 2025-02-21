@@ -2015,7 +2015,7 @@
           url: '/app/application-form/duration?admission_type_id=' + admission_type_ids + '&sub_course_id=' + sub_course_ids + '&course_category=' + course_category + '&userId=' + user_id,
           type: 'GET',
           success: function (data) {
-            console.log(data);
+            // console.log(data);
             $('#duration').html(data);
             <?php
             if (!empty($id)) {
@@ -2278,7 +2278,7 @@
             }
           },
           onTabClick: function (activeTab, navigation, currentIndex, nextIndex) {
-            console.log(nextIndex, currentIndex);
+            // console.log(nextIndex, currentIndex);
             if (nextIndex <= currentIndex) {
               return;
             }
@@ -2291,7 +2291,7 @@
             return submitForm(index);
           },
           onPrevious: function (tab, navigation, index) {
-            console.log("previous");
+            // console.log("previous");
           },
           onInit: function () {
             $('#rootwizard ul').removeClass('nav-pills');
@@ -2339,7 +2339,7 @@
           error: function (data) {
             notification('danger', 'Server is not responding. Please try again later');
             $('#previous-button').click();
-            console.log(data);
+            // console.log(data);
           }
         });
       });
@@ -2367,7 +2367,7 @@
           error: function (data) {
             notification('danger', 'Server is not responding. Please try again later');
             $('#previous-button').click();
-            console.log(data);
+            // console.log(data);
           }
         });
       });
@@ -2395,7 +2395,7 @@
           error: function (data) {
             notification('danger', 'Server is not responding. Please try again later');
             $('#previous-button').click();
-            console.log(data);
+            // console.log(data);
           }
         });
       });
@@ -2423,7 +2423,7 @@
           },
           error: function (data) {
             notification('danger', 'Server is not responding. Please try again later');
-            console.log(data);
+            // console.log(data);
           }
         });
       });
