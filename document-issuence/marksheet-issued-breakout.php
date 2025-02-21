@@ -1,4 +1,10 @@
 <?php include($_SERVER['DOCUMENT_ROOT'] . '/includes/header-top.php'); ?>
+<style>
+    .badge-primary {
+    color: #fff !important;
+    background-color: #007bff !important;
+}
+</style>
 <?php include($_SERVER['DOCUMENT_ROOT'] . '/includes/header-bottom.php'); ?>
 <?php include($_SERVER['DOCUMENT_ROOT'] . '/includes/menu.php'); ?>
 <!-- START PAGE-CONTAINER -->
@@ -19,11 +25,11 @@
                             if (count($breadcrumbs) == $i) :
                             $active = "active";
                             $crumb = explode("?", $breadcrumbs[$i]);
-                            echo '<li class="breadcrumb-item ' . $active . '">' . $crumb[0] . '</li>';
+                            echo '<li class="breadcrumb-item ' . $active . '">' . ucwords($crumb[0]) . '</li>';
                             endif;
                         } ?>
                         <li>
-                            <span class="btn btn-primary cursor-pointer" onclick="showUnAssignDocketIdCenter()" style = "font-size:0.70rem;" data-toggle="tooltip" data-placement="top" title="Assign Docket_id">Select Center</span> 
+                            <span class="custom_add_button p-2 text-white cursor-pointer" onclick="showUnAssignDocketIdCenter()" style = "font-size:0.70rem;" data-toggle="tooltip" data-placement="top" title="Assign Docket_id">Select Center <i class="uil uil-users-alt ml-2"></i></span> 
                         </li>
                     </ol>
                     <!-- END BREADCRUMB -->
@@ -52,7 +58,7 @@
                         <div class="tab-pane active" id="all-marksheet">
                             <div class="row d-flex justify-content-end">
                                 <div class="col-md-2 d-flex justify-content-start">
-                                    <input type="text" id="all_marksheet_entry-search" class="form-control pull-right" placeholder="Search">
+                                    <input type="text" id="all_marksheet_entry-search" class="form-control pull-right custom_search_section" placeholder="Search">
                                 </div>
                             </div>
                             <div class="table-responsive">
@@ -74,7 +80,7 @@
                         <div class="tab-pane" id="not-dispatched">
                             <div class="row d-flex justify-content-end">
                                 <div class="col-md-2 d-flex justify-content-start">
-                                    <input type="text" id="not-dispatched-marksheet_entry-search" class="form-control pull-right" placeholder="Search">
+                                    <input type="text" id="not-dispatched-marksheet_entry-search" class="form-control pull-right custom_search_section" placeholder="Search">
                                 </div>
                             </div>
                             <div class="table-responsive">
@@ -96,7 +102,7 @@
                         <div class="tab-pane" id="dispatched">
                             <div class="row d-flex justify-content-end">
                                 <div class="col-md-2 d-flex justify-content-start">
-                                    <input type="text" id="dispatched-marksheet_entry-search" class="form-control pull-right" placeholder="Search">
+                                    <input type="text" id="dispatched-marksheet_entry-search" class="form-control pull-right custom_search_section" placeholder="Search">
                                 </div>
                             </div>
                             <div class="table-responsive">
@@ -165,7 +171,7 @@ var allMarksheetTableSetting = {
                 var edit = '<span class="badge badge-success cursor-pointer p-2" style="font-size:13px;">'+data+'</span>';
                 return edit;
             } else {
-                var edit = '<span class="badge badge-secondary cursor-pointer" onclick="checkForCenterDocketId(&#39;' + row.Center_id + '&#39;)">Assign Docket_Id</span>'
+                var edit = '<span class="badge badge-info cursor-pointer p-2" onclick="checkForCenterDocketId(&#39;' + row.Center_id + '&#39;)">Assign Docket_Id</span>'
                 return edit;
             }
         }
@@ -173,9 +179,9 @@ var allMarksheetTableSetting = {
             data: "upload_file",
             render : function(data,type,row) {
                 if (data != '') {
-                    var edit = '<a href="'+data+'" class="btn btn-primary btn-animated from-left" download><span style = "font-size:0.70rem;">Download</span><span class="hidden-block"><i class = "uil uil-file-download"></i></span></a>'; 
+                    var edit = '<a href="'+data+'" class="badge badge-success p-2 btn-animated from-left" download><span style = "font-size:0.70rem;">Download</span><span class="hidden-block"><i class = "uil uil-file-download"></i></span></a>'; 
                 } else {
-                    var edit = '<span class="text-primary cursor-pointer" onclick="uploadFile(&#39;' + row.Docket_Id + '&#39;)">Upload</span>';
+                    var edit = '<span class="badge badge-info p-2 cursor-pointer" onclick="uploadFile(&#39;' + row.Docket_Id + '&#39;)">Upload</span>';
                 }
                 return edit;
             }
@@ -183,7 +189,7 @@ var allMarksheetTableSetting = {
             data: "Dispatch_status",
             render : function(data,type,row) {
                 if(data == '1') {
-                    var edit = '<span class="badge badge-secondary cursor-pointer" onclick="fillDispatchDetails(&#39;' + row.Docket_Id + '&#39;)">Not Dispatched</span>';
+                    var edit = '<span class="badge badge-danger cursor-pointer p-2" onclick="fillDispatchDetails(&#39;' + row.Docket_Id + '&#39;)">Not Dispatched</span>';
                     return edit;
                 } else {
                     var edit = '<span class="badge badge-success cursor-pointer p-2" style = "font-size:0.70rem;" onclick = "viewDispatchedDetails(&#39;' + row.Docket_Id + '&#39;)">Dispatched on '+row.dispatch_date+'</span>';
@@ -241,7 +247,7 @@ var notDispatchedMarksheetTableSetting = {
                     var edit = '<span class="badge badge-success cursor-pointer p-2" style="font-size:13px;">'+data+'</span>';
                     return edit;
                 } else {
-                    var edit = '<span class="badge badge-secondary cursor-pointer" onclick="checkForCenterDocketId(&#39;' + row.Center_id + '&#39;)">Assign Docket_Id</span>'
+                    var edit = '<span class="badge badge-info p-2 cursor-pointer" onclick="checkForCenterDocketId(&#39;' + row.Center_id + '&#39;)">Assign Docket_Id</span>'
                     return edit;
                 }
             }
@@ -249,9 +255,9 @@ var notDispatchedMarksheetTableSetting = {
             data: "upload_file",
             render : function(data,type,row) {
                 if (data != '') {
-                    var edit = '<a href="'+data+'" class="btn btn-primary btn-animated from-left" download><span style = "font-size:0.70rem;">Download</span><span class="hidden-block"><i class = "uil uil-file-download"></i></span></a>';
+                    var edit = '<a href="'+data+'" class="badge badge-success p-2 btn-animated from-left" download><span style = "font-size:0.70rem;">Download</span><span class="hidden-block"><i class = "uil uil-file-download"></i></span></a>';
                 } else {
-                    var edit = '<span class="text-primary cursor-pointer" onclick="uploadFile(&#39;' + row.Docket_Id + '&#39;)">Upload</span>';
+                    var edit = '<span class="badge p-2 badge-info cursor-pointer" onclick="uploadFile(&#39;' + row.Docket_Id + '&#39;)">Upload</span>';
                 }
                 return edit;
             }
@@ -259,10 +265,10 @@ var notDispatchedMarksheetTableSetting = {
             data: "Dispatch_status",
             render : function(data,type,row) {
                 if(data == '1') {
-                    var edit = '<span class="badge badge-secondary cursor-pointer" onclick="fillDispatchDetails(&#39;' + row.Docket_Id + '&#39;)">Not Dispatched</span>';
+                    var edit = '<span class="badge badge-danger p-2 cursor-pointer" onclick="fillDispatchDetails(&#39;' + row.Docket_Id + '&#39;)">Not Dispatched</span>';
                     return edit;
                 } else {
-                    var edit = '<span class="badge badge-success cursor-pointer" onclick = "viewDispatchedDetails(&#39;' + row.Docket_Id + '&#39;)">Dispatched on '+row.dispatch_date+'</span>';
+                    var edit = '<span class="badge badge-success p-2 cursor-pointer" onclick = "viewDispatchedDetails(&#39;' + row.Docket_Id + '&#39;)">Dispatched on '+row.dispatch_date+'</span>';
                     return edit;
                 }
             }
@@ -317,7 +323,7 @@ var dispatchedMarkSheetTableSetting = {
                     var edit = '<span class="badge badge-success cursor-pointer p-2" style="font-size:13px;">'+data+'</span>';
                     return edit;
                 } else {
-                    var edit = '<span class="badge badge-secondary cursor-pointer" onclick="checkForCenterDocketId(&#39;' + row.Center_id + '&#39;)">Assign Docket_Id</span>'
+                    var edit = '<span class="badge badge-info p-2 cursor-pointer" onclick="checkForCenterDocketId(&#39;' + row.Center_id + '&#39;)">Assign Docket_Id</span>'
                     return edit;
                 }
             }
@@ -325,9 +331,9 @@ var dispatchedMarkSheetTableSetting = {
             data: "upload_file",
             render : function(data,type,row) {
                 if (data != '') {
-                    var edit = '<a href="'+data+'" class="btn btn-primary btn-animated from-left" download><span style = "font-size:0.70rem;">Download</span><span class="hidden-block"><i class = "uil uil-file-download"></i></span></a>';
+                    var edit = '<a href="'+data+'" class="btn btn-success p-2 btn-animated from-left" download><span style = "font-size:0.70rem;">Download</span><span class="hidden-block"><i class = "uil uil-file-download"></i></span></a>';
                 } else {
-                    var edit = '<span class="text-primary cursor-pointer" onclick="uploadFile(&#39;' + row.Docket_Id + '&#39;)">Upload</span>';
+                    var edit = '<span class="badge badge-info cursor-pointer" onclick="uploadFile(&#39;' + row.Docket_Id + '&#39;)">Upload</span>';
                 }
                 return edit;
             }
@@ -335,7 +341,7 @@ var dispatchedMarkSheetTableSetting = {
             data: "Dispatch_status",
             render : function(data,type,row) {
                 if(data == '1') {
-                    var edit = '<span class="badge badge-secondary cursor-pointer" onclick="fillDispatchDetails(&#39;' + row.Docket_Id + '&#39;)">Not Dispatched</span>';
+                    var edit = '<span class="badge badge-danger p-2 cursor-pointer" onclick="fillDispatchDetails(&#39;' + row.Docket_Id + '&#39;)">Not Dispatched</span>';
                     return edit;
                 } else {
                     var edit = '<span class="badge badge-success cursor-pointer p-2" style = "font-size:0.75rem;" onclick = "viewDispatchedDetails(&#39;' + row.Docket_Id + '&#39;)">Dispatched on '+row.dispatch_date+'</span>';

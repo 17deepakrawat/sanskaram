@@ -19,6 +19,12 @@
 .card-body {
   padding: 1.25rem !important;
 }
+.dataTables_wrapper .dataTables_paginate ul > li.active > a {
+  color: white !important;
+}
+b{
+  color: white !important;
+}
 </style>
 <?php include($_SERVER['DOCUMENT_ROOT'] . '/includes/header-bottom.php'); ?>
 <?php include($_SERVER['DOCUMENT_ROOT'] . '/includes/menu.php'); ?>
@@ -40,7 +46,7 @@
               if (count($breadcrumbs) == $i):
                 $active = "active";
                 $crumb = explode("?", $breadcrumbs[$i]);
-                echo '<li class="breadcrumb-item ' . $active . '">' . strtoupper($crumb[0]) . '</li>';
+                echo '<li class="breadcrumb-item ' . $active . '">' . ucwords($crumb[0]) . '</li>';
               endif;
             }
             ?>
@@ -60,14 +66,14 @@
             <div class="card-header">
               <div class="pull-right">
                 <div class="col-xs-12">
-                  <input type="text" id="notification-search" class="form-control pull-right" placeholder="Search">
+                  <input type="text" id="notification-search" class="form-control pull-right custom_search_section mt-2 mb-4" placeholder="Search">
                 </div>
               </div>
               <div class="clearfix"></div>
             </div>
             <div class="card-body">
-              <div class="table-responsive">
-                <table class="table table-hover nowrap" id="notification_table">
+              <div class="">
+                <table class="table table-hover nowrap " id="notification_table">
                   <thead>
                     <tr>
                       <th>Regarding</th>
@@ -115,12 +121,12 @@ var settings = {
     },{
       data: "Content", 
       render : function(data, type, row) {
-        return '<button type="btn" class = "btn btn-sm btn-primary" onclick="viewNotification('+row.ID+');"> view</button>';
+        return '<button type="btn" class = "badge badge-info border-0 p-2" onclick="viewNotification('+row.ID+');"> view <i class="uil uil-eye ml-1"></i></button>';
       }
     },{
       data : "document" , 
       render : function(data,type,row) {
-        return '<a href="'+data+'" target="_blank" download ">Download</a>';
+        return '<a href="'+data+'" target="_blank" download class="badge badge-success p-2" ">Download <i class="uil uil-down-arrow ml-2"></i></a>';
       } 
     }
   ],

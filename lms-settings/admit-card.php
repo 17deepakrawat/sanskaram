@@ -1,4 +1,32 @@
 <?php include($_SERVER['DOCUMENT_ROOT'] . '/includes/header-top.php'); ?>
+<style>
+  .select2-container .select2-selection {
+    border-radius: 10px;
+    height: 48px !important;
+    font-size: 17px;
+    font-family: system-ui;
+  }
+
+  .select2-container .select2-selection .select2-selection__arrow {
+    top: auto;
+    bottom: 11px;
+  }
+
+  .select2-container--open .select2-selection {
+    box-shadow: none;
+    border: 1px solid #2b303b !important;
+  }
+
+  .select2-results .select2-results__option--highlighted {
+    background-color: #55638d !important;
+    border-radius: 3px;
+    color: #ffffff !important;
+  }
+  .custom_seect1 {
+    height: 67px;
+    border-radius: 10px;
+}
+</style>
 <?php include($_SERVER['DOCUMENT_ROOT'] . '/includes/header-bottom.php'); ?>
 <?php include($_SERVER['DOCUMENT_ROOT'] . '/includes/menu.php'); ?>
 <!-- START PAGE-CONTAINER -->
@@ -18,7 +46,7 @@
               for ($i = 1; $i <= count($breadcrumbs); $i++) {
                 if (count($breadcrumbs) == $i) : $active = "active";
                   $crumb = explode("?", $breadcrumbs[$i]);
-                  echo '<li class="breadcrumb-item ' . $active . '">' . $crumb[0] . '</li>';
+                  echo '<li class="breadcrumb-item ' . $active . '">' . ucwords($crumb[0]) . '</li>';
                 endif;
               }
               ?>
@@ -35,10 +63,10 @@
       <div class=" container-fluid">
         <!-- BEGIN PlACE PAGE CONTENT HERE -->
         <div class="row">
-          <div class="col-md-6">
-            <div class="form-group form-group-default required">
+          <div class="col-md-3">
+            <div class="form-group custom_seect1 form-group-default required">
               <label>Course</label>
-              <select class="full-width" style="border: transparent;" id="course" onchange="getSemester(this.value); removeTable()">
+              <select class="full-width " style="border: transparent;" id="course" onchange="getSemester(this.value); removeTable()">
                 <option value="">Choose</option>
                 <?php
                 $condition = "";
@@ -58,8 +86,8 @@
               </select>
             </div>
           </div>
-          <div class="col-md-6">
-            <div class="form-group form-group-default required">
+          <div class="col-md-3">
+            <div class="form-group custom_seect1 form-group-default required">
               <label>Semester</label>
               <select class="full-width" style="border: transparent;" id="semester" onchange="getTable()">
                 <option value="">Choose</option>
@@ -76,7 +104,14 @@
     </div>
     <!-- END PAGE CONTENT -->
     <?php include($_SERVER['DOCUMENT_ROOT'] . '/includes/footer-top.php'); ?>
+
     <script type="text/javascript">
+      $(document).ready(function() {
+        $('#course').select2({
+          placeholder: "Choose Sub-Course"
+        })
+      })
+
       function getSemester(id) {
         $.ajax({
           url: '/app/subjects/semester?id=' + id,
@@ -98,7 +133,7 @@
             type: 'GET',
             success: function(data) {
               $('#admit_cards').html(data);
-            } 
+            }
           })
         } else {
           $('#subjects').html('');
@@ -112,14 +147,14 @@
 
     <script type="text/javascript">
       function downloadStudentAdmitCard(table, column, id) {
-      //   $.ajax({
-      //     url: '/app/upload/create?id=' + id + '&column=' + column + '&table=' + table,
-      //     type: 'GET',
-      //     success: function(data) {
-      //       $("#md-modal-content").html(data);
-      //       $("#mdmodal").modal('show');
-      //     }
-      //   })
+        //   $.ajax({
+        //     url: '/app/upload/create?id=' + id + '&column=' + column + '&table=' + table,
+        //     type: 'GET',
+        //     success: function(data) {
+        //       $("#md-modal-content").html(data);
+        //       $("#mdmodal").modal('show');
+        //     }
+        //   })
       }
     </script>
     <?php include($_SERVER['DOCUMENT_ROOT'] . '/includes/footer-bottom.php'); ?>

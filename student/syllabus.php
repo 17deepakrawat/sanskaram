@@ -11,6 +11,29 @@ unset($_SESSION['courseFilter']);
   thead tr th {
     font-weight: 700 !important;
   }
+  .select2-container .select2-selection {
+    border-radius: 10px;
+    height: 48px !important;
+    font-size: 17px;
+    font-family: system-ui;
+  }
+
+  .select2-container .select2-selection .select2-selection__arrow {
+    top: auto;
+    bottom: 11px;
+  }
+
+  .select2-container--open .select2-selection {
+    box-shadow: none;
+    border: 1px solid #2b303b !important;
+  }
+
+  .select2-results .select2-results__option--highlighted {
+    background-color: #55638d !important;
+    border-radius: 3px;
+    color: #ffffff !important;
+  }
+
 </style>
 <!-- START PAGE-CONTAINER -->
 <div class="page-container ">
@@ -30,7 +53,7 @@ unset($_SESSION['courseFilter']);
                 if (count($breadcrumbs) == $i):
                   $active = "active";
                   $crumb = explode("?", $breadcrumbs[$i]);
-                  echo '<li class="breadcrumb-item ' . $active . '">' . $crumb[0] . '</li>';
+                  echo '<li class="breadcrumb-item ' . $active . '">' . ucwords($crumb[0]) . '</li>';
                 endif;
               }
               if($_SESSION['Role']=='Student' && $_SESSION['university_id']==48){
@@ -65,7 +88,7 @@ unset($_SESSION['courseFilter']);
           <div class="card-header">
             <div class="row">
                 
-              <div class="col-md-3 m-b-10">
+              <div class="col-md-2 m-b-10">
            
                 <div class="form-group">
                   <select class="full-width" style="width:40px" data-init-plugin="select2" id="duration"
@@ -73,9 +96,9 @@ unset($_SESSION['courseFilter']);
                   </select>
                 </div>
               </div>
-              <div class="col-md-6"></div>
-              <div class="col-md-3">
-                <input type="text" id="users-search-table" class="form-control pull-right" placeholder="Search">
+              <div class="col-md-8"></div>
+              <div class="col-md-2">
+                <input type="text" id="users-search-table" class="form-control pull-right custom_search_section" placeholder="Search">
               </div>
             </div>
             <div class="clearfix"></div>

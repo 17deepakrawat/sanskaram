@@ -1,4 +1,18 @@
 <?php include($_SERVER['DOCUMENT_ROOT'] . '/includes/header-top.php'); ?>
+<style>
+  
+  .select2-container .select2-selection {
+    border-radius: 10px;
+    height: 48px !important;
+    font-size: 17px;
+    font-family: system-ui;
+  }
+
+  .select2-container .select2-selection .select2-selection__arrow {
+    top: auto;
+    bottom: 11px;
+  }
+</style>
 <?php include($_SERVER['DOCUMENT_ROOT'] . '/includes/header-bottom.php'); ?>
 <?php include($_SERVER['DOCUMENT_ROOT'] . '/includes/menu.php');
 include($_SERVER['DOCUMENT_ROOT'] . '/includes/helpers.php');
@@ -13,13 +27,13 @@ unset($_SESSION['filterByDuration']);
 unset($_SESSION['filterByVerticalType']);
 
 $sub_course_arr = new ClassHelper();
-$sub_courses = $sub_course_arr->getUserSubCourse($conn, $_SESSION['ID'], $_SESSION['Role'],$_SESSION['university_id']);
+$sub_courses = $sub_course_arr->getUserSubCourse($conn, $_SESSION['ID'], $_SESSION['Role'], $_SESSION['university_id']);
 function verticalTypeFunc()
 {
-    $verticalType = '<option value="">Select Vertical Type</option>';
-    $verticalType .= '<option value="1">Edtech Innovate</option>';
-    $verticalType .= '<option value="0">IITS LLP Paramedical</option>';
-    return $verticalType;
+  $verticalType = '<option value="">Select Vertical Type</option>';
+  $verticalType .= '<option value="1">Edtech Innovate</option>';
+  $verticalType .= '<option value="0">IITS LLP Paramedical</option>';
+  return $verticalType;
 }
 
 ?>
@@ -46,6 +60,9 @@ function verticalTypeFunc()
                 endif;
               }
               ?>
+              <button class="custom_add_button text-white" aria-label="" title="" data-toggle="tooltip"
+                data-original-title="Export Internal Marks" onclick="exportData()">Export<i class="uil uil-down-arrow ml-2"></i>
+              </button>
             </ol>
             <!-- END BREADCRUMB -->
 
@@ -58,44 +75,35 @@ function verticalTypeFunc()
         <!-- BEGIN PlACE PAGE CONTENT HERE -->
         <div class="card card-transparent">
           <div class="card-header">
-   
-            <div class="row">
-              <div class="col-md-3 m-b-10">
-                <div class="form-group">
-                  <select class="full-width" style="width:40px" data-init-plugin="select2" id="sub_courses"
-                    onchange="addFilter(this.value, 'sub_courses')" data-placeholder="Choose Program">
-                    <option value="">Choose Program</option>
-                    <?php echo $sub_courses; 
-                    ?>
-                  </select>
+
+            <div class="row justify-content-between">
+              <div class="col-md-8 m-b-10">
+                <div class=" d-flex flex-row">
+                  <div class="form-group w-25 mr-3">
+                    <select class="full-width" style="width:40px" data-init-plugin="select2" id="sub_courses"
+                      onchange="addFilter(this.value, 'sub_courses')" data-placeholder="Choose Program">
+                      <option value="">Choose Program</option>
+                      <?php echo $sub_courses;
+                      ?>
+                    </select>
+                  </div>
+                  <div class="form-group w-25">
+                    <select class="full-width" style="width:40px" data-init-plugin="select2" id="duration"
+                      onchange="addFilter(this.value, 'duration')" data-placeholder="Choose Duration">
+                      <option value="">Choose Duration</option>
+                    </select>
+                  </div>
                 </div>
               </div>
-            
-              <div class="col-md-3 m-b-10">
-                <div class="form-group">
-                  <select class="full-width" style="width:40px" data-init-plugin="select2" id="duration"
-                    onchange="addFilter(this.value, 'duration')" data-placeholder="Choose Duration">
-                    <option value="">Choose Duration</option>
-                  </select>
-                </div>
-              </div>
-
-
-                <div class="col-md-3">
-                <button class="btn btn-info" aria-label="" title="" data-toggle="tooltip"
-                  data-original-title="Export Internal Marks" onclick="exportData()"><i class="uil uil-down-arrow"></i>
-                  Export</button>
-              </div>
-            
-              <div class="col-md-3">
-                <input type="text" id="users-search-table" class="form-control pull-right" placeholder="Search">
+              <div class="col-md-2">
+                <input type="text" id="users-search-table" class="form-control pull-right custom_search_section" placeholder="Search">
               </div>
             </div>
             <div class="clearfix"></div>
           </div>
 
           <div class="card-body">
-            <div class="table-responsive">
+            <div class="">
               <table class="table table-hover nowrap" id="users-table">
                 <thead>
                   <tr>
@@ -105,7 +113,7 @@ function verticalTypeFunc()
                     <th>Sub-Course Name</th>
                     <th>Duration</th>
                     <th>Centre Name</th>
-                    <th>Action</th>
+                    <th class="text-center">Action</th>
                   </tr>
                 </thead>
               </table>
@@ -121,7 +129,7 @@ function verticalTypeFunc()
     <!-- END PAGE CONTENT -->
     <?php include($_SERVER['DOCUMENT_ROOT'] . '/includes/footer-top.php'); ?>
     <script type="text/javascript">
-      $(function () {
+      $(function() {
         $("#vartical_type").select2({
           placeholder: "Choose Vertical Type",
         });
@@ -139,36 +147,36 @@ function verticalTypeFunc()
             'url': '/app/results/internl-marks-server'
           },
           'columns': [{
-            data: "full_name",
-          },
+              data: "full_name",
+            },
 
-          {
-            data: "Unique_ID",
-          },
-          {
-            data: "Enrollment_No",
-          },
-          {
-            data: "sub_course_name",
-          },
+            {
+              data: "Unique_ID",
+            },
+            {
+              data: "Enrollment_No",
+            },
+            {
+              data: "sub_course_name",
+            },
 
-          {
-            data: "Duration",
-          
-          },
-          {
-            data: "user_name",
-          },
+            {
+              data: "Duration",
 
-          {
-            data: "ID",
-            "render": function (data, type, row) {
-              var intMarkButton = '<button class="btn btn-success cursor-pointer" title="Obtain ' + marks_type + ' Marks" onclick="obtExtMarks(\'' + row.Enrollment_No + '\',\'' + row.Duration + '\',\'' + row.user_code + '\')" ><b>Obtain ' + marks_type + ' Marks</b></button>';
-              return '<div class="button-list text-end">\
+            },
+            {
+              data: "user_name",
+            },
+
+            {
+              data: "ID",
+              "render": function(data, type, row) {
+                var intMarkButton = '<button class="badge border-0  p-2 badge-success cursor-pointer" title="Obtain ' + marks_type + ' Marks" onclick="obtExtMarks(\'' + row.Enrollment_No + '\',\'' + row.Duration + '\',\'' + row.user_code + '\')" ><span style="font-size: 13px;">Obtain ' + marks_type + ' Marks <i class="uil uil-file"></i></span></button>';
+                return '<div class="button-list text-end">\
               ' + intMarkButton + '\
             </div>'
-            }
-          },
+              }
+            },
 
           ],
           "sDom": "<t><'row'<p i>>",
@@ -180,7 +188,7 @@ function verticalTypeFunc()
           },
           "aaSorting": [],
           "iDisplayLength": 25,
-          "drawCallback": function (settings) {
+          "drawCallback": function(settings) {
             $('[data-toggle="tooltip"]').tooltip();
           },
         };
@@ -188,7 +196,7 @@ function verticalTypeFunc()
         table.dataTable(settings);
 
         // search box for table
-        $('#users-search-table').keyup(function () {
+        $('#users-search-table').keyup(function() {
           table.fnFilter($(this).val());
         });
 
@@ -198,14 +206,19 @@ function verticalTypeFunc()
         $.ajax({
           url: '/app/results/create-internal-marks',
           type: 'POST',
-          data: { enroll: enroll, current_duration: duration, user_code: user_code },
-          success: function (data) {
+          data: {
+            enroll: enroll,
+            current_duration: duration,
+            user_code: user_code
+          },
+          success: function(data) {
             $('#lg-modal-content').html(data);
             $('#lgmodal').modal('show');
             // }
           }
         })
       }
+
       function addFilter(id, by) {
         $.ajax({
           url: '/app/applications/filter',
@@ -215,7 +228,7 @@ function verticalTypeFunc()
             by
           },
           dataType: 'json',
-          success: function (data) {
+          success: function(data) {
             if (by == "sub_courses") {
               getDuration(id);
             }
@@ -230,9 +243,11 @@ function verticalTypeFunc()
       function getDuration(id) {
         $.ajax({
           url: '/app/subjects/get-duration',
-          data: { id: id },
+          data: {
+            id: id
+          },
           type: 'POST',
-          success: function (data) {
+          success: function(data) {
             $("#duration").html(data);
             // addFilter(id, 'duration');
           }

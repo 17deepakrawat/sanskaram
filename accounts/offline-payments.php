@@ -93,7 +93,7 @@
            </div>
            <div class="card-body">
              <div class="">
-               <table class="table table-hover nowrap table-responsive" id="payments-table">
+               <table class="table table-hover nowrap " id="payments-table">
                  <thead>
                    <tr>
                      <th>File</th>

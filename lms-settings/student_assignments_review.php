@@ -1,4 +1,17 @@
 <?php include($_SERVER['DOCUMENT_ROOT'] . '/includes/header-top.php'); ?>
+<style>
+  .select2-container .select2-selection {
+    border-radius: 10px;
+    height: 48px !important;
+    font-size: 17px;
+    font-family: system-ui;
+  }
+
+  .select2-container .select2-selection .select2-selection__arrow {
+    top: auto;
+    bottom: 11px;
+  }
+</style>
 <?php include($_SERVER['DOCUMENT_ROOT'] . '/includes/header-bottom.php'); ?>
 <?php include($_SERVER['DOCUMENT_ROOT'] . '/includes/menu.php'); ?>
 <div class="page-container ">
@@ -13,9 +26,28 @@
   unset($_SESSION['filterBySemesterdata']);
   ?>
   <div class="page-content-wrapper ">
-    <div class="content">
+    <!-- START PAGE CONTENT -->
+    <div class="content ">
+      <!-- START JUMBOTRON -->
       <div class="jumbotron" data-pages="parallax">
-        <div class=" container-fluid sm-p-l-0 sm-p-r-0">
+        <div class=" container-fluid   sm-p-l-0 sm-p-r-0">
+          <div class="inner">
+            <!-- START BREADCRUMB -->
+            <ol class="breadcrumb d-flex flex-wrap justify-content-between align-self-start">
+              <?php $breadcrumbs = array_filter(explode("/", $_SERVER['REQUEST_URI']));
+              for ($i = 1; $i <= count($breadcrumbs); $i++) {
+                if (count($breadcrumbs) == $i) : $active = "active";
+                  $crumb = explode("?", $breadcrumbs[$i]);
+                  echo '<li class="breadcrumb-item ' . $active . '">' . 'Student Assignments Review' . '</li>';
+                endif;
+              }
+              ?>
+              <div>
+              </div>
+              <button class="custom_add_button" aria-label="Add bulk Download" data-toggle="tooltip" data-placement="top" title="Add bulk Download" onclick="add('zip_bulk_download','md')">Bulk Assignments <i class="uil uil-file-alt ml-2"></i></button>
+            </ol>
+            <!-- END BREADCRUMB -->
+          </div>
         </div>
       </div>
       <div class=" container-fluid">
@@ -53,9 +85,6 @@
                   </select>
                 </div>
               </div>
-
-
-
               <div class="col-md-2 m-b-10">
                 <div class="form-group">
                   <select class="full-width" style="width:40px" data-init-plugin="select2" id="subcourse_id_filter" name="subcourse_id" onchange="addFilter(this.value,'sub_courses')" data-placeholder="Choose SubCourses Types">
@@ -75,10 +104,6 @@
                   </select>
                 </div>
               </div>
-
-
-
-
               <div class="col-md-2 m-b-10">
                 <div class="form-group">
                   <select class="full-width" style="width:40px" data-init-plugin="select2" id="semef" name="seme" onchange="addFilter(this.value,'semesterdata')" data-placeholder="Choose Semester">
@@ -100,10 +125,6 @@
                   </select>
                 </div>
               </div>
-
-
-
-
               <div class="col-md-2 m-b-10">
                 <div class="form-group">
                   <!-- <label for="subject">Subject</label> -->
@@ -112,7 +133,6 @@
                   </select>
                 </div>
               </div>
-
               <div class="col-md-2 m-b-10">
                 <div class="form-group">
                   <select class="full-width" style="width:40px" data-init-plugin="select2" id="users" onchange="addFilter(this.value, 'users')" data-placeholder="Choose Center/Sub-Center">
@@ -131,9 +151,6 @@
                   </select>
                 </div>
               </div>
-
-
-
               <div class="col-md-2 m-b-10">
                 <div class="form-group">
                   <select class="full-width" style="width:40px" data-init-plugin="select2" id="users" onchange="addFilter(this.value, 'assignmentstatus')" data-placeholder="Choose Assignment Status">
@@ -144,43 +161,23 @@
                 </div>
               </div>
             </div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
             <div class="pull-right">
               <div class="col-md-2 m-b-10">
                 <div class="form-group">
-                  <button class="btn btn-lg btn-danger" aria-label="Add bulk Download" data-toggle="tooltip" data-placement="top" title="Add bulk Download" onclick="add('zip_bulk_download','md')">Bulk Assignments</button>
+                  <!-- <button class="btn btn-lg btn-danger" aria-label="Add bulk Download" data-toggle="tooltip" data-placement="top" title="Add bulk Download" onclick="add('zip_bulk_download','md')">Bulk Assignments</button> -->
                 </div>
               </div>
               <div class="row">
-
                 <div class="col-xs-7" style="margin-right: 10px;">
-                  <input type="text" id="e-book-search-table" class="form-control pull-right p-2 fw-bold" placeholder="Search">
+                  <input type="text" id="e-book-search-table" class="form-control pull-right p-2 fw-bold custom_search_section" placeholder="Search">
                 </div>
               </div>
             </div>
             <div class="clearfix"></div>
           </div>
           <div class="card-body">
-            <div class="table-responsive">
-              <table class="table table-hover nowrap" id="students-table">
+            <div class="">
+              <table class="table table-hover nowrap table-responsive" id="students-table">
                 <thead>
                   <tr>
                     <th>Vertical Based</th>
@@ -308,7 +305,7 @@
                       '&student_name=' + encodeURIComponent(row.student_name) +
                       '&enrollment_no=' + encodeURIComponent(row.enrollment_no) +
                       '&subject_name=' + encodeURIComponent(row.subject_name);
-                    fileLinks += '<a href="' + zipLink + '" class="btn btn-danger btn-sm" download>Download Assignments</a> ';
+                    fileLinks += '<a href="' + zipLink + '" class=" badge badge-success p-2" download>Download Assignments</a> ';
                   }
                 }
                 return fileLinks;
@@ -319,7 +316,7 @@
               render: function(data, type, full, meta) {
                 if (full.assignment_status && full.assignment_status === 'CREATED') {
                   if (full.uploaded_type !== 'Manual' && full.uploaded_type !== 'Online') {
-                    var buttonHtml = '<button class="btn btn-primary btn-block" onclick="opensolution(\'' + full.student_id + '\', \'' + full.subject_id + '\', \'' + full.assignment_id + '\')">Manual</button>';
+                    var buttonHtml = '<button class="badge badge-info p-2 border-0" onclick="opensolution(\'' + full.student_id + '\', \'' + full.subject_id + '\', \'' + full.assignment_id + '\')">Manual</button>';
                     return buttonHtml;
                   }
                 }
@@ -351,10 +348,10 @@
                       row.eva_status === "Not Submitted"
                     ) {
                       var sub_id = row.subject_id;
-                      buttonHtml += '<i class="btn btn-success btn-block" onclick="openEditModal(\'' + data + '\',\'' + sub_id + '\')">Edit Result</i>';
+                      buttonHtml += '<i class="badge p-2 badge-primary btn-block" onclick="openEditModal(\'' + data + '\',\'' + sub_id + '\')">Edit Result</i>';
                     } else {
                       var subj = row.subject_id;
-                      buttonHtml += '<i class="btn btn-warning btn-block" onclick="openModal(\'' + data + '\',\'' + subj + '\')">Set Result</i>';
+                      buttonHtml += '<i class="badge p-2 badge-warning btn-block" onclick="openModal(\'' + data + '\',\'' + subj + '\')">Set Result</i>';
                     }
                   }
                 }

@@ -11,6 +11,18 @@ unset($_SESSION['usersFilter']);
   thead tr th {
     font-weight: 700 !important;
   }
+  
+  .select2-container .select2-selection {
+    border-radius: 10px;
+    height: 48px !important;
+    font-size: 17px;
+    font-family: system-ui;
+  }
+
+  .select2-container .select2-selection .select2-selection__arrow {
+    top: auto;
+    bottom: 11px;
+  }
 </style>
 <!-- START PAGE-CONTAINER -->
 <div class="page-container ">
@@ -30,12 +42,12 @@ unset($_SESSION['usersFilter']);
                 if (count($breadcrumbs) == $i):
                   $active = "active";
                   $crumb = explode("?", $breadcrumbs[$i]);
-                  echo '<li class="breadcrumb-item ' . $active . '">' . $crumb[0] . '</li>';
+                  echo '<li class="breadcrumb-item ' . $active . '">' . ucwords($crumb[0]) . '</li>';
                 endif;
               }
               ?>
               <div>
-                <button class="btn btn-link" aria-label="" title="" data-toggle="tooltip" data-original-title="Upload"
+                <button class="custom_add_button" aria-label="" title="" data-toggle="tooltip" data-original-title="Upload"
                   onclick="upload('datesheets', 'lg')"> <i class="uil uil-export"></i></button>
               </div>
             </ol>
@@ -74,9 +86,9 @@ unset($_SESSION['usersFilter']);
                   </select>
                 </div>
               </div>
-              <div class="col-md-3"></div>
-              <div class="col-md-3">
-                <input type="text" id="users-search-table" class="form-control pull-right" placeholder="Search">
+              <div class="col-md-4"></div>
+              <div class="col-md-2">
+                <input type="text" id="users-search-table" class="form-control pull-right custom_search_section" placeholder="Search">
               </div>
             </div>
             <div class="clearfix"></div>

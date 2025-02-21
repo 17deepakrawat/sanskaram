@@ -8,8 +8,11 @@ if (isset($_POST['table']) && isset($_POST['id'])) {
   $table = str_replace('-', '_', $table);
 
   $column = "Status";
+  echo "<pre>";
+  print_r($_POST);
   if (isset($_POST['column']) && !empty($_POST['column'])) {
     $column = $_POST['column'];
+  
   }
   $inputStatus=null;
   if (isset($_POST['status']) && !empty($_POST['status'])) {
@@ -47,9 +50,9 @@ if (isset($_POST['table']) && isset($_POST['id'])) {
     }
     //status update
     if ($status[$column] == 1) {
-      $update = $conn->query("UPDATE $table SET $column = 0 WHERE ID = $id OR id = $id");
+      $update = $conn->query("UPDATE $table SET $column = 0 WHERE (ID = $id OR id = $id)");
     } else {
-      $update = $conn->query("UPDATE $table SET $column = 1 WHERE ID = $id OR id = $id");
+      $update = $conn->query("UPDATE $table SET $column = 1 WHERE (ID = $id OR id = $id)");
     }
    
     if ($update) {

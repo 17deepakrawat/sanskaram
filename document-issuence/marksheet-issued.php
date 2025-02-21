@@ -19,11 +19,11 @@
                 if (count($breadcrumbs) == $i) :
                   $active = "active";
                   $crumb = explode("?", $breadcrumbs[$i]);
-                  echo '<li class="breadcrumb-item ' . $active . '">' . $crumb[0] . '</li>';
+                  echo '<li class="breadcrumb-item ' . $active . '">' . ucwords($crumb[0]) . '</li>';
                 endif;
               } ?>
               <div>
-                <button class="btn btn-link" aria-label="" title="" data-toggle="tooltip" data-original-title="Upload" onclick="add('document-issuence/marksheet', 'lg')"> <i class="uil uil-export"></i></button>
+                <button class="custom_add_button" aria-label="" title="" data-toggle="tooltip" data-original-title="Upload" onclick="add('document-issuence/marksheet', 'lg')"> <i class="uil uil-export"></i></button>
               </div>
             </ol>
             <!-- END BREADCRUMB -->
@@ -38,7 +38,7 @@
           <div class="card-header">
             <div class="pull-right">
               <div class="col-xs-12">
-                <input type="text" id="users-search-table" class="form-control pull-right" placeholder="Search">
+                <input type="text" id="users-search-table" class="form-control pull-right custom_search_section" placeholder="Search">
               </div>
             </div>
             <div class="clearfix"></div>
@@ -98,16 +98,16 @@
             data: "Docket_Id",
             render : function(data,type,row) {
               if(data == null) {
-                return "<div class = 'text-danger'><b>Not Assign</b></div>";
+                return "<div class = 'badge badge-danger'>Not Assign</div>";
               } else {
-                return data;
+                return "<div class='badge badge-success'>" + data + "</div>";
               }
             }
           },{
             data : "Dispatch_status",
             render : function(data,type,row) {
               if(data == '1') {
-                var edit = '<span class="badge badge-secondary cursor-pointer">Not Dispatched</span>';
+                var edit = '<span class="badge badge-danger cursor-pointer">Not Dispatched</span>';
                 return edit;
               } else {
                 var edit = '<span class="badge badge-success cursor-pointer">Dispatched</span>';

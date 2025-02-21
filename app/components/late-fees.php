@@ -21,10 +21,10 @@
             <table class="table table-hover nowrap" id="tableLateFees">
               <thead>
                 <tr>
-                  <th>Name</th>    
+                  <th>Name</th>
                   <th>For</th>
                   <th>Fee</th>
-                  <th>Is Late Fee?</th>    
+                  <th>Is Late Fee?</th>
                   <th>Start Date</th>
                   <th>End Date</th>
                   <th>Exceptions</th>
@@ -57,13 +57,13 @@
     'columns': [{
         data: "Name"
       },
-	  {
+      {
         data: "For_Students"
       },
       {
         data: "Fee"
       },
-	  {
+      {
         data: "IsLateFee"
       },
       {
@@ -81,23 +81,29 @@
       {
         data: "Show_Popup",
         "render": function(data, type, row) {
-          var active = data == 1 ? 'Active' : 'Inactive';
+          var active = data == 1 ?
+            '<span class="badge badge-success">Active</span>' :
+            '<span class="badge badge-danger">Inactive</span>';
           var checked = data == 1 ? 'checked' : '';
+
           return '<div class="form-check form-check-inline switch switch-lg success">\
-            <input onclick="changePopupStatus( \'' + row.ID + '\');" type="checkbox" ' + checked + ' id="popup-status-switch-' + row.ID + '">\
-            <label for="popup-status-switch-' + row.ID + '">' + active + '</label>\
-          </div>';
+      <input onclick="changePopupStatus(\'' + row.ID + '\');" type="checkbox" ' + checked + ' id="popup-status-switch-' + row.ID + '">\
+      <label for="popup-status-switch-' + row.ID + '"> ' + active + '</label>\
+    </div>';
         }
       },
       {
         data: "Status",
         "render": function(data, type, row) {
-          var active = data == 1 ? 'Active' : 'Inactive';
+          var active = data == 1 ?
+            '<span class="badge badge-success">Active</span>' :
+            '<span class="badge badge-danger">Inactive</span>';
           var checked = data == 1 ? 'checked' : '';
+
           return '<div class="form-check form-check-inline switch switch-lg success">\
-            <input onclick="changeComponentStatus(\'Late_Fees\', \'LateFees\', \'' + row.ID + '\');" type="checkbox" ' + checked + ' id="late-fee-status-switch-' + row.ID + '">\
-            <label for="late-fee-status-switch-' + row.ID + '">' + active + '</label>\
-          </div>';
+      <input onclick="changeComponentStatus(\'Late_Fees\', \'LateFees\', \'' + row.ID + '\');" type="checkbox" ' + checked + ' id="late-fee-status-switch-' + row.ID + '">\
+      <label for="late-fee-status-switch-' + row.ID + '"> ' + active + '</label>\
+    </div>';
         }
       }
     ],

@@ -3,7 +3,7 @@
 <?php include($_SERVER['DOCUMENT_ROOT'] . '/includes/menu.php'); ?>
 <!-- START PAGE-CONTAINER -->
 <div class="page-container ">
-  <?php include($_SERVER['DOCUMENT_ROOT'] . '/includes/topbar.php'); 
+  <?php include($_SERVER['DOCUMENT_ROOT'] . '/includes/topbar.php');
   unset($_SESSION['filterByVerticalType']);
   ?>
   <!-- START PAGE CONTENT WRAPPER -->
@@ -27,14 +27,14 @@
                 if (count($breadcrumbs) == $i):
                   $active = "active";
                   $crumb = explode("?", $breadcrumbs[$i]);
-                  echo '<li class="breadcrumb-item ' . $active . '">' . $crumb[0] . '</li>';
+                  echo '<li class="breadcrumb-item ' . $active . '">' . ucwords($crumb[0]) . '</li>';
                 endif;
               }
               ?>
               <?php if ($_SESSION['Role'] == 'Administrator') { ?>
                 <div>
 
-                  <button class="btn btn-primary p-2 " data-toggle="tooltip" data-original-title="Bulk import"
+                  <button class="custom_add_button" data-toggle="tooltip" data-original-title="Bulk import"
                     onclick="upload('results', 'lg')"> <i class="uil uil-upload"></i></button>
                 </div>
               <?php } ?>
@@ -52,16 +52,16 @@
         <div class="card card-transparent">
           <div class="card-header">
             <div class=" row ">
-            
-              <div class="col-md-9"></div>
-              <div class="col-md-3 pull-right">
-                <input type="text" id="courses-search-table" class="form-control pull-right" placeholder="Search">
+
+              <div class="col-md-10"></div>
+              <div class="col-md-2 pull-right">
+                <input type="text" id="courses-search-table" class="form-control pull-right custom_search_section" placeholder="Search">
               </div>
             </div>
             <div class="clearfix"></div>
           </div>
           <div class="card-body">
-            <div class="table-responsive">
+            <div class="">
               <table class="table table-hover nowrap" id="courses-table">
                 <thead>
                   <tr>
@@ -87,7 +87,7 @@
     <!-- END PAGE CONTENT -->
     <?php include($_SERVER['DOCUMENT_ROOT'] . '/includes/footer-top.php'); ?>
     <script type="text/javascript">
-      $(function () {
+      $(function() {
         var role = '<?= $_SESSION['Role'] ?>';
         var show = role == 'Administrator' ? true : false;
         var table = $('#courses-table');
@@ -100,46 +100,48 @@
             'url': '/app/results/server'
           },
           'columns': [{
-            data: "student_name"
-          },
-          {
-            data: "Unique_ID"
-          },
-          {
-            data: "Enrollment_No"
-          },
-          // {
-          //   data: "duration"
-          // },
-          {
-            data: "subcourse_name"
-          },
-          {
-            data: "published_on",
-            visible: show
-          },
-          {
-            data: "ID",
-            "render": function (data, type, row) {
-              return '<div class="button-list">\
-                <a href="/student/examination/marksheet?studentId='+ row.stu_id + '" target="_blank"><i class="uil uil-eye icon-xs cursor-pointer" target="_blank"></i></a>\
+              data: "student_name"
+            },
+            {
+              data: "Unique_ID"
+            },
+            {
+              data: "Enrollment_No"
+            },
+            // {
+            //   data: "duration"
+            // },
+            {
+              data: "subcourse_name"
+            },
+            {
+              data: "published_on",
+              visible: show
+            },
+            {
+              data: "ID",
+              "render": function(data, type, row) {
+                return '<div class="button-list">\
+                <a href="/student/examination/marksheet?studentId=' + row.stu_id + '" target="_blank"><i class="uil uil-eye icon-xs cursor-pointer" target="_blank"></i></a>\
               </div>'
+              },
+              visible: ['Administrator', 'University Head', 'Center', 'Sub-Center'].includes(role) ? true : false
             },
-            visible: ['Administrator', 'University Head', 'Center', 'Sub-Center'].includes(role) ? true : false
-          },
-          {
-            data: "Exam",
-            "render": function (data, type, row) {
-              var active = data == 1 ? 'Active' : 'Inactive';
-              var checked = data == 1 ? 'checked' : '';
-              return '<div class="form-check form-check-inline switch switch-lg success">\
-                        <input onclick="changeStatus(\'Students\', &#39;' + row.ID + '&#39;, \'Exam\')" type="checkbox" ' + checked + ' id="status-switch-' + row.ID + '">\
-                        <label for="status-switch-' + row.ID + '">' + active + '</label>\
-                      </div>';
-            },
-            visible: ['Administrator', 'University Head'].includes(role) ? true : false
+            {
+              data: "Exam",
+              "render": function(data, type, row) {
+                var active = data == 1 ?
+                  '<span class="badge badge-success">Active</span>' :
+                  '<span class="badge badge-danger">Inactive</span>';
+                var checked = data == 1 ? 'checked' : '';
 
-          },
+                return '<div class="form-check form-check-inline switch switch-lg success">' +
+                  '<input onclick="changeStatus(\'Students\', \'' + row.ID + '\', \'Exam\')" type="checkbox" ' + checked + ' id="status-switch-' + row.ID + '">' +
+                  '<label for="status-switch-' + row.ID + '" class="ms-2">' + active + '</label>' +
+                  '</div>';
+              },
+              visible: ['Administrator', 'University Head'].includes(role) ? true : false
+            },
 
           ],
           "sDom": "<t><'row'<p i>>",
@@ -156,7 +158,7 @@
         table.dataTable(settings);
 
         // search box for table
-        $('#courses-search-table').keyup(function () {
+        $('#courses-search-table').keyup(function() {
           table.fnFilter($(this).val());
         });
 
@@ -174,13 +176,12 @@
             by
           },
           dataType: 'json',
-          success: function (data) {
+          success: function(data) {
             if (data.status) {
               $('.table').DataTable().ajax.reload(null, false);
             }
           }
         })
       }
-     
     </script>
     <?php include($_SERVER['DOCUMENT_ROOT'] . '/includes/footer-bottom.php'); ?>

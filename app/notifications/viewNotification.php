@@ -30,7 +30,7 @@ if(isset($_REQUEST['id']) && !empty($_REQUEST['id'])) {
             <?= $notification_details['Message'] ?>
         </p>
         <?php if (!empty($notification_details['attachment'])) { ?>
-            <a href="<?= $notification_details['attachment'] ?>" target="_blank" download="<?= $notification_details['regarding'] ?>">Download</a>
+            <a href="<?= $notification_details['attachment'] ?>" class="badge badge-success p-2" target="_blank" download="<?= $notification_details['regarding'] ?>">Download <i class="uil uil-down-arrow ml-2"></i></a>
         <?php } ?>
     </div>
 </div>

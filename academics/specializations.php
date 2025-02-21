@@ -54,7 +54,7 @@
             <div class="clearfix"></div>
           </div>
           <div class="card-body">
-            <div class="table-responsive">
+            <div class="">
               <table class="table table-hover nowrap" id="sub-courses-table">
                 <thead>
                   <tr>

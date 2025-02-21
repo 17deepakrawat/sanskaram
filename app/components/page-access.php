@@ -53,46 +53,62 @@
     },
     'columns': [  
       { data: "Name"},
-      { data: "Inhouse",
-        "render": function(data, type, row){
-          var active = data==1 ? 'Active' : 'Inactive';
-          var checked = data==1 ? 'checked' : '';
+      {
+        data: "Inhouse",
+        "render": function(data, type, row) {
+          var active = data == 1 ?
+            '<span class="badge badge-success">Active</span>' :
+            '<span class="badge badge-danger">Inactive</span>';
+          var checked = data == 1 ? 'checked' : '';
+
           return '<div class="form-check form-check-inline switch switch-lg success">\
-            <input onclick="changeInhouseStatus(\''+row.ID+'\');" type="checkbox" '+checked+' id="inhouse-status-switch-'+row.ID+'">\
-            <label for="inhouse-status-switch-'+row.ID+'">'+active+'</label>\
-          </div>';
+      <input onclick="changeInhouseStatus(\'' + row.ID + '\');" type="checkbox" ' + checked + ' id="inhouse-status-switch-' + row.ID + '">\
+      <label for="inhouse-status-switch-' + row.ID + '"> ' + active + '</label>\
+    </div>';
         }
       },
-      { data: "Center",
-        "render": function(data, type, row){
-          var active = data==1 ? 'Active' : 'Inactive';
-          var checked = data==1 ? 'checked' : '';
+      {
+        data: "Center",
+        "render": function(data, type, row) {
+          var active = data == 1 ?
+            '<span class="badge badge-success">Active</span>' :
+            '<span class="badge badge-danger">Inactive</span>';
+          var checked = data == 1 ? 'checked' : '';
+
           return '<div class="form-check form-check-inline switch switch-lg success">\
-            <input onclick="changeCenterStatus(\''+row.ID+'\');" type="checkbox" '+checked+' id="center-status-switch-'+row.ID+'">\
-            <label for="center-status-switch-'+row.ID+'">'+active+'</label>\
-          </div>';
+      <input onclick="changeCenterStatus(\'' + row.ID + '\');" type="checkbox" ' + checked + ' id="center-status-switch-' + row.ID + '">\
+      <label for="center-status-switch-' + row.ID + '"> ' + active + '</label>\
+    </div>';
         }
       },
-      { data: "Sub_Center",
-        "render": function(data, type, row){
-          var active = data==1 ? 'Active' : 'Inactive';
-          var checked = data==1 ? 'checked' : '';
+      {
+        data: "Sub_Center",
+        "render": function(data, type, row) {
+          var active = data == 1 ?
+            '<span class="badge badge-success">Active</span>' :
+            '<span class="badge badge-danger">Inactive</span>';
+          var checked = data == 1 ? 'checked' : '';
+
           return '<div class="form-check form-check-inline switch switch-lg success">\
-            <input onclick="changeSubCenterStatus(\''+row.ID+'\');" type="checkbox" '+checked+' id="sub-center-status-switch-'+row.ID+'">\
-            <label for="sub-center-status-switch-'+row.ID+'">'+active+'</label>\
-          </div>';
+      <input onclick="changeSubCenterStatus(\'' + row.ID + '\');" type="checkbox" ' + checked + ' id="sub-center-status-switch-' + row.ID + '">\
+      <label for="sub-center-status-switch-' + row.ID + '"> ' + active + '</label>\
+    </div>';
         }
       },
-      { data: "Student",
-        "render": function(data, type, row){
-          var active = data==1 ? 'Active' : 'Inactive';
-          var checked = data==1 ? 'checked' : '';
+      {
+        data: "Student",
+        "render": function(data, type, row) {
+          var active = data == 1 ?
+            '<span class="badge badge-success">Active</span>' :
+            '<span class="badge badge-danger">Inactive</span>';
+          var checked = data == 1 ? 'checked' : '';
+
           return '<div class="form-check form-check-inline switch switch-lg success">\
-            <input onclick="changeStudentStatus(\''+row.ID+'\');" type="checkbox" '+checked+' id="student-status-switch-'+row.ID+'">\
-            <label for="student-status-switch-'+row.ID+'">'+active+'</label>\
-          </div>';
+      <input onclick="changeStudentStatus(\'' + row.ID + '\');" type="checkbox" ' + checked + ' id="student-status-switch-' + row.ID + '">\
+      <label for="student-status-switch-' + row.ID + '"> ' + active + '</label>\
+    </div>';
         },
-        visible: hasLMS==1 ? true : false
+        visible: hasLMS == 1 ? true : false
       },
     ],
     "sDom": "<t><'row'<p i>>",

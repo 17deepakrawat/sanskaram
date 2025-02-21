@@ -21386,7 +21386,7 @@ font-size: 17px;
   color: #fff;
   border: 1px solid rgb(184 182 191 / 50%);
   border-bottom: 1px solid #164dbee0;
-  font-size: 20px;
+  font-size: 14px;
 }
 .btn-default.hover:not(.active), .btn-default:hover:not(.active) {
   background: #21252d !important;
@@ -21579,4 +21579,8 @@ text-align: start !important;
   display: inline-flex;
   justify-content: center;
   align-items: center;
+}
+.badge-primary {
+  color: #fff !important;
+  background-color: #007bff !important;
 }

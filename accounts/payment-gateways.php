@@ -18,12 +18,12 @@
               for ($i = 1; $i <= count($breadcrumbs); $i++) {
                 if (count($breadcrumbs) == $i) : $active = "active";
                   $crumb = explode("?", $breadcrumbs[$i]);
-                  echo '<li class="breadcrumb-item ' . $active . '">' . $crumb[0] . '</li>';
+                  echo '<li class="breadcrumb-item ' . $active . '">' . ucwords($crumb[0]) . '</li>';
                 endif;
               }
               ?>
               <div>
-                <button class="btn btn-link" aria-label="" title="" data-toggle="tooltip" data-original-title="Add Payment Gateway" onclick="add('payment-gateways', 'lg')"> <i class="uil uil-plus-circle"></i></button>
+                <button class="custom_add_button" aria-label="" title="" data-toggle="tooltip" data-original-title="Add Payment Gateway" onclick="add('payment-gateways', 'lg')"> <i class="uil uil-plus-circle"></i></button>
               </div>
             </ol>
             <!-- END BREADCRUMB -->
@@ -34,7 +34,7 @@
       <!-- START CONTAINER FLUID -->
       <div class=" container-fluid">
         <!-- BEGIN PlACE PAGE CONTENT HERE -->
-        <div class="row">
+        <div class="row card">
           <div class="card-body">
             <div class="table-responsive">
               <table class="table table-hover nowrap" id="payment-gateway-table">
@@ -44,8 +44,8 @@
                     <th>Type</th>
                     <th>Access Key</th>
                     <th>Salt/Secret Key</th>
-                    <th data-orderable="false"></th>
-                    <th data-orderable="false"></th>
+                    <th data-orderable="false">Status</th>
+                    <th data-orderable="false" class="text-end">Action</th>
                   </tr>
                 </thead>
               </table>
@@ -83,20 +83,22 @@
             {
               data: "Status",
               "render": function(data, type, row) {
-                var active = data == 1 ? 'Active' : 'Inactive';
+                var active = data == 1 ?
+                  '<span class="badge bg-success">Active</span>' :
+                  '<span class="badge bg-danger">Inactive</span>';
                 var checked = data == 1 ? 'checked' : '';
                 return '<div class="form-check form-check-inline switch switch-lg success">\
-                        <input onclick="changeStatus(&#39;Payment_Gateways&#39;, &#39;' + row.ID + '&#39;)" type="checkbox" ' + checked + ' id="status-switch-' + row.ID + '">\
-                        <label for="status-switch-' + row.ID + '">' + active + '</label>\
-                      </div>';
+              <input onclick="changeStatus(&#39;Payment_Gateways&#39;, &#39;' + row.ID + '&#39;)" type="checkbox" ' + checked + ' id="status-switch-' + row.ID + '">\
+              <label for="status-switch-' + row.ID + '">' + active + '</label>\
+            </div>';
               }
             },
             {
               data: "ID",
               "render": function(data, type, row) {
                 return '<div class="button-list text-end">\
-                <i class="uil uil-edit icon-xs cursor-pointer" onclick="edit(&#39;payment-gateways&#39;, &#39;' + data + '&#39, &#39;lg&#39;)"></i>\
-                <i class="uil uil-trash icon-xs cursor-pointer" onclick="destroy(&#39;payment-gateways&#39;, &#39;' + data + '&#39)"></i>\
+                <i class="uil uil-edit icon-xs cursor-pointer custom_edit_button" onclick="edit(&#39;payment-gateways&#39;, &#39;' + data + '&#39, &#39;lg&#39;)"></i>\
+                <i class="uil uil-trash icon-xs cursor-pointer custom_edit_button" onclick="destroy(&#39;payment-gateways&#39;, &#39;' + data + '&#39)"></i>\
               </div>'
               }
             },

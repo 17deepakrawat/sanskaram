@@ -1,4 +1,31 @@
 <?php include ($_SERVER['DOCUMENT_ROOT'] . '/includes/header-top.php'); ?>
+<style>
+    .select2-container .select2-selection {
+    border-radius: 10px;
+    height: 48px !important;
+    font-size: 17px;
+    font-family: system-ui;
+  }
+
+  .select2-container .select2-selection .select2-selection__arrow {
+    top: auto;
+    bottom: 11px;
+  }
+
+  .select2-container--open .select2-selection {
+    box-shadow: none;
+    border: 1px solid #2b303b !important;
+  }
+
+  .select2-results .select2-results__option--highlighted {
+    background-color: #55638d !important;
+    border-radius: 3px;
+    color: #ffffff !important;
+  }
+.custom_filter{
+  border-radius: 10px;
+}
+</style>
 <?php include ($_SERVER['DOCUMENT_ROOT'] . '/includes/header-bottom.php'); ?>
 <?php include ($_SERVER['DOCUMENT_ROOT'] . '/includes/menu.php'); ?>
 <!-- START PAGE-CONTAINER -->
@@ -19,12 +46,12 @@
                 if (count($breadcrumbs) == $i):
                   $active = "active";
                   $crumb = explode("?", $breadcrumbs[$i]);
-                  echo '<li class="breadcrumb-item ' . $active . '">' . $crumb[0] . '</li>';
+                  echo '<li class="breadcrumb-item ' . $active . '">' . ucwords($crumb[0]) . '</li>';
                 endif;
               }
               ?>
               <div>
-                <button class="btn btn-link" aria-label="" title="" data-toggle="tooltip" data-original-title="Upload"
+                <button class="custom_add_button" aria-label="" title="" data-toggle="tooltip" data-original-title="Upload"
                   onclick="add('subjects', 'lg')"> <i class="uil uil-export"></i></button>
               </div>
             </ol>
@@ -39,7 +66,7 @@
         <div class="row">
           <?php if ($_SESSION['university_id'] == '47') { ?>
             <div class="col-md-4">
-              <div class="form-group form-group-default required">
+              <div class="form-group form-group-default required custom_filter">
                 <label>Semester</label>
                 <?php
                 $sem_count = $conn->query("SELECT MAX(Sem) AS duration FROM Admit_Card  WHERE Enrollment_No = '" . $_SESSION['Enrollment_No'] . "'");
