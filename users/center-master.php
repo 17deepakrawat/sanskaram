@@ -1,13 +1,13 @@
 <?php include($_SERVER['DOCUMENT_ROOT'] . '/includes/header-top.php'); ?>
 <style>
-  .select2-container .select2-selection {
+  .custom_field .select2-container .select2-selection {
     border-radius: 10px;
     height: 48px !important;
     font-size: 17px;
     font-family: system-ui;
   }
 
-  .select2-container .select2-selection .select2-selection__arrow {
+  .custom_field .select2-container .select2-selection .select2-selection__arrow {
     top: auto;
     bottom: 11px;
   }
@@ -62,7 +62,7 @@ unset($_SESSION['filterByVerticalType'])
 
             <div class="row">
               <div class="col-md-3 m-b-10">
-                <div class="form-group">
+                <div class="form-group custom_field">
                   <select class="full-width" style="width:40px" data-init-plugin="select2" id="university"
                     onchange="addFilter(this.value, 'university')" data-placeholder="Choose University">
                     <option value="">Choose University </option>
