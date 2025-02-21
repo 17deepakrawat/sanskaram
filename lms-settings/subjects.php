@@ -1,13 +1,13 @@
 <?php include($_SERVER['DOCUMENT_ROOT'] . '/includes/header-top.php'); ?>
 <style>
-  .custom-field {
+  .custom_field .select2-container .select2-selection {
     border-radius: 10px;
     height: 48px !important;
     font-size: 17px;
     font-family: system-ui;
   }
 
-  .select2-container .select2-selection .select2-selection__arrow {
+  .custom_field .select2-container .select2-selection .select2-selection__arrow {
     top: auto;
     bottom: 11px;
   }
@@ -16,12 +16,12 @@
     font-weight: 700 !important;
   }
 
-  .custom-field {
+ .custom_field .select2-container .select2-selection {
     border-radius: 10px;
     height: 48px !important;
     font-size: 17px;
     font-family: system-ui;
-  }
+  } 
 
   .btn:hover {
     /* background: #2b303b !important; */
@@ -87,7 +87,7 @@ unset($_SESSION['durationFilter']); ?>
           <div class="card-header">
             <div class="row">
               <div class="col-md-3 m-b-10">
-                <div class="form-group custom-field">
+                <div class="form-group custom_field">
                   <?php $get_course = $conn->query("SELECT ID, Name FROM Sub_Courses WHERE Status = 1 AND University_ID = " . $_SESSION['university_id'] . " ORDER BY Name ASC"); ?>
                   <select class="full-width " style="width:40px" data-init-plugin="select2" id="sub_course"
                     onchange="addFilter(this.value, 'sub_course')" data-placeholder="Choose Sub-Courses">
@@ -99,7 +99,7 @@ unset($_SESSION['durationFilter']); ?>
                 </div>
               </div>
               <div class="col-md-3 m-b-10">
-                <div class="form-group custom-field">
+                <div class="form-group custom_field">
                   <select class="full-width" style="width:40px" data-init-plugin="select2" id="duration"
                     onchange="addFilter(this.value, 'duration')" data-placeholder="Choose Duration">
                   </select>

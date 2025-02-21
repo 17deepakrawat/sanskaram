@@ -51,18 +51,19 @@ unset($_SESSION['filterByDate']); ?>
                 }
                 ?>
                 <div>
-                  <?php if ($_SESSION['Role'] == 'Center' || $_SESSION['Role'] == 'Sub-Center') { ?>
-                    <a href="/accounts/center-ledger/student-wise-ledger" target="" class="btn btn-default" aria-label=""
-                      title="" data-toggle="tooltip" data-original-title="Go On Ladger"> <i
-                        class="uil uil-arrow-left"></i></a>
-                    <a class="btn btn-success" aria-label="" title="" data-toggle="tooltip" data-original-title="Add Amount"
-                      onclick="add_wallet();"> <i class="uil uil-plus"></i></a>
-                  <?php } ?>
+
                 </div>
               </ol>
               <!-- END BREADCRUMB -->
             </div>
             <div class="breadcrumb_btn_custom">
+              <?php if ($_SESSION['Role'] == 'Center' || $_SESSION['Role'] == 'Sub-Center') { ?>
+                <a href="/accounts/center-ledger/student-wise-ledger" target="" class="btn custom_add_button text-white p-2 pt-1" aria-label=""
+                  title="" data-toggle="tooltip" data-original-title="Go On Ladger"> <i
+                    class="uil uil-arrow-left"></i></a>
+                <a class="btn custom_add_button text-white p-2 pt-1" aria-label="" title="" data-toggle="tooltip" data-original-title="Add Amount"
+                  onclick="add_wallet();"> <i class="uil uil-plus"></i></a>
+              <?php } ?>
               <a class="btn custom_add_button p-2" href="/app/wallet-payments/admission-history"><i class="uil uil-history mr-2"></i> Admission History </a>
               <a class="btn custom_add_button text-white p-2" aria-label="" title="Download Wallet Payment" data-toggle="tooltip"
                 data-original-title="Download Wallet Payment" onclick="exportData('Wallet-Payment')"> <i

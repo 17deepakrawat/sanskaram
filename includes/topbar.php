@@ -61,9 +61,9 @@
 
         $amount = $amounts['total_amt'] - $debited_amount;
         ?>
-        <a href="#" class="btn btn-primary" aria-label="" title="" data-toggle="tooltip"
-          data-original-title="Available Balance"><?= $amount ?> <i class="uil uil-wallet"></i></a>
-        <a href="/accounts/wallet-payments" class="btn btn-success" aria-label="" title="" data-toggle="tooltip"
+        <a href="#" class="btn custom_add_button text-white p-2" aria-label="" title="" data-toggle="tooltip"
+          data-original-title="Available Balance"><?= $amount ?> <i class="uil uil-wallet ml-2"></i></a>
+        <a href="/accounts/wallet-payments" class="btn custom_add_button text-white p-2" aria-label="" title="" data-toggle="tooltip"
           data-original-title="Add Amount"> <i class="uil uil-plus"></i></a>
       <?php } ?>
     </div>
