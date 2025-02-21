@@ -255,8 +255,6 @@ unset($_SESSION['filterByVerticalType'])
           success: function(data) {
             if (data.status) {
               $('.table').DataTable().ajax.reload(null, false);
-              // $("#sub_center").html(data.subCenterName);
-
               if ('<?= $_SESSION['Role'] ?>' == 'Administrator') {
                 $(".sub_center").html(data.subCenterName);
 

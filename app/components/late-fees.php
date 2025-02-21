@@ -125,7 +125,7 @@
       },
       dataType: 'json',
       success: function(data) {
-        if (data.status) {
+        if (data.status==true ) {
           notification('success', data.message);
           $('#tableLateFees').DataTable().ajax.reload(null, false);
         } else {

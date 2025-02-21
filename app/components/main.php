@@ -12,7 +12,8 @@
   <?php include('admission-sessions.php'); ?>
   <?php include('exam-sessions.php'); ?>
   <?php include('course-types.php'); ?>
-  <?php include('fee-structures.php'); ?>
+  <?php  // include('fee-structures.php'); ?> 
+  <!-- Fee Structures -->
   <?php include('late-fees.php'); ?>
   <?php include('page-access.php'); ?>
 </div>

@@ -1,13 +1,18 @@
 <?php include($_SERVER['DOCUMENT_ROOT'] . '/includes/header-top.php'); ?>
 <style>
-  .custom_input_st_en{
-  border-top-right-radius: 0px !important;
-  border-bottom-right-radius: 0px !important
-}
-.custom_input_st_en1{
-  border-top-left-radius: 0px !important;
-  border-bottom-left-radius: 0px !important
-}
+  .jumbotron {
+    overflow: visible !important;
+  }
+  .custom_input_st_en {
+    border-top-right-radius: 0px !important;
+    border-bottom-right-radius: 0px !important
+  }
+
+  .custom_input_st_en1 {
+    border-top-left-radius: 0px !important;
+    border-bottom-left-radius: 0px !important
+  }
+
   .tooltip-inner {
     white-space: pre-wrap;
     max-width: 100% !important;
@@ -64,9 +69,13 @@
   .div.dataTables_wrapper div.dataTables_length select {
     width: 57px !important;
   }
-  .input-sm{
+
+  .input-sm {
     border-radius: 10px !important;
     height: 48px !important;
+  }
+  .card .card-header {
+    z-index: 0 !important;
   }
 </style>
 <link href="/assets/plugins/bootstrap-datepicker/css/datepicker3.css" rel="stylesheet" type="text/css" media="screen">
@@ -82,7 +91,6 @@
 <?php include($_SERVER['DOCUMENT_ROOT'] . '/includes/menu.php');
 require($_SERVER['DOCUMENT_ROOT'] . '/includes/helpers.php');
 
-unset($_SESSION['current_session']);
 unset($_SESSION['current_session']);
 unset($_SESSION['filterByDepartment']);
 unset($_SESSION['filterByUser']);
@@ -118,6 +126,20 @@ unset($_SESSION['filterByExamStatus']); //kp
               ?>
               <div>
                 <?php if ($_SESSION['Role'] == 'Administrator' || $_SESSION['Role'] == 'University Head') { ?>
+                    <div class="dropdown pull-right">
+                      <button class=" profile-dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true"
+                        aria-expanded="false" aria-label="profile dropdown">
+                        <span class="btn btn-info" style="border-radius:6px;">Guide & Tutorial
+                        </span>
+                      </button>
+                      <div class="dropdown-menu dropdown-menu-right profile-dropdown" role="menu">
+                        <a href="#" class="dropdown-item"><span>
+                          <br/>Guide tutorial<b></b></span></a>
+                          <div class="dropdown-divider"></div>
+                          <a href="/assets/guide/student-processed.mp4" class="dropdown-item">How to process the Students ? </a>
+                        <a href="/assets/guide/document-review.mp4" class="dropdown-item">How to review Document of Students?</a>
+                      </div>
+                    </div>
                   <button class="custom_add_button" aria-label="" title="" data-toggle="tooltip"
                     data-original-title="Upload OA, Enrollment AND Roll No." onclick="uploadOAEnrollRoll()"> <i
                       class="uil uil-upload"></i></button>
