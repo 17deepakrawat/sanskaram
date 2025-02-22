@@ -126,6 +126,20 @@ unset($_SESSION['filterByExamStatus']); //kp
               ?>
               <div>
                 <?php if ($_SESSION['Role'] == 'Administrator' || $_SESSION['Role'] == 'University Head') { ?>
+                    <!-- <div class="dropdown pull-right">
+                      <button class=" profile-dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true"
+                        aria-expanded="false" aria-label="profile dropdown">
+                        <span class="btn btn-info" style="border-radius:6px;">Guide & Tutorial
+                        </span>
+                      </button>
+                      <div class="dropdown-menu dropdown-menu-right profile-dropdown" role="menu">
+                        <a href="#" class="dropdown-item"><span>
+                          <br/>Guide tutorial<b></b></span></a>
+                          <div class="dropdown-divider"></div>
+                          <a href="/assets/guide/student-processed.mp4" class="dropdown-item">How to process the Students ? </a>
+                        <a href="/assets/guide/document-review.mp4" class="dropdown-item">How to review Document of Students?</a>
+                      </div>
+                    </div> -->
                     <div class="dropdown pull-right">
                       <button class=" profile-dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true"
                         aria-expanded="false" aria-label="profile dropdown">
